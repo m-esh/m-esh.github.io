@@ -101,14 +101,3 @@ export const certifications: CertificationItem[] = [
     year: "2024",
   },
 ];
-
-export const skills = [
-  "CAD Design",
-  "Robotics",
-  "Electronics & Wiring",
-  "Design & Build",
-  "Problem Solving",
-  "First Aid & CPR",
-  "Team Leadership",
-  "Mechanical Design",
-];

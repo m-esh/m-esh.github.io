@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 
-import { profile, skills } from "@/data/profile";
+import { profile } from "@/data/profile";
 import { SectionHeading } from "@/components/section-heading";
 
 export function About() {
@@ -29,23 +29,6 @@ export function About() {
             </motion.p>
           ))}
         </div>
-
-        <motion.ul
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-8 flex flex-wrap gap-2"
-        >
-          {skills.map((skill) => (
-            <li
-              key={skill}
-              className="rounded-full border border-border/60 px-3.5 py-1.5 text-sm text-muted-foreground"
-            >
-              {skill}
-            </li>
-          ))}
-        </motion.ul>
       </div>
     </section>
   );

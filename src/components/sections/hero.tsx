@@ -19,7 +19,7 @@ function ConstructedName({ name }: { name: string }) {
   const words = name.split(" ");
 
   return (
-    <span className="gradient-text">
+    <span className="text-primary">
       {words.flatMap((word, wi) => {
         const wordSpan = (
           <span key={`w-${wi}`} className="inline-block whitespace-nowrap">
