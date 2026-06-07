@@ -12,7 +12,7 @@ export function About() {
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <SectionHeading
           eyebrow="About"
-          title="A bit about who I am"
+          title="About me"
           description="The short version: I keep people safe, I build robots, and I'm chasing a future in mechatronics engineering."
         />
 

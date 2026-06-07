@@ -82,27 +82,6 @@ export const projects: ProjectItem[] = [
     links: [{ label: "FRC Team 7902", href: "https://www.thebluealliance.com/team/7902" }],
     accent: "from-violet-500/30 via-fuchsia-500/10 to-transparent",
   },
-  {
-    title: "Personal Portfolio Website",
-    description:
-      "The site you're looking at right now: designed and built from the ground up with Next.js, Tailwind CSS, and shadcn/ui.",
-    longDescription:
-      "A place to bring everything together: my background, the work I've done, and the experience I'm collecting along the way. I focused on motion, a clean dark layout, and a few interactions you don't see on every site.",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
-    year: "2026",
-    links: [{ label: "View source", href: "https://github.com/m-esh/m-esh.github.io" }],
-    accent: "from-indigo-500/30 via-purple-500/10 to-transparent",
-  },
-  {
-    title: "Reserved for what's next",
-    description:
-      "Open slot for whatever I build next: a mechanism, a circuit board, a script, or anything else worth showing off.",
-    longDescription:
-      "This card gets swapped out the moment something new is ready to share. The layout can grow with as many projects as I add to it.",
-    tags: ["Coming soon"],
-    year: "2026",
-    accent: "from-purple-500/20 via-violet-500/5 to-transparent",
-  },
 ];
 
 export type CertificationItem = {
@@ -126,13 +105,6 @@ export const certifications: CertificationItem[] = [
     year: "2024",
     description:
       "First aid and CPR training for handling emergencies, whether they happen on shift or somewhere else entirely.",
-  },
-  {
-    name: "Lifesaving Instructor",
-    issuer: "Lifesaving Society",
-    year: "In progress",
-    description:
-      "Currently working toward this certification so I can train and evaluate newer lifeguards and swimmers myself.",
   },
 ];
 
