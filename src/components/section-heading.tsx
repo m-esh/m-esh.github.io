@@ -4,17 +4,26 @@ import { motion } from "framer-motion";
 
 import { cn } from "@/lib/utils";
 
+const ACCENT_CLASSES = {
+  pink: "border-primary/30 bg-primary/10 text-primary",
+  yellow: "border-glow/30 bg-glow/10 text-glow",
+  cyan: "border-glow-secondary/30 bg-glow-secondary/10 text-glow-secondary",
+  blue: "border-accent/40 bg-accent/15 text-accent-foreground",
+} as const;
+
 export function SectionHeading({
   eyebrow,
   title,
   description,
   align = "left",
+  accent = "pink",
   className,
 }: {
   eyebrow: string;
   title: string;
   description?: string;
   align?: "left" | "center";
+  accent?: keyof typeof ACCENT_CLASSES;
   className?: string;
 }) {
   return (
@@ -29,7 +38,12 @@ export function SectionHeading({
         className
       )}
     >
-      <span className="inline-flex w-fit items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 font-mono text-xs font-medium uppercase tracking-[0.18em] text-primary">
+      <span
+        className={cn(
+          "inline-flex w-fit items-center gap-2 rounded-full border px-3.5 py-1 font-mono text-xs font-medium uppercase tracking-[0.18em]",
+          ACCENT_CLASSES[accent]
+        )}
+      >
         {eyebrow}
       </span>
       <h2 className="text-balance font-display text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">

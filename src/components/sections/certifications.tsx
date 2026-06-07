@@ -13,6 +13,7 @@ export function Certifications() {
           eyebrow="Certifications"
           title="Credentials I've earned"
           description="The training behind the lifeguarding work."
+          accent="blue"
         />
 
         <ul className="mt-10 flex flex-col border-t border-border/60">

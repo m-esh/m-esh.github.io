@@ -14,6 +14,7 @@ export function ProjectsShowcase() {
           eyebrow="Projects"
           title="Things I've built"
           description="A running list — more to come as each season wraps."
+          accent="cyan"
         />
 
         <ul className="mt-10 flex flex-col border-t border-border/60">
@@ -26,7 +27,7 @@ export function ProjectsShowcase() {
                   <span className="inline-flex items-center gap-2 text-lg font-medium tracking-tight sm:text-xl">
                     {project.title}
                     {href && (
-                      <ArrowUpRight className="size-4 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-primary" />
+                      <ArrowUpRight className="size-4 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-glow-secondary" />
                     )}
                   </span>
                   <span className="max-w-xl text-sm leading-relaxed text-muted-foreground">
@@ -51,7 +52,7 @@ export function ProjectsShowcase() {
                     href={href}
                     target="_blank"
                     rel="noreferrer noopener"
-                    className="group flex items-start justify-between gap-6 py-6 transition-colors hover:text-primary"
+                    className="group flex items-start justify-between gap-6 py-6 transition-colors hover:text-glow-secondary"
                   >
                     {row}
                   </a>
