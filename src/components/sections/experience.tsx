@@ -6,7 +6,6 @@ import { Briefcase, MapPin } from "lucide-react";
 
 import { experience, type ExperienceItem } from "@/data/profile";
 import { SectionHeading } from "@/components/section-heading";
-import { Badge } from "@/components/ui/badge";
 
 function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }) {
   const cardRef = React.useRef<HTMLDivElement>(null);
@@ -59,14 +58,6 @@ function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }
             </li>
           ))}
         </ul>
-
-        <div className="mt-6 flex flex-wrap gap-2">
-          {item.tags.map((tag) => (
-            <Badge key={tag} variant="secondary">
-              {tag}
-            </Badge>
-          ))}
-        </div>
       </motion.div>
     </motion.li>
   );

@@ -1,32 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 
 import { GitHubIcon, LinkedInIcon } from "@/components/icons";
 
 import { profile } from "@/data/profile";
 import { Button } from "@/components/ui/button";
 
-const links = [
-  {
-    label: "Email",
-    value: profile.email,
-    href: `mailto:${profile.email}`,
-    icon: Mail,
-  },
-  {
-    label: "LinkedIn",
-    value: "/in/mehrdad-shariatmadari",
-    href: profile.socials.linkedin,
-    icon: LinkedInIcon,
-  },
-  {
-    label: "GitHub",
-    value: "@m-esh",
-    href: profile.socials.github,
-    icon: GitHubIcon,
-  },
+const socials = [
+  { label: "LinkedIn", href: profile.socials.linkedin, icon: LinkedInIcon },
+  { label: "GitHub", href: profile.socials.github, icon: GitHubIcon },
 ];
 
 export function Contact() {
@@ -73,40 +57,27 @@ export function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-10 flex justify-center"
+          className="mt-10 flex flex-col items-center gap-6"
         >
           <Button size="lg" asChild>
             <a href={`mailto:${profile.email}`}>
               <Mail /> Email me directly
             </a>
           </Button>
-        </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="mx-auto mt-10 grid max-w-2xl gap-3 sm:grid-cols-3"
-        >
-          {links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              target={link.href.startsWith("http") ? "_blank" : undefined}
-              rel={link.href.startsWith("http") ? "noreferrer noopener" : undefined}
-              className="group flex flex-col items-start gap-3 rounded-2xl border border-border/60 bg-card/50 p-5 text-left backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40"
-            >
-              <span className="flex size-10 items-center justify-center rounded-full bg-primary/15 text-primary ring-1 ring-primary/30">
-                <link.icon className="size-4.5" />
-              </span>
-              <span className="flex w-full items-center justify-between gap-2">
-                <span className="text-sm font-medium">{link.label}</span>
-                <ArrowUpRight className="size-4 text-muted-foreground transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary" />
-              </span>
-              <span className="truncate text-xs text-muted-foreground">{link.value}</span>
-            </a>
-          ))}
+          <div className="flex items-center gap-6">
+            {socials.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <link.icon className="size-4" /> {link.label}
+              </a>
+            ))}
+          </div>
         </motion.div>
       </div>
 

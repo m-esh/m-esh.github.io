@@ -3,8 +3,6 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Mail } from "lucide-react";
 
-import { LinkedInIcon } from "@/components/icons";
-
 import { Button } from "@/components/ui/button";
 import { profile } from "@/data/profile";
 
@@ -68,14 +66,6 @@ export function Hero() {
           <Button size="lg" variant="outline" onClick={() => scrollTo("#contact")}>
             <Mail /> Contact me
           </Button>
-          <a
-            href={profile.socials.linkedin}
-            target="_blank"
-            rel="noreferrer noopener"
-            className="inline-flex h-12 items-center gap-2 rounded-full px-5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <LinkedInIcon className="size-4" /> LinkedIn
-          </a>
         </motion.div>
       </div>
     </section>

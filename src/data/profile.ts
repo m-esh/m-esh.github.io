@@ -26,7 +26,6 @@ export type ExperienceItem = {
   location: string;
   summary: string;
   highlights: string[];
-  tags: string[];
 };
 
 export const experience: ExperienceItem[] = [
@@ -42,7 +41,6 @@ export const experience: ExperienceItem[] = [
       "Stay in constant contact with a team of guards and instructors to keep the facility running safely",
       "Built up the habit of staying calm, reading a situation fast, and acting on it without hesitation",
     ],
-    tags: ["Public Safety", "First Aid & CPR", "Teamwork"],
   },
   {
     role: "Mechanical Division Vice Lead & Drive Team, FRC Team 7902",
@@ -56,7 +54,6 @@ export const experience: ExperienceItem[] = [
       "Use CAD and quick prototyping to solve mechanical problems within the competition's rules",
       "Operate the robot on the field as part of the drive team and adjust strategy between matches at regional events",
     ],
-    tags: ["Robotics", "CAD", "Mechanical Design", "Leadership"],
   },
 ];
 

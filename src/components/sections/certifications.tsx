@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Award } from "lucide-react";
 
 import { certifications } from "@/data/profile";
 import { SectionHeading } from "@/components/section-heading";
@@ -15,14 +14,9 @@ function CertificationCard({ cert, className }: { cert: (typeof certifications)[
   return (
     <Card className={className}>
       <CardHeader>
-        <div className="flex items-center justify-between">
-          <span className="flex size-11 items-center justify-center rounded-full bg-primary/15 text-primary ring-1 ring-primary/30">
-            <Award className="size-5" />
-          </span>
-          <Badge variant="outline" className="font-mono text-xs">
-            {cert.year}
-          </Badge>
-        </div>
+        <Badge variant="outline" className="w-fit font-mono text-xs">
+          {cert.year}
+        </Badge>
         <CardTitle className="mt-3 text-xl">{cert.name}</CardTitle>
         <CardDescription className="text-primary">{cert.issuer}</CardDescription>
       </CardHeader>
