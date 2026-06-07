@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { AnimatePresence } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Lightbox, type GalleryItem } from "./project-gallery";
@@ -13,6 +12,8 @@ export type DiagramPart = {
   blurb: string;
   x: number;
   y: number;
+  labelX: number;
+  labelY: number;
   item: GalleryItem;
 };
 
@@ -59,18 +60,62 @@ export function PartsDiagram({
   }, [openIndex, close, step]);
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[1.3fr_1fr] lg:items-center lg:gap-10">
-      <div className="relative overflow-hidden rounded-2xl border border-border/60 bg-card/50">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={image}
-          alt={alt}
-          className="aspect-[1278/712] size-full object-cover"
-        />
+    <div className="relative overflow-hidden rounded-2xl border border-border/60 bg-card/50">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={image}
+        alt={alt}
+        className="aspect-[1278/712] size-full object-cover"
+      />
 
+      <svg
+        className="pointer-events-none absolute inset-0 size-full"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
         {parts.map((part, i) => (
-          <button
+          <line
             key={part.number}
+            x1={part.labelX}
+            y1={part.labelY}
+            x2={part.x}
+            y2={part.y}
+            vectorEffect="non-scaling-stroke"
+            strokeWidth={active === i ? 1.5 : 1}
+            strokeDasharray={active === i ? undefined : "3 2.5"}
+            className={cn(
+              "transition-[stroke,stroke-width] duration-300",
+              active === i ? "stroke-glow-secondary" : "stroke-glow-secondary/35"
+            )}
+          />
+        ))}
+      </svg>
+
+      {parts.map((part, i) => (
+        <React.Fragment key={part.number}>
+          <span
+            aria-hidden="true"
+            style={{ left: `${part.x}%`, top: `${part.y}%` }}
+            className="pointer-events-none absolute flex -translate-x-1/2 -translate-y-1/2 items-center justify-center"
+          >
+            <span
+              className={cn(
+                "absolute size-6 rounded-full bg-glow-secondary/40 transition-opacity duration-300",
+                active === i ? "animate-ping opacity-100" : "opacity-0"
+              )}
+            />
+            <span
+              className={cn(
+                "block size-2.5 rounded-full border transition-all duration-300",
+                active === i
+                  ? "scale-125 border-glow-secondary bg-glow-secondary shadow-[0_0_16px_-2px_var(--color-glow-secondary)]"
+                  : "border-glow-secondary/60 bg-background/80"
+              )}
+            />
+          </span>
+
+          <button
             type="button"
             onClick={() => setOpenIndex(i)}
             onMouseEnter={() => setActive(i)}
@@ -78,63 +123,30 @@ export function PartsDiagram({
             onFocus={() => setActive(i)}
             onBlur={() => setActive((a) => (a === i ? null : a))}
             aria-label={`View ${part.name} drawing`}
-            style={{ left: `${part.x}%`, top: `${part.y}%` }}
-            className="absolute -translate-x-1/2 -translate-y-1/2 outline-none"
+            style={{ left: `${part.labelX}%`, top: `${part.labelY}%` }}
+            className="group absolute -translate-x-1/2 -translate-y-1/2 outline-none"
           >
             <span
               className={cn(
-                "absolute inset-0 -z-10 rounded-full bg-glow-secondary/40 transition-opacity duration-300",
-                active === i ? "animate-ping opacity-100" : "opacity-0"
-              )}
-            />
-            <span
-              className={cn(
-                "flex size-7 items-center justify-center rounded-full border font-mono text-xs font-semibold backdrop-blur-sm transition-all duration-300",
+                "flex items-center gap-2 whitespace-nowrap rounded-full border px-3 py-1.5 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.12em] backdrop-blur-md transition-all duration-300 sm:text-xs",
                 active === i
-                  ? "scale-125 border-glow-secondary bg-glow-secondary text-background shadow-[0_0_20px_-2px_var(--color-glow-secondary)]"
-                  : "border-glow-secondary/50 bg-background/70 text-glow-secondary"
-              )}
-            >
-              {part.number}
-            </span>
-          </button>
-        ))}
-      </div>
-
-      <ul className="flex flex-col gap-2.5">
-        {parts.map((part, i) => (
-          <li key={part.number}>
-            <button
-              type="button"
-              onClick={() => setOpenIndex(i)}
-              onMouseEnter={() => setActive(i)}
-              onMouseLeave={() => setActive((a) => (a === i ? null : a))}
-              onFocus={() => setActive(i)}
-              onBlur={() => setActive((a) => (a === i ? null : a))}
-              className={cn(
-                "group flex w-full items-center gap-4 rounded-xl border bg-card/40 p-4 text-left backdrop-blur-sm transition-colors",
-                active === i ? "border-glow-secondary/50 bg-card/70" : "border-border/60"
+                  ? "scale-105 border-glow-secondary bg-glow-secondary text-background shadow-[0_0_24px_-4px_var(--color-glow-secondary)]"
+                  : "border-glow-secondary/40 bg-background/80 text-glow-secondary"
               )}
             >
               <span
                 className={cn(
-                  "flex size-7 shrink-0 items-center justify-center rounded-full border font-mono text-xs font-semibold transition-colors",
-                  active === i
-                    ? "border-glow-secondary bg-glow-secondary text-background"
-                    : "border-glow-secondary/50 text-glow-secondary"
+                  "flex size-4 shrink-0 items-center justify-center rounded-full text-[0.6rem] transition-colors duration-300",
+                  active === i ? "bg-background/25 text-background" : "bg-glow-secondary/15 text-glow-secondary"
                 )}
               >
                 {part.number}
               </span>
-              <span className="flex flex-col gap-0.5">
-                <span className="text-sm font-semibold tracking-tight">{part.name}</span>
-                <span className="text-xs leading-relaxed text-muted-foreground">{part.blurb}</span>
-              </span>
-              <ArrowRight className="ml-auto size-4 shrink-0 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1 group-hover:text-glow-secondary" />
-            </button>
-          </li>
-        ))}
-      </ul>
+              {part.name}
+            </span>
+          </button>
+        </React.Fragment>
+      ))}
 
       <AnimatePresence>
         {openIndex !== null && (

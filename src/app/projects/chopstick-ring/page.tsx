@@ -71,6 +71,8 @@ const diagramParts: DiagramPart[] = [
     blurb: "Ø25.5 mm wearable ring the whole assembly hangs from.",
     x: 26,
     y: 78,
+    labelX: 10,
+    labelY: 92,
     item: cadSheets[4],
   },
   {
@@ -79,6 +81,8 @@ const diagramParts: DiagramPart[] = [
     blurb: "Bridges the ring and the arm, housing the pivot bore.",
     x: 36,
     y: 54,
+    labelX: 16,
+    labelY: 26,
     item: cadSheets[3],
   },
   {
@@ -87,6 +91,8 @@ const diagramParts: DiagramPart[] = [
     blurb: "T-shaped pin that lets the arm rotate at the hinge.",
     x: 33,
     y: 60,
+    labelX: 47,
+    labelY: 90,
     item: cadSheets[5],
   },
   {
@@ -95,6 +101,8 @@ const diagramParts: DiagramPart[] = [
     blurb: "Thin sleeve that keeps the pivot spinning freely.",
     x: 40,
     y: 60,
+    labelX: 76,
+    labelY: 88,
     item: cadSheets[6],
   },
   {
@@ -103,38 +111,9 @@ const diagramParts: DiagramPart[] = [
     blurb: "The 150 mm business end that actually picks up food.",
     x: 65,
     y: 26,
+    labelX: 90,
+    labelY: 10,
     item: cadSheets[2],
-  },
-];
-
-const buildPhotos: GalleryItem[] = [
-  {
-    src: "/projects/chopstick-ring/prototype-standing.jpg",
-    alt: "The assembled Chopstick Ring prototype standing on its hinge on a desk",
-    title: "Assembled prototype",
-    description:
-      "The printed and assembled prototype — two arms joined at a brass-pinned hinge, each carrying its own finger ring.",
-  },
-  {
-    src: "/projects/chopstick-ring/prototype-eating-mode.jpg",
-    alt: "The Chopstick Ring folded into its angled eating position",
-    title: "Folded for eating",
-    description:
-      "Pivoted down into the working angle — the position the rings hold while the arms are being used to pick up food.",
-  },
-  {
-    src: "/projects/chopstick-ring/prototype-typing-mode.jpg",
-    alt: "The Chopstick Ring opened flat into its resting position for typing",
-    title: "Open for typing",
-    description:
-      "Unfolded flat and laid back against the fingers — out of the way and resting on the rings so the hands stay free to type.",
-  },
-  {
-    src: "/projects/chopstick-ring/prototype-detail.jpg",
-    alt: "Close-up of the hinge, pivot pin, and finger ring on the Chopstick Ring prototype",
-    title: "Hinge detail",
-    description:
-      "A close-up of the pivot — the pin, bushing, and bracket from the CAD set, printed, assembled, and doing their job.",
   },
 ];
 
@@ -291,12 +270,12 @@ export default function ChopstickRingPage() {
               Anatomy
             </span>
             <h2 className="mt-3 text-balance font-display text-2xl font-semibold tracking-tight sm:text-3xl">
-              Tap a part to open its drawing
+              Tap a label to open its drawing
             </h2>
             <p className="mt-3 max-w-2xl text-balance leading-relaxed text-muted-foreground">
-              Each numbered point on the model below is a real part from the
-              assembly — click it, or its entry in the list, to open the
-              dimensioned CAD sheet it came from.
+              Each callout on the render below points to a real part from the
+              assembly — click one to open the dimensioned CAD sheet it came
+              from, with a short note on what the part actually does.
             </p>
 
             <div className="mt-10">
@@ -330,23 +309,10 @@ export default function ChopstickRingPage() {
           </div>
         </section>
 
-        {/* Build photos */}
+        {/* Closing */}
         <section className="relative py-16 sm:py-28">
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
-            <h2 className="text-balance font-display text-2xl font-semibold tracking-tight sm:text-3xl">
-              From CAD to hand
-            </h2>
-            <p className="mt-3 max-w-2xl text-balance leading-relaxed text-muted-foreground">
-              The printed parts, assembled and put through their paces on a desk —
-              proof that the hinge, pin, and bushing from the drawings actually work
-              together.
-            </p>
-
-            <div className="mt-10">
-              <ProjectGallery items={buildPhotos} zoomHint="Click the image to zoom in" />
-            </div>
-
-            <div className="mt-14 flex flex-col items-start gap-3 border-t border-border/60 pt-8 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-col items-start gap-3 border-t border-border/60 pt-8 sm:flex-row sm:items-center sm:justify-between">
               <p className="text-sm text-muted-foreground">
                 Want to see what else I&apos;ve been building?
               </p>
