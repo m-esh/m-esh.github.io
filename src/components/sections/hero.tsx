@@ -25,7 +25,6 @@ function ConstructedName({ name }: { name: string }) {
   }, []);
 
   const words = name.split(" ");
-  const totalLength = name.length - 1;
   const wordOffsets = words.reduce<number[]>((acc, word, idx) => {
     acc.push(idx === 0 ? 0 : acc[idx - 1] + words[idx - 1].length + 1);
     return acc;
@@ -38,11 +37,6 @@ function ConstructedName({ name }: { name: string }) {
           <span key={`w-${wi}`} className="inline-block whitespace-nowrap">
             {word.split("").map((letter, li) => {
               const i = wordOffsets[wi] + li;
-              const t = totalLength > 0 ? i / totalLength : 0;
-              const color =
-                t <= 0.5
-                  ? `color-mix(in oklch, var(--color-primary) ${Math.round((1 - t * 2) * 100)}%, var(--color-glow) ${Math.round(t * 2 * 100)}%)`
-                  : `color-mix(in oklch, var(--color-glow) ${Math.round((1 - (t - 0.5) * 2) * 100)}%, var(--color-glow-secondary) ${Math.round((t - 0.5) * 2 * 100)}%)`;
               const fromLeft = i % 2 === 0;
               return (
                 <motion.span
@@ -64,8 +58,7 @@ function ConstructedName({ name }: { name: string }) {
                     duration: 0.75,
                     ease: [0.16, 1, 0.3, 1],
                   }}
-                  style={{ color }}
-                  className="inline-block"
+                  className="inline-block text-foreground"
                 >
                   {letter}
                 </motion.span>

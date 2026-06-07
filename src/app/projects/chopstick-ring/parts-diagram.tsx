@@ -154,11 +154,15 @@ export function PartsDiagram({
             onBlur={() => setActive((a) => (a === i ? null : a))}
             aria-label={`View ${part.name} drawing`}
             style={{ left: `${part.labelX}%`, top: `${part.labelY}%` }}
-            className="group absolute -translate-x-1/2 -translate-y-1/2 outline-none"
+            className={cn(
+              "group absolute max-w-[42%] outline-none sm:max-w-[34%]",
+              part.labelX > 50 ? "-translate-x-full" : "translate-x-0",
+              part.labelY > 50 ? "-translate-y-full" : "translate-y-0"
+            )}
           >
             <span
               className={cn(
-                "flex items-center gap-2 whitespace-nowrap rounded-full border px-3 py-1.5 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.12em] backdrop-blur-md transition-all duration-300 sm:text-xs",
+                "flex w-fit items-center gap-2 rounded-xl border px-2.5 py-1.5 font-mono text-[0.6rem] font-semibold uppercase leading-tight tracking-[0.1em] backdrop-blur-md transition-all duration-300 sm:text-[0.7rem]",
                 active === i
                   ? "scale-105 border-glow-secondary bg-glow-secondary text-background shadow-[0_0_24px_-4px_var(--color-glow-secondary)]"
                   : "border-glow-secondary/40 bg-background/80 text-glow-secondary"
