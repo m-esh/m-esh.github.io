@@ -15,6 +15,42 @@ const fadeUp = {
   }),
 };
 
+function ConstructedName({ name }: { name: string }) {
+  const pieces = name.split(" ").flatMap((word, wi, words) => [
+    ...word.split(""),
+    ...(wi < words.length - 1 ? [" "] : []),
+  ]);
+
+  return (
+    <span className="gradient-text inline-flex flex-wrap">
+      {pieces.map((letter, i) => {
+        const fromLeft = i % 2 === 0;
+        return (
+          <motion.span
+            key={i}
+            initial={{
+              opacity: 0,
+              x: fromLeft ? -(32 + (i % 3) * 8) : 32 + (i % 3) * 8,
+              y: ((i % 4) - 1.5) * 10,
+              rotate: fromLeft ? -55 : 55,
+              scale: 0.5,
+            }}
+            animate={{ opacity: 1, x: 0, y: 0, rotate: 0, scale: 1 }}
+            transition={{
+              delay: 0.3 + i * 0.045,
+              duration: 0.65,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+            className="inline-block"
+          >
+            {letter === " " ? " " : letter}
+          </motion.span>
+        );
+      })}
+    </span>
+  );
+}
+
 export function Hero() {
   const scrollTo = (href: string) =>
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -32,15 +68,9 @@ export function Hero() {
       </div>
 
       <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-6 lg:px-8">
-        <motion.h1
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-          custom={0}
-          className="max-w-4xl text-balance font-display text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl"
-        >
-          <span className="gradient-text">{profile.name}</span>
-        </motion.h1>
+        <h1 className="max-w-4xl text-balance font-display text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
+          <ConstructedName name={profile.name} />
+        </h1>
 
         <motion.p
           variants={fadeUp}

@@ -60,11 +60,8 @@ export const experience: ExperienceItem[] = [
 export type ProjectItem = {
   title: string;
   description: string;
-  longDescription?: string;
-  tags: string[];
   year: string;
   links?: { label: string; href: string }[];
-  accent: string;
 };
 
 export const projects: ProjectItem[] = [
@@ -72,12 +69,8 @@ export const projects: ProjectItem[] = [
     title: "FRC 7902 Competition Robot",
     description:
       "A season-long build that starts as a CAD sketch and ends as a machine that has to drive, score, and survive elimination matches.",
-    longDescription:
-      "I worked across the mechanical and electrical groups on our FIRST Robotics Competition entry, helping with drivetrain design, wiring, and the repairs that always seem to come up between matches at regional events.",
-    tags: ["CAD", "Robotics", "Electronics", "Team Project"],
     year: "2024 to 2025",
     links: [{ label: "FRC Team 7902", href: "https://www.thebluealliance.com/team/7902" }],
-    accent: "from-amber-500/30 via-emerald-500/10 to-transparent",
   },
 ];
 
@@ -85,7 +78,6 @@ export type CertificationItem = {
   name: string;
   issuer: string;
   year: string;
-  description: string;
 };
 
 export const certifications: CertificationItem[] = [
@@ -93,29 +85,21 @@ export const certifications: CertificationItem[] = [
     name: "National Lifeguard (NL)",
     issuer: "Lifesaving Society",
     year: "2024",
-    description:
-      "Covers water rescue, surveillance, and emergency response: the foundation that the rest of lifeguarding builds on.",
   },
   {
     name: "Standard First Aid & CPR/AED",
     issuer: "Canadian Red Cross",
     year: "2024",
-    description:
-      "First aid and CPR training for handling emergencies, whether they happen on shift or somewhere else entirely.",
   },
   {
     name: "Bronze Cross",
     issuer: "Lifesaving Society",
     year: "2024",
-    description:
-      "An advanced lifesaving award that builds judgment and rescue skill on top of the Bronze Medallion, a step toward lifeguarding.",
   },
   {
     name: "WHMIS 2015",
     issuer: "Workplace Hazardous Materials Information System",
     year: "2024",
-    description:
-      "Covers how to recognize, handle, and stay safe around hazardous materials in a workplace setting.",
   },
 ];
 
