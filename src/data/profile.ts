@@ -45,14 +45,14 @@ export const experience: ExperienceItem[] = [
     tags: ["Public Safety", "First Aid & CPR", "Teamwork"],
   },
   {
-    role: "Mechanical Sub-Team Vice Lead & Drive Team, FRC Team 7902",
+    role: "Mechanical Division Vice Lead & Drive Team, FRC Team 7902",
     org: "FIRST Robotics Competition",
     period: "2025 to present",
     location: "Toronto, ON",
     summary:
       "Helping lead the mechanical side of a competition robot build each season, while also stepping onto the field as part of the drive team.",
     highlights: [
-      "Help run the mechanical sub-team: planning builds, assigning tasks, and keeping CAD designs on track",
+      "Help run the mechanical division: planning builds, assigning tasks, and keeping CAD designs on track",
       "Use CAD and quick prototyping to solve mechanical problems within the competition's rules",
       "Operate the robot on the field as part of the drive team and adjust strategy between matches at regional events",
     ],
@@ -105,6 +105,20 @@ export const certifications: CertificationItem[] = [
     year: "2024",
     description:
       "First aid and CPR training for handling emergencies, whether they happen on shift or somewhere else entirely.",
+  },
+  {
+    name: "Bronze Cross",
+    issuer: "Lifesaving Society",
+    year: "2024",
+    description:
+      "An advanced lifesaving award that builds judgment and rescue skill on top of the Bronze Medallion, a step toward lifeguarding.",
+  },
+  {
+    name: "WHMIS 2015",
+    issuer: "Workplace Hazardous Materials Information System",
+    year: "2024",
+    description:
+      "Covers how to recognize, handle, and stay safe around hazardous materials in a workplace setting.",
   },
 ];
 

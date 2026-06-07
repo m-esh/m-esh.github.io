@@ -119,11 +119,11 @@
   }
   html {
     color-scheme: dark;
-    overflow-x: hidden;
+    overscroll-behavior-x: none;
   }
   body {
     @apply bg-background text-foreground font-sans;
-    overflow-x: hidden;
+    overscroll-behavior-x: none;
     font-feature-settings: "ss01" on, "cv01" on;
   }
   ::selection {
