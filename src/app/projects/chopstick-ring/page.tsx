@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, Hand, Keyboard, Ruler } from "lucide-react";
+import { ArrowLeft, Hand, Keyboard } from "lucide-react";
 
 import { ScrollProgress } from "@/components/scroll-progress";
-import { ProjectGallery, type GalleryItem } from "./project-gallery";
+import { type GalleryItem } from "./project-gallery";
 import { PartsDiagram, type DiagramPart } from "./parts-diagram";
 
 export const metadata: Metadata = {
@@ -135,43 +135,32 @@ export default function ChopstickRingPage() {
             <div className="absolute right-[-12rem] top-[-8rem] size-[32rem] rounded-full bg-glow-secondary/20 blur-[120px]" />
           </div>
 
-          <div className="mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:px-8">
-            <div className="flex flex-col gap-5">
-              <span className="inline-flex w-fit items-center gap-2 rounded-full border border-glow-secondary/30 bg-glow-secondary/10 px-3.5 py-1 font-mono text-xs font-medium uppercase tracking-[0.18em] text-glow-secondary">
-                Case Study · 2025
-              </span>
-              <h1 className="text-balance font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
-                Chopstick Ring
-              </h1>
-              <p className="max-w-xl text-balance text-lg leading-relaxed text-muted-foreground sm:text-xl">
-                A finger-worn chopstick that flips from an eating utensil to a flat desk
-                rest in one motion — so you can eat lunch at your desk without getting
-                food on your hands or your keyboard.
-              </p>
-              <dl className="mt-2 grid grid-cols-3 gap-4 border-t border-border/60 pt-5 text-sm">
-                <div className="flex flex-col gap-1">
-                  <dt className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">Role</dt>
-                  <dd className="font-medium">Design &amp; build</dd>
-                </div>
-                <div className="flex flex-col gap-1">
-                  <dt className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">Tools</dt>
-                  <dd className="font-medium">CAD, 3D printing</dd>
-                </div>
-                <div className="flex flex-col gap-1">
-                  <dt className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">Parts</dt>
-                  <dd className="font-medium">6-piece assembly</dd>
-                </div>
-              </dl>
-            </div>
-
-            <div className="relative overflow-hidden rounded-2xl border border-border/60 bg-card/50 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.5)]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/projects/chopstick-ring/cad-render.jpg"
-                alt="3D rendered CAD model of the Chopstick Ring assembly"
-                className="aspect-[16/10] size-full object-cover"
-              />
-            </div>
+          <div className="mx-auto flex max-w-3xl flex-col gap-5 px-6 lg:px-8">
+            <span className="inline-flex w-fit items-center gap-2 rounded-full border border-glow-secondary/30 bg-glow-secondary/10 px-3.5 py-1 font-mono text-xs font-medium uppercase tracking-[0.18em] text-glow-secondary">
+              Case Study · 2025
+            </span>
+            <h1 className="text-balance font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
+              Chopstick Ring
+            </h1>
+            <p className="max-w-xl text-balance text-lg leading-relaxed text-muted-foreground sm:text-xl">
+              A finger-worn chopstick that flips from an eating utensil to a flat desk
+              rest in one motion — so you can eat lunch at your desk without getting
+              food on your hands or your keyboard.
+            </p>
+            <dl className="mt-2 grid grid-cols-3 gap-4 border-t border-border/60 pt-5 text-sm sm:max-w-md">
+              <div className="flex flex-col gap-1">
+                <dt className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">Role</dt>
+                <dd className="font-medium">Design &amp; build</dd>
+              </div>
+              <div className="flex flex-col gap-1">
+                <dt className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">Tools</dt>
+                <dd className="font-medium">CAD, 3D printing</dd>
+              </div>
+              <div className="flex flex-col gap-1">
+                <dt className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">Parts</dt>
+                <dd className="font-medium">6-piece assembly</dd>
+              </div>
+            </dl>
           </div>
         </section>
 
@@ -247,8 +236,9 @@ export default function ChopstickRingPage() {
                     <Keyboard className="size-3.5" /> Typing mode
                   </span>
                   <p className="text-sm leading-relaxed text-muted-foreground">
-                    Swing the arm back flat against your fingers and it tucks neatly out
-                    of the way, resting on the rings so your hands stay completely free.
+                    Swing the arm back flat against your fingers and a pair of small
+                    embedded magnets click into place, holding it snug against your hand
+                    so it stays put — out of the way and ready — while you type.
                   </p>
                 </div>
               </div>
@@ -266,38 +256,17 @@ export default function ChopstickRingPage() {
               Tap a label to open its drawing
             </h2>
             <p className="mt-3 max-w-2xl text-balance leading-relaxed text-muted-foreground">
-              Each callout on the render below points to a real part from the
-              assembly — click one to open the dimensioned CAD sheet it came
-              from, with a short note on what the part actually does.
+              Every part below was modeled and dimensioned to scale before it was
+              printed. Click any arrow — or its label — to pop open that part&apos;s
+              fully dimensioned CAD sheet, with a short note on what it actually does.
             </p>
 
             <div className="mt-10">
               <PartsDiagram
                 image="/projects/chopstick-ring/cad-render.jpg"
-                alt="3D rendered CAD model of the Chopstick Ring with its parts numbered"
+                alt="3D rendered CAD model of the Chopstick Ring with its parts called out"
                 parts={diagramParts}
               />
-            </div>
-          </div>
-        </section>
-
-        {/* CAD breakdown */}
-        <section className="relative py-16 sm:py-20">
-          <div className="mx-auto max-w-6xl px-6 lg:px-8">
-            <span className="inline-flex w-fit items-center gap-2 rounded-full border border-accent/40 bg-accent/15 px-3.5 py-1 font-mono text-xs font-medium uppercase tracking-[0.18em] text-accent-foreground">
-              <Ruler className="size-3.5" /> CAD breakdown
-            </span>
-            <h2 className="mt-3 text-balance font-display text-2xl font-semibold tracking-tight sm:text-3xl">
-              Six parts, fully dimensioned
-            </h2>
-            <p className="mt-3 max-w-2xl text-balance leading-relaxed text-muted-foreground">
-              Every part of the assembly was modeled and drawn to scale before it was
-              printed. Click any sheet below to open it full-size — then click the image
-              itself to zoom in and read the dimensions.
-            </p>
-
-            <div className="mt-10">
-              <ProjectGallery items={cadSheets} />
             </div>
           </div>
         </section>
