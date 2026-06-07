@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 import { projects } from "@/data/profile";
 import { SectionHeading } from "@/components/section-heading";
@@ -20,6 +21,8 @@ export function ProjectsShowcase() {
         <ul className="mt-10 flex flex-col border-t border-border/60">
           {projects.map((project, i) => {
             const href = project.links?.[0]?.href;
+            const isInternal = href?.startsWith("/");
+            const ArrowIcon = isInternal ? ArrowRight : ArrowUpRight;
 
             const row = (
               <>
@@ -27,7 +30,7 @@ export function ProjectsShowcase() {
                   <span className="inline-flex items-center gap-2 text-lg font-medium tracking-tight sm:text-xl">
                     {project.title}
                     {href && (
-                      <ArrowUpRight className="size-4 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-glow-secondary" />
+                      <ArrowIcon className="size-4 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-glow-secondary" />
                     )}
                   </span>
                   <span className="max-w-xl text-sm leading-relaxed text-muted-foreground">
@@ -48,14 +51,23 @@ export function ProjectsShowcase() {
                 className="border-b border-border/60"
               >
                 {href ? (
-                  <a
-                    href={href}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className="group flex items-start justify-between gap-6 py-6 transition-colors hover:text-glow-secondary"
-                  >
-                    {row}
-                  </a>
+                  isInternal ? (
+                    <Link
+                      href={href}
+                      className="group flex items-start justify-between gap-6 py-6 transition-colors hover:text-glow-secondary"
+                    >
+                      {row}
+                    </Link>
+                  ) : (
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="group flex items-start justify-between gap-6 py-6 transition-colors hover:text-glow-secondary"
+                    >
+                      {row}
+                    </a>
+                  )
                 ) : (
                   <div className="flex items-start justify-between gap-6 py-6">{row}</div>
                 )}
@@ -67,3 +79,4 @@ export function ProjectsShowcase() {
     </section>
   );
 }
+

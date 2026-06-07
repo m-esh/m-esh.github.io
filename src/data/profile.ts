@@ -65,6 +65,13 @@ export type ProjectItem = {
 
 export const projects: ProjectItem[] = [
   {
+    title: "Chopstick Ring",
+    description:
+      "A finger-worn chopstick that flips between an eating utensil and a flat desk rest — modeled in CAD, 3D printed, and assembled by hand.",
+    year: "2025",
+    links: [{ label: "View case study", href: "/projects/chopstick-ring" }],
+  },
+  {
     title: "FRC 7902 Competition Robot",
     description:
       "A season-long build that starts as a CAD sketch and ends as a machine that has to drive, score, and survive elimination matches.",
