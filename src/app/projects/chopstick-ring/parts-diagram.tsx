@@ -17,6 +17,9 @@ export type DiagramPart = {
   item: GalleryItem;
 };
 
+const VIEW_W = 1278;
+const VIEW_H = 712;
+
 export function PartsDiagram({
   image,
   alt,
@@ -28,6 +31,7 @@ export function PartsDiagram({
 }) {
   const [openIndex, setOpenIndex] = React.useState<number | null>(null);
   const [active, setActive] = React.useState<number | null>(null);
+  const arrowId = React.useId().replace(/:/g, "");
 
   const items = React.useMemo(() => parts.map((p) => p.item), [parts]);
 
@@ -70,17 +74,43 @@ export function PartsDiagram({
 
       <svg
         className="pointer-events-none absolute inset-0 size-full"
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
+        viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
         aria-hidden="true"
       >
+        <defs>
+          <marker
+            id={`${arrowId}-rest`}
+            viewBox="0 0 10 10"
+            refX="8.5"
+            refY="5"
+            markerWidth={9}
+            markerHeight={9}
+            markerUnits="userSpaceOnUse"
+            orient="auto"
+          >
+            <path d="M0,0 L10,5 L0,10 Z" fill="var(--color-glow-secondary)" fillOpacity={0.4} />
+          </marker>
+          <marker
+            id={`${arrowId}-active`}
+            viewBox="0 0 10 10"
+            refX="8.5"
+            refY="5"
+            markerWidth={11}
+            markerHeight={11}
+            markerUnits="userSpaceOnUse"
+            orient="auto"
+          >
+            <path d="M0,0 L10,5 L0,10 Z" fill="var(--color-glow-secondary)" />
+          </marker>
+        </defs>
         {parts.map((part, i) => (
           <line
             key={part.number}
-            x1={part.labelX}
-            y1={part.labelY}
-            x2={part.x}
-            y2={part.y}
+            x1={(part.labelX / 100) * VIEW_W}
+            y1={(part.labelY / 100) * VIEW_H}
+            x2={(part.x / 100) * VIEW_W}
+            y2={(part.y / 100) * VIEW_H}
+            markerEnd={`url(#${arrowId}-${active === i ? "active" : "rest"})`}
             vectorEffect="non-scaling-stroke"
             strokeWidth={active === i ? 1.5 : 1}
             strokeDasharray={active === i ? undefined : "3 2.5"}

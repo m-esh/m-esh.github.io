@@ -14,13 +14,6 @@ export const metadata: Metadata = {
 
 const cadSheets: GalleryItem[] = [
   {
-    src: "/projects/chopstick-ring/cad-render.jpg",
-    alt: "3D rendered model of the Chopstick Ring assembly",
-    title: "Full assembly — render",
-    description:
-      "The complete assembly: a finger ring joined to a 150 mm chopstick arm through a pivoting hinge, so the arm can swing between an eating angle and a flat resting position.",
-  },
-  {
     src: "/projects/chopstick-ring/cad-sheet-1-overview.jpg",
     alt: "Orthographic CAD sheet showing the full Chopstick Ring assembly with overall dimensions",
     title: "Assembly overview — sheet 1 of 6",
@@ -73,7 +66,7 @@ const diagramParts: DiagramPart[] = [
     y: 78,
     labelX: 10,
     labelY: 92,
-    item: cadSheets[4],
+    item: cadSheets[3],
   },
   {
     number: 2,
@@ -83,7 +76,7 @@ const diagramParts: DiagramPart[] = [
     y: 54,
     labelX: 16,
     labelY: 26,
-    item: cadSheets[3],
+    item: cadSheets[2],
   },
   {
     number: 3,
@@ -93,7 +86,7 @@ const diagramParts: DiagramPart[] = [
     y: 60,
     labelX: 47,
     labelY: 90,
-    item: cadSheets[5],
+    item: cadSheets[4],
   },
   {
     number: 4,
@@ -103,7 +96,7 @@ const diagramParts: DiagramPart[] = [
     y: 60,
     labelX: 76,
     labelY: 88,
-    item: cadSheets[6],
+    item: cadSheets[5],
   },
   {
     number: 5,
@@ -113,7 +106,7 @@ const diagramParts: DiagramPart[] = [
     y: 26,
     labelX: 90,
     labelY: 10,
-    item: cadSheets[2],
+    item: cadSheets[1],
   },
 ];
 
