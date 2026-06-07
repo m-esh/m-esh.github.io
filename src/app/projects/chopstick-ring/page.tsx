@@ -4,6 +4,7 @@ import { ArrowLeft, Hand, Keyboard, Ruler } from "lucide-react";
 
 import { ScrollProgress } from "@/components/scroll-progress";
 import { ProjectGallery, type GalleryItem } from "./project-gallery";
+import { PartsDiagram, type DiagramPart } from "./parts-diagram";
 
 export const metadata: Metadata = {
   title: "Chopstick Ring · Mehrdad Shariatmadari",
@@ -60,6 +61,49 @@ const cadSheets: GalleryItem[] = [
     title: "Pivot bushing — sheet 6 of 6",
     description:
       "A thin sleeve that rides on the pivot pin and keeps the arm spinning freely against the bracket instead of wearing against bare plastic.",
+  },
+];
+
+const diagramParts: DiagramPart[] = [
+  {
+    number: 1,
+    name: "Finger ring",
+    blurb: "Ø25.5 mm wearable ring the whole assembly hangs from.",
+    x: 26,
+    y: 78,
+    item: cadSheets[4],
+  },
+  {
+    number: 2,
+    name: "Hinge bracket",
+    blurb: "Bridges the ring and the arm, housing the pivot bore.",
+    x: 36,
+    y: 54,
+    item: cadSheets[3],
+  },
+  {
+    number: 3,
+    name: "Pivot pin",
+    blurb: "T-shaped pin that lets the arm rotate at the hinge.",
+    x: 33,
+    y: 60,
+    item: cadSheets[5],
+  },
+  {
+    number: 4,
+    name: "Bushing",
+    blurb: "Thin sleeve that keeps the pivot spinning freely.",
+    x: 40,
+    y: 60,
+    item: cadSheets[6],
+  },
+  {
+    number: 5,
+    name: "Chopstick arm",
+    blurb: "The 150 mm business end that actually picks up food.",
+    x: 65,
+    y: 26,
+    item: cadSheets[2],
   },
 ];
 
@@ -236,6 +280,31 @@ export default function ChopstickRingPage() {
                   </p>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Anatomy / parts diagram */}
+        <section className="relative py-16 sm:py-20">
+          <div className="mx-auto max-w-6xl px-6 lg:px-8">
+            <span className="inline-flex w-fit items-center gap-2 rounded-full border border-glow-secondary/30 bg-glow-secondary/10 px-3.5 py-1 font-mono text-xs font-medium uppercase tracking-[0.18em] text-glow-secondary">
+              Anatomy
+            </span>
+            <h2 className="mt-3 text-balance font-display text-2xl font-semibold tracking-tight sm:text-3xl">
+              Tap a part to open its drawing
+            </h2>
+            <p className="mt-3 max-w-2xl text-balance leading-relaxed text-muted-foreground">
+              Each numbered point on the model below is a real part from the
+              assembly — click it, or its entry in the list, to open the
+              dimensioned CAD sheet it came from.
+            </p>
+
+            <div className="mt-10">
+              <PartsDiagram
+                image="/projects/chopstick-ring/cad-render.jpg"
+                alt="3D rendered CAD model of the Chopstick Ring with its parts numbered"
+                parts={diagramParts}
+              />
             </div>
           </div>
         </section>

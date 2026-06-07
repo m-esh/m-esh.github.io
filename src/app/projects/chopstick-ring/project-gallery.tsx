@@ -104,7 +104,7 @@ export function ProjectGallery({
   );
 }
 
-function Lightbox({
+export function Lightbox({
   item,
   index,
   total,
