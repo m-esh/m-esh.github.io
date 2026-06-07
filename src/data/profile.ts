@@ -80,7 +80,7 @@ export const projects: ProjectItem[] = [
     tags: ["CAD", "Robotics", "Electronics", "Team Project"],
     year: "2024 to 2025",
     links: [{ label: "FRC Team 7902", href: "https://www.thebluealliance.com/team/7902" }],
-    accent: "from-violet-500/30 via-fuchsia-500/10 to-transparent",
+    accent: "from-amber-500/30 via-emerald-500/10 to-transparent",
   },
 ];
 

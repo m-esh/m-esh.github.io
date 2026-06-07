@@ -33,6 +33,30 @@ function CertificationCard({ cert, className }: { cert: (typeof certifications)[
   );
 }
 
+function ProgressDots({ progress }: { progress: import("framer-motion").MotionValue<number> }) {
+  const [active, setActive] = React.useState(0);
+
+  React.useEffect(() => {
+    return progress.on("change", (v) => {
+      const step = 1 / certifications.length;
+      setActive(Math.min(certifications.length - 1, Math.floor(v / step)));
+    });
+  }, [progress]);
+
+  return (
+    <div className="mt-6 flex items-center gap-2">
+      {certifications.map((cert, i) => (
+        <span
+          key={cert.name}
+          className={`h-1.5 rounded-full transition-all duration-300 ${
+            i === active ? "w-8 bg-primary" : "w-1.5 bg-muted-foreground/30"
+          }`}
+        />
+      ))}
+    </div>
+  );
+}
+
 function PinnedSideways() {
   const sectionRef = React.useRef<HTMLDivElement>(null);
   const trackRef = React.useRef<HTMLDivElement>(null);
@@ -74,16 +98,17 @@ function PinnedSideways() {
             title="Credentials I've earned"
             description="The training behind the lifeguarding work, plus a bit more on the way soon."
           />
+          <ProgressDots progress={scrollYProgress} />
         </div>
 
         <div ref={viewportRef} className="w-full overflow-hidden">
           <motion.div
             ref={trackRef}
-            className="flex h-[48vh] min-h-[340px] w-fit gap-6 px-6 will-change-transform"
+            className="flex h-[46vh] min-h-[320px] w-fit gap-5 px-6 will-change-transform sm:gap-6"
             style={{ x }}
           >
             {certifications.map((cert) => (
-              <div key={cert.name} className="h-full w-[64vw] shrink-0">
+              <div key={cert.name} className="h-full w-[80vw] shrink-0 sm:w-[56vw] lg:w-[40vw] xl:w-[32vw]">
                 <CertificationCard cert={cert} className="h-full transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_20px_60px_-24px_var(--color-primary)]" />
               </div>
             ))}
@@ -122,15 +147,14 @@ function StackedGrid() {
 }
 
 export function Certifications() {
-  const isDesktop = useMediaQuery("(min-width: 1024px)");
   const prefersReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
   const isClient = useIsClient();
 
-  const usePinned = isClient && isDesktop && !prefersReducedMotion;
+  const usePinned = isClient && !prefersReducedMotion;
 
   return (
-    <section id="certifications" className="relative py-20 sm:py-28">
-      {usePinned ? <PinnedSideways /> : <StackedGrid />}
+    <section id="certifications" className="relative">
+      {usePinned ? <PinnedSideways /> : <div className="py-20 sm:py-28"><StackedGrid /></div>}
     </section>
   );
 }
