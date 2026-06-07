@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Mail } from "lucide-react";
 
@@ -16,32 +17,54 @@ const fadeUp = {
 };
 
 function ConstructedName({ name }: { name: string }) {
+  const [started, setStarted] = React.useState(false);
+
+  React.useEffect(() => {
+    const id = requestAnimationFrame(() => setStarted(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
+
   const words = name.split(" ");
+  const totalLength = name.length - 1;
+  const wordOffsets = words.reduce<number[]>((acc, word, idx) => {
+    acc.push(idx === 0 ? 0 : acc[idx - 1] + words[idx - 1].length + 1);
+    return acc;
+  }, []);
 
   return (
-    <span className="text-primary">
+    <span>
       {words.flatMap((word, wi) => {
         const wordSpan = (
           <span key={`w-${wi}`} className="inline-block whitespace-nowrap">
             {word.split("").map((letter, li) => {
-              const i = wi * 16 + li;
+              const i = wordOffsets[wi] + li;
+              const t = totalLength > 0 ? i / totalLength : 0;
+              const color =
+                t <= 0.5
+                  ? `color-mix(in oklch, var(--color-primary) ${Math.round((1 - t * 2) * 100)}%, var(--color-glow) ${Math.round(t * 2 * 100)}%)`
+                  : `color-mix(in oklch, var(--color-glow) ${Math.round((1 - (t - 0.5) * 2) * 100)}%, var(--color-glow-secondary) ${Math.round((t - 0.5) * 2 * 100)}%)`;
               const fromLeft = i % 2 === 0;
               return (
                 <motion.span
                   key={li}
                   initial={{
                     opacity: 0,
-                    x: fromLeft ? -(28 + (li % 3) * 6) : 28 + (li % 3) * 6,
-                    y: ((li % 4) - 1.5) * 8,
-                    rotate: fromLeft ? -40 : 40,
-                    scale: 0.6,
+                    x: fromLeft ? -(30 + (li % 3) * 8) : 30 + (li % 3) * 8,
+                    y: ((li % 4) - 1.5) * 10,
+                    rotate: fromLeft ? -45 : 45,
+                    scale: 0.55,
                   }}
-                  animate={{ opacity: 1, x: 0, y: 0, rotate: 0, scale: 1 }}
+                  animate={
+                    started
+                      ? { opacity: 1, x: 0, y: 0, rotate: 0, scale: 1 }
+                      : undefined
+                  }
                   transition={{
-                    delay: 0.25 + i * 0.035,
-                    duration: 0.7,
+                    delay: i * 0.05,
+                    duration: 0.75,
                     ease: [0.16, 1, 0.3, 1],
                   }}
+                  style={{ color }}
                   className="inline-block"
                 >
                   {letter}
