@@ -38,19 +38,8 @@ export function Contact() {
           transition={{ duration: 0.6, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
           className="mt-4 text-balance text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl"
         >
-          Got something in mind? <span className="gradient-text">Say hello.</span>
+          <span className="gradient-text">Contact me</span>
         </motion.h2>
-
-        <motion.p
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="mx-auto mt-5 max-w-xl text-balance leading-relaxed text-muted-foreground sm:text-lg"
-        >
-          A team looking for a hand, a question about robotics, or just a hello: my inbox is
-          always open.
-        </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}

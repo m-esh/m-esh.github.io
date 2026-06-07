@@ -16,36 +16,42 @@ const fadeUp = {
 };
 
 function ConstructedName({ name }: { name: string }) {
-  const pieces = name.split(" ").flatMap((word, wi, words) => [
-    ...word.split(""),
-    ...(wi < words.length - 1 ? [" "] : []),
-  ]);
+  const words = name.split(" ");
 
   return (
-    <span className="gradient-text inline-flex flex-wrap">
-      {pieces.map((letter, i) => {
-        const fromLeft = i % 2 === 0;
-        return (
-          <motion.span
-            key={i}
-            initial={{
-              opacity: 0,
-              x: fromLeft ? -(32 + (i % 3) * 8) : 32 + (i % 3) * 8,
-              y: ((i % 4) - 1.5) * 10,
-              rotate: fromLeft ? -55 : 55,
-              scale: 0.5,
-            }}
-            animate={{ opacity: 1, x: 0, y: 0, rotate: 0, scale: 1 }}
-            transition={{
-              delay: 0.3 + i * 0.045,
-              duration: 0.65,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-            className="inline-block"
-          >
-            {letter === " " ? " " : letter}
-          </motion.span>
+    <span className="gradient-text">
+      {words.flatMap((word, wi) => {
+        const wordSpan = (
+          <span key={`w-${wi}`} className="inline-block whitespace-nowrap">
+            {word.split("").map((letter, li) => {
+              const i = wi * 16 + li;
+              const fromLeft = i % 2 === 0;
+              return (
+                <motion.span
+                  key={li}
+                  initial={{
+                    opacity: 0,
+                    x: fromLeft ? -(28 + (li % 3) * 6) : 28 + (li % 3) * 6,
+                    y: ((li % 4) - 1.5) * 8,
+                    rotate: fromLeft ? -40 : 40,
+                    scale: 0.6,
+                  }}
+                  animate={{ opacity: 1, x: 0, y: 0, rotate: 0, scale: 1 }}
+                  transition={{
+                    delay: 0.25 + i * 0.035,
+                    duration: 0.7,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                  className="inline-block"
+                >
+                  {letter}
+                </motion.span>
+              );
+            })}
+          </span>
         );
+
+        return wi < words.length - 1 ? [wordSpan, " "] : [wordSpan];
       })}
     </span>
   );
