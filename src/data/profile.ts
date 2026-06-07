@@ -7,7 +7,7 @@ export const profile = {
     "A grade 11 student who likes building things that move, sense, and respond. Some weeks that means wiring a competition robot with FRC Team 7902, other times it means watching over swimmers as a city lifeguard. Always curious about where mechanical design, electronics, and code come together.",
   longBio: [
     "I'm Mehrdad, a high school student in Toronto with a growing pull toward mechatronics: the field where mechanical systems, electronics, and software come together to make something actually do things.",
-    "Most weeks split between two pretty different worlds. As a lifeguard for the City of Toronto, I keep an eye on swimmers and stay ready to act the moment something goes wrong. As part of FRC Team 7902, I help design, wire, and program competition robots with a team that pushes me to think like an engineer rather than just follow instructions.",
+    "Most weeks split between two pretty different worlds. As a lifeguard for the City of Toronto, I keep an eye on swimmers and stay ready to act the moment something goes wrong. As part of FRC Team 7902, I help design, build, and wire competition robots with a team that pushes me to think like an engineer rather than just follow instructions.",
     "What I enjoy most is the kind of project that forces me to learn quickly: shaping a part that has to survive a two-minute match, tracking down a wiring fault the night before an event, or working out why a sensor keeps reading something it shouldn't. Step by step, that's what's pulling me toward a future in mechatronics engineering.",
   ],
   email: "mehrdad.shari@gmail.com",
@@ -126,7 +126,7 @@ export const skills = [
   "CAD Design",
   "Robotics",
   "Electronics & Wiring",
-  "Programming",
+  "Design & Build",
   "Problem Solving",
   "First Aid & CPR",
   "Team Leadership",
