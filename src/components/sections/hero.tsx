@@ -6,7 +6,7 @@ import { ArrowUpRight, Mail } from "lucide-react";
 import { LinkedInIcon } from "@/components/icons";
 
 import { Button } from "@/components/ui/button";
-import { profile, stats } from "@/data/profile";
+import { profile } from "@/data/profile";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -38,38 +38,21 @@ export function Hero() {
       </div>
 
       <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-6 lg:px-8">
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-          custom={0}
-          className="mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-border/70 bg-card/60 px-4 py-1.5 text-xs font-medium text-muted-foreground backdrop-blur-sm"
-        >
-          <span className="relative flex size-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/70" />
-            <span className="relative inline-flex size-2 rounded-full bg-primary" />
-          </span>
-          Grade 11 · Toronto, Canada · FRC Team 7902
-        </motion.div>
-
         <motion.h1
           variants={fadeUp}
           initial="hidden"
           animate="show"
-          custom={1}
+          custom={0}
           className="max-w-4xl text-balance text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl"
         >
-          Hi, I&rsquo;m{" "}
-          <span className="gradient-text">Mehrdad Shariatmadari</span>.
-          <br />
-          I build, guard, and keep learning.
+          <span className="gradient-text">{profile.name}</span>
         </motion.h1>
 
         <motion.p
           variants={fadeUp}
           initial="hidden"
           animate="show"
-          custom={2}
+          custom={1}
           className="mt-6 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground sm:text-xl"
         >
           {profile.blurb}
@@ -79,7 +62,7 @@ export function Hero() {
           variants={fadeUp}
           initial="hidden"
           animate="show"
-          custom={3}
+          custom={2}
           className="mt-10 flex flex-wrap items-center gap-3"
         >
           <Button size="lg" onClick={() => scrollTo("#projects")}>
@@ -98,23 +81,6 @@ export function Hero() {
             <LinkedInIcon className="size-4" /> LinkedIn
           </a>
         </motion.div>
-
-        <motion.dl
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-          custom={4}
-          className="mt-16 grid grid-cols-2 gap-6 border-t border-border/60 pt-8 sm:grid-cols-4"
-        >
-          {stats.map((stat) => (
-            <div key={stat.label} className="flex flex-col gap-1">
-              <dt className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                {stat.label}
-              </dt>
-              <dd className="text-2xl font-semibold tracking-tight sm:text-3xl">{stat.value}</dd>
-            </div>
-          ))}
-        </motion.dl>
       </div>
     </section>
   );

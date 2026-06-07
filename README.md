@@ -20,7 +20,6 @@ Almost everything you'd want to change lives in **`src/data/profile.ts`**:
 - `projects` — personal projects (shown in the sideways-scrolling showcase — add as many as you like)
 - `certifications` — certifications/credentials (shown as cards)
 - `skills` — the toolkit/skills tag list
-- `stats` — the four stat callouts in the hero section
 
 Just edit the arrays/objects in that file and the site updates automatically — no need to touch any component.
 

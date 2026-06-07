@@ -31,7 +31,7 @@ const links = [
 
 export function Contact() {
   return (
-    <section id="contact" className="relative overflow-hidden py-28 sm:py-36">
+    <section id="contact" className="relative overflow-hidden py-20 sm:py-28">
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute left-1/2 top-1/2 size-[40rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/15 blur-[140px]" />
       </div>
@@ -87,7 +87,7 @@ export function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="mx-auto mt-14 grid max-w-2xl gap-3 sm:grid-cols-3"
+          className="mx-auto mt-10 grid max-w-2xl gap-3 sm:grid-cols-3"
         >
           {links.map((link) => (
             <a
@@ -110,7 +110,7 @@ export function Contact() {
         </motion.div>
       </div>
 
-      <footer className="mx-auto mt-24 flex max-w-6xl flex-col items-center gap-2 border-t border-border/60 px-6 pt-8 text-center text-xs text-muted-foreground sm:flex-row sm:justify-between sm:text-left">
+      <footer className="mx-auto mt-16 flex max-w-6xl flex-col items-center gap-2 border-t border-border/60 px-6 pt-8 text-center text-xs text-muted-foreground sm:flex-row sm:justify-between sm:text-left">
         <p>© {new Date().getFullYear()} {profile.name}. Built with Next.js, Tailwind CSS &amp; shadcn/ui.</p>
         <p>Designed &amp; developed in Toronto, Canada.</p>
       </footer>

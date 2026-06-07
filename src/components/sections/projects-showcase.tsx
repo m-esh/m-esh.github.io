@@ -216,7 +216,7 @@ export function ProjectsShowcase() {
   const usePinned = isClient && isDesktop && !prefersReducedMotion;
 
   return (
-    <section id="projects" className="relative py-28 sm:py-36">
+    <section id="projects" className="relative py-20 sm:py-28">
       {usePinned ? <PinnedHorizontalShowcase /> : <SwipeCarousel />}
     </section>
   );

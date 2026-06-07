@@ -74,7 +74,7 @@ function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }
 
 export function Experience() {
   return (
-    <section id="experience" className="relative py-28 sm:py-36">
+    <section id="experience" className="relative py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <SectionHeading
           eyebrow="Experience"
@@ -82,13 +82,13 @@ export function Experience() {
           description="Two very different jobs that both come down to the same thing: showing up and getting it right."
         />
 
-        <div className="relative mt-16">
+        <div className="relative mt-12">
           <div
             className="absolute left-[18px] top-2 bottom-2 w-px bg-gradient-to-b from-primary/60 via-border to-transparent sm:left-[22px]"
             aria-hidden
           />
 
-          <ol className="flex flex-col gap-10">
+          <ol className="flex flex-col gap-8">
             {experience.map((item, i) => (
               <ExperienceCard key={item.role} item={item} index={i} />
             ))}

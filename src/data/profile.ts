@@ -10,7 +10,7 @@ export const profile = {
     "Most weeks split between two pretty different worlds. As a lifeguard for the City of Toronto, I keep an eye on swimmers and stay ready to act the moment something goes wrong. As part of FRC Team 7902, I help design, wire, and program competition robots with a team that pushes me to think like an engineer rather than just follow instructions.",
     "What I enjoy most is the kind of project that forces me to learn quickly: shaping a part that has to survive a two-minute match, tracking down a wiring fault the night before an event, or working out why a sensor keeps reading something it shouldn't. Step by step, that's what's pulling me toward a future in mechatronics engineering.",
   ],
-  email: "shahdad.sh2012@gmail.com",
+  email: "mehrdad.shari@gmail.com",
   socials: {
     linkedin:
       "https://www.linkedin.com/in/mehrdad-shariatmadari",
@@ -33,7 +33,7 @@ export const experience: ExperienceItem[] = [
   {
     role: "Lifeguard",
     org: "City of Toronto",
-    period: "2024 to present",
+    period: "2025 to present",
     location: "Toronto, ON",
     summary:
       "Watching over swimmers at municipal pools, staying alert and ready to step in the moment something needs attention.",
@@ -45,18 +45,18 @@ export const experience: ExperienceItem[] = [
     tags: ["Public Safety", "First Aid & CPR", "Teamwork"],
   },
   {
-    role: "Robotics Team Member, FRC Team 7902",
+    role: "Mechanical Sub-Team Vice Lead & Drive Team, FRC Team 7902",
     org: "FIRST Robotics Competition",
-    period: "2023 to present",
+    period: "2025 to present",
     location: "Toronto, ON",
     summary:
-      "Helping design, wire, and program a competition robot from scratch each season, on a tight build-and-compete schedule.",
+      "Helping lead the mechanical side of a competition robot build each season, while also stepping onto the field as part of the drive team.",
     highlights: [
-      "Work alongside the mechanical, electrical, and software groups to get a robot ready every build season",
+      "Help run the mechanical sub-team: planning builds, assigning tasks, and keeping CAD designs on track",
       "Use CAD and quick prototyping to solve mechanical problems within the competition's rules",
-      "Travel to regional events and adjust the robot between matches based on what's actually breaking",
+      "Operate the robot on the field as part of the drive team and adjust strategy between matches at regional events",
     ],
-    tags: ["Robotics", "CAD", "Electronics", "Teamwork"],
+    tags: ["Robotics", "CAD", "Mechanical Design", "Leadership"],
   },
 ];
 
@@ -145,11 +145,4 @@ export const skills = [
   "First Aid & CPR",
   "Team Leadership",
   "Mechanical Design",
-];
-
-export const stats = [
-  { label: "Grade", value: "11" },
-  { label: "FRC Team", value: "7902" },
-  { label: "Lifeguard since", value: "2024" },
-  { label: "Aspiring", value: "Mechatronics Eng." },
 ];

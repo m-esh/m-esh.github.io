@@ -8,7 +8,7 @@ import { SectionHeading } from "@/components/section-heading";
 
 export function About() {
   return (
-    <section id="about" className="relative py-28 sm:py-36">
+    <section id="about" className="relative py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <SectionHeading
           eyebrow="About"
@@ -16,7 +16,7 @@ export function About() {
           description="The short version: I keep people safe, I build robots, and I'm chasing a future in mechatronics engineering."
         />
 
-        <div className="mt-14 grid gap-12 lg:grid-cols-[1.3fr_1fr]">
+        <div className="mt-10 grid gap-10 lg:grid-cols-[1.3fr_1fr]">
           <div className="flex flex-col gap-6">
             {profile.longBio.map((paragraph, i) => (
               <motion.p
