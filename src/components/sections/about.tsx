@@ -47,8 +47,8 @@ export function About() {
               <h3 className="text-lg font-semibold tracking-tight">Toolkit &amp; strengths</h3>
             </div>
             <p className="relative mt-3 text-sm leading-relaxed text-muted-foreground">
-              Skills I&rsquo;ve been building through robotics, lifeguarding, and personal projects —
-              growing this list every season.
+              Picked up through robotics builds, lifeguard shifts, and late nights on personal
+              projects. The list keeps growing each season.
             </p>
             <ul className="relative mt-6 flex flex-wrap gap-2">
               {skills.map((skill, i) => (

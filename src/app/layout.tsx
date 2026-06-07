@@ -17,11 +17,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: `${profile.name} — ${profile.tagline}`,
+  title: `${profile.name} · ${profile.tagline}`,
   description: profile.blurb,
   metadataBase: new URL("https://m-esh.github.io"),
   openGraph: {
-    title: `${profile.name} — ${profile.tagline}`,
+    title: `${profile.name} · ${profile.tagline}`,
     description: profile.blurb,
     type: "website",
   },

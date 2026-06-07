@@ -104,7 +104,7 @@ function PinnedHorizontalShowcase() {
           <SectionHeading
             eyebrow="Projects"
             title="Things I've built"
-            description="Keep scrolling — this section moves sideways. A growing collection of robots, code, and things that didn't work the first time."
+            description="Keep scrolling: the cards slide sideways from here. A look at what I've been putting together lately."
           />
         </div>
 
@@ -154,7 +154,7 @@ function SwipeCarousel() {
       <SectionHeading
         eyebrow="Projects"
         title="Things I've built"
-        description="Swipe sideways to browse — a growing collection of robots, code, and things that didn't work the first time."
+        description="Swipe through to browse: a look at what I've been putting together lately."
       />
 
       <div

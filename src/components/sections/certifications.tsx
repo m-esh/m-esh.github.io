@@ -15,7 +15,7 @@ export function Certifications() {
         <SectionHeading
           eyebrow="Certifications"
           title="Credentials I've earned"
-          description="Training that backs up the lifeguarding side of what I do — with more on the way."
+          description="The training behind the lifeguarding work, plus a bit more on the way soon."
         />
 
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

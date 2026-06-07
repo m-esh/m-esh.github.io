@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDown, ArrowUpRight, Mail } from "lucide-react";
+import { ArrowUpRight, Mail } from "lucide-react";
 
 import { LinkedInIcon } from "@/components/icons";
 
@@ -30,7 +30,7 @@ export function Hero() {
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 section-glow" />
         <div className="absolute left-1/2 top-[-12rem] size-[36rem] -translate-x-1/2 rounded-full bg-primary/25 blur-[120px] animate-glow-pulse" />
-        <div className="absolute right-[-10rem] bottom-[-10rem] size-[28rem] rounded-full bg-fuchsia-500/15 blur-[120px]" />
+        <div className="absolute right-[-10rem] bottom-[-10rem] size-[28rem] rounded-full bg-glow-secondary/15 blur-[120px]" />
         <div
           className="absolute inset-0 opacity-[0.05] [background-image:linear-gradient(to_right,currentColor_1px,transparent_1px),linear-gradient(to_bottom,currentColor_1px,transparent_1px)] [background-size:64px_64px]"
           aria-hidden
@@ -116,20 +116,6 @@ export function Hero() {
           ))}
         </motion.dl>
       </div>
-
-      <motion.button
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 0.8 }}
-        onClick={() => scrollTo("#about")}
-        aria-label="Scroll to about section"
-        className="group absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
-      >
-        Scroll
-        <span className="flex size-8 items-center justify-center rounded-full border border-border/70 transition-transform duration-300 group-hover:translate-y-1">
-          <ArrowDown className="size-3.5" />
-        </span>
-      </motion.button>
     </section>
   );
 }

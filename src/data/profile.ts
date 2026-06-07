@@ -4,11 +4,11 @@ export const profile = {
   tagline: "Aspiring Mechatronics Engineer",
   location: "Toronto, Canada",
   blurb:
-    "Grade 11 student building things that move, sense, and respond — from FIRST Robotics competition robots to lifesaving on the water. Curious about where mechanical design, electronics, and code meet.",
+    "A grade 11 student who likes building things that move, sense, and respond. Some weeks that means wiring a competition robot with FRC Team 7902, other times it means watching over swimmers as a city lifeguard. Always curious about where mechanical design, electronics, and code come together.",
   longBio: [
-    "I'm Mehrdad — a high-school student in Toronto with a growing obsession with mechatronics: the place where mechanical systems, electronics, and software collide to make something actually do things.",
-    "By day (and many evenings), I work as a lifeguard for the City of Toronto, keeping people safe in and around the water. By night, I'm usually deep in CAD files, wiring diagrams, or code for FRC Team 7902 — building competition robots from scratch with a team that pushes me to think like an engineer.",
-    "I'm drawn to projects that force me to learn fast: designing a mechanism that has to survive a 2-minute match, debugging a motor controller at 11pm before an event, or just figuring out why a sensor keeps lying to me. I want to keep building toward a future in mechatronics engineering.",
+    "I'm Mehrdad, a high school student in Toronto with a growing pull toward mechatronics: the field where mechanical systems, electronics, and software come together to make something actually do things.",
+    "Most weeks split between two pretty different worlds. As a lifeguard for the City of Toronto, I keep an eye on swimmers and stay ready to act the moment something goes wrong. As part of FRC Team 7902, I help design, wire, and program competition robots with a team that pushes me to think like an engineer rather than just follow instructions.",
+    "What I enjoy most is the kind of project that forces me to learn quickly: shaping a part that has to survive a two-minute match, tracking down a wiring fault the night before an event, or working out why a sensor keeps reading something it shouldn't. Step by step, that's what's pulling me toward a future in mechatronics engineering.",
   ],
   email: "shahdad.sh2012@gmail.com",
   socials: {
@@ -33,28 +33,28 @@ export const experience: ExperienceItem[] = [
   {
     role: "Lifeguard",
     org: "City of Toronto",
-    period: "2024 — Present",
+    period: "2024 to present",
     location: "Toronto, ON",
     summary:
-      "Responsible for the safety of swimmers at municipal pools and waterfronts — staying sharp, calm, and ready to act under pressure.",
+      "Watching over swimmers at municipal pools, staying alert and ready to step in the moment something needs attention.",
     highlights: [
       "Monitor pool activity and respond to emergencies following lifesaving and first-aid protocols",
-      "Communicate constantly with a team of guards and instructors to keep facilities running safely",
-      "Built habits around vigilance, quick decision-making, and staying composed when it matters most",
+      "Stay in constant contact with a team of guards and instructors to keep the facility running safely",
+      "Built up the habit of staying calm, reading a situation fast, and acting on it without hesitation",
     ],
     tags: ["Public Safety", "First Aid & CPR", "Teamwork"],
   },
   {
-    role: "Robotics Team Member — FRC 7902",
+    role: "Robotics Team Member, FRC Team 7902",
     org: "FIRST Robotics Competition",
-    period: "2023 — Present",
+    period: "2023 to present",
     location: "Toronto, ON",
     summary:
-      "Member of FRC Team 7902, designing, building, wiring, and programming competition robots within tight season deadlines.",
+      "Helping design, wire, and program a competition robot from scratch each season, on a tight build-and-compete schedule.",
     highlights: [
-      "Collaborate across mechanical, electrical, and software sub-teams to ship a working robot every build season",
-      "Apply CAD design and rapid prototyping to solve real mechanical constraints under competition rules",
-      "Compete at regional events, iterating on the robot between matches based on what actually breaks",
+      "Work alongside the mechanical, electrical, and software groups to get a robot ready every build season",
+      "Use CAD and quick prototyping to solve mechanical problems within the competition's rules",
+      "Travel to regional events and adjust the robot between matches based on what's actually breaking",
     ],
     tags: ["Robotics", "CAD", "Electronics", "Teamwork"],
   },
@@ -74,32 +74,32 @@ export const projects: ProjectItem[] = [
   {
     title: "FRC 7902 Competition Robot",
     description:
-      "Season-long build of a competition robot — from CAD concept to a machine that drives, scores, and survives elimination matches.",
+      "A season-long build that starts as a CAD sketch and ends as a machine that has to drive, score, and survive elimination matches.",
     longDescription:
-      "Worked across the mechanical and electrical sub-teams on the team's annual FIRST Robotics Competition entry — contributing to drivetrain design, wiring, and on-the-fly repairs between matches at regional competitions.",
+      "I worked across the mechanical and electrical groups on our FIRST Robotics Competition entry, helping with drivetrain design, wiring, and the repairs that always seem to come up between matches at regional events.",
     tags: ["CAD", "Robotics", "Electronics", "Team Project"],
-    year: "2024 – 2025",
+    year: "2024 to 2025",
     links: [{ label: "FRC Team 7902", href: "https://www.thebluealliance.com/team/7902" }],
     accent: "from-violet-500/30 via-fuchsia-500/10 to-transparent",
   },
   {
     title: "Personal Portfolio Website",
     description:
-      "This site — designed and built from scratch with Next.js, Tailwind CSS, and shadcn/ui to showcase my work and experience.",
+      "The site you're looking at right now: designed and built from the ground up with Next.js, Tailwind CSS, and shadcn/ui.",
     longDescription:
-      "A from-the-ground-up personal site exploring scroll-driven storytelling, motion design, and a clean dark interface — built as a place to keep growing as I take on new projects.",
+      "A place to bring everything together: my background, the work I've done, and the experience I'm collecting along the way. I focused on motion, a clean dark layout, and a few interactions you don't see on every site.",
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
     year: "2026",
-    links: [{ label: "View Source", href: "https://github.com/m-esh/m-esh.github.io" }],
+    links: [{ label: "View source", href: "https://github.com/m-esh/m-esh.github.io" }],
     accent: "from-indigo-500/30 via-purple-500/10 to-transparent",
   },
   {
-    title: "Add your next project",
+    title: "Reserved for what's next",
     description:
-      "This space is reserved for the next build — a mechanism, a circuit, a piece of code, or anything you're proud of.",
+      "Open slot for whatever I build next: a mechanism, a circuit board, a script, or anything else worth showing off.",
     longDescription:
-      "Swap this card out as new projects come together. The layout is built to scale with as many entries as you add.",
-    tags: ["Coming Soon"],
+      "This card gets swapped out the moment something new is ready to share. The layout can grow with as many projects as I add to it.",
+    tags: ["Coming soon"],
     year: "2026",
     accent: "from-purple-500/20 via-violet-500/5 to-transparent",
   },
@@ -118,21 +118,21 @@ export const certifications: CertificationItem[] = [
     issuer: "Lifesaving Society",
     year: "2024",
     description:
-      "Certification covering water rescue, surveillance, and emergency response — the foundation of lifeguarding work.",
+      "Covers water rescue, surveillance, and emergency response: the foundation that the rest of lifeguarding builds on.",
   },
   {
     name: "Standard First Aid & CPR/AED",
     issuer: "Canadian Red Cross",
     year: "2024",
     description:
-      "Comprehensive first-aid and cardiopulmonary resuscitation training for emergency situations on and off duty.",
+      "First aid and CPR training for handling emergencies, whether they happen on shift or somewhere else entirely.",
   },
   {
     name: "Lifesaving Instructor",
     issuer: "Lifesaving Society",
-    year: "In Progress",
+    year: "In progress",
     description:
-      "Working toward certification to train and evaluate the next generation of lifeguards and swimmers.",
+      "Currently working toward this certification so I can train and evaluate newer lifeguards and swimmers myself.",
   },
 ];
 
@@ -151,5 +151,5 @@ export const stats = [
   { label: "Grade", value: "11" },
   { label: "FRC Team", value: "7902" },
   { label: "Lifeguard since", value: "2024" },
-  { label: "Field", value: "Mechatronics" },
+  { label: "Aspiring", value: "Mechatronics Eng." },
 ];
