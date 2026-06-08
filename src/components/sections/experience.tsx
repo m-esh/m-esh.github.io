@@ -8,7 +8,8 @@ import { experience, type ExperienceItem } from "@/data/profile";
 import { SectionHeading } from "@/components/section-heading";
 import { cn } from "@/lib/utils";
 
-const SWIPE_THRESHOLD = 60;
+const SWIPE_OFFSET_THRESHOLD = 32;
+const SWIPE_VELOCITY_THRESHOLD = 350;
 
 const slide: Variants = {
   enter: (direction: number) => ({ x: direction > 0 ? 64 : -64, opacity: 0 }),
@@ -65,9 +66,14 @@ export function Experience() {
   }, []);
 
   const handleDragEnd = (_: unknown, info: PanInfo) => {
-    if (info.offset.x <= -SWIPE_THRESHOLD) {
+    const swipedLeft =
+      info.offset.x <= -SWIPE_OFFSET_THRESHOLD || info.velocity.x <= -SWIPE_VELOCITY_THRESHOLD;
+    const swipedRight =
+      info.offset.x >= SWIPE_OFFSET_THRESHOLD || info.velocity.x >= SWIPE_VELOCITY_THRESHOLD;
+
+    if (swipedLeft) {
       goTo(index + 1, 1);
-    } else if (info.offset.x >= SWIPE_THRESHOLD) {
+    } else if (swipedRight) {
       goTo(index - 1, -1);
     }
   };
@@ -112,7 +118,7 @@ export function Experience() {
               type="button"
               onClick={() => goTo(index - 1, -1)}
               aria-label="Previous experience"
-              className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-border/60 bg-card/60 text-muted-foreground transition-colors hover:border-glow/40 hover:text-foreground"
+              className="hidden size-10 shrink-0 items-center justify-center rounded-full border border-border/60 bg-card/60 text-muted-foreground transition-colors hover:border-glow/40 hover:text-foreground sm:inline-flex"
             >
               <ChevronLeft className="size-4" />
             </button>
@@ -137,15 +143,11 @@ export function Experience() {
               type="button"
               onClick={() => goTo(index + 1, 1)}
               aria-label="Next experience"
-              className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-border/60 bg-card/60 text-muted-foreground transition-colors hover:border-glow/40 hover:text-foreground"
+              className="hidden size-10 shrink-0 items-center justify-center rounded-full border border-border/60 bg-card/60 text-muted-foreground transition-colors hover:border-glow/40 hover:text-foreground sm:inline-flex"
             >
               <ChevronRight className="size-4" />
             </button>
           </div>
-
-          <p className="mt-4 text-center font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground/70 sm:hidden">
-            Swipe left or right to look through
-          </p>
         </div>
       </div>
     </section>
