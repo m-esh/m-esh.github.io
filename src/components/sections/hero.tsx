@@ -17,8 +17,8 @@ export function Hero() {
       {/* Ambient glow background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 section-glow" />
-        <div className="absolute left-1/2 top-[-12rem] size-[36rem] -translate-x-1/2 rounded-full bg-primary/25 blur-[90px]" />
-        <div className="absolute right-[-10rem] bottom-[-10rem] size-[28rem] rounded-full bg-glow-secondary/15 blur-[90px]" />
+        <div className="absolute left-1/2 top-[-12rem] size-[36rem] -translate-x-1/2 rounded-full bg-primary/25 blur-[64px] will-change-transform" />
+        <div className="absolute right-[-10rem] bottom-[-10rem] size-[28rem] rounded-full bg-glow-secondary/15 blur-[64px] will-change-transform" />
       </div>
 
       <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-6 lg:px-8">

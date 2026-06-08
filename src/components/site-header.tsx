@@ -19,9 +19,14 @@ export function SiteHeader() {
   const [scrolled, setScrolled] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const { scrollY } = useScroll();
+  const scrolledRef = React.useRef(false);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    setScrolled(latest > 24);
+    const isScrolled = latest > 24;
+    if (isScrolled !== scrolledRef.current) {
+      scrolledRef.current = isScrolled;
+      setScrolled(isScrolled);
+    }
   });
 
   const handleNavigate = (href: string) => {
@@ -43,7 +48,7 @@ export function SiteHeader() {
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-all duration-500",
           scrolled
-            ? "bg-background/70 backdrop-blur-xl border-b border-border/60 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.3)]"
+            ? "bg-background/85 backdrop-blur-sm border-b border-border/60 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.3)]"
             : "bg-transparent border-b border-transparent"
         )}
       >
