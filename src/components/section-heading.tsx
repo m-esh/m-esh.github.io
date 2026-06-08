@@ -5,6 +5,7 @@ const ACCENT_CLASSES = {
   yellow: "border-glow/30 bg-glow/10 text-glow",
   cyan: "border-glow-secondary/30 bg-glow-secondary/10 text-glow-secondary",
   blue: "border-accent/40 bg-accent/15 text-accent-foreground",
+  purple: "border-purple/30 bg-purple/10 text-purple",
 } as const;
 
 const ACCENT_GRADIENT_COLORS = {
@@ -12,6 +13,7 @@ const ACCENT_GRADIENT_COLORS = {
   yellow: "var(--color-glow)",
   cyan: "var(--color-glow-secondary)",
   blue: "var(--color-accent-foreground)",
+  purple: "var(--color-purple)",
 } as const;
 
 export function SectionHeading({
