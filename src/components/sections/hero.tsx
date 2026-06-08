@@ -5,39 +5,6 @@ import { ArrowUpRight, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { profile } from "@/data/profile";
 
-function ConstructedName({ name }: { name: string }) {
-  const words = name.split(" ");
-  const wordOffsets = words.reduce<number[]>((acc, word, idx) => {
-    acc.push(idx === 0 ? 0 : acc[idx - 1] + words[idx - 1].length + 1);
-    return acc;
-  }, []);
-
-  return (
-    <span>
-      {words.flatMap((word, wi) => {
-        const wordSpan = (
-          <span key={`w-${wi}`} className="inline-block whitespace-nowrap">
-            {word.split("").map((letter, li) => {
-              const i = wordOffsets[wi] + li;
-              return (
-                <span
-                  key={li}
-                  style={{ animationDelay: `${i * 0.045}s` }}
-                  className="animate-letter-up inline-block text-foreground"
-                >
-                  {letter}
-                </span>
-              );
-            })}
-          </span>
-        );
-
-        return wi < words.length - 1 ? [wordSpan, " "] : [wordSpan];
-      })}
-    </span>
-  );
-}
-
 export function Hero() {
   const scrollTo = (href: string) =>
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -55,8 +22,8 @@ export function Hero() {
       </div>
 
       <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-6 lg:px-8">
-        <h1 className="max-w-4xl text-balance font-display text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
-          <ConstructedName name={profile.name} />
+        <h1 className="animate-fade-up max-w-4xl text-balance font-display text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
+          {profile.name}
         </h1>
 
         <p
