@@ -67,7 +67,7 @@ export const projects: ProjectItem[] = [
   {
     title: "Chopstick Ring",
     description:
-      "A finger-worn chopstick that flips between an eating utensil and a flat desk rest — modeled in CAD, 3D printed, and assembled by hand.",
+      "A finger-worn chopstick that flips between an eating utensil and a flat fold against your fingers — modeled in CAD, 3D printed, and assembled by hand.",
     year: "2025",
     links: [{ label: "View case study", href: "/projects/chopstick-ring" }],
   },

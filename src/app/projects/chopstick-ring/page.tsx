@@ -9,7 +9,7 @@ import { PartsDiagram, type DiagramPart } from "./parts-diagram";
 export const metadata: Metadata = {
   title: "Chopstick Ring · Mehrdad Shariatmadari",
   description:
-    "A finger-worn chopstick that flips between an eating utensil and a flat desk rest — sketched, modeled in CAD, 3D printed, and assembled by hand.",
+    "A finger-worn chopstick that flips between an eating utensil and a flat fold against your fingers — sketched, modeled in CAD, 3D printed, and assembled by hand.",
 };
 
 const cadSheets: GalleryItem[] = [
@@ -143,9 +143,9 @@ export default function ChopstickRingPage() {
               Chopstick Ring
             </h1>
             <p className="max-w-xl text-balance text-lg leading-relaxed text-muted-foreground sm:text-xl">
-              A finger-worn chopstick that flips from an eating utensil to a flat desk
-              rest in one motion — so you can eat lunch at your desk without getting
-              food on your hands or your keyboard.
+              A finger-worn chopstick that flips from an eating utensil to a flat fold
+              against your fingers in one motion — so you can eat lunch at your desk
+              without getting food on your hands or your keyboard.
             </p>
             <dl className="mt-2 grid grid-cols-3 gap-4 border-t border-border/60 pt-5 text-sm sm:max-w-md">
               <div className="flex flex-col gap-1">
@@ -208,7 +208,7 @@ export default function ChopstickRingPage() {
               <div className="flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/50 backdrop-blur-sm">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/projects/chopstick-ring/prototype-eating-mode.jpg"
+                  src="/projects/chopstick-ring/prototype-typing-mode.jpg"
                   alt="The Chopstick Ring pivoted down into its eating position"
                   className="aspect-[16/10] size-full object-cover"
                 />
@@ -227,7 +227,7 @@ export default function ChopstickRingPage() {
               <div className="flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/50 backdrop-blur-sm">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/projects/chopstick-ring/prototype-typing-mode.jpg"
+                  src="/projects/chopstick-ring/prototype-eating-mode.jpg"
                   alt="The Chopstick Ring opened flat into its resting position"
                   className="aspect-[16/10] size-full object-cover"
                 />
