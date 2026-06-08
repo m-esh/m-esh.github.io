@@ -22,7 +22,7 @@ export function Hero() {
       </div>
 
       <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-6 lg:px-8">
-        <h1 className="animate-fade-up max-w-4xl text-balance font-bitcount text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
+        <h1 className="animate-fade-up max-w-4xl text-balance font-display text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
           {profile.name}
         </h1>
 
