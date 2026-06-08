@@ -129,6 +129,13 @@ export type ProjectItem = {
 
 export const projects: ProjectItem[] = [
   {
+    title: "Kalimbinator",
+    description:
+      "A hand-crank music box, built around a re-tuned kalimba and a custom 3D-printed drum, that plays the opening of the tenor sax solo from Omar Thomas' Come Sunday.",
+    year: "2026",
+    links: [{ label: "View case study", href: "/projects/kalimbinator" }],
+  },
+  {
     title: "Chopstick Ring",
     description:
       "A finger-worn chopstick that flips between an eating utensil and a flat fold against your fingers, modeled in CAD, 3D printed, and assembled by hand.",
