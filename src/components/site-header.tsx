@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 
@@ -41,17 +40,6 @@ export function SiteHeader() {
       )}
     >
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 lg:px-8">
-        <Link
-          href="#top"
-          onClick={(e) => {
-            e.preventDefault();
-            handleNavigate("#top");
-          }}
-          className="group flex items-center gap-2 text-sm font-semibold tracking-tight"
-        >
-          <span>Mehrdad Shariatmadari</span>
-        </Link>
-
         <div className="hidden items-center gap-1 md:flex">
           {NAV_LINKS.map((link) => (
             <button
