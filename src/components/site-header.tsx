@@ -97,9 +97,6 @@ export function SiteHeader() {
                   {link.label}
                 </button>
               ))}
-              <Button className="mt-2" onClick={() => handleNavigate("#contact")}>
-                Get in touch
-              </Button>
             </div>
           </motion.div>
         )}

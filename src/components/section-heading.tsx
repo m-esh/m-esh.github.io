@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 const ACCENT_CLASSES = {
-  pink: "border-primary/30 bg-primary/10 text-primary",
+  green: "border-primary/30 bg-primary/10 text-primary",
   yellow: "border-glow/30 bg-glow/10 text-glow",
   cyan: "border-glow-secondary/30 bg-glow-secondary/10 text-glow-secondary",
   blue: "border-accent/40 bg-accent/15 text-accent-foreground",
@@ -12,7 +12,7 @@ export function SectionHeading({
   title,
   description,
   align = "left",
-  accent = "pink",
+  accent = "green",
   className,
 }: {
   eyebrow: string;
