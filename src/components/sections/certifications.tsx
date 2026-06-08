@@ -17,7 +17,7 @@ export function Certifications() {
             <li
               key={cert.name}
               style={{ animationDelay: `${i * 0.06}s` }}
-              className="animate-fade-up flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-border/60 py-5"
+              className="animate-fade-up flex flex-col gap-1 border-b border-border/60 py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-x-6"
             >
               <span className="text-base font-medium tracking-tight sm:text-lg">{cert.name}</span>
               <span className="flex items-center gap-3 text-sm text-muted-foreground">
