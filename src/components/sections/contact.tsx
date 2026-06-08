@@ -1,14 +1,11 @@
 import { Mail } from "lucide-react";
 
-import { GitHubIcon, LinkedInIcon } from "@/components/icons";
+import { LinkedInIcon } from "@/components/icons";
 
 import { profile } from "@/data/profile";
 import { Button } from "@/components/ui/button";
 
-const socials = [
-  { label: "LinkedIn", href: profile.socials.linkedin, icon: LinkedInIcon },
-  { label: "GitHub", href: profile.socials.github, icon: GitHubIcon },
-];
+const socials = [{ label: "LinkedIn", href: profile.socials.linkedin, icon: LinkedInIcon }];
 
 export function Contact() {
   return (

@@ -13,7 +13,6 @@ export const profile = {
   socials: {
     linkedin:
       "https://www.linkedin.com/in/mehrdad-shariatmadari",
-    github: "https://github.com/m-esh",
   },
   resumeUrl: "#",
 };
