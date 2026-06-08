@@ -48,7 +48,7 @@ export function Experience() {
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <SectionHeading
           eyebrow="Experience"
-          title="Where I've put in the work"
+          title="Where I've worked"
           description="A few different worlds, robotics, manufacturing, lifeguarding, school life, that all come down to the same thing: showing up and getting it right."
           accent="yellow"
         />

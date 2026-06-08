@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Chakra_Petch } from "next/font/google";
 
 import { profile } from "@/data/profile";
+import { IntroScreen } from "@/components/intro-screen";
 
 import "./globals.css";
 
@@ -45,6 +46,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col antialiased selection:bg-primary selection:text-primary-foreground">
         {/* EXPERIMENTAL: revert by deleting this div + .noise-overlay in globals.css */}
         <div aria-hidden className="noise-overlay" />
+        <IntroScreen />
         {children}
       </body>
     </html>
