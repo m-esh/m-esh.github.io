@@ -75,7 +75,7 @@ export const projects: ProjectItem[] = [
     title: "FRC 7902 Competition Robot",
     description:
       "A season-long build that starts as a CAD sketch and ends as a machine that has to drive, score, and survive elimination matches.",
-    year: "2024–2025",
+    year: "2025–present",
     links: [{ label: "FRC Team 7902", href: "https://www.thebluealliance.com/team/7902" }],
   },
 ];
@@ -90,20 +90,15 @@ export const certifications: CertificationItem[] = [
   {
     name: "National Lifeguard (NL)",
     issuer: "Lifesaving Society",
-    year: "2024",
+    year: "2025–2027",
   },
   {
     name: "Standard First Aid & CPR/AED",
     issuer: "Lifesaving Society",
-    year: "2024",
+    year: "2024–2027",
   },
   {
     name: "Bronze Cross",
-    issuer: "Lifesaving Society",
-    year: "2024",
-  },
-  {
-    name: "WHMIS 2015",
     issuer: "Lifesaving Society",
     year: "2024",
   },
