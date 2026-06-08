@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Mail } from "lucide-react";
 
@@ -16,60 +15,43 @@ const fadeUp = {
   }),
 };
 
+const nameContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.045 } },
+};
+
+const letterReveal = {
+  hidden: { opacity: 0, y: 14 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
+  },
+};
+
 function ConstructedName({ name }: { name: string }) {
-  const [started, setStarted] = React.useState(false);
-
-  React.useEffect(() => {
-    const id = requestAnimationFrame(() => setStarted(true));
-    return () => cancelAnimationFrame(id);
-  }, []);
-
   const words = name.split(" ");
-  const wordOffsets = words.reduce<number[]>((acc, word, idx) => {
-    acc.push(idx === 0 ? 0 : acc[idx - 1] + words[idx - 1].length + 1);
-    return acc;
-  }, []);
 
   return (
-    <span>
+    <motion.span variants={nameContainer} initial="hidden" animate="show">
       {words.flatMap((word, wi) => {
         const wordSpan = (
           <span key={`w-${wi}`} className="inline-block whitespace-nowrap">
-            {word.split("").map((letter, li) => {
-              const i = wordOffsets[wi] + li;
-              const fromLeft = i % 2 === 0;
-              return (
-                <motion.span
-                  key={li}
-                  initial={{
-                    opacity: 0,
-                    x: fromLeft ? -(30 + (li % 3) * 8) : 30 + (li % 3) * 8,
-                    y: ((li % 4) - 1.5) * 10,
-                    rotate: fromLeft ? -45 : 45,
-                    scale: 0.55,
-                  }}
-                  animate={
-                    started
-                      ? { opacity: 1, x: 0, y: 0, rotate: 0, scale: 1 }
-                      : undefined
-                  }
-                  transition={{
-                    delay: i * 0.05,
-                    duration: 0.75,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                  className="inline-block text-foreground"
-                >
-                  {letter}
-                </motion.span>
-              );
-            })}
+            {word.split("").map((letter, li) => (
+              <motion.span
+                key={li}
+                variants={letterReveal}
+                className="inline-block text-foreground"
+              >
+                {letter}
+              </motion.span>
+            ))}
           </span>
         );
 
         return wi < words.length - 1 ? [wordSpan, " "] : [wordSpan];
       })}
-    </span>
+    </motion.span>
   );
 }
 
