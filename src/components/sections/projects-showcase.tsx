@@ -3,6 +3,7 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 import { projects } from "@/data/profile";
 import { SectionHeading } from "@/components/section-heading";
+import { Reveal } from "@/components/reveal";
 
 export function ProjectsShowcase() {
   return (
@@ -39,10 +40,12 @@ export function ProjectsShowcase() {
             );
 
             return (
-              <li
+              <Reveal
                 key={project.title}
-                style={{ animationDelay: `${i * 0.06}s` }}
-                className="animate-fade-up border-b border-border/60"
+                as="li"
+                variant="right"
+                delay={i * 0.07}
+                className="border-b border-border/60"
               >
                 {href ? (
                   isInternal ? (
@@ -65,7 +68,7 @@ export function ProjectsShowcase() {
                 ) : (
                   <div className="flex items-start justify-between gap-6 py-6">{row}</div>
                 )}
-              </li>
+              </Reveal>
             );
           })}
         </ul>

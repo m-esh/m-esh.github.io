@@ -1,5 +1,6 @@
 import { profile } from "@/data/profile";
 import { SectionHeading } from "@/components/section-heading";
+import { Reveal } from "@/components/reveal";
 
 export function About() {
   return (
@@ -13,13 +14,15 @@ export function About() {
 
         <div className="mt-10 flex max-w-3xl flex-col gap-6">
           {profile.longBio.map((paragraph, i) => (
-            <p
+            <Reveal
               key={i}
-              style={{ animationDelay: `${i * 0.1}s` }}
-              className="animate-fade-up text-balance text-base leading-relaxed text-muted-foreground sm:text-lg"
+              as="p"
+              variant="left"
+              delay={i * 0.12}
+              className="text-balance text-base leading-relaxed text-muted-foreground sm:text-lg"
             >
               {paragraph}
-            </p>
+            </Reveal>
           ))}
         </div>
       </div>

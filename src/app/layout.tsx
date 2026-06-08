@@ -43,6 +43,8 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${chakraPetch.variable} dark h-full`}
     >
       <body className="min-h-full flex flex-col antialiased selection:bg-primary selection:text-primary-foreground">
+        {/* EXPERIMENTAL: revert by deleting this div + .noise-overlay in globals.css */}
+        <div aria-hidden className="noise-overlay" />
         {children}
       </body>
     </html>

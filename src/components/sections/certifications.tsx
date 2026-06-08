@@ -1,5 +1,6 @@
 import { certifications } from "@/data/profile";
 import { SectionHeading } from "@/components/section-heading";
+import { Reveal } from "@/components/reveal";
 
 export function Certifications() {
   return (
@@ -14,17 +15,19 @@ export function Certifications() {
 
         <ul className="mt-10 flex flex-col border-t border-border/60">
           {certifications.map((cert, i) => (
-            <li
+            <Reveal
               key={cert.name}
-              style={{ animationDelay: `${i * 0.06}s` }}
-              className="animate-fade-up flex flex-col gap-1 border-b border-border/60 py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-x-6"
+              as="li"
+              variant="scale"
+              delay={i * 0.08}
+              className="flex flex-col gap-1 border-b border-border/60 py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-x-6"
             >
               <span className="text-base font-medium tracking-tight sm:text-lg">{cert.name}</span>
               <span className="flex items-center gap-3 text-sm text-muted-foreground">
                 {cert.issuer}
                 <span className="font-mono text-xs">{cert.year}</span>
               </span>
-            </li>
+            </Reveal>
           ))}
         </ul>
       </div>
