@@ -49,7 +49,7 @@ export function Experience() {
         <SectionHeading
           eyebrow="Experience"
           title="Where I've put in the work"
-          description="Two very different jobs that both come down to the same thing: showing up and getting it right."
+          description="A few different worlds, robotics, manufacturing, lifeguarding, school life, that all come down to the same thing: showing up and getting it right."
           accent="yellow"
         />
 
