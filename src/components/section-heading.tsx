@@ -7,6 +7,13 @@ const ACCENT_CLASSES = {
   blue: "border-accent/40 bg-accent/15 text-accent-foreground",
 } as const;
 
+const ACCENT_GRADIENT_COLORS = {
+  green: "var(--color-primary)",
+  yellow: "var(--color-glow)",
+  cyan: "var(--color-glow-secondary)",
+  blue: "var(--color-accent-foreground)",
+} as const;
+
 export function SectionHeading({
   eyebrow,
   title,
@@ -22,6 +29,10 @@ export function SectionHeading({
   accent?: keyof typeof ACCENT_CLASSES;
   className?: string;
 }) {
+  const words = title.split(" ");
+  const tip = words.pop() ?? "";
+  const lead = words.join(" ");
+
   return (
     <div
       className={cn(
@@ -39,7 +50,15 @@ export function SectionHeading({
         {eyebrow}
       </span>
       <h2 className="text-balance font-display text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
-        {title}
+        {lead && <>{lead} </>}
+        <span
+          className="bg-clip-text text-transparent"
+          style={{
+            backgroundImage: `linear-gradient(135deg, var(--color-foreground) 35%, ${ACCENT_GRADIENT_COLORS[accent]} 100%)`,
+          }}
+        >
+          {tip}
+        </span>
       </h2>
       {description && (
         <p className="text-balance text-base leading-relaxed text-muted-foreground sm:text-lg">

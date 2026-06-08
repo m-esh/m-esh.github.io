@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Chakra_Petch } from "next/font/google";
+import { Geist, Geist_Mono, Chakra_Petch, Bitcount_Single } from "next/font/google";
 
 import { profile } from "@/data/profile";
 import { IntroScreen } from "@/components/intro-screen";
@@ -22,6 +22,11 @@ const chakraPetch = Chakra_Petch({
   subsets: ["latin"],
 });
 
+const bitcountSingle = Bitcount_Single({
+  variable: "--font-bitcount-single",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: `${profile.name} · ${profile.tagline}`,
   description: profile.blurb,
@@ -41,7 +46,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${chakraPetch.variable} dark h-full`}
+      className={`${geistSans.variable} ${geistMono.variable} ${chakraPetch.variable} ${bitcountSingle.variable} dark h-full`}
     >
       <body className="min-h-full flex flex-col antialiased selection:bg-primary selection:text-primary-foreground">
         {/* EXPERIMENTAL: revert by deleting this div + .noise-overlay in globals.css */}
