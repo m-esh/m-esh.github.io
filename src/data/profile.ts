@@ -4,9 +4,9 @@ export const profile = {
   tagline: "Aspiring Mechatronics Engineer",
   location: "Toronto, Canada",
   blurb:
-    "Grade 11 student building things that move, sense, and respond — competition robots by season, lifeguarding by summer.",
+    "Grade 11 student building things that move, sense, and respond, from competition robots each season to lifeguarding through the summer.",
   longBio: [
-    "I'm Mehrdad, a high school student in Toronto chasing mechatronics — where mechanical systems, electronics, and code meet.",
+    "I'm Mehrdad, a grade 11 student in Toronto with my sights set on mechatronics engineering, the field where mechanical systems, electronics, and code all come together.",
     "Most weeks split between lifeguarding for the City of Toronto and building competition robots with FRC Team 7902. Different worlds, same lesson: stay calm, pay attention, get it right.",
   ],
   email: "mehrdad.shari@gmail.com",
@@ -67,7 +67,7 @@ export const projects: ProjectItem[] = [
   {
     title: "Chopstick Ring",
     description:
-      "A finger-worn chopstick that flips between an eating utensil and a flat fold against your fingers — modeled in CAD, 3D printed, and assembled by hand.",
+      "A finger-worn chopstick that flips between an eating utensil and a flat fold against your fingers, modeled in CAD, 3D printed, and assembled by hand.",
     year: "2025",
     links: [{ label: "View case study", href: "/projects/chopstick-ring" }],
   },

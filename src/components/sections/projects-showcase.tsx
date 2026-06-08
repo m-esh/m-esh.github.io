@@ -11,7 +11,7 @@ export function ProjectsShowcase() {
         <SectionHeading
           eyebrow="Projects"
           title="Things I've built"
-          description="A running list — more to come as each season wraps."
+          description="A running list, with more to come as each season wraps."
           accent="cyan"
         />
 

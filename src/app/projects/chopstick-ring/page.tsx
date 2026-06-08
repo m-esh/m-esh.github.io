@@ -9,49 +9,49 @@ import { PartsDiagram, type DiagramPart } from "./parts-diagram";
 export const metadata: Metadata = {
   title: "Chopstick Ring · Mehrdad Shariatmadari",
   description:
-    "A finger-worn chopstick that flips between an eating utensil and a flat fold against your fingers — sketched, modeled in CAD, 3D printed, and assembled by hand.",
+    "A finger-worn chopstick that flips between an eating utensil and a flat fold against your fingers, sketched, modeled in CAD, 3D printed, and assembled by hand.",
 };
 
 const cadSheets: GalleryItem[] = [
   {
     src: "/projects/chopstick-ring/cad-sheet-1-overview.jpg",
     alt: "Orthographic CAD sheet showing the full Chopstick Ring assembly with overall dimensions",
-    title: "Assembly overview — sheet 1 of 6",
+    title: "Assembly overview, sheet 1 of 6",
     description:
-      "Front, side, and isometric views of the finished assembly with overall dimensions called out — 208 mm tip-to-ring, 25.5 mm across the ring mount.",
+      "Front, side, and isometric views of the finished assembly with overall dimensions called out: 208 mm tip-to-ring, 25.5 mm across the ring mount.",
   },
   {
     src: "/projects/chopstick-ring/cad-sheet-2-arm.jpg",
     alt: "Orthographic CAD sheet of the chopstick arm component with dimensions",
-    title: "Chopstick arm — sheet 2 of 6",
+    title: "Chopstick arm, sheet 2 of 6",
     description:
-      "The 150 mm main arm — the part that actually does the eating. Drilled for the Ø6.5 mm pivot at one end and a Ø4 mm locating pin near the tip.",
+      "The 150 mm main arm, the part that actually does the eating. Drilled for the Ø6.5 mm pivot at one end and a Ø4 mm locating pin near the tip.",
   },
   {
     src: "/projects/chopstick-ring/cad-sheet-3-bracket.jpg",
     alt: "Orthographic CAD sheet of the hinge bracket component with dimensions",
-    title: "Hinge bracket — sheet 3 of 6",
+    title: "Hinge bracket, sheet 3 of 6",
     description:
       "A 50 mm bracket that bridges the ring and the arm. It houses the Ø6.5 mm pivot bore and the Ø8 mm counterbore that the pin's head seats into.",
   },
   {
     src: "/projects/chopstick-ring/cad-sheet-4-ring.jpg",
     alt: "Orthographic CAD sheet of the finger ring component with dimensions",
-    title: "Finger ring — sheet 4 of 6",
+    title: "Finger ring, sheet 4 of 6",
     description:
-      "The wearable ring itself — Ø25.5 mm outside, Ø21.5 mm inside, sized to sit comfortably on an average adult finger and printed as its own part.",
+      "The wearable ring itself, Ø25.5 mm outside and Ø21.5 mm inside, sized to sit comfortably on an average adult finger and printed as its own part.",
   },
   {
     src: "/projects/chopstick-ring/cad-sheet-5-pin.jpg",
     alt: "Orthographic CAD sheet of the pivot pin component, drawn at 8:1 scale",
-    title: "Pivot pin — sheet 5 of 6",
+    title: "Pivot pin, sheet 5 of 6",
     description:
       "A small T-shaped pin (drawn at 8:1 to keep the dimensions legible) that passes through the bracket and bushing and lets the arm rotate smoothly at the hinge.",
   },
   {
     src: "/projects/chopstick-ring/cad-sheet-6-bushing.jpg",
     alt: "Orthographic CAD sheet of the pivot bushing component, drawn at 8:1 scale",
-    title: "Pivot bushing — sheet 6 of 6",
+    title: "Pivot bushing, sheet 6 of 6",
     description:
       "A thin sleeve that rides on the pivot pin and keeps the arm spinning freely against the bracket instead of wearing against bare plastic.",
   },
@@ -144,7 +144,7 @@ export default function ChopstickRingPage() {
             </h1>
             <p className="max-w-xl text-balance text-lg leading-relaxed text-muted-foreground sm:text-xl">
               A finger-worn chopstick that flips from an eating utensil to a flat fold
-              against your fingers in one motion — so you can eat lunch at your desk
+              against your fingers in one motion, so you can eat lunch at your desk
               without getting food on your hands or your keyboard.
             </p>
             <dl className="mt-2 grid grid-cols-3 gap-4 border-t border-border/60 pt-5 text-sm sm:max-w-md">
@@ -175,7 +175,7 @@ export default function ChopstickRingPage() {
                 Eating lunch at a desk usually means a trade-off: eat with your hands and
                 risk leaving food residue on your keyboard, or set your work aside
                 entirely. Neither option is great when you&apos;re trying to get through the
-                day without a break in focus — or in your meal.
+                day without a break in focus, or in your meal.
               </p>
             </div>
             <div className="flex flex-col gap-4">
@@ -185,7 +185,7 @@ export default function ChopstickRingPage() {
               <p className="text-balance leading-relaxed text-muted-foreground">
                 The Chopstick Ring lives on two fingers. A pivoting arm swings down into
                 an eating position when you need it, then folds back flat against your
-                hand when you don&apos;t — clean, out of the way, and always within reach. I
+                hand when you don&apos;t, staying clean, out of the way, and always within reach. I
                 worked through the geometry in CAD, dimensioned a six-part assembly, then
                 3D printed and hand-assembled the prototype with metal pins and rings.
               </p>
@@ -218,7 +218,7 @@ export default function ChopstickRingPage() {
                   </span>
                   <p className="text-sm leading-relaxed text-muted-foreground">
                     Pivot the arm down and the two halves meet at an angle you can pinch
-                    food with — just like a normal pair of chopsticks, except they never
+                    food with, just like a normal pair of chopsticks, except they never
                     leave your hand.
                   </p>
                 </div>
@@ -238,7 +238,7 @@ export default function ChopstickRingPage() {
                   <p className="text-sm leading-relaxed text-muted-foreground">
                     Swing the arm back flat against your fingers and a pair of small
                     embedded magnets click into place, holding it snug against your hand
-                    so it stays put — out of the way and ready — while you type.
+                    so it stays put, out of the way and ready, while you type.
                   </p>
                 </div>
               </div>
@@ -257,7 +257,7 @@ export default function ChopstickRingPage() {
             </h2>
             <p className="mt-3 max-w-2xl text-balance leading-relaxed text-muted-foreground">
               Every part below was modeled and dimensioned to scale before it was
-              printed. Click any arrow — or its label — to pop open that part&apos;s
+              printed. Click any arrow, or its label, to pop open that part&apos;s
               fully dimensioned CAD sheet, with a short note on what it actually does.
             </p>
 
