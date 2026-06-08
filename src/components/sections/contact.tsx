@@ -56,7 +56,7 @@ export function Contact() {
       </div>
 
       <footer className="mx-auto mt-16 flex max-w-6xl flex-col items-center gap-2 border-t border-border/60 px-6 pt-8 text-center text-xs text-muted-foreground sm:flex-row sm:justify-between sm:text-left">
-        <p>© {new Date().getFullYear()} {profile.name}. Built with Next.js, Tailwind CSS &amp; shadcn/ui.</p>
+        <p>© {new Date().getFullYear()} {profile.name}.</p>
         <p>Designed &amp; developed in Toronto, Canada.</p>
       </footer>
     </section>
