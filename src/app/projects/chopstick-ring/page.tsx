@@ -84,8 +84,8 @@ const diagramParts: DiagramPart[] = [
     blurb: "T-shaped pin that lets the arm rotate at the hinge.",
     x: 33,
     y: 60,
-    labelX: 47,
-    labelY: 90,
+    labelX: 50,
+    labelY: 45,
     item: cadSheets[4],
   },
   {
