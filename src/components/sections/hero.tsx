@@ -1,57 +1,40 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ArrowUpRight, Mail } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { profile } from "@/data/profile";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  show: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: 0.08 * i, duration: 0.7, ease: [0.16, 1, 0.3, 1] as const },
-  }),
-};
-
-const nameContainer = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.045 } },
-};
-
-const letterReveal = {
-  hidden: { opacity: 0, y: 14 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
-  },
-};
-
 function ConstructedName({ name }: { name: string }) {
   const words = name.split(" ");
+  const wordOffsets = words.reduce<number[]>((acc, word, idx) => {
+    acc.push(idx === 0 ? 0 : acc[idx - 1] + words[idx - 1].length + 1);
+    return acc;
+  }, []);
 
   return (
-    <motion.span variants={nameContainer} initial="hidden" animate="show">
+    <span>
       {words.flatMap((word, wi) => {
         const wordSpan = (
           <span key={`w-${wi}`} className="inline-block whitespace-nowrap">
-            {word.split("").map((letter, li) => (
-              <motion.span
-                key={li}
-                variants={letterReveal}
-                className="inline-block text-foreground"
-              >
-                {letter}
-              </motion.span>
-            ))}
+            {word.split("").map((letter, li) => {
+              const i = wordOffsets[wi] + li;
+              return (
+                <span
+                  key={li}
+                  style={{ animationDelay: `${i * 0.045}s` }}
+                  className="animate-letter-up inline-block text-foreground"
+                >
+                  {letter}
+                </span>
+              );
+            })}
           </span>
         );
 
         return wi < words.length - 1 ? [wordSpan, " "] : [wordSpan];
       })}
-    </motion.span>
+    </span>
   );
 }
 
@@ -76,22 +59,16 @@ export function Hero() {
           <ConstructedName name={profile.name} />
         </h1>
 
-        <motion.p
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-          custom={1}
-          className="mt-6 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground sm:text-xl"
+        <p
+          style={{ animationDelay: "0.08s" }}
+          className="animate-fade-up mt-6 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground sm:text-xl"
         >
           {profile.blurb}
-        </motion.p>
+        </p>
 
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-          custom={2}
-          className="mt-10 flex flex-wrap items-center gap-3"
+        <div
+          style={{ animationDelay: "0.16s" }}
+          className="animate-fade-up mt-10 flex flex-wrap items-center gap-3"
         >
           <Button size="lg" onClick={() => scrollTo("#projects")}>
             See my projects
@@ -100,7 +77,7 @@ export function Hero() {
           <Button size="lg" variant="outline" onClick={() => scrollTo("#contact")}>
             <Mail /> Contact me
           </Button>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

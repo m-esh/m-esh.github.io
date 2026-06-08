@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 
@@ -42,13 +39,10 @@ export function ProjectsShowcase() {
             );
 
             return (
-              <motion.li
+              <li
                 key={project.title}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.5, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-                className="border-b border-border/60"
+                style={{ animationDelay: `${i * 0.06}s` }}
+                className="animate-fade-up border-b border-border/60"
               >
                 {href ? (
                   isInternal ? (
@@ -71,7 +65,7 @@ export function ProjectsShowcase() {
                 ) : (
                   <div className="flex items-start justify-between gap-6 py-6">{row}</div>
                 )}
-              </motion.li>
+              </li>
             );
           })}
         </ul>

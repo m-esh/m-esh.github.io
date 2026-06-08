@@ -1,7 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
-
 import { cn } from "@/lib/utils";
 
 const ACCENT_CLASSES = {
@@ -27,13 +23,9 @@ export function SectionHeading({
   className?: string;
 }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+    <div
       className={cn(
-        "flex max-w-2xl flex-col gap-3",
+        "flex max-w-2xl flex-col gap-3 animate-fade-up",
         align === "center" && "mx-auto items-center text-center",
         className
       )}
@@ -54,6 +46,6 @@ export function SectionHeading({
           {description}
         </p>
       )}
-    </motion.div>
+    </div>
   );
 }

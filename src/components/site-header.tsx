@@ -49,10 +49,7 @@ export function SiteHeader() {
           }}
           className="group flex items-center gap-2 text-sm font-semibold tracking-tight"
         >
-          <span className="flex size-8 items-center justify-center rounded-full bg-primary/15 text-primary ring-1 ring-primary/30 transition-transform duration-300 group-hover:scale-105">
-            MS
-          </span>
-          <span className="hidden sm:inline">Mehrdad Shariatmadari</span>
+          <span>Mehrdad Shariatmadari</span>
         </Link>
 
         <div className="hidden items-center gap-1 md:flex">

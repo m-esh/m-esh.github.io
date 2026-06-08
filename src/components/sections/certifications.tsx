@@ -1,7 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
-
 import { certifications } from "@/data/profile";
 import { SectionHeading } from "@/components/section-heading";
 
@@ -18,20 +14,17 @@ export function Certifications() {
 
         <ul className="mt-10 flex flex-col border-t border-border/60">
           {certifications.map((cert, i) => (
-            <motion.li
+            <li
               key={cert.name}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-border/60 py-5"
+              style={{ animationDelay: `${i * 0.06}s` }}
+              className="animate-fade-up flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-border/60 py-5"
             >
               <span className="text-base font-medium tracking-tight sm:text-lg">{cert.name}</span>
               <span className="flex items-center gap-3 text-sm text-muted-foreground">
                 {cert.issuer}
                 <span className="font-mono text-xs">{cert.year}</span>
               </span>
-            </motion.li>
+            </li>
           ))}
         </ul>
       </div>

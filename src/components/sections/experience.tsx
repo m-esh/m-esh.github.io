@@ -1,40 +1,19 @@
-"use client";
-
-import * as React from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
 import { Briefcase, MapPin } from "lucide-react";
 
 import { experience, type ExperienceItem } from "@/data/profile";
 import { SectionHeading } from "@/components/section-heading";
 
 function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }) {
-  const cardRef = React.useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: cardRef,
-    offset: ["start 92%", "start 45%"],
-  });
-
-  const scale = useTransform(scrollYProgress, [0, 1], [0.92, 1]);
-  const radius = useTransform(scrollYProgress, [0, 1], [28, 16]);
-
   return (
-    <motion.li
-      initial={{ opacity: 0, x: -24 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-      className="relative pl-12 sm:pl-16"
+    <li
+      style={{ animationDelay: `${index * 0.08}s` }}
+      className="animate-fade-up relative pl-12 sm:pl-16"
     >
       <span className="absolute left-0 top-1 flex size-9 items-center justify-center rounded-full border border-glow/40 bg-card text-glow shadow-[0_0_0_4px_var(--color-background)] sm:size-11">
         <Briefcase className="size-4 sm:size-5" />
       </span>
 
-      <motion.div
-        ref={cardRef}
-        style={{ scale, borderRadius: radius, transformOrigin: "left center" }}
-        className="border border-border/60 bg-card/50 p-6 backdrop-blur-sm transition-colors hover:border-glow/40 sm:p-8"
-      >
+      <div className="rounded-2xl border border-border/60 bg-card/50 p-6 backdrop-blur-sm transition-colors hover:border-glow/40 sm:p-8">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
             <h3 className="text-xl font-semibold tracking-tight sm:text-2xl">{item.role}</h3>
@@ -58,8 +37,8 @@ function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }
             </li>
           ))}
         </ul>
-      </motion.div>
-    </motion.li>
+      </div>
+    </li>
   );
 }
 

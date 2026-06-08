@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
 
 import { GitHubIcon, LinkedInIcon } from "@/components/icons";
@@ -21,32 +18,20 @@ export function Contact() {
       </div>
 
       <div className="mx-auto max-w-4xl px-6 text-center lg:px-8">
-        <motion.span
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex w-fit items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 text-xs font-medium uppercase tracking-[0.18em] text-primary"
-        >
+        <span className="animate-fade-up inline-flex w-fit items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 text-xs font-medium uppercase tracking-[0.18em] text-primary">
           Contact
-        </motion.span>
+        </span>
 
-        <motion.h2
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-4 text-balance text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl"
+        <h2
+          style={{ animationDelay: "0.05s" }}
+          className="animate-fade-up mt-4 text-balance text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl"
         >
           <span className="gradient-text">Contact me</span>
-        </motion.h2>
+        </h2>
 
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-10 flex flex-col items-center gap-6"
+        <div
+          style={{ animationDelay: "0.15s" }}
+          className="animate-fade-up mt-10 flex flex-col items-center gap-6"
         >
           <Button size="lg" asChild>
             <a href={`mailto:${profile.email}`}>
@@ -67,7 +52,7 @@ export function Contact() {
               </a>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
 
       <footer className="mx-auto mt-16 flex max-w-6xl flex-col items-center gap-2 border-t border-border/60 px-6 pt-8 text-center text-xs text-muted-foreground sm:flex-row sm:justify-between sm:text-left">
