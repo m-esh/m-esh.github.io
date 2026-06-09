@@ -69,20 +69,22 @@ export function SiteHeader() {
       )}
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-colors duration-500",
-          scrolled ? "bg-background/90 backdrop-blur-sm" : "bg-transparent"
+          "fixed inset-x-0 top-0 z-50 transition-all duration-500",
+          scrolled
+            ? "bg-background/85 backdrop-blur-sm shadow-[0_8px_30px_-12px_rgba(0,0,0,0.3)]"
+            : "bg-transparent"
         )}
       >
         <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 lg:px-8">
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             aria-label="Back to top"
-            className="text-base tracking-tight"
+            className="font-display text-lg font-semibold tracking-tight"
           >
-            M·Shariatmadari
+            MS
           </button>
 
-          <div className="hidden items-center gap-6 md:flex">
+          <div className="hidden items-center gap-1 md:flex">
             {NAV_LINKS.map((link) => {
               const isActive = active === link.href;
               return (
@@ -91,7 +93,7 @@ export function SiteHeader() {
                   onClick={() => handleNavigate(link.href)}
                   aria-current={isActive ? "true" : undefined}
                   className={cn(
-                    "relative py-2 text-xs uppercase tracking-[0.08em] transition-colors",
+                    "relative rounded-full px-4 py-2 text-sm font-medium transition-colors",
                     isActive
                       ? "text-foreground"
                       : "text-muted-foreground hover:text-foreground"
@@ -101,7 +103,7 @@ export function SiteHeader() {
                     <motion.span
                       layoutId="nav-active"
                       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                      className="absolute inset-x-0 bottom-0 h-px bg-foreground"
+                      className="absolute inset-0 rounded-full bg-card"
                     />
                   )}
                   <span className="relative">{link.label}</span>
@@ -139,16 +141,16 @@ export function SiteHeader() {
             exit={{ opacity: 0, y: -8 }}
             className="bg-background/95 backdrop-blur-xl md:hidden"
           >
-            <div className="flex flex-col divide-y divide-border/40 px-6 py-2">
+            <div className="flex flex-col gap-1 px-6 py-4">
               {NAV_LINKS.map((link) => (
                 <button
                   key={link.href}
                   onClick={() => handleNavigate(link.href)}
                   className={cn(
-                    "py-3.5 text-left text-sm uppercase tracking-[0.08em] transition-colors",
+                    "rounded-lg px-3 py-2.5 text-left text-sm font-medium transition-colors",
                     active === link.href
-                      ? "text-foreground"
-                      : "text-muted-foreground hover:text-foreground"
+                      ? "bg-card text-foreground"
+                      : "text-muted-foreground hover:bg-card/60 hover:text-foreground"
                   )}
                 >
                   {link.label}

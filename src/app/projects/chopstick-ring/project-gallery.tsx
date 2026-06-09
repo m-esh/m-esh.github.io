@@ -62,7 +62,7 @@ export function ProjectGallery({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
-            className="group relative overflow-hidden border border-border/60 text-left transition-colors hover:border-foreground/70"
+            className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card/50 text-left backdrop-blur-sm transition-colors hover:border-border"
           >
             <div className="relative aspect-[4/3] overflow-hidden bg-background/40">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -73,7 +73,7 @@ export function ProjectGallery({
                 className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
               />
               <div className="absolute inset-0 flex items-center justify-center bg-background/0 opacity-0 backdrop-blur-[1px] transition-all duration-300 group-hover:bg-background/30 group-hover:opacity-100">
-                <span className="inline-flex items-center gap-2 border border-border/60 bg-background/70 px-3.5 py-1.5 text-xs font-medium text-muted-foreground">
+                <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/70 px-3.5 py-1.5 text-xs font-medium text-muted-foreground">
                   <Search className="size-3.5" /> Zoom in
                 </span>
               </div>
@@ -157,7 +157,7 @@ export function Lightbox({
             onClose();
           }}
           aria-label="Close"
-          className="inline-flex size-10 items-center justify-center border border-border/60 bg-background/80 text-muted-foreground transition-colors hover:text-foreground"
+          className="inline-flex size-10 items-center justify-center rounded-full border border-border/60 bg-card/60 text-muted-foreground transition-colors hover:text-foreground"
         >
           <X className="size-4" />
         </button>
@@ -174,12 +174,12 @@ export function Lightbox({
             onPrev();
           }}
           aria-label="Previous image"
-          className="absolute left-2 top-1/2 z-10 inline-flex size-10 -translate-y-1/2 items-center justify-center border border-border/60 bg-background/80 text-muted-foreground transition-colors hover:text-foreground sm:left-4"
+          className="absolute left-2 top-1/2 z-10 inline-flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-border/60 bg-card/60 text-muted-foreground transition-colors hover:text-foreground sm:left-4"
         >
           <ChevronLeft className="size-5" />
         </button>
 
-        <div className="relative max-h-full max-w-full overflow-hidden border border-border/60">
+        <div className="relative max-h-full max-w-full overflow-hidden rounded-xl border border-border/60">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={item.src}
@@ -200,7 +200,7 @@ export function Lightbox({
             onNext();
           }}
           aria-label="Next image"
-          className="absolute right-2 top-1/2 z-10 inline-flex size-10 -translate-y-1/2 items-center justify-center border border-border/60 bg-background/80 text-muted-foreground transition-colors hover:text-foreground sm:right-4"
+          className="absolute right-2 top-1/2 z-10 inline-flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-border/60 bg-card/60 text-muted-foreground transition-colors hover:text-foreground sm:right-4"
         >
           <ChevronRight className="size-5" />
         </button>
@@ -211,7 +211,7 @@ export function Lightbox({
         onClick={(e) => e.stopPropagation()}
       >
         <p className="text-sm leading-relaxed text-muted-foreground">{item.description}</p>
-        <span className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
+        <span className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.18em] text-glow-secondary/80">
           <Search className="size-3" /> {zoomHint}
         </span>
       </div>

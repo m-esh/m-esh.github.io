@@ -21,7 +21,6 @@ Precise, hands-on, understated. The voice of someone who builds physical things 
 - AI-generated SaaS landing aesthetics: ambient color glows, gradient pills, eyebrow labels above every section, colored card borders, gradient text. All were deliberately stripped; never reintroduce.
 - Template portfolio grammar: icon-in-circle decorations, identical card grids, hero metrics.
 - Decorative novelty fonts for the name (Bitcount was tried and rejected).
-- Rounded card surfaces (`bg-card`, `rounded-2xl` panels): replaced by a single slate canvas with hairline `border-t` rules. Don't reintroduce card chrome.
 
 ## Design Principles
 
