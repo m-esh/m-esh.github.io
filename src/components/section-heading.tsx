@@ -6,11 +6,9 @@ export function SectionHeading({
   align = "left",
   className,
 }: {
-  eyebrow?: string;
   title: string;
   description?: string;
   align?: "left" | "center";
-  accent?: string;
   className?: string;
 }) {
   return (

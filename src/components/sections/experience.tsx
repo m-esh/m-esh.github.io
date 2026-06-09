@@ -79,9 +79,8 @@ export function Experience() {
     <section id="experience" className="relative py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <SectionHeading
-          eyebrow="Experience"
           title="Where I've worked"
-          description="Robotics, manufacturing, lifeguarding, school life: different worlds that all come down to showing up and getting it right. Swipe through to see them all."
+          description="Robotics, manufacturing, lifeguarding, school life. Swipe through the deck."
         />
 
         <div className="mt-12">

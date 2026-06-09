@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Geist_Mono, Chakra_Petch } from "next/font/google";
+import { Schibsted_Grotesk, Geist_Mono, Chakra_Petch } from "next/font/google";
 
 import { profile } from "@/data/profile";
 import { IntroScreen } from "@/components/intro-screen";
@@ -7,7 +7,7 @@ import { MotionProvider } from "@/components/motion-provider";
 
 import "./globals.css";
 
-const plusJakarta = Plus_Jakarta_Sans({
+const schibsted = Schibsted_Grotesk({
   variable: "--font-geist-sans",
   subsets: ["latin"],
   display: "swap",
@@ -43,7 +43,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakarta.variable} ${geistMono.variable} ${chakraPetch.variable} dark h-full`}
+      className={`${schibsted.variable} ${geistMono.variable} ${chakraPetch.variable} dark h-full`}
     >
       <body className="min-h-full flex flex-col antialiased selection:bg-primary selection:text-primary-foreground">
         <MotionProvider>

@@ -125,6 +125,8 @@ export type ProjectItem = {
   description: string;
   year: string;
   links?: { label: string; href: string }[];
+  /** Artifact shown in the cursor-follow preview on the projects list */
+  image?: { src: string; alt: string };
 };
 
 export const projects: ProjectItem[] = [
@@ -134,6 +136,10 @@ export const projects: ProjectItem[] = [
       "A hand-crank music box, built around a re-tuned kalimba and a custom 3D-printed drum, that plays the opening of the tenor sax solo from Omar Thomas' Come Sunday.",
     year: "2026",
     links: [{ label: "View case study", href: "/projects/kalimbinator" }],
+    image: {
+      src: "/projects/kalimbinator/cad-render.png",
+      alt: "CAD render of the Kalimbinator hand-crank music box",
+    },
   },
   {
     title: "Chopstick Ring",
@@ -141,6 +147,10 @@ export const projects: ProjectItem[] = [
       "A finger-worn chopstick that flips between an eating utensil and a flat fold against your fingers, modeled in CAD, 3D printed, and assembled by hand.",
     year: "2025",
     links: [{ label: "View case study", href: "/projects/chopstick-ring" }],
+    image: {
+      src: "/projects/chopstick-ring/cad-render.jpg",
+      alt: "CAD render of the Chopstick Ring",
+    },
   },
   {
     title: "FRC 7902 Competition Robot",

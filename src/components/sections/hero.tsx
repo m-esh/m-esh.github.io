@@ -21,7 +21,7 @@ export function Hero() {
 
         <h1
           style={{ animationDelay: "0.05s" }}
-          className="animate-fade-up mt-5 max-w-4xl text-balance font-display text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl"
+          className="animate-fade-up mt-5 max-w-4xl text-balance font-display text-[clamp(2.25rem,9vw,4.5rem)] font-semibold leading-[1.05] tracking-tight"
         >
           {profile.name}
         </h1>

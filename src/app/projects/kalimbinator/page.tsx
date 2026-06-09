@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
 import { ScrollProgress } from "@/components/scroll-progress";
+import { PlayableKalimba } from "@/components/playable-kalimba";
 
 export const metadata: Metadata = {
   title: "Kalimbinator · Mehrdad Shariatmadari",
@@ -154,6 +155,25 @@ export default function KalimbinatorPage() {
                   </p>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Playable kalimba */}
+        <section className="relative py-16 sm:py-20">
+          <div className="mx-auto max-w-6xl px-6 lg:px-8">
+            <div className="grid gap-10 lg:grid-cols-[minmax(0,380px)_1fr] lg:items-center">
+              <div className="flex flex-col gap-4">
+                <h2 className="text-balance font-display text-2xl font-semibold tracking-tight sm:text-3xl">
+                  Try the tines yourself
+                </h2>
+                <p className="leading-relaxed text-muted-foreground">
+                  These are the eight notes the build uses, laid out the same way:
+                  lowest to highest, so the drum can sweep across them in order.
+                  Click a tine to pluck it, or let it run through the phrase.
+                </p>
+              </div>
+              <PlayableKalimba />
             </div>
           </div>
         </section>
