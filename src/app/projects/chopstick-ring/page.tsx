@@ -130,15 +130,8 @@ export default function ChopstickRingPage() {
       <main className="flex-1 pt-16">
         {/* Hero */}
         <section className="relative overflow-hidden py-20 sm:py-28">
-          <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute inset-0 section-glow" />
-            <div className="absolute right-[-12rem] top-[-8rem] size-[32rem] rounded-full bg-glow-secondary/20 blur-[64px] will-change-transform" />
-          </div>
-
           <div className="mx-auto flex max-w-3xl flex-col gap-5 px-6 lg:px-8">
-            <span className="inline-flex w-fit items-center gap-2 rounded-full border border-glow-secondary/30 bg-glow-secondary/10 px-3.5 py-1 font-mono text-xs font-medium uppercase tracking-[0.18em] text-glow-secondary">
-              Case Study · 2025
-            </span>
+            <span className="font-mono text-xs text-muted-foreground uppercase tracking-[0.18em]">Case Study · 2025</span>
             <h1 className="text-balance font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
               Chopstick Ring
             </h1>
@@ -213,7 +206,7 @@ export default function ChopstickRingPage() {
                   className="aspect-[16/10] size-full object-cover"
                 />
                 <div className="flex flex-col gap-2 p-6">
-                  <span className="inline-flex w-fit items-center gap-2 rounded-full border border-glow/30 bg-glow/10 px-3 py-1 font-mono text-xs font-medium uppercase tracking-[0.16em] text-glow">
+                  <span className="flex items-center gap-1.5 font-mono text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
                     <Hand className="size-3.5" /> Eating mode
                   </span>
                   <p className="text-sm leading-relaxed text-muted-foreground">
@@ -232,7 +225,7 @@ export default function ChopstickRingPage() {
                   className="aspect-[16/10] size-full object-cover"
                 />
                 <div className="flex flex-col gap-2 p-6">
-                  <span className="inline-flex w-fit items-center gap-2 rounded-full border border-glow-secondary/30 bg-glow-secondary/10 px-3 py-1 font-mono text-xs font-medium uppercase tracking-[0.16em] text-glow-secondary">
+                  <span className="flex items-center gap-1.5 font-mono text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
                     <Keyboard className="size-3.5" /> Typing mode
                   </span>
                   <p className="text-sm leading-relaxed text-muted-foreground">
@@ -249,9 +242,7 @@ export default function ChopstickRingPage() {
         {/* Anatomy / parts diagram */}
         <section className="relative py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
-            <span className="inline-flex w-fit items-center gap-2 rounded-full border border-glow-secondary/30 bg-glow-secondary/10 px-3.5 py-1 font-mono text-xs font-medium uppercase tracking-[0.18em] text-glow-secondary">
-              Anatomy
-            </span>
+            <span className="font-mono text-xs text-muted-foreground uppercase tracking-[0.18em]">Anatomy</span>
             <h2 className="mt-3 text-balance font-display text-2xl font-semibold tracking-tight sm:text-3xl">
               Tap a label to open its drawing
             </h2>
@@ -280,7 +271,7 @@ export default function ChopstickRingPage() {
               </p>
               <Link
                 href="/#projects"
-                className="group inline-flex items-center gap-2 text-sm font-medium text-glow-secondary transition-colors hover:text-foreground"
+                className="group inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
               >
                 <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-1" />
                 Back to all projects

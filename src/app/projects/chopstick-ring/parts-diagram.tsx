@@ -88,7 +88,7 @@ export function PartsDiagram({
             markerUnits="userSpaceOnUse"
             orient="auto"
           >
-            <path d="M0,0 L10,5 L0,10 Z" fill="var(--color-glow-secondary)" fillOpacity={0.4} />
+            <path d="M0,0 L10,5 L0,10 Z" fill="var(--color-foreground)" fillOpacity={0.3} />
           </marker>
           <marker
             id={`${arrowId}-active`}
@@ -100,7 +100,7 @@ export function PartsDiagram({
             markerUnits="userSpaceOnUse"
             orient="auto"
           >
-            <path d="M0,0 L10,5 L0,10 Z" fill="var(--color-glow-secondary)" />
+            <path d="M0,0 L10,5 L0,10 Z" fill="var(--color-foreground)" />
           </marker>
         </defs>
         {parts.map((part, i) => (
@@ -116,7 +116,7 @@ export function PartsDiagram({
             strokeDasharray={active === i ? undefined : "3 2.5"}
             className={cn(
               "transition-[stroke,stroke-width] duration-300",
-              active === i ? "stroke-glow-secondary" : "stroke-glow-secondary/35"
+              active === i ? "stroke-foreground" : "stroke-foreground/35"
             )}
           />
         ))}
@@ -131,7 +131,7 @@ export function PartsDiagram({
           >
             <span
               className={cn(
-                "absolute size-6 rounded-full bg-glow-secondary/40 transition-opacity duration-300",
+                "absolute size-6 rounded-full bg-foreground/25 transition-opacity duration-300",
                 active === i ? "animate-ping opacity-100" : "opacity-0"
               )}
             />
@@ -139,8 +139,8 @@ export function PartsDiagram({
               className={cn(
                 "block size-2.5 rounded-full border transition-all duration-300",
                 active === i
-                  ? "scale-125 border-glow-secondary bg-glow-secondary shadow-[0_0_16px_-2px_var(--color-glow-secondary)]"
-                  : "border-glow-secondary/60 bg-background/80"
+                  ? "scale-125 border-foreground bg-foreground"
+                  : "border-foreground/50 bg-background/80"
               )}
             />
           </span>
@@ -164,14 +164,14 @@ export function PartsDiagram({
               className={cn(
                 "flex w-fit items-center gap-2 rounded-xl border px-2.5 py-1.5 font-mono text-[0.6rem] font-semibold uppercase leading-tight tracking-[0.1em] backdrop-blur-md transition-all duration-300 sm:text-[0.7rem]",
                 active === i
-                  ? "scale-105 border-glow-secondary bg-glow-secondary text-background shadow-[0_0_24px_-4px_var(--color-glow-secondary)]"
-                  : "border-glow-secondary/40 bg-background/80 text-glow-secondary"
+                  ? "scale-105 border-foreground bg-foreground text-background"
+                  : "border-border/60 bg-background/80 text-foreground"
               )}
             >
               <span
                 className={cn(
                   "flex size-4 shrink-0 items-center justify-center rounded-full text-[0.6rem] transition-colors duration-300",
-                  active === i ? "bg-background/25 text-background" : "bg-glow-secondary/15 text-glow-secondary"
+                  active === i ? "bg-background/25 text-background" : "bg-foreground/10 text-foreground"
                 )}
               >
                 {part.number}

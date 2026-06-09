@@ -30,15 +30,8 @@ export default function KalimbinatorPage() {
       <main className="flex-1 pt-16">
         {/* Hero */}
         <section className="relative overflow-hidden py-20 sm:py-28">
-          <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute inset-0 section-glow" />
-            <div className="absolute left-[-10rem] top-[-8rem] size-[32rem] rounded-full bg-primary/20 blur-[64px] will-change-transform" />
-          </div>
-
           <div className="mx-auto flex max-w-3xl flex-col gap-5 px-6 lg:px-8">
-            <span className="inline-flex w-fit items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 font-mono text-xs font-medium uppercase tracking-[0.18em] text-primary">
-              Independent Study · 2026
-            </span>
+            <span className="font-mono text-xs text-muted-foreground uppercase tracking-[0.18em]">Independent Study · 2026</span>
             <h1 className="text-balance font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
               Kalimbinator
             </h1>
@@ -101,10 +94,8 @@ export default function KalimbinatorPage() {
         {/* CAD render + demo */}
         <section className="relative py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
-            <span className="inline-flex w-fit items-center gap-2 rounded-full border border-glow/30 bg-glow/10 px-3.5 py-1 font-mono text-xs font-medium uppercase tracking-[0.18em] text-glow">
-              The model
-            </span>
-            <h2 className="mt-3 text-balance font-display text-2xl font-semibold tracking-tight sm:text-3xl">
+
+            <h2 className="text-balance font-display text-2xl font-semibold tracking-tight sm:text-3xl">
               Six iterations to get the geometry right
             </h2>
             <p className="mt-3 max-w-2xl text-balance leading-relaxed text-muted-foreground">
@@ -170,7 +161,7 @@ export default function KalimbinatorPage() {
 
             <div className="mt-10 grid gap-6 sm:grid-cols-3">
               <div className="flex flex-col gap-3 rounded-2xl border border-border/60 bg-card/50 p-6 backdrop-blur-sm">
-                <span className="inline-flex size-10 items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-primary">
+                <span className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-card text-muted-foreground">
                   <Music className="size-4.5" />
                 </span>
                 <h3 className="font-medium tracking-tight">Re-tuning the kalimba</h3>
@@ -185,7 +176,7 @@ export default function KalimbinatorPage() {
               </div>
 
               <div className="flex flex-col gap-3 rounded-2xl border border-border/60 bg-card/50 p-6 backdrop-blur-sm">
-                <span className="inline-flex size-10 items-center justify-center rounded-full border border-glow/30 bg-glow/10 text-glow">
+                <span className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-card text-muted-foreground">
                   <Settings2 className="size-4.5" />
                 </span>
                 <h3 className="font-medium tracking-tight">Modeling the mechanism</h3>
@@ -198,7 +189,7 @@ export default function KalimbinatorPage() {
               </div>
 
               <div className="flex flex-col gap-3 rounded-2xl border border-border/60 bg-card/50 p-6 backdrop-blur-sm">
-                <span className="inline-flex size-10 items-center justify-center rounded-full border border-glow-secondary/30 bg-glow-secondary/10 text-glow-secondary">
+                <span className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-card text-muted-foreground">
                   <Wrench className="size-4.5" />
                 </span>
                 <h3 className="font-medium tracking-tight">Printing &amp; assembly</h3>
@@ -234,7 +225,7 @@ export default function KalimbinatorPage() {
               </p>
               <Link
                 href="/#projects"
-                className="group inline-flex items-center gap-2 text-sm font-medium text-glow-secondary transition-colors hover:text-foreground"
+                className="group inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
               >
                 <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-1" />
                 Back to all projects

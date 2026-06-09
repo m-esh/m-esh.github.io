@@ -22,12 +22,12 @@ function ExperienceCard({ item }: { item: ExperienceItem }) {
     <div className="rounded-2xl border border-border/60 bg-card/50 p-6 backdrop-blur-sm sm:p-8">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div className="flex items-start gap-3.5">
-          <span className="flex size-9 shrink-0 items-center justify-center rounded-full border border-glow/40 bg-card text-glow sm:size-11">
+          <span className="flex size-9 shrink-0 items-center justify-center rounded-full border border-border bg-card text-muted-foreground sm:size-11">
             <Briefcase className="size-4 sm:size-5" />
           </span>
           <div>
             <h3 className="text-xl font-semibold tracking-tight sm:text-2xl">{item.role}</h3>
-            <p className="mt-1 text-sm font-medium text-glow">{item.org}</p>
+            <p className="mt-1 text-sm font-medium text-muted-foreground">{item.org}</p>
           </div>
         </div>
         <div className="flex flex-col items-start gap-1 text-sm text-muted-foreground sm:items-end">
@@ -46,7 +46,7 @@ function ExperienceCard({ item }: { item: ExperienceItem }) {
             key={point}
             className="flex gap-3 text-sm leading-relaxed text-muted-foreground sm:text-base"
           >
-            <span className="mt-2 size-1.5 shrink-0 rounded-full bg-glow" />
+            <span className="mt-2 size-1.5 shrink-0 rounded-full bg-muted-foreground/60" />
             {point}
           </li>
         ))}
@@ -118,7 +118,7 @@ export function Experience() {
               type="button"
               onClick={() => goTo(index - 1, -1)}
               aria-label="Previous experience"
-              className="hidden size-10 shrink-0 items-center justify-center rounded-full border border-border/60 bg-card/60 text-muted-foreground transition-colors hover:border-glow/40 hover:text-foreground sm:inline-flex"
+              className="hidden size-10 shrink-0 items-center justify-center rounded-full border border-border/60 bg-card/60 text-muted-foreground transition-colors hover:border-border hover:text-foreground sm:inline-flex"
             >
               <ChevronLeft className="size-4" />
             </button>
@@ -133,7 +133,7 @@ export function Experience() {
                   aria-current={i === index}
                   className={cn(
                     "h-1.5 rounded-full transition-all duration-300",
-                    i === index ? "w-6 bg-glow" : "w-1.5 bg-border hover:bg-muted-foreground/50"
+                    i === index ? "w-6 bg-foreground" : "w-1.5 bg-border hover:bg-muted-foreground/50"
                   )}
                 />
               ))}
@@ -143,7 +143,7 @@ export function Experience() {
               type="button"
               onClick={() => goTo(index + 1, 1)}
               aria-label="Next experience"
-              className="hidden size-10 shrink-0 items-center justify-center rounded-full border border-border/60 bg-card/60 text-muted-foreground transition-colors hover:border-glow/40 hover:text-foreground sm:inline-flex"
+              className="hidden size-10 shrink-0 items-center justify-center rounded-full border border-border/60 bg-card/60 text-muted-foreground transition-colors hover:border-border hover:text-foreground sm:inline-flex"
             >
               <ChevronRight className="size-4" />
             </button>

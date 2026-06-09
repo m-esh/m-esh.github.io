@@ -62,7 +62,7 @@ export function ProjectGallery({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
-            className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card/50 text-left backdrop-blur-sm transition-colors hover:border-glow-secondary/40"
+            className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card/50 text-left backdrop-blur-sm transition-colors hover:border-border"
           >
             <div className="relative aspect-[4/3] overflow-hidden bg-background/40">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -73,7 +73,7 @@ export function ProjectGallery({
                 className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
               />
               <div className="absolute inset-0 flex items-center justify-center bg-background/0 opacity-0 backdrop-blur-[1px] transition-all duration-300 group-hover:bg-background/30 group-hover:opacity-100">
-                <span className="inline-flex items-center gap-2 rounded-full border border-glow-secondary/40 bg-background/70 px-3.5 py-1.5 text-xs font-medium text-glow-secondary">
+                <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/70 px-3.5 py-1.5 text-xs font-medium text-muted-foreground">
                   <Search className="size-3.5" /> Zoom in
                 </span>
               </div>

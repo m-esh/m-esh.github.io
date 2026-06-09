@@ -28,7 +28,7 @@ export function ProjectsShowcase() {
                   <span className="inline-flex items-center gap-2 text-lg font-medium tracking-tight sm:text-xl">
                     {project.title}
                     {href && (
-                      <ArrowIcon className="size-4 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-purple" />
+                      <ArrowIcon className="size-4 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-foreground" />
                     )}
                   </span>
                   <span className="max-w-xl text-sm leading-relaxed text-muted-foreground">
@@ -51,7 +51,7 @@ export function ProjectsShowcase() {
                   isInternal ? (
                     <Link
                       href={href}
-                      className="group flex items-start justify-between gap-6 py-6 transition-colors hover:text-purple"
+                      className="group flex items-start justify-between gap-6 py-6 transition-colors hover:text-foreground"
                     >
                       {row}
                     </Link>
@@ -60,7 +60,7 @@ export function ProjectsShowcase() {
                       href={href}
                       target="_blank"
                       rel="noreferrer noopener"
-                      className="group flex items-start justify-between gap-6 py-6 transition-colors hover:text-purple"
+                      className="group flex items-start justify-between gap-6 py-6 transition-colors hover:text-foreground"
                     >
                       {row}
                     </a>
