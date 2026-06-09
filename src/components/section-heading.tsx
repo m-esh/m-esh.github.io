@@ -19,7 +19,7 @@ export function SectionHeading({
         className
       )}
     >
-      <h2 className="text-balance font-display text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
+      <h2 className="text-balance text-[clamp(2.5rem,6vw,3.5rem)] font-normal leading-[1.13] tracking-[-0.02em]">
         {title}
       </h2>
       {description && (

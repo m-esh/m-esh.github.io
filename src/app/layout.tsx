@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Schibsted_Grotesk, Geist_Mono, Chakra_Petch } from "next/font/google";
+import { Manrope } from "next/font/google";
 
 import { profile } from "@/data/profile";
 import { IntroScreen } from "@/components/intro-screen";
@@ -7,21 +7,12 @@ import { MotionProvider } from "@/components/motion-provider";
 
 import "./globals.css";
 
-const schibsted = Schibsted_Grotesk({
-  variable: "--font-geist-sans",
+// Sole typeface, Neue Montreal stand-in: weight 400 carries everything,
+// 700 is reserved for emphasis words.
+const neue = Manrope({
+  variable: "--font-neue",
   subsets: ["latin"],
   display: "swap",
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const chakraPetch = Chakra_Petch({
-  variable: "--font-chakra-petch",
-  weight: ["500", "600", "700"],
-  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -41,11 +32,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${schibsted.variable} ${geistMono.variable} ${chakraPetch.variable} dark h-full`}
-    >
-      <body className="min-h-full flex flex-col antialiased selection:bg-primary selection:text-primary-foreground">
+    <html lang="en" className={`${neue.variable} dark h-full`}>
+      <body className="min-h-full flex flex-col antialiased">
         <MotionProvider>
           {/* EXPERIMENTAL: revert by deleting this div + .noise-overlay in globals.css */}
           <div aria-hidden className="noise-overlay" />

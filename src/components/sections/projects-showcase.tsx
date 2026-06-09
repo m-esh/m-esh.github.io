@@ -29,7 +29,7 @@ export function ProjectsShowcase() {
         />
 
         <ul
-          className="mt-10 flex flex-col divide-y divide-border/40"
+          className="mt-10 flex flex-col divide-y divide-border/60 border-t"
           onMouseMove={handleMouseMove}
           onMouseLeave={() => setPreview(null)}
         >
@@ -41,17 +41,17 @@ export function ProjectsShowcase() {
             const row = (
               <>
                 <div className="flex flex-col gap-2">
-                  <span className="inline-flex items-center gap-2 text-lg font-semibold tracking-tight sm:text-xl">
+                  <span className="inline-flex items-center gap-3 text-2xl font-normal tracking-[-0.01em] sm:text-3xl">
                     {project.title}
                     {href && (
-                      <ArrowIcon className="size-4 shrink-0 text-muted-foreground transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-foreground" />
+                      <ArrowIcon className="size-5 shrink-0 text-muted-foreground transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-foreground" />
                     )}
                   </span>
                   <span className="max-w-xl text-sm leading-relaxed text-muted-foreground">
                     {project.description}
                   </span>
                 </div>
-                <span className="shrink-0 font-mono text-xs text-muted-foreground">
+                <span className="shrink-0 text-xs tracking-[0.06em] text-muted-foreground">
                   {project.year}
                 </span>
               </>
@@ -59,7 +59,7 @@ export function ProjectsShowcase() {
 
             const rowProps = {
               className:
-                "group -mx-4 flex items-start justify-between gap-6 rounded-xl px-4 py-5 transition-colors hover:bg-card/50",
+                "group flex items-start justify-between gap-6 py-7 transition-colors",
               onMouseEnter: () => setPreview(project.image ?? null),
             };
 
@@ -76,7 +76,7 @@ export function ProjectsShowcase() {
                     </a>
                   )
                 ) : (
-                  <div className="flex items-start justify-between gap-6 py-5">{row}</div>
+                  <div className="flex items-start justify-between gap-6 py-7">{row}</div>
                 )}
               </li>
             );
@@ -100,7 +100,7 @@ export function ProjectsShowcase() {
               animate={{ opacity: 1, scale: 1, rotate: 0 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="w-60 rounded-xl bg-white object-cover shadow-[0_24px_60px_-12px_rgba(0,0,0,0.6)]"
+              className="w-60 bg-white object-cover shadow-[0_24px_60px_-12px_rgba(0,0,0,0.6)]"
             />
           )}
         </AnimatePresence>

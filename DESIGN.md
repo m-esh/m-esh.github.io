@@ -2,7 +2,7 @@
 
 ## Theme
 
-Dark only (`html.dark`, `color-scheme: dark`). Near-black cool canvas, light cool-gray ink. Light-mode tokens exist in `:root` but are not exposed; the dark surface is identity.
+Dark only (`html.dark`, `color-scheme: dark`). A darkroom-editorial spread: one slate-veil canvas, bone-white type, a single gunmetal-blue hairline accent. Vivid+Co-derived.
 
 ## Color
 
@@ -10,45 +10,39 @@ OKLCH tokens in `src/app/globals.css`, mapped to Tailwind v4 utilities via `@the
 
 | Token | Value (dark) | Role |
 |---|---|---|
-| `--background` | `oklch(0.12 0.01 280)` | Page canvas (near-black) |
-| `--foreground` | `oklch(0.96 0.015 230)` | Ink |
-| `--card` | `oklch(0.20 0.015 265)` | Raised surfaces (borderless, usually `/70`) |
-| `--primary` | `oklch(0.78 0.2 95)` | Yellow accent: CTAs, selection, scrollbar, progress bar |
-| `--glow` | `oklch(0.85 0.19 145)` | Green: intro-screen name only |
-| `--glow-secondary` | `oklch(0.8 0.15 205)` | Cyan: legacy, mostly retired |
-| `--muted-foreground` | `oklch(0.68 0.035 250)` | Secondary text |
-| `--border` | `oklch(1 0 0 / 12%)` | All borders, usually at `/60` |
+| `--background` | `oklch(0.45 0.028 246)` (≈ `#495764`, slate veil) | The entire canvas. Every section sits on it directly, no card surfaces |
+| `--foreground` | `oklch(0.99 0.004 95)` (≈ `#fffdf9`, bone white) | All type |
+| `--primary` | `oklch(0.61 0.042 245)` (≈ `#6f879c`, gunmetal blue) | The one chromatic accent: hairline borders, outlined-button borders, active states |
+| `--card` / `--carbon` | recessed slate / `#101010` | Rare deeper recess, used sparingly (e.g. nothing currently) |
+| `--border` | `--primary` at 55% | All hairlines and dividers |
+| `--muted-foreground` | bone white at 76% | Secondary text |
 
-Strategy: **Restrained.** One yellow accent ≤10% of surface; everything else neutral. Colored glows, gradient text, eyebrow pills, and colored borders are banned (see PRODUCT.md anti-references).
+Strategy: **Drenched-restrained.** One canvas color carries the whole page; the only chroma is the gunmetal-blue hairline. No gradients, no glows, no card chrome, no rounded corners (`--radius: 0`).
 
 ## Typography
 
-| Slot | Family | Usage |
-|---|---|---|
-| Display (`font-display`) | Chakra Petch 500/600/700 | h1/h2 headings, hero name, intro screen |
-| Body (`font-sans`) | Schibsted Grotesk | Everything else |
-| Mono (`font-mono`) | Geist Mono | Dates, years, small meta labels |
+Single typeface (Manrope, standing in for Neue Montreal) across `font-sans`, `font-display`, and `font-mono` — weight 400 everywhere, weight 700 reserved for emphasis (e.g. the surname in the hero).
 
-Hero name: fluid `clamp(2.25rem, 9vw, 4.5rem)`, tracking-tight, leading-[1.05]. Section h2: `text-3xl` → `md:text-5xl`. Body: `text-base`/`text-lg`, relaxed leading. `text-balance` on headings. Modular 1.25× scale tokens (`--text-2xs` … `--text-6xl`) in `@theme inline`.
+Editorial scale jumps straight from body (15–20px) to display (`clamp(3rem, 9–10.5vw, 6.5–8.25rem)`), line-height 1.0, letter-spacing -0.02em on display sizes. Section h2s sit at `clamp(2.5rem, 6vw, 3.5rem)`, leading 1.13, tracking -0.02em. `text-balance` on headings.
 
 ## Components
 
-- **SiteHeader**: fixed, transparent until 24px scroll then blurred bg + shadow. Scrollspy nav: an animated pill (`layoutId`) slides between items tracking the current section (IntersectionObserver, mid-viewport band).
-- **IntroScreen**: full-screen one-shot, letters of the name tumble in (framer-motion stagger), then fades; locks scroll while visible.
-- **ScrollProgress**: 2px primary bar, springed `scaleX`.
-- **SectionHeading**: plain h2 + optional description. No eyebrow, no gradient tip.
-- **Experience carousel**: drag/swipe deck (framer-motion), arrows hidden on mobile, dot pagination.
-- **Project rows**: borderless list with `divide-y` hairlines, bg-tint hover, and a cursor-follow artifact preview (spring-tracked CAD render, `lg:` and pointer devices only).
-- **PlayableKalimba**: Web Audio synthesized tines on the Kalimbinator page; click to pluck (sine fundamental + decaying inharmonic partial), sequenced "Play the phrase" button, CSS `tine` wobble keyframes.
-- **Buttons**: rounded-full; primary = solid yellow; outline = 1px border, hover bg-accent.
-- **Project case-study pages**: fixed back-header, hero with meta `dl`, borderless image/video cards on `bg-card/70`, gallery lightbox with zoom, interactive parts diagram (SVG callouts).
+- **SiteHeader**: fixed, transparent until 24px scroll then a flat blurred bg (no shadow). Scrollspy nav: an animated underline (`layoutId`) slides beneath the active link.
+- **IntroScreen**: full-screen one-shot, letters of the name tumble in (framer-motion stagger), then fades; locks scroll while visible. Bone-white, no glow.
+- **ScrollProgress**: 2px accent bar, springed `scaleX`.
+- **SectionHeading**: plain display-scale h2 + optional description. No eyebrow, no gradient tip.
+- **Experience**: borderless, hairline `border-t` rule per entry; swipe deck (framer-motion), pagination as thin accent-colored bars, prev/next as bordered squares.
+- **Project rows**: borderless list with `divide-y` hairlines over a `border-t`, large weight-400/weight-700 titles, and a cursor-follow artifact preview (spring-tracked CAD render, `lg:` and pointer devices only).
+- **Buttons**: rectangular (`rounded-none`), outlined ghost only — `border border-foreground` (default) or `border border-primary` (outline variant), transparent fill, uppercase tracked label. No filled/solid variant.
+- **Project case-study pages**: fixed transparent header, hero with meta `dl`, borderless `figure`/`figcaption` image and video blocks with a `border-t` caption rule, gallery lightbox, interactive parts diagram (SVG callouts).
 
-Content is never visibility-gated on scroll reveals: sections render visible by default (the old `Reveal` whileInView wrapper shipped blank sections to headless renderers and was removed).
+Content is never visibility-gated on scroll reveals: sections render visible by default.
 
 ## Spacing & Layout
 
-`max-w-6xl` container, `px-6 lg:px-8`. Sections `py-20 sm:py-28`. Prose capped at `max-w-2xl`/`max-w-3xl` (~65-75ch). Radius scale from `--radius: 0.625rem`; cards use `rounded-2xl`.
+`max-w-6xl` container, `px-6 lg:px-8`. Sections `py-20 sm:py-28`. Prose capped at `max-w-2xl`/`max-w-3xl` (~65-75ch). All radii are `0`.
 
 ## Motion
 
-Expo-out easing `[0.16, 1, 0.3, 1]` everywhere. Intro ~2.3s total, exit crossfade. Carousel slide 0.32s. Nav pill slide 0.35s. Kalimba tine wobble 0.5s ease-out. `prefers-reduced-motion` collapses CSS animations and framer transforms.
+Expo-out easing `[0.16, 1, 0.3, 1]` everywhere. Intro ~2.3s total, exit crossfade. Carousel slide 0.32s. Nav underline slide 0.35s. Magnetic cursor-pull on primary CTAs (hero, header, contact). `prefers-reduced-motion` collapses CSS animations and framer transforms.
+

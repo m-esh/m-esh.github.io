@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
 import { ScrollProgress } from "@/components/scroll-progress";
-import { TiltCard } from "@/components/tilt-card";
 
 export const metadata: Metadata = {
   title: "Kalimbinator · Mehrdad Shariatmadari",
@@ -32,10 +31,10 @@ export default function KalimbinatorPage() {
         {/* Hero */}
         <section className="relative overflow-hidden py-20 sm:py-28">
           <div className="mx-auto flex max-w-3xl flex-col gap-5 px-6 lg:px-8">
-            <span className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
+            <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
               Independent Study · 2026
             </span>
-            <h1 className="text-balance font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
+            <h1 className="text-balance text-[clamp(3rem,9vw,6.5rem)] font-normal leading-[1.0] tracking-[-0.02em]">
               Kalimbinator
             </h1>
             <p className="max-w-xl text-balance text-lg leading-relaxed text-muted-foreground sm:text-xl">
@@ -71,7 +70,7 @@ export default function KalimbinatorPage() {
         <section className="relative py-16 sm:py-20">
           <div className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-2 lg:px-8">
             <div className="flex flex-col gap-4">
-              <h2 className="text-balance font-display text-2xl font-semibold tracking-tight sm:text-3xl">
+              <h2 className="text-balance text-3xl font-normal leading-[1.17] tracking-[-0.01em] sm:text-4xl">
                 The idea
               </h2>
               <p className="leading-relaxed text-muted-foreground">
@@ -85,7 +84,7 @@ export default function KalimbinatorPage() {
               </p>
             </div>
             <div className="flex flex-col gap-4">
-              <h2 className="text-balance font-display text-2xl font-semibold tracking-tight sm:text-3xl">
+              <h2 className="text-balance text-3xl font-normal leading-[1.17] tracking-[-0.01em] sm:text-4xl">
                 The approach
               </h2>
               <p className="leading-relaxed text-muted-foreground">
@@ -103,7 +102,7 @@ export default function KalimbinatorPage() {
         {/* CAD render + demo */}
         <section className="relative py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
-            <h2 className="text-balance font-display text-2xl font-semibold tracking-tight sm:text-3xl">
+            <h2 className="text-balance text-3xl font-normal leading-[1.17] tracking-[-0.01em] sm:text-4xl">
               Six iterations to get the geometry right
             </h2>
             <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">
@@ -115,18 +114,16 @@ export default function KalimbinatorPage() {
               that they&apos;d flex or catch.
             </p>
 
-            <div className="mt-10 grid gap-6 sm:grid-cols-2">
-              <div className="flex flex-col overflow-hidden rounded-2xl bg-card/70">
-                <TiltCard className="aspect-[16/10]">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="/projects/kalimbinator/cad-render.png"
-                    alt="3D rendered CAD model of the Kalimbinator showing the hand crank, peg drum, and kalimba housing"
-                    className="size-full bg-white object-contain"
-                  />
-                </TiltCard>
-                <div className="flex flex-col gap-1 p-6">
-                  <span className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+            <div className="mt-10 grid gap-10 sm:grid-cols-2">
+              <figure className="flex flex-col gap-4">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/projects/kalimbinator/cad-render.png"
+                  alt="3D rendered CAD model of the Kalimbinator showing the hand crank, peg drum, and kalimba housing"
+                  className="aspect-[16/10] w-full bg-white object-contain"
+                />
+                <figcaption className="flex flex-col gap-2 border-t pt-4">
+                  <span className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
                     CAD render
                   </span>
                   <p className="text-sm leading-relaxed text-muted-foreground">
@@ -135,19 +132,19 @@ export default function KalimbinatorPage() {
                     housed in a shell sized to wrap around the instrument and
                     hold it at an angle.
                   </p>
-                </div>
-              </div>
+                </figcaption>
+              </figure>
 
-              <div className="flex flex-col overflow-hidden rounded-2xl bg-card/70">
+              <figure className="flex flex-col gap-4">
                 <video
                   src="/projects/kalimbinator/demo.mp4"
-                  className="aspect-[16/10] size-full object-cover"
+                  className="aspect-[16/10] w-full object-cover"
                   controls
                   playsInline
                   preload="metadata"
                 />
-                <div className="flex flex-col gap-1 p-6">
-                  <span className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                <figcaption className="flex flex-col gap-2 border-t pt-4">
+                  <span className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
                     The build, working
                   </span>
                   <p className="text-sm leading-relaxed text-muted-foreground">
@@ -155,8 +152,8 @@ export default function KalimbinatorPage() {
                     tine in order and plucking out the opening notes of the solo,
                     just like the music boxes that inspired it.
                   </p>
-                </div>
-              </div>
+                </figcaption>
+              </figure>
             </div>
           </div>
         </section>
@@ -164,7 +161,7 @@ export default function KalimbinatorPage() {
         {/* Process — numbered rows instead of icon feature cards */}
         <section className="relative py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
-            <h2 className="text-balance font-display text-2xl font-semibold tracking-tight sm:text-3xl">
+            <h2 className="text-balance text-3xl font-normal leading-[1.17] tracking-[-0.01em] sm:text-4xl">
               How it came together
             </h2>
 
@@ -172,7 +169,7 @@ export default function KalimbinatorPage() {
               <li className="grid gap-4 py-8 sm:grid-cols-[48px_1fr]">
                 <span className="font-mono text-sm font-medium text-muted-foreground">01</span>
                 <div className="flex flex-col gap-2">
-                  <h3 className="font-semibold tracking-tight">Re-tuning the kalimba</h3>
+                  <h3 className="text-lg tracking-[-0.01em]">Re-tuning the kalimba</h3>
                   <p className="leading-relaxed text-muted-foreground">
                     I disassembled a kalimba sized to fit my printer&apos;s build
                     plate, transposed the solo from tenor saxophone into concert
@@ -187,7 +184,7 @@ export default function KalimbinatorPage() {
               <li className="grid gap-4 py-8 sm:grid-cols-[48px_1fr]">
                 <span className="font-mono text-sm font-medium text-muted-foreground">02</span>
                 <div className="flex flex-col gap-2">
-                  <h3 className="font-semibold tracking-tight">Modeling the mechanism</h3>
+                  <h3 className="text-lg tracking-[-0.01em]">Modeling the mechanism</h3>
                   <p className="leading-relaxed text-muted-foreground">
                     Working from the sheet music, I mapped each note onto the drum
                     in CAD and worked through six prototypes before landing on a
@@ -200,7 +197,7 @@ export default function KalimbinatorPage() {
               <li className="grid gap-4 py-8 sm:grid-cols-[48px_1fr]">
                 <span className="font-mono text-sm font-medium text-muted-foreground">03</span>
                 <div className="flex flex-col gap-2">
-                  <h3 className="font-semibold tracking-tight">Printing &amp; assembly</h3>
+                  <h3 className="text-lg tracking-[-0.01em]">Printing &amp; assembly</h3>
                   <p className="leading-relaxed text-muted-foreground">
                     The full housing and drum came out of a single six-hour print,
                     and the assembly was mostly a matter of gluing the pieces into

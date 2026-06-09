@@ -66,7 +66,7 @@ export function IntroScreen() {
             initial="hidden"
             animate="visible"
             variants={container}
-            className="inline-flex flex-wrap items-baseline justify-center text-balance text-center font-display text-2xl font-semibold tracking-tight text-glow sm:text-4xl"
+            className="inline-flex flex-wrap items-baseline justify-center text-balance text-center text-3xl font-normal tracking-[-0.02em] text-foreground sm:text-5xl"
           >
             {NAME.split("").map((char, i) => {
               const offset = pieceOffset(i);

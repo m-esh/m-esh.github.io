@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ArrowLeft, Hand, Keyboard } from "lucide-react";
 
 import { ScrollProgress } from "@/components/scroll-progress";
-import { TiltCard } from "@/components/tilt-card";
 import { type GalleryItem } from "./project-gallery";
 import { PartsDiagram, type DiagramPart } from "./parts-diagram";
 
@@ -132,8 +131,8 @@ export default function ChopstickRingPage() {
         {/* Hero */}
         <section className="relative overflow-hidden py-20 sm:py-28">
           <div className="mx-auto flex max-w-3xl flex-col gap-5 px-6 lg:px-8">
-            <span className="font-mono text-xs text-muted-foreground uppercase tracking-[0.18em]">Case Study · 2025</span>
-            <h1 className="text-balance font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
+            <span className="text-xs text-muted-foreground uppercase tracking-[0.18em]">Case Study · 2025</span>
+            <h1 className="text-balance text-[clamp(3rem,9vw,6.5rem)] font-normal leading-[1.0] tracking-[-0.02em]">
               Chopstick Ring
             </h1>
             <p className="max-w-xl text-balance text-lg leading-relaxed text-muted-foreground sm:text-xl">
@@ -162,7 +161,7 @@ export default function ChopstickRingPage() {
         <section className="relative py-16 sm:py-20">
           <div className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-2 lg:px-8">
             <div className="flex flex-col gap-4">
-              <h2 className="text-balance font-display text-2xl font-semibold tracking-tight sm:text-3xl">
+              <h2 className="text-balance text-3xl font-normal leading-[1.17] tracking-[-0.01em] sm:text-4xl">
                 The problem
               </h2>
               <p className="text-balance leading-relaxed text-muted-foreground">
@@ -173,7 +172,7 @@ export default function ChopstickRingPage() {
               </p>
             </div>
             <div className="flex flex-col gap-4">
-              <h2 className="text-balance font-display text-2xl font-semibold tracking-tight sm:text-3xl">
+              <h2 className="text-balance text-3xl font-normal leading-[1.17] tracking-[-0.01em] sm:text-4xl">
                 The design
               </h2>
               <p className="text-balance leading-relaxed text-muted-foreground">
@@ -190,7 +189,7 @@ export default function ChopstickRingPage() {
         {/* How it works */}
         <section className="relative py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
-            <h2 className="text-balance font-display text-2xl font-semibold tracking-tight sm:text-3xl">
+            <h2 className="text-balance text-3xl font-normal leading-[1.17] tracking-[-0.01em] sm:text-4xl">
               Two positions, one hinge
             </h2>
             <p className="mt-3 max-w-2xl text-balance leading-relaxed text-muted-foreground">
@@ -198,18 +197,16 @@ export default function ChopstickRingPage() {
               it&apos;s a utensil; rotate it back and it&apos;s out of your way.
             </p>
 
-            <div className="mt-10 grid gap-6 sm:grid-cols-2">
-              <div className="flex flex-col overflow-hidden rounded-2xl bg-card/70">
-                <TiltCard className="aspect-[16/10]">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="/projects/chopstick-ring/prototype-typing-mode.jpg"
-                    alt="The Chopstick Ring pivoted down into its eating position"
-                    className="size-full object-cover"
-                  />
-                </TiltCard>
-                <div className="flex flex-col gap-2 p-6">
-                  <span className="flex items-center gap-1.5 font-mono text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
+            <div className="mt-10 grid gap-10 sm:grid-cols-2">
+              <figure className="flex flex-col gap-4">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/projects/chopstick-ring/prototype-typing-mode.jpg"
+                  alt="The Chopstick Ring pivoted down into its eating position"
+                  className="aspect-[16/10] w-full object-cover"
+                />
+                <figcaption className="flex flex-col gap-2 border-t pt-4">
+                  <span className="flex items-center gap-1.5 text-xs uppercase tracking-[0.16em] text-muted-foreground">
                     <Hand className="size-3.5" /> Eating mode
                   </span>
                   <p className="text-sm leading-relaxed text-muted-foreground">
@@ -217,20 +214,18 @@ export default function ChopstickRingPage() {
                     food with, just like a normal pair of chopsticks, except they never
                     leave your hand.
                   </p>
-                </div>
-              </div>
+                </figcaption>
+              </figure>
 
-              <div className="flex flex-col overflow-hidden rounded-2xl bg-card/70">
-                <TiltCard className="aspect-[16/10]">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="/projects/chopstick-ring/prototype-eating-mode.jpg"
-                    alt="The Chopstick Ring opened flat into its resting position"
-                    className="size-full object-cover"
-                  />
-                </TiltCard>
-                <div className="flex flex-col gap-2 p-6">
-                  <span className="flex items-center gap-1.5 font-mono text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
+              <figure className="flex flex-col gap-4">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/projects/chopstick-ring/prototype-eating-mode.jpg"
+                  alt="The Chopstick Ring opened flat into its resting position"
+                  className="aspect-[16/10] w-full object-cover"
+                />
+                <figcaption className="flex flex-col gap-2 border-t pt-4">
+                  <span className="flex items-center gap-1.5 text-xs uppercase tracking-[0.16em] text-muted-foreground">
                     <Keyboard className="size-3.5" /> Typing mode
                   </span>
                   <p className="text-sm leading-relaxed text-muted-foreground">
@@ -238,8 +233,8 @@ export default function ChopstickRingPage() {
                     embedded magnets click into place, holding it snug against your hand
                     so it stays put, out of the way and ready, while you type.
                   </p>
-                </div>
-              </div>
+                </figcaption>
+              </figure>
             </div>
           </div>
         </section>
@@ -248,7 +243,7 @@ export default function ChopstickRingPage() {
         <section className="relative py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
             <span className="font-mono text-xs text-muted-foreground uppercase tracking-[0.18em]">Anatomy</span>
-            <h2 className="mt-3 text-balance font-display text-2xl font-semibold tracking-tight sm:text-3xl">
+            <h2 className="mt-3 text-balance text-3xl font-normal leading-[1.17] tracking-[-0.01em] sm:text-4xl">
               Tap a label to open its drawing
             </h2>
             <p className="mt-3 max-w-2xl text-balance leading-relaxed text-muted-foreground">

@@ -19,29 +19,33 @@ const slide: Variants = {
 
 function ExperienceCard({ item }: { item: ExperienceItem }) {
   return (
-    <div className="rounded-2xl bg-card/70 p-6 sm:p-8">
-      <div className="flex flex-wrap items-start justify-between gap-4">
+    <div className="border-t pt-8">
+      <div className="flex flex-wrap items-baseline justify-between gap-4">
         <div>
-          <h3 className="text-xl font-semibold tracking-tight sm:text-2xl">{item.role}</h3>
-          <p className="mt-1 text-sm font-medium text-muted-foreground">{item.org}</p>
+          <h3 className="text-2xl font-normal leading-[1.17] tracking-[-0.01em] sm:text-3xl">
+            {item.role}
+          </h3>
+          <p className="mt-2 text-sm text-muted-foreground">{item.org}</p>
         </div>
         <div className="flex flex-col items-start gap-1 text-sm text-muted-foreground sm:items-end">
-          <span className="font-mono text-xs tracking-wide">{item.period}</span>
+          <span className="text-xs tracking-[0.06em]">{item.period}</span>
           <span className="inline-flex items-center gap-1.5">
             <MapPin className="size-3.5" /> {item.location}
           </span>
         </div>
       </div>
 
-      <p className="mt-4 text-balance leading-relaxed text-muted-foreground">{item.summary}</p>
+      <p className="mt-5 max-w-2xl text-balance leading-relaxed text-muted-foreground">
+        {item.summary}
+      </p>
 
-      <ul className="mt-5 flex flex-col gap-2.5">
+      <ul className="mt-6 flex flex-col gap-2.5">
         {item.highlights.map((point) => (
           <li
             key={point}
             className="flex gap-3 text-sm leading-relaxed text-muted-foreground sm:text-base"
           >
-            <span className="mt-2 size-1.5 shrink-0 rounded-full bg-muted-foreground/60" />
+            <span className="mt-3 h-px w-4 shrink-0 bg-primary" />
             {point}
           </li>
         ))}
@@ -111,12 +115,12 @@ export function Experience() {
               type="button"
               onClick={() => goTo(index - 1, -1)}
               aria-label="Previous experience"
-              className="hidden size-10 shrink-0 items-center justify-center rounded-full bg-card/70 text-muted-foreground transition-colors hover:bg-card hover:text-foreground sm:inline-flex"
+              className="hidden size-10 shrink-0 items-center justify-center border text-muted-foreground transition-colors hover:border-foreground hover:text-foreground sm:inline-flex"
             >
               <ChevronLeft className="size-4" />
             </button>
 
-            <div className="flex flex-wrap items-center justify-center gap-2">
+            <div className="flex flex-wrap items-center justify-center gap-2.5">
               {experience.map((exp, i) => (
                 <button
                   key={exp.role}
@@ -125,8 +129,8 @@ export function Experience() {
                   aria-label={`Show ${exp.role} at ${exp.org}`}
                   aria-current={i === index}
                   className={cn(
-                    "h-1.5 rounded-full transition-all duration-300",
-                    i === index ? "w-6 bg-foreground" : "w-1.5 bg-muted-foreground/30 hover:bg-muted-foreground/60"
+                    "h-0.5 w-7 transition-colors duration-300",
+                    i === index ? "bg-foreground" : "bg-foreground/25 hover:bg-foreground/50"
                   )}
                 />
               ))}
@@ -136,7 +140,7 @@ export function Experience() {
               type="button"
               onClick={() => goTo(index + 1, 1)}
               aria-label="Next experience"
-              className="hidden size-10 shrink-0 items-center justify-center rounded-full bg-card/70 text-muted-foreground transition-colors hover:bg-card hover:text-foreground sm:inline-flex"
+              className="hidden size-10 shrink-0 items-center justify-center border text-muted-foreground transition-colors hover:border-foreground hover:text-foreground sm:inline-flex"
             >
               <ChevronRight className="size-4" />
             </button>

@@ -64,7 +64,7 @@ export function PartsDiagram({
   }, [openIndex, close, step]);
 
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-border/60 bg-card/50">
+    <div className="relative overflow-hidden border border-border/60">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={image}
@@ -162,7 +162,7 @@ export function PartsDiagram({
           >
             <span
               className={cn(
-                "flex w-fit items-center gap-2 rounded-xl border px-2.5 py-1.5 font-mono text-[0.6rem] font-semibold uppercase leading-tight tracking-[0.1em] backdrop-blur-md transition-all duration-300 sm:text-[0.7rem]",
+                "flex w-fit items-center gap-2 border px-2.5 py-1.5 font-mono text-[0.6rem] font-semibold uppercase leading-tight tracking-[0.1em] backdrop-blur-md transition-all duration-300 sm:text-[0.7rem]",
                 active === i
                   ? "scale-105 border-foreground bg-foreground text-background"
                   : "border-border/60 bg-background/80 text-foreground"

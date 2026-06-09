@@ -3,51 +3,37 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/*
+ * Vivid+Co-derived darkroom editorial palette.
+ * Slate-veil canvas, bone-white ink, gunmetal-blue hairline accent.
+ * One canvas, no card surfaces; depth comes from type scale, not chrome.
+ */
 :root {
-  --background: oklch(0.98 0.008 250);
-  --foreground: oklch(0.2 0.04 280);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.2 0.04 280);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.2 0.04 280);
-  --primary: oklch(0.72 0.19 95);
-  --primary-foreground: oklch(0.18 0.03 95);
-  --secondary: oklch(0.95 0.018 250);
-  --secondary-foreground: oklch(0.26 0.04 270);
-  --muted: oklch(0.95 0.018 250);
-  --muted-foreground: oklch(0.52 0.03 270);
-  --accent: oklch(0.88 0.09 210);
-  --accent-foreground: oklch(0.28 0.08 230);
-  --destructive: oklch(0.58 0.22 27);
-  --border: oklch(0.9 0.02 250);
-  --input: oklch(0.9 0.02 250);
-  --ring: oklch(0.72 0.19 95);
-  --glow: oklch(0.8 0.18 145);
-  --glow-secondary: oklch(0.74 0.13 205);
-  --radius: 0.625rem;
+  --background: oklch(0.45 0.028 246); /* slate veil  #495764 */
+  --foreground: oklch(0.99 0.004 95); /* bone white  #fffdf9 */
+  --card: oklch(0.38 0.026 246); /* recessed slate, rare */
+  --card-foreground: oklch(0.99 0.004 95);
+  --popover: oklch(0.38 0.026 246);
+  --popover-foreground: oklch(0.99 0.004 95);
+  --primary: oklch(0.61 0.042 245); /* gunmetal blue  #6f879c */
+  --primary-foreground: oklch(0.99 0.004 95);
+  --secondary: oklch(0.38 0.026 246);
+  --secondary-foreground: oklch(0.99 0.004 95);
+  --muted: oklch(0.38 0.026 246);
+  --muted-foreground: oklch(0.99 0.004 95 / 76%);
+  --accent: oklch(0.99 0.004 95 / 8%);
+  --accent-foreground: oklch(0.99 0.004 95);
+  --destructive: oklch(0.7 0.19 27);
+  --border: oklch(0.61 0.042 245 / 55%);
+  --input: oklch(0.61 0.042 245 / 55%);
+  --ring: oklch(0.61 0.042 245);
+  --carbon: oklch(0.18 0 0); /* carbon recess  #101010 */
+  --radius: 0rem;
 }
 
 .dark {
-  --background: oklch(0.12 0.01 280);
-  --foreground: oklch(0.96 0.015 230);
-  --card: oklch(0.20 0.015 265);
-  --card-foreground: oklch(0.96 0.015 230);
-  --popover: oklch(0.21 0.045 280);
-  --popover-foreground: oklch(0.96 0.015 230);
-  --primary: oklch(0.78 0.2 95);
-  --primary-foreground: oklch(0.16 0.03 95);
-  --secondary: oklch(0.27 0.045 280);
-  --secondary-foreground: oklch(0.96 0.015 230);
-  --muted: oklch(0.27 0.045 280);
-  --muted-foreground: oklch(0.68 0.035 250);
-  --accent: oklch(0.4 0.13 210);
-  --accent-foreground: oklch(0.88 0.1 205);
-  --destructive: oklch(0.7 0.19 27);
-  --border: oklch(1 0 0 / 12%);
-  --input: oklch(1 0 0 / 16%);
-  --ring: oklch(0.78 0.2 95);
-  --glow: oklch(0.85 0.19 145);
-  --glow-secondary: oklch(0.8 0.15 205);
+  --background: oklch(0.45 0.028 246);
+  --foreground: oklch(0.99 0.004 95);
 }
 
 @theme inline {
@@ -69,31 +55,31 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-glow: var(--glow);
-  --color-glow-secondary: var(--glow-secondary);
+  --color-carbon: var(--carbon);
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
 
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-display: var(--font-chakra-petch);
+  /* Single typeface system: every slot resolves to the same grotesque. */
+  --font-sans: var(--font-neue);
+  --font-mono: var(--font-neue);
+  --font-display: var(--font-neue);
 
-  /* Modular type scale — 1.25× (major third) ratio */
-  --text-2xs: 0.64rem;
-  --text-xs: 0.75rem;
+  /* Editorial scale: body sizes, then a hard jump to display */
+  --text-2xs: 0.75rem;
+  --text-xs: 0.815rem;
   --text-sm: 0.875rem;
-  --text-base: 1rem;
+  --text-base: 1.0625rem;
   --text-md: 1.125rem;
   --text-lg: 1.25rem;
-  --text-xl: 1.5rem;
-  --text-2xl: 1.875rem;
-  --text-3xl: 2.375rem;
-  --text-4xl: 3rem;
-  --text-5xl: 3.75rem;
-  --text-6xl: 4.75rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 2rem;
+  --text-3xl: 2.25rem;
+  --text-4xl: 3.5rem;
+  --text-5xl: 4.5rem;
+  --text-6xl: 6.5rem;
 
   --animate-fade-up: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 
@@ -120,7 +106,6 @@
   body {
     @apply bg-background text-foreground font-sans;
     overscroll-behavior-x: none;
-    font-feature-settings: "ss01" on, "cv01" on;
   }
   ::selection {
     background: var(--color-primary);
