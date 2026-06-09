@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
+import { Magnetic } from "@/components/magnetic";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
@@ -112,13 +113,15 @@ export function SiteHeader() {
           </div>
 
           <div className="flex items-center gap-2">
-            <Button
-              size="sm"
-              className="hidden sm:inline-flex"
-              onClick={() => handleNavigate("#contact")}
-            >
-              Get in touch
-            </Button>
+            <Magnetic>
+              <Button
+                size="sm"
+                className="hidden sm:inline-flex"
+                onClick={() => handleNavigate("#contact")}
+              >
+                Get in touch
+              </Button>
+            </Magnetic>
             <Button
               variant="ghost"
               size="icon"

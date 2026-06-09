@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, Hand, Keyboard } from "lucide-react";
 
 import { ScrollProgress } from "@/components/scroll-progress";
+import { TiltCard } from "@/components/tilt-card";
 import { type GalleryItem } from "./project-gallery";
 import { PartsDiagram, type DiagramPart } from "./parts-diagram";
 
@@ -115,7 +116,7 @@ export default function ChopstickRingPage() {
     <>
       <ScrollProgress />
 
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/70 backdrop-blur-xl">
+      <header className="fixed inset-x-0 top-0 z-50 bg-background/70 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-6xl items-center px-6 lg:px-8">
           <Link
             href="/#projects"
@@ -140,7 +141,7 @@ export default function ChopstickRingPage() {
               against your fingers in one motion, so you can eat lunch at your desk
               without getting food on your hands or your keyboard.
             </p>
-            <dl className="mt-2 grid grid-cols-3 gap-4 border-t border-border/60 pt-5 text-sm sm:max-w-md">
+            <dl className="mt-2 grid grid-cols-3 gap-4 pt-5 text-sm sm:max-w-md">
               <div className="flex flex-col gap-1">
                 <dt className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">Role</dt>
                 <dd className="font-medium">Design &amp; build</dd>
@@ -198,13 +199,15 @@ export default function ChopstickRingPage() {
             </p>
 
             <div className="mt-10 grid gap-6 sm:grid-cols-2">
-              <div className="flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/50 backdrop-blur-sm">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/projects/chopstick-ring/prototype-typing-mode.jpg"
-                  alt="The Chopstick Ring pivoted down into its eating position"
-                  className="aspect-[16/10] size-full object-cover"
-                />
+              <div className="flex flex-col overflow-hidden rounded-2xl bg-card/70">
+                <TiltCard className="aspect-[16/10]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/projects/chopstick-ring/prototype-typing-mode.jpg"
+                    alt="The Chopstick Ring pivoted down into its eating position"
+                    className="size-full object-cover"
+                  />
+                </TiltCard>
                 <div className="flex flex-col gap-2 p-6">
                   <span className="flex items-center gap-1.5 font-mono text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
                     <Hand className="size-3.5" /> Eating mode
@@ -217,13 +220,15 @@ export default function ChopstickRingPage() {
                 </div>
               </div>
 
-              <div className="flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/50 backdrop-blur-sm">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/projects/chopstick-ring/prototype-eating-mode.jpg"
-                  alt="The Chopstick Ring opened flat into its resting position"
-                  className="aspect-[16/10] size-full object-cover"
-                />
+              <div className="flex flex-col overflow-hidden rounded-2xl bg-card/70">
+                <TiltCard className="aspect-[16/10]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/projects/chopstick-ring/prototype-eating-mode.jpg"
+                    alt="The Chopstick Ring opened flat into its resting position"
+                    className="size-full object-cover"
+                  />
+                </TiltCard>
                 <div className="flex flex-col gap-2 p-6">
                   <span className="flex items-center gap-1.5 font-mono text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
                     <Keyboard className="size-3.5" /> Typing mode
@@ -265,7 +270,7 @@ export default function ChopstickRingPage() {
         {/* Closing */}
         <section className="relative py-16 sm:py-28">
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
-            <div className="flex flex-col items-start gap-3 border-t border-border/60 pt-8 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-col items-start gap-3 border-t border-border/30 pt-8 sm:flex-row sm:items-center sm:justify-between">
               <p className="text-sm text-muted-foreground">
                 Want to see what else I&apos;ve been building?
               </p>

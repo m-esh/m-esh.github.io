@@ -4,6 +4,8 @@ import { LinkedInIcon } from "@/components/icons";
 
 import { profile } from "@/data/profile";
 import { Button } from "@/components/ui/button";
+import { Magnetic } from "@/components/magnetic";
+import { LocalTime } from "@/components/local-time";
 
 const socials = [{ label: "LinkedIn", href: profile.socials.linkedin, icon: LinkedInIcon }];
 
@@ -21,11 +23,13 @@ export function Contact() {
           style={{ animationDelay: "0.1s" }}
           className="animate-fade-up mt-10 flex flex-col items-center gap-6"
         >
-          <Button size="lg" asChild>
-            <a href={`mailto:${profile.email}`}>
-              <Mail /> Email me directly
-            </a>
-          </Button>
+          <Magnetic>
+            <Button size="lg" asChild>
+              <a href={`mailto:${profile.email}`}>
+                <Mail /> Email me directly
+              </a>
+            </Button>
+          </Magnetic>
 
           <div className="flex items-center gap-6">
             {socials.map((link) => (
@@ -45,7 +49,9 @@ export function Contact() {
 
       <footer className="mx-auto mt-16 flex max-w-6xl flex-col items-center gap-2 border-t border-border/30 px-6 pt-8 text-center text-xs text-muted-foreground sm:flex-row sm:justify-between sm:text-left">
         <p>© {new Date().getFullYear()} {profile.name}.</p>
-        <p>Designed &amp; developed in Toronto, Canada.</p>
+        <p className="flex items-center gap-2">
+          Toronto, Canada <span aria-hidden>·</span> <LocalTime />
+        </p>
       </footer>
     </section>
   );

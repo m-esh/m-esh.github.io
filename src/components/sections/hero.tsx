@@ -3,6 +3,7 @@
 import { ArrowUpRight, Mail } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { Magnetic } from "@/components/magnetic";
 import { profile } from "@/data/profile";
 
 export function Hero() {
@@ -37,13 +38,17 @@ export function Hero() {
           style={{ animationDelay: "0.2s" }}
           className="animate-fade-up mt-10 flex flex-wrap items-center gap-3"
         >
-          <Button size="lg" className="group" onClick={() => scrollTo("#projects")}>
-            See my projects
-            <ArrowUpRight className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </Button>
-          <Button size="lg" variant="outline" onClick={() => scrollTo("#contact")}>
-            <Mail /> Contact me
-          </Button>
+          <Magnetic>
+            <Button size="lg" className="group" onClick={() => scrollTo("#projects")}>
+              See my projects
+              <ArrowUpRight className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </Button>
+          </Magnetic>
+          <Magnetic>
+            <Button size="lg" variant="outline" onClick={() => scrollTo("#contact")}>
+              <Mail /> Contact me
+            </Button>
+          </Magnetic>
         </div>
       </div>
 
