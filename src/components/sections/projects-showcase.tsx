@@ -15,7 +15,7 @@ export function ProjectsShowcase() {
           description="A running list, with more to come as each season wraps."
         />
 
-        <ul className="mt-10 flex flex-col border-t border-border/60">
+        <ul className="mt-10 flex flex-col divide-y divide-border/40">
           {projects.map((project, i) => {
             const href = project.links?.[0]?.href;
             const isInternal = href?.startsWith("/");
@@ -23,18 +23,18 @@ export function ProjectsShowcase() {
 
             const row = (
               <>
-                <div className="flex flex-col gap-1.5">
-                  <span className="inline-flex items-center gap-2 text-lg font-medium tracking-tight decoration-1 underline-offset-4 group-hover:underline sm:text-xl">
+                <div className="flex flex-col gap-2">
+                  <span className="inline-flex items-center gap-2 text-lg font-semibold tracking-tight sm:text-xl">
                     {project.title}
                     {href && (
-                      <ArrowIcon className="size-4 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-foreground" />
+                      <ArrowIcon className="size-4 shrink-0 text-muted-foreground transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-foreground" />
                     )}
                   </span>
                   <span className="max-w-xl text-sm leading-relaxed text-muted-foreground">
                     {project.description}
                   </span>
                 </div>
-                <span className="font-mono text-xs text-muted-foreground">{project.year}</span>
+                <span className="shrink-0 font-mono text-xs text-muted-foreground">{project.year}</span>
               </>
             );
 
@@ -44,13 +44,12 @@ export function ProjectsShowcase() {
                 as="li"
                 variant="right"
                 delay={i * 0.07}
-                className="border-b border-border/60"
               >
                 {href ? (
                   isInternal ? (
                     <Link
                       href={href}
-                      className="group flex items-start justify-between gap-6 py-6 transition-colors hover:text-foreground"
+                      className="group -mx-4 flex items-start justify-between gap-6 rounded-xl px-4 py-5 transition-colors hover:bg-card/50"
                     >
                       {row}
                     </Link>
@@ -59,13 +58,13 @@ export function ProjectsShowcase() {
                       href={href}
                       target="_blank"
                       rel="noreferrer noopener"
-                      className="group flex items-start justify-between gap-6 py-6 transition-colors hover:text-foreground"
+                      className="group -mx-4 flex items-start justify-between gap-6 rounded-xl px-4 py-5 transition-colors hover:bg-card/50"
                     >
                       {row}
                     </a>
                   )
                 ) : (
-                  <div className="flex items-start justify-between gap-6 py-6">{row}</div>
+                  <div className="flex items-start justify-between gap-6 py-5">{row}</div>
                 )}
               </Reveal>
             );

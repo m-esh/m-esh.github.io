@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, Music, Settings2, Wrench } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 import { ScrollProgress } from "@/components/scroll-progress";
 
@@ -15,7 +15,7 @@ export default function KalimbinatorPage() {
     <>
       <ScrollProgress />
 
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/70 backdrop-blur-xl">
+      <header className="fixed inset-x-0 top-0 z-50 bg-background/70 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-6xl items-center px-6 lg:px-8">
           <Link
             href="/#projects"
@@ -31,7 +31,9 @@ export default function KalimbinatorPage() {
         {/* Hero */}
         <section className="relative overflow-hidden py-20 sm:py-28">
           <div className="mx-auto flex max-w-3xl flex-col gap-5 px-6 lg:px-8">
-            <span className="font-mono text-xs text-muted-foreground uppercase tracking-[0.18em]">Independent Study · 2026</span>
+            <span className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
+              Independent Study · 2026
+            </span>
             <h1 className="text-balance font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
               Kalimbinator
             </h1>
@@ -41,31 +43,37 @@ export default function KalimbinatorPage() {
               re-tuned kalimba and a drum I designed and 3D printed to pluck out
               the notes in sequence.
             </p>
-            <dl className="mt-2 grid grid-cols-3 gap-4 border-t border-border/60 pt-5 text-sm sm:max-w-md">
+            <dl className="mt-2 grid grid-cols-3 gap-4 pt-5 text-sm sm:max-w-md">
               <div className="flex flex-col gap-1">
-                <dt className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">Role</dt>
+                <dt className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                  Role
+                </dt>
                 <dd className="font-medium">Design, build &amp; tune</dd>
               </div>
               <div className="flex flex-col gap-1">
-                <dt className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">Tools</dt>
+                <dt className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                  Tools
+                </dt>
                 <dd className="font-medium">CAD, 3D printing</dd>
               </div>
               <div className="flex flex-col gap-1">
-                <dt className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">Power</dt>
+                <dt className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                  Power
+                </dt>
                 <dd className="font-medium">Hand-crank</dd>
               </div>
             </dl>
           </div>
         </section>
 
-        {/* Overview */}
+        {/* Overview — dual column */}
         <section className="relative py-16 sm:py-20">
           <div className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-2 lg:px-8">
             <div className="flex flex-col gap-4">
               <h2 className="text-balance font-display text-2xl font-semibold tracking-tight sm:text-3xl">
                 The idea
               </h2>
-              <p className="text-balance leading-relaxed text-muted-foreground">
+              <p className="leading-relaxed text-muted-foreground">
                 I wanted to build a device that could play a piece of music on its
                 own. Rather than reaching for motors and microcontrollers to
                 automate it, I looked to traditional music boxes for inspiration:
@@ -79,7 +87,7 @@ export default function KalimbinatorPage() {
               <h2 className="text-balance font-display text-2xl font-semibold tracking-tight sm:text-3xl">
                 The approach
               </h2>
-              <p className="text-balance leading-relaxed text-muted-foreground">
+              <p className="leading-relaxed text-muted-foreground">
                 I sourced a kalimba sized to fit my printer&apos;s build plate,
                 disassembled it, and reworked its tines to the exact notes the
                 solo needed. From there, the project became a CAD problem: design
@@ -94,11 +102,10 @@ export default function KalimbinatorPage() {
         {/* CAD render + demo */}
         <section className="relative py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
-
             <h2 className="text-balance font-display text-2xl font-semibold tracking-tight sm:text-3xl">
               Six iterations to get the geometry right
             </h2>
-            <p className="mt-3 max-w-2xl text-balance leading-relaxed text-muted-foreground">
+            <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">
               The final assembly is a hand crank turning a drum studded with pegs,
               housed in a shell sized to wrap around the kalimba and hold it at an
               angle. Getting there took six rounds of CAD prototyping, working
@@ -108,7 +115,7 @@ export default function KalimbinatorPage() {
             </p>
 
             <div className="mt-10 grid gap-6 sm:grid-cols-2">
-              <div className="flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/50 backdrop-blur-sm">
+              <div className="flex flex-col overflow-hidden rounded-2xl bg-card/70">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/projects/kalimbinator/cad-render.png"
@@ -128,7 +135,7 @@ export default function KalimbinatorPage() {
                 </div>
               </div>
 
-              <div className="flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/50 backdrop-blur-sm">
+              <div className="flex flex-col overflow-hidden rounded-2xl bg-card/70">
                 <video
                   src="/projects/kalimbinator/demo.mp4"
                   className="aspect-[16/10] size-full object-cover"
@@ -151,64 +158,64 @@ export default function KalimbinatorPage() {
           </div>
         </section>
 
-        {/* Process */}
+        {/* Process — numbered rows instead of icon feature cards */}
         <section className="relative py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
             <h2 className="text-balance font-display text-2xl font-semibold tracking-tight sm:text-3xl">
               How it came together
             </h2>
 
-            <div className="mt-10 grid gap-6 sm:grid-cols-3">
-              <div className="flex flex-col gap-3 rounded-2xl border border-border/60 bg-card/50 p-6 backdrop-blur-sm">
-                <span className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-card text-muted-foreground">
-                  <Music className="size-4.5" />
-                </span>
-                <h3 className="font-medium tracking-tight">Re-tuning the kalimba</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  I disassembled a kalimba sized to fit my printer&apos;s build
-                  plate, transposed the solo from tenor saxophone into concert
-                  pitch, and rebuilt it with only the tines the piece required.
-                  Each one was tuned to match, then arranged from lowest to
-                  highest so the drum could be angled without the pegs needing to
-                  extend too far.
-                </p>
-              </div>
+            <ol className="mt-10 flex flex-col divide-y divide-border/40">
+              <li className="grid gap-4 py-8 sm:grid-cols-[48px_1fr]">
+                <span className="font-mono text-sm font-medium text-muted-foreground">01</span>
+                <div className="flex flex-col gap-2">
+                  <h3 className="font-semibold tracking-tight">Re-tuning the kalimba</h3>
+                  <p className="leading-relaxed text-muted-foreground">
+                    I disassembled a kalimba sized to fit my printer&apos;s build
+                    plate, transposed the solo from tenor saxophone into concert
+                    pitch, and rebuilt it with only the tines the piece required.
+                    Each one was tuned to match, then arranged from lowest to
+                    highest so the drum could be angled without the pegs needing to
+                    extend too far.
+                  </p>
+                </div>
+              </li>
 
-              <div className="flex flex-col gap-3 rounded-2xl border border-border/60 bg-card/50 p-6 backdrop-blur-sm">
-                <span className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-card text-muted-foreground">
-                  <Settings2 className="size-4.5" />
-                </span>
-                <h3 className="font-medium tracking-tight">Modeling the mechanism</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  Working from the sheet music, I mapped each note onto the drum
-                  in CAD and worked through six prototypes before landing on a
-                  model that matched the real kalimba&apos;s geometry and held
-                  every peg at the angle it needed to play cleanly.
-                </p>
-              </div>
+              <li className="grid gap-4 py-8 sm:grid-cols-[48px_1fr]">
+                <span className="font-mono text-sm font-medium text-muted-foreground">02</span>
+                <div className="flex flex-col gap-2">
+                  <h3 className="font-semibold tracking-tight">Modeling the mechanism</h3>
+                  <p className="leading-relaxed text-muted-foreground">
+                    Working from the sheet music, I mapped each note onto the drum
+                    in CAD and worked through six prototypes before landing on a
+                    model that matched the real kalimba&apos;s geometry and held
+                    every peg at the angle it needed to play cleanly.
+                  </p>
+                </div>
+              </li>
 
-              <div className="flex flex-col gap-3 rounded-2xl border border-border/60 bg-card/50 p-6 backdrop-blur-sm">
-                <span className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-card text-muted-foreground">
-                  <Wrench className="size-4.5" />
-                </span>
-                <h3 className="font-medium tracking-tight">Printing &amp; assembly</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  The full housing and drum came out of a single six-hour print,
-                  and the assembly was mostly a matter of gluing the pieces into
-                  place. After test-running it, I noticed a gap between the drum
-                  and the kalimba and printed a separate spacer to close it so the
-                  pegs could reach the tines properly.
-                </p>
-              </div>
-            </div>
+              <li className="grid gap-4 py-8 sm:grid-cols-[48px_1fr]">
+                <span className="font-mono text-sm font-medium text-muted-foreground">03</span>
+                <div className="flex flex-col gap-2">
+                  <h3 className="font-semibold tracking-tight">Printing &amp; assembly</h3>
+                  <p className="leading-relaxed text-muted-foreground">
+                    The full housing and drum came out of a single six-hour print,
+                    and the assembly was mostly a matter of gluing the pieces into
+                    place. After test-running it, I noticed a gap between the drum
+                    and the kalimba and printed a separate spacer to close it so
+                    the pegs could reach the tines properly.
+                  </p>
+                </div>
+              </li>
+            </ol>
           </div>
         </section>
 
         {/* Closing */}
         <section className="relative py-16 sm:py-28">
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
-            <div className="max-w-2xl border-t border-border/60 pt-8">
-              <p className="text-balance leading-relaxed text-muted-foreground">
+            <div className="max-w-2xl pt-8">
+              <p className="leading-relaxed text-muted-foreground">
                 The Kalimbinator doesn&apos;t play perfectly, but it plays, and
                 that was the point: a chance to take two things I care about,
                 engineering and music, and find a real connection between them.
@@ -218,7 +225,7 @@ export default function KalimbinatorPage() {
                 come to life.
               </p>
             </div>
-            <div className="mt-8 flex flex-col items-start gap-3 border-t border-border/60 pt-8 sm:flex-row sm:items-center sm:justify-between">
+            <div className="mt-8 flex flex-col items-start gap-3 border-t border-border/30 pt-8 sm:flex-row sm:items-center sm:justify-between">
               <p className="text-sm text-muted-foreground">
                 Want to see what else I&apos;ve been building?
               </p>

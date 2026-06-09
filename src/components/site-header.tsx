@@ -56,7 +56,7 @@ export function SiteHeader() {
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             aria-label="Back to top"
-            className="font-display text-lg font-semibold tracking-tight transition-colors hover:text-muted-foreground"
+            className="font-display text-lg font-semibold tracking-tight"
           >
             MS
           </button>

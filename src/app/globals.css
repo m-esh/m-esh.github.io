@@ -30,7 +30,7 @@
 .dark {
   --background: oklch(0.12 0.01 280);
   --foreground: oklch(0.96 0.015 230);
-  --card: oklch(0.21 0.045 280);
+  --card: oklch(0.20 0.015 265);
   --card-foreground: oklch(0.96 0.015 230);
   --popover: oklch(0.21 0.045 280);
   --popover-foreground: oklch(0.96 0.015 230);
@@ -80,6 +80,20 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-chakra-petch);
+
+  /* Modular type scale — 1.25× (major third) ratio */
+  --text-2xs: 0.64rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-md: 1.125rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 1.875rem;
+  --text-3xl: 2.375rem;
+  --text-4xl: 3rem;
+  --text-5xl: 3.75rem;
+  --text-6xl: 4.75rem;
 
   --animate-fade-up: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 

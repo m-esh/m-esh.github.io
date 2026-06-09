@@ -19,7 +19,7 @@ const slide: Variants = {
 
 function ExperienceCard({ item }: { item: ExperienceItem }) {
   return (
-    <div className="rounded-2xl border border-border/60 bg-card/50 p-6 backdrop-blur-sm sm:p-8">
+    <div className="rounded-2xl bg-card/70 p-6 sm:p-8">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <h3 className="text-xl font-semibold tracking-tight sm:text-2xl">{item.role}</h3>
@@ -112,7 +112,7 @@ export function Experience() {
               type="button"
               onClick={() => goTo(index - 1, -1)}
               aria-label="Previous experience"
-              className="hidden size-10 shrink-0 items-center justify-center rounded-full border border-border/60 bg-card/60 text-muted-foreground transition-colors hover:border-border hover:text-foreground sm:inline-flex"
+              className="hidden size-10 shrink-0 items-center justify-center rounded-full bg-card/70 text-muted-foreground transition-colors hover:bg-card hover:text-foreground sm:inline-flex"
             >
               <ChevronLeft className="size-4" />
             </button>
@@ -127,7 +127,7 @@ export function Experience() {
                   aria-current={i === index}
                   className={cn(
                     "h-1.5 rounded-full transition-all duration-300",
-                    i === index ? "w-6 bg-foreground" : "w-1.5 bg-border hover:bg-muted-foreground/50"
+                    i === index ? "w-6 bg-foreground" : "w-1.5 bg-muted-foreground/30 hover:bg-muted-foreground/60"
                   )}
                 />
               ))}
@@ -137,7 +137,7 @@ export function Experience() {
               type="button"
               onClick={() => goTo(index + 1, 1)}
               aria-label="Next experience"
-              className="hidden size-10 shrink-0 items-center justify-center rounded-full border border-border/60 bg-card/60 text-muted-foreground transition-colors hover:border-border hover:text-foreground sm:inline-flex"
+              className="hidden size-10 shrink-0 items-center justify-center rounded-full bg-card/70 text-muted-foreground transition-colors hover:bg-card hover:text-foreground sm:inline-flex"
             >
               <ChevronRight className="size-4" />
             </button>
