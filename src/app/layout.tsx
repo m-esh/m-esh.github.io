@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Chakra_Petch } from "next/font/google";
 
 import { profile } from "@/data/profile";
 import { IntroScreen } from "@/components/intro-screen";
+import { MotionProvider } from "@/components/motion-provider";
 
 import "./globals.css";
 
@@ -44,10 +45,12 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${chakraPetch.variable} dark h-full`}
     >
       <body className="min-h-full flex flex-col antialiased selection:bg-primary selection:text-primary-foreground">
-        {/* EXPERIMENTAL: revert by deleting this div + .noise-overlay in globals.css */}
-        <div aria-hidden className="noise-overlay" />
-        <IntroScreen />
-        {children}
+        <MotionProvider>
+          {/* EXPERIMENTAL: revert by deleting this div + .noise-overlay in globals.css */}
+          <div aria-hidden className="noise-overlay" />
+          <IntroScreen />
+          {children}
+        </MotionProvider>
       </body>
     </html>
   );

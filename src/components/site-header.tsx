@@ -53,6 +53,14 @@ export function SiteHeader() {
         )}
       >
         <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 lg:px-8">
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            aria-label="Back to top"
+            className="font-display text-lg font-semibold tracking-tight transition-colors hover:text-muted-foreground"
+          >
+            MS
+          </button>
+
           <div className="hidden items-center gap-1 md:flex">
             {NAV_LINKS.map((link) => (
               <button

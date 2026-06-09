@@ -1,11 +1,9 @@
 import { cn } from "@/lib/utils";
 
 export function SectionHeading({
-  eyebrow: _eyebrow,
   title,
   description,
   align = "left",
-  accent: _accent,
   className,
 }: {
   eyebrow?: string;

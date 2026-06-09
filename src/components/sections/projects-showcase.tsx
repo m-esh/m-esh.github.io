@@ -13,7 +13,6 @@ export function ProjectsShowcase() {
           eyebrow="Projects"
           title="Things I've built"
           description="A running list, with more to come as each season wraps."
-          accent="purple"
         />
 
         <ul className="mt-10 flex flex-col border-t border-border/60">
@@ -25,7 +24,7 @@ export function ProjectsShowcase() {
             const row = (
               <>
                 <div className="flex flex-col gap-1.5">
-                  <span className="inline-flex items-center gap-2 text-lg font-medium tracking-tight sm:text-xl">
+                  <span className="inline-flex items-center gap-2 text-lg font-medium tracking-tight decoration-1 underline-offset-4 group-hover:underline sm:text-xl">
                     {project.title}
                     {href && (
                       <ArrowIcon className="size-4 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-foreground" />

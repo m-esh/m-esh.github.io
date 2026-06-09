@@ -134,8 +134,7 @@ export default function KalimbinatorPage() {
                   className="aspect-[16/10] size-full object-cover"
                   controls
                   playsInline
-                  muted
-                  loop
+                  preload="metadata"
                 />
                 <div className="flex flex-col gap-1 p-6">
                   <span className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">

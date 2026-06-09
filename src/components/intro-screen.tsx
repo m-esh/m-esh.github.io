@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { motion, AnimatePresence, type Variants } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion, type Variants } from "framer-motion";
 
 import { profile } from "@/data/profile";
 
@@ -31,19 +31,26 @@ const container: Variants = {
 };
 
 export function IntroScreen() {
+  const reduceMotion = useReducedMotion();
   const [visible, setVisible] = React.useState(true);
 
   React.useEffect(() => {
+    if (reduceMotion) return;
     document.body.style.overflow = "hidden";
     const timer = setTimeout(() => setVisible(false), VISIBLE_MS);
-    return () => clearTimeout(timer);
-  }, []);
+    return () => {
+      clearTimeout(timer);
+      document.body.style.overflow = "";
+    };
+  }, [reduceMotion]);
 
   React.useEffect(() => {
     if (!visible) {
       document.body.style.overflow = "";
     }
   }, [visible]);
+
+  if (reduceMotion) return null;
 
   return (
     <AnimatePresence>

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Briefcase, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
+import { ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 import { motion, AnimatePresence, type PanInfo, type Variants } from "framer-motion";
 
 import { experience, type ExperienceItem } from "@/data/profile";
@@ -21,14 +21,9 @@ function ExperienceCard({ item }: { item: ExperienceItem }) {
   return (
     <div className="rounded-2xl border border-border/60 bg-card/50 p-6 backdrop-blur-sm sm:p-8">
       <div className="flex flex-wrap items-start justify-between gap-4">
-        <div className="flex items-start gap-3.5">
-          <span className="flex size-9 shrink-0 items-center justify-center rounded-full border border-border bg-card text-muted-foreground sm:size-11">
-            <Briefcase className="size-4 sm:size-5" />
-          </span>
-          <div>
-            <h3 className="text-xl font-semibold tracking-tight sm:text-2xl">{item.role}</h3>
-            <p className="mt-1 text-sm font-medium text-muted-foreground">{item.org}</p>
-          </div>
+        <div>
+          <h3 className="text-xl font-semibold tracking-tight sm:text-2xl">{item.role}</h3>
+          <p className="mt-1 text-sm font-medium text-muted-foreground">{item.org}</p>
         </div>
         <div className="flex flex-col items-start gap-1 text-sm text-muted-foreground sm:items-end">
           <span className="font-mono text-xs tracking-wide">{item.period}</span>
@@ -86,8 +81,7 @@ export function Experience() {
         <SectionHeading
           eyebrow="Experience"
           title="Where I've worked"
-          description="A few different worlds, robotics, manufacturing, lifeguarding, school life, that all come down to the same thing: showing up and getting it right. Swipe through to see them all."
-          accent="yellow"
+          description="Robotics, manufacturing, lifeguarding, school life: different worlds that all come down to showing up and getting it right. Swipe through to see them all."
         />
 
         <div className="mt-12">
