@@ -145,3 +145,17 @@
     text-wrap: balance;
   }
 }
+
+.cube-face {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 180px;
+  height: 180px;
+  border: 1px solid oklch(0.78 0.2 95 / 0.45);
+  background-color: oklch(0.78 0.2 95 / 0.04);
+  background-image:
+    repeating-linear-gradient(to right, oklch(0.78 0.2 95 / 0.14) 0 1px, transparent 1px 45px),
+    repeating-linear-gradient(to bottom, oklch(0.78 0.2 95 / 0.14) 0 1px, transparent 1px 45px);
+  backface-visibility: hidden;
+}
