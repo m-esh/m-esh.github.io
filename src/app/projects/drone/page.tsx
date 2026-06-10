@@ -222,54 +222,32 @@ export default function DronePage() {
               Getting it off the bench
             </h2>
             <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">
-              Before anything flew, the glove&apos;s output had to look like a
-              real radio to the flight controller. That meant hours in
-              Betaflight Configurator mapping channels and watching the receiver
-              tab respond to finger curls, then live-debugging sensor readings
-              over the serial monitor until the calibration felt right.
+              Before anything flew, the glove&apos;s signals had to look like a
+              normal radio link to the flight controller. That meant
+              calibrating each flex sensor&apos;s range in the firmware, then
+              watching the receiver tab in Betaflight Configurator move as
+              fingers curled, until every channel tracked the way a real
+              transmitter&apos;s would.
             </p>
 
-            <div className="mt-10 grid gap-6 sm:grid-cols-2">
-              <div className="flex flex-col overflow-hidden rounded-2xl bg-card/70">
-                <TiltCard className="aspect-[16/10]">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="/projects/drone/esp32-mount.jpg"
-                    alt="An ESP32 development board seated on its 3D-printed mounting plate"
-                    className="size-full object-cover"
-                  />
-                </TiltCard>
-                <div className="flex flex-col gap-1 p-6">
-                  <span className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
-                    The radio link
-                  </span>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    The drone-side ESP32 on its 3D-printed mounting plate. It
-                    catches the glove&apos;s wireless packets and hands them to
-                    the flight controller as channel data.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex flex-col overflow-hidden rounded-2xl bg-card/70">
-                <video
-                  src="/projects/drone/betaflight-tuning.mp4"
-                  className="aspect-[16/10] w-full bg-black object-contain"
-                  controls
-                  muted
-                  playsInline
-                  preload="metadata"
-                />
-                <div className="flex flex-col gap-1 p-6">
-                  <span className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
-                    Betaflight setup
-                  </span>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    Mapping the glove&apos;s channels in Betaflight Configurator,
-                    the same receiver setup any conventional transmitter would
-                    get, except the sticks are fingers.
-                  </p>
-                </div>
+            <div className="mt-10 flex flex-col overflow-hidden rounded-2xl bg-card/70 sm:mx-auto sm:max-w-2xl">
+              <video
+                src="/projects/drone/betaflight-tuning.mp4"
+                className="aspect-[16/10] w-full bg-black object-contain"
+                controls
+                muted
+                playsInline
+                preload="metadata"
+              />
+              <div className="flex flex-col gap-1 p-6">
+                <span className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                  Betaflight setup
+                </span>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  The receiver tab in Betaflight Configurator, with each bar
+                  moving as a finger curls, the same channel mapping any new
+                  transmitter goes through.
+                </p>
               </div>
             </div>
 
