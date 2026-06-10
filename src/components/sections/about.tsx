@@ -30,17 +30,6 @@ export function About() {
                 <li className="text-sm leading-snug">Grade 11 · Markham, ON</li>
               </ul>
             </div>
-
-            <div className="rounded-2xl bg-card/70 p-5">
-              <p className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
-                What I work with
-              </p>
-              <ul className="mt-3 flex flex-col gap-2.5">
-                <li className="text-sm leading-snug">Fusion 360 / CAD</li>
-                <li className="text-sm leading-snug">3D printing & physical prototyping</li>
-                <li className="text-sm leading-snug">Competition robotics (FRC, VEX)</li>
-              </ul>
-            </div>
           </div>
         </div>
       </div>

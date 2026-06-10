@@ -79,7 +79,7 @@
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-display: var(--font-chakra-petch);
+  --font-display: var(--font-bricolage);
 
   /* Modular type scale — 1.25× (major third) ratio */
   --text-2xs: 0.64rem;
@@ -143,15 +143,5 @@
 @layer utilities {
   .text-balance {
     text-wrap: balance;
-  }
-  /* EXPERIMENTAL: subtle film-grain overlay, revert by deleting this rule and its usage in layout.tsx */
-  .noise-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    opacity: 0.05;
-    mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 }

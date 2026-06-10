@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Schibsted_Grotesk, Geist_Mono, Chakra_Petch } from "next/font/google";
+import { Schibsted_Grotesk, Geist_Mono, Bricolage_Grotesque } from "next/font/google";
 
 import { profile } from "@/data/profile";
 import { IntroScreen } from "@/components/intro-screen";
@@ -18,9 +18,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const chakraPetch = Chakra_Petch({
-  variable: "--font-chakra-petch",
-  weight: ["500", "600", "700"],
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
   subsets: ["latin"],
 });
 
@@ -43,12 +42,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${schibsted.variable} ${geistMono.variable} ${chakraPetch.variable} dark h-full`}
+      className={`${schibsted.variable} ${geistMono.variable} ${bricolage.variable} dark h-full`}
     >
       <body className="min-h-full flex flex-col antialiased selection:bg-primary selection:text-primary-foreground">
         <MotionProvider>
-          {/* EXPERIMENTAL: revert by deleting this div + .noise-overlay in globals.css */}
-          <div aria-hidden className="noise-overlay" />
           <IntroScreen />
           {children}
         </MotionProvider>
