@@ -15,6 +15,8 @@ const EXIT_DURATION = 0.45;
 const VISIBLE_MS =
   (START_DELAY + (NAME.length - 1) * STAGGER + SETTLE_DURATION + HOLD) * 1000;
 
+const SEEN_KEY = "intro-seen";
+
 function pieceOffset(index: number) {
   return {
     x: ((index * 47) % 84) - 42,
@@ -34,15 +36,26 @@ export function IntroScreen() {
   const reduceMotion = useReducedMotion();
   const [visible, setVisible] = React.useState(true);
 
+  // Skip the intro on repeat visits within the same tab session. sessionStorage
+  // can't be read during SSR, so the overlay must render first and be hidden
+  // here, before paint, to avoid both a hydration mismatch and a visible flash.
+  React.useLayoutEffect(() => {
+    if (sessionStorage.getItem(SEEN_KEY)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setVisible(false);
+    }
+  }, []);
+
   React.useEffect(() => {
-    if (reduceMotion) return;
+    if (reduceMotion || !visible) return;
+    sessionStorage.setItem(SEEN_KEY, "1");
     document.body.style.overflow = "hidden";
     const timer = setTimeout(() => setVisible(false), VISIBLE_MS);
     return () => {
       clearTimeout(timer);
       document.body.style.overflow = "";
     };
-  }, [reduceMotion]);
+  }, [reduceMotion, visible]);
 
   React.useEffect(() => {
     if (!visible) {

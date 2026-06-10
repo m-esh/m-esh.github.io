@@ -25,7 +25,7 @@ Strategy: **Restrained.** One yellow accent ≤10% of surface; everything else n
 
 | Slot | Family | Usage |
 |---|---|---|
-| Display (`font-display`) | Chakra Petch 500/600/700 | h1/h2 headings, hero name, intro screen |
+| Display (`font-display`) | Bricolage Grotesque | h1/h2 headings, hero name, intro screen |
 | Body (`font-sans`) | Schibsted Grotesk | Everything else |
 | Mono (`font-mono`) | Geist Mono | Dates, years, small meta labels |
 
@@ -33,15 +33,14 @@ Hero name: fluid `clamp(2.25rem, 9vw, 4.5rem)`, tracking-tight, leading-[1.05]. 
 
 ## Components
 
-- **SiteHeader**: fixed, transparent until 24px scroll then blurred bg + shadow. Scrollspy nav: an animated pill (`layoutId`) slides between items tracking the current section (IntersectionObserver, mid-viewport band).
-- **IntroScreen**: full-screen one-shot, letters of the name tumble in (framer-motion stagger), then fades; locks scroll while visible.
+- **SiteHeader**: fixed, transparent until 24px scroll then near-opaque bg + shadow (no `backdrop-blur` — too costly on a scroll-pinned element). Scrollspy nav: an animated pill (`layoutId`) slides between items tracking the current section (IntersectionObserver, mid-viewport band).
+- **IntroScreen**: full-screen one-shot, letters of the name tumble in (framer-motion stagger), then fades; locks scroll while visible. Plays once per tab session (`sessionStorage` flag, hidden pre-paint via `useLayoutEffect` on repeat visits).
 - **ScrollProgress**: 2px primary bar, springed `scaleX`.
 - **SectionHeading**: plain h2 + optional description. No eyebrow, no gradient tip.
 - **Experience carousel**: drag/swipe deck (framer-motion), arrows hidden on mobile, dot pagination.
-- **Project rows**: borderless list with `divide-y` hairlines, bg-tint hover, and a cursor-follow artifact preview (spring-tracked CAD render, `lg:` and pointer devices only).
-- **PlayableKalimba**: Web Audio synthesized tines on the Kalimbinator page; click to pluck (sine fundamental + decaying inharmonic partial), sequenced "Play the phrase" button, CSS `tine` wobble keyframes.
+- **Project rows**: borderless list with `divide-y` hairlines and bg-tint hover. (The cursor-follow CAD preview was removed: per-mousemove spring tracking was a lag source.)
 - **Buttons**: rounded-full; primary = solid yellow; outline = 1px border, hover bg-accent.
-- **Project case-study pages**: fixed back-header, hero with meta `dl`, borderless image/video cards on `bg-card/70`, gallery lightbox with zoom, interactive parts diagram (SVG callouts).
+- **Project case-study pages**: fixed `CaseStudyNav` header (back link + section scrollspy pills), hero with meta `dl`, borderless image/video cards on `bg-card/70` with `TiltCard` 3D hover, gallery lightbox with zoom, interactive parts diagram (SVG callouts), `CaseStudyFooter` with a next-project link.
 
 Content is never visibility-gated on scroll reveals: sections render visible by default (the old `Reveal` whileInView wrapper shipped blank sections to headless renderers and was removed).
 

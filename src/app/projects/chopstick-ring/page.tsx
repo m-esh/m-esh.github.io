@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowLeft, Hand, Keyboard } from "lucide-react";
+import { Hand, Keyboard } from "lucide-react";
 
 import { ScrollProgress } from "@/components/scroll-progress";
 import { TiltCard } from "@/components/tilt-card";
+import { CaseStudyNav } from "@/components/case-study-nav";
+import { CaseStudyFooter } from "@/components/case-study-footer";
 import { type GalleryItem } from "./project-gallery";
 import { PartsDiagram, type DiagramPart } from "./parts-diagram";
+
+const sections = [
+  { id: "overview", label: "Overview" },
+  { id: "how-it-works", label: "How it works" },
+  { id: "anatomy", label: "Anatomy" },
+];
 
 export const metadata: Metadata = {
   title: "Chopstick Ring · Mehrdad Shariatmadari",
@@ -116,17 +123,7 @@ export default function ChopstickRingPage() {
     <>
       <ScrollProgress />
 
-      <header className="fixed inset-x-0 top-0 z-50 bg-background/70 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-6xl items-center px-6 lg:px-8">
-          <Link
-            href="/#projects"
-            className="group inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-1" />
-            Back to portfolio
-          </Link>
-        </div>
-      </header>
+      <CaseStudyNav sections={sections} />
 
       <main className="flex-1 pt-16">
         {/* Hero */}
@@ -159,7 +156,7 @@ export default function ChopstickRingPage() {
         </section>
 
         {/* Overview */}
-        <section className="relative py-16 sm:py-20">
+        <section id="overview" className="relative scroll-mt-16 py-16 sm:py-20">
           <div className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-2 lg:px-8">
             <div className="flex flex-col gap-4">
               <h2 className="text-balance font-display text-2xl font-semibold tracking-tight sm:text-3xl">
@@ -188,7 +185,7 @@ export default function ChopstickRingPage() {
         </section>
 
         {/* How it works */}
-        <section className="relative py-16 sm:py-20">
+        <section id="how-it-works" className="relative scroll-mt-16 py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
             <h2 className="text-balance font-display text-2xl font-semibold tracking-tight sm:text-3xl">
               Two positions, one hinge
@@ -245,7 +242,7 @@ export default function ChopstickRingPage() {
         </section>
 
         {/* Anatomy / parts diagram */}
-        <section className="relative py-16 sm:py-20">
+        <section id="anatomy" className="relative scroll-mt-16 py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
             <span className="font-mono text-xs text-muted-foreground uppercase tracking-[0.18em]">Anatomy</span>
             <h2 className="mt-3 text-balance font-display text-2xl font-semibold tracking-tight sm:text-3xl">
@@ -270,18 +267,7 @@ export default function ChopstickRingPage() {
         {/* Closing */}
         <section className="relative py-16 sm:py-28">
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
-            <div className="flex flex-col items-start gap-3 border-t border-border/30 pt-8 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-sm text-muted-foreground">
-                Want to see what else I&apos;ve been building?
-              </p>
-              <Link
-                href="/#projects"
-                className="group inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-              >
-                <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-1" />
-                Back to all projects
-              </Link>
-            </div>
+            <CaseStudyFooter next={{ href: "/projects/kalimbinator", label: "Kalimbinator" }} />
           </div>
         </section>
       </main>

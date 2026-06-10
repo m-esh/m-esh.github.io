@@ -129,6 +129,12 @@ export type ProjectItem = {
 
 export const projects: ProjectItem[] = [
   {
+    title: "Custom Drone",
+    description:
+      "A drone designed and built from the ground up with a friend — frame, propulsion, and flight tuning, taken from parts list to first flight.",
+    year: "2026",
+  },
+  {
     title: "Kalimbinator",
     description:
       "A hand-crank music box, built around a re-tuned kalimba and a custom 3D-printed drum, that plays the opening of the tenor sax solo from Omar Thomas' Come Sunday.",

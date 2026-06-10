@@ -1,9 +1,15 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 
 import { ScrollProgress } from "@/components/scroll-progress";
 import { TiltCard } from "@/components/tilt-card";
+import { CaseStudyNav } from "@/components/case-study-nav";
+import { CaseStudyFooter } from "@/components/case-study-footer";
+
+const sections = [
+  { id: "overview", label: "Overview" },
+  { id: "build", label: "The build" },
+  { id: "process", label: "Process" },
+];
 
 export const metadata: Metadata = {
   title: "Kalimbinator · Mehrdad Shariatmadari",
@@ -16,17 +22,7 @@ export default function KalimbinatorPage() {
     <>
       <ScrollProgress />
 
-      <header className="fixed inset-x-0 top-0 z-50 bg-background/70 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-6xl items-center px-6 lg:px-8">
-          <Link
-            href="/#projects"
-            className="group inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-1" />
-            Back to portfolio
-          </Link>
-        </div>
-      </header>
+      <CaseStudyNav sections={sections} />
 
       <main className="flex-1 pt-16">
         {/* Hero */}
@@ -68,7 +64,7 @@ export default function KalimbinatorPage() {
         </section>
 
         {/* Overview — dual column */}
-        <section className="relative py-16 sm:py-20">
+        <section id="overview" className="relative scroll-mt-16 py-16 sm:py-20">
           <div className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-2 lg:px-8">
             <div className="flex flex-col gap-4">
               <h2 className="text-balance font-display text-2xl font-semibold tracking-tight sm:text-3xl">
@@ -101,7 +97,7 @@ export default function KalimbinatorPage() {
         </section>
 
         {/* CAD render + demo */}
-        <section className="relative py-16 sm:py-20">
+        <section id="build" className="relative scroll-mt-16 py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
             <h2 className="text-balance font-display text-2xl font-semibold tracking-tight sm:text-3xl">
               Six iterations to get the geometry right
@@ -162,7 +158,7 @@ export default function KalimbinatorPage() {
         </section>
 
         {/* Process — numbered rows instead of icon feature cards */}
-        <section className="relative py-16 sm:py-20">
+        <section id="process" className="relative scroll-mt-16 py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
             <h2 className="text-balance font-display text-2xl font-semibold tracking-tight sm:text-3xl">
               How it came together
@@ -228,17 +224,8 @@ export default function KalimbinatorPage() {
                 come to life.
               </p>
             </div>
-            <div className="mt-8 flex flex-col items-start gap-3 border-t border-border/30 pt-8 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-sm text-muted-foreground">
-                Want to see what else I&apos;ve been building?
-              </p>
-              <Link
-                href="/#projects"
-                className="group inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-              >
-                <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-1" />
-                Back to all projects
-              </Link>
+            <div className="mt-8">
+              <CaseStudyFooter next={{ href: "/projects/chopstick-ring", label: "Chopstick Ring" }} />
             </div>
           </div>
         </section>

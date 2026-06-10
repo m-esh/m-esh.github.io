@@ -140,7 +140,7 @@ export function Lightbox({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.25 }}
-      className="fixed inset-0 z-[100] flex flex-col bg-background/90 backdrop-blur-xl"
+      className="fixed inset-0 z-[100] flex flex-col bg-background/95"
       onClick={onClose}
     >
       <div className="flex items-center justify-between gap-4 px-6 py-4 sm:px-8">

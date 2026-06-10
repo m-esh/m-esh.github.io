@@ -64,14 +64,14 @@ export function SiteHeader() {
         <div
           onClick={() => setOpen(false)}
           aria-hidden
-          className="fixed inset-0 z-40 bg-background/60 backdrop-blur-sm md:hidden"
+          className="fixed inset-0 z-40 bg-background/70 md:hidden"
         />
       )}
       <header
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-all duration-500",
           scrolled
-            ? "bg-background/85 backdrop-blur-sm shadow-[0_8px_30px_-12px_rgba(0,0,0,0.3)]"
+            ? "bg-background/95 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.3)]"
             : "bg-transparent"
         )}
       >
@@ -139,7 +139,7 @@ export function SiteHeader() {
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            className="bg-background/95 backdrop-blur-xl md:hidden"
+            className="bg-background md:hidden"
           >
             <div className="flex flex-col gap-1 px-6 py-4">
               {NAV_LINKS.map((link) => (
