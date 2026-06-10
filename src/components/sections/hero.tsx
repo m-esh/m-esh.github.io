@@ -56,7 +56,7 @@ export function Hero() {
 
         <div
           style={{ animationDelay: "0.3s" }}
-          className="animate-fade-up hidden lg:block"
+          className="animate-fade-up mt-4 flex justify-center lg:mt-0 lg:block"
         >
           <HeroObject />
         </div>
