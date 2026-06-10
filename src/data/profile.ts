@@ -129,10 +129,11 @@ export type ProjectItem = {
 
 export const projects: ProjectItem[] = [
   {
-    title: "Custom Drone",
+    title: "Gesture-Controlled Drone",
     description:
-      "A drone designed and built from the ground up with a friend — frame, propulsion, and flight tuning, taken from parts list to first flight.",
+      "A 3D-printed ducted drone flown with a flex-sensor glove — finger curls become stick inputs, streamed from an ESP32 on your hand to a Betaflight flight controller. Built with a friend.",
     year: "2026",
+    links: [{ label: "View case study", href: "/projects/drone" }],
   },
   {
     title: "Kalimbinator",
