@@ -5,6 +5,7 @@ import { ArrowUpRight, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Magnetic } from "@/components/magnetic";
 import { HeroObject } from "@/components/hero-object";
+import { TextScramble } from "@/components/text-scramble";
 import { profile } from "@/data/profile";
 
 export function Hero() {
@@ -22,12 +23,12 @@ export function Hero() {
             {profile.location} · {profile.tagline}
           </p>
 
-          <h1
-            style={{ animationDelay: "0.05s" }}
+          <TextScramble
+            as="h1"
+            text={profile.name}
+            style={{ animationDelay: "0.05s" } as React.CSSProperties}
             className="animate-fade-up mt-5 max-w-4xl text-balance font-display text-[clamp(2.25rem,9vw,4.5rem)] font-semibold leading-[1.05] tracking-tight"
-          >
-            {profile.name}
-          </h1>
+          />
 
           <p
             style={{ animationDelay: "0.12s" }}

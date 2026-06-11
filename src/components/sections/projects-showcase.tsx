@@ -5,6 +5,7 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 import { projects } from "@/data/profile";
 import { SectionHeading } from "@/components/section-heading";
+import { TextScramble } from "@/components/text-scramble";
 
 export function ProjectsShowcase() {
   return (
@@ -25,7 +26,7 @@ export function ProjectsShowcase() {
               <>
                 <div className="flex flex-col gap-2">
                   <span className="inline-flex items-center gap-2 text-lg font-semibold tracking-tight sm:text-xl">
-                    {project.title}
+                    <TextScramble text={project.title} trigger="hover" />
                     {href && (
                       <ArrowIcon className="size-4 shrink-0 text-muted-foreground transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-foreground" />
                     )}
