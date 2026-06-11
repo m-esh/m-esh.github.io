@@ -20,17 +20,16 @@ export function TextScramble({
 }) {
   const [display, setDisplay] = React.useState(text);
   const reduceMotion = useReducedMotion();
-  const frame = React.useRef(0);
   const raf = React.useRef<number | null>(null);
 
   const scramble = React.useCallback(() => {
     if (reduceMotion) return;
     if (raf.current) cancelAnimationFrame(raf.current);
-    frame.current = 0;
-    const totalFrames = 18;
+    const duration = 650; // ms, wall-clock so it's frame-rate independent
+    const start = performance.now();
 
-    const tick = () => {
-      const progress = frame.current / totalFrames;
+    const tick = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
       const revealCount = Math.floor(progress * text.length);
 
       setDisplay(
@@ -44,15 +43,14 @@ export function TextScramble({
           .join("")
       );
 
-      frame.current += 1;
-      if (frame.current <= totalFrames) {
+      if (progress < 1) {
         raf.current = requestAnimationFrame(tick);
       } else {
         setDisplay(text);
       }
     };
 
-    tick();
+    raf.current = requestAnimationFrame(tick);
   }, [text, reduceMotion]);
 
   React.useEffect(() => {
