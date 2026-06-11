@@ -45,7 +45,7 @@ export function CursorSpotlight() {
       className="pointer-events-none fixed inset-0 z-30 opacity-0 transition-opacity duration-500"
       style={{
         background:
-          "radial-gradient(600px circle at var(--spot-x, 50%) var(--spot-y, 50%), oklch(0.78 0.2 95 / 0.07), transparent 70%)",
+          "radial-gradient(380px circle at var(--spot-x, 50%) var(--spot-y, 50%), oklch(0.78 0.2 95 / 0.035), transparent 72%)",
       }}
     />
   );

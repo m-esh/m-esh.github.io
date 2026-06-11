@@ -121,7 +121,9 @@ function OrbitNode({
 export function OrbitalTimeline() {
   const reduceMotion = useReducedMotion();
   const [active, setActive] = React.useState(0);
-  const [paused, setPaused] = React.useState(false);
+  const [hovered, setHovered] = React.useState(false);
+  const [inView, setInView] = React.useState(false);
+  const orbitRef = React.useRef<HTMLDivElement>(null);
   const angle = useMotionValue(0);
   const controls = React.useRef<ReturnType<typeof animate> | null>(null);
 
@@ -135,11 +137,22 @@ export function OrbitalTimeline() {
     return () => controls.current?.stop();
   }, [reduceMotion, angle]);
 
+  // Only spin while the orbit is on screen and not being hovered.
+  React.useEffect(() => {
+    const el = orbitRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), {
+      threshold: 0.1,
+    });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   React.useEffect(() => {
     if (reduceMotion) return;
-    if (paused) controls.current?.pause();
-    else controls.current?.play();
-  }, [paused, reduceMotion]);
+    if (inView && !hovered) controls.current?.play();
+    else controls.current?.pause();
+  }, [inView, hovered, reduceMotion]);
 
   const item = experience[active];
   const total = experience.length;
@@ -148,9 +161,10 @@ export function OrbitalTimeline() {
     <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center">
       {/* Orbit */}
       <div
+        ref={orbitRef}
         className="relative mx-auto aspect-square w-full max-w-[460px]"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
       >
         {/* orbit rings */}
         <div className="pointer-events-none absolute inset-[8%] rounded-full border border-border/40" />

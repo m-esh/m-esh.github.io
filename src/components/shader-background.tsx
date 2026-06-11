@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useReducedMotion } from "framer-motion";
 import * as THREE from "three";
 
@@ -13,14 +13,14 @@ const vertexShader = /* glsl */ `
   }
 `;
 
+// Cheap value noise + 3-octave fbm with a single domain-warp.
 const fragmentShader = /* glsl */ `
-  precision highp float;
+  precision mediump float;
   varying vec2 vUv;
   uniform float uTime;
   uniform vec2 uResolution;
   uniform vec2 uPointer;
 
-  // Simplex-ish value noise
   vec2 hash(vec2 p) {
     p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
     return -1.0 + 2.0 * fract(sin(p) * 43758.5453123);
@@ -43,7 +43,7 @@ const fragmentShader = /* glsl */ `
   float fbm(vec2 p) {
     float v = 0.0;
     float amp = 0.5;
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 3; i++) {
       v += amp * noise(p);
       p *= 2.0;
       amp *= 0.5;
@@ -57,23 +57,20 @@ const fragmentShader = /* glsl */ `
     vec2 p = (uv - 0.5) * aspect;
 
     float t = uTime * 0.04;
-    vec2 q = vec2(fbm(p + t), fbm(p - t + 3.1));
-    vec2 r = vec2(fbm(p + q + vec2(1.7, 9.2) + 0.15 * t), fbm(p + q + vec2(8.3, 2.8) - 0.12 * t));
-    float f = fbm(p + r);
+    vec2 q = vec2(fbm(p + vec2(0.0, t)), fbm(p + vec2(5.2, 1.3) - t));
+    float f = fbm(p + 0.6 * q);
 
-    // Pointer-driven warm glow
     vec2 mp = (uPointer - 0.5) * aspect;
     float glow = 0.10 / (length(p - mp) + 0.18);
 
-    vec3 base = vec3(0.07, 0.065, 0.085);          // deep indigo-black
-    vec3 mid = vec3(0.12, 0.10, 0.16);             // muted violet
-    vec3 gold = vec3(0.85, 0.66, 0.20);            // accent #e8c450-ish
+    vec3 base = vec3(0.07, 0.065, 0.085);
+    vec3 mid = vec3(0.12, 0.10, 0.16);
+    vec3 gold = vec3(0.85, 0.66, 0.20);
 
     vec3 col = mix(base, mid, smoothstep(-0.2, 0.8, f));
     col += gold * pow(clamp(f, 0.0, 1.0), 2.5) * 0.32;
     col += gold * glow * 0.18;
 
-    // Vignette so edges stay calm
     float vig = smoothstep(1.25, 0.35, length(p));
     col *= 0.55 + 0.45 * vig;
 
@@ -85,6 +82,7 @@ function Plane() {
   const matRef = React.useRef<THREE.ShaderMaterial>(null);
   const pointer = React.useRef(new THREE.Vector2(0.5, 0.5));
   const target = React.useRef(new THREE.Vector2(0.5, 0.5));
+  const { invalidate } = useThree();
 
   const uniforms = React.useMemo(
     () => ({
@@ -100,16 +98,30 @@ function Plane() {
       if (e.pointerType !== "mouse") return;
       target.current.set(e.clientX / window.innerWidth, 1 - e.clientY / window.innerHeight);
     };
-    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointermove", onMove, { passive: true });
     return () => window.removeEventListener("pointermove", onMove);
   }, []);
+
+  // Drive renders at ~30fps via demand frameloop instead of every rAF.
+  React.useEffect(() => {
+    let raf = 0;
+    let last = 0;
+    const loop = (now: number) => {
+      raf = requestAnimationFrame(loop);
+      if (now - last < 33) return;
+      last = now;
+      invalidate();
+    };
+    raf = requestAnimationFrame(loop);
+    return () => cancelAnimationFrame(raf);
+  }, [invalidate]);
 
   useFrame((state) => {
     const mat = matRef.current;
     if (!mat) return;
     mat.uniforms.uTime.value = state.clock.elapsedTime;
     mat.uniforms.uResolution.value.set(state.size.width, state.size.height);
-    pointer.current.lerp(target.current, 0.05);
+    pointer.current.lerp(target.current, 0.08);
     mat.uniforms.uPointer.value.copy(pointer.current);
   });
 
@@ -140,12 +152,12 @@ export function ShaderBackground() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none fixed inset-0 -z-10 opacity-70 [mask-image:radial-gradient(120%_120%_at_50%_0%,black,transparent_85%)]"
+      className="pointer-events-none fixed inset-0 -z-10 opacity-70 blur-[2px] [mask-image:radial-gradient(120%_120%_at_50%_0%,black,transparent_85%)]"
     >
       <Canvas
         gl={{ antialias: false, alpha: false, powerPreference: "low-power" }}
-        dpr={[1, 1.5]}
-        frameloop="always"
+        dpr={0.5}
+        frameloop="demand"
       >
         <Plane />
       </Canvas>
