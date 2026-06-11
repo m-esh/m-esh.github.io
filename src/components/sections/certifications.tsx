@@ -1,31 +1,33 @@
+import { Award, HeartPulse, ShieldCheck } from "lucide-react";
+
 import { certifications } from "@/data/profile";
 import { SectionHeading } from "@/components/section-heading";
+import { DisplayCards } from "@/components/ui/display-cards";
+
+const ICONS = [ShieldCheck, HeartPulse, Award];
 
 export function Certifications() {
+  const cards = certifications.map((cert, i) => {
+    const Icon = ICONS[i % ICONS.length];
+    return {
+      icon: <Icon />,
+      title: cert.name,
+      description: cert.issuer,
+      date: cert.year,
+    };
+  });
+
   return (
-    <section id="certifications" className="relative py-20 sm:py-28">
+    <section id="certifications" className="relative overflow-x-hidden py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <SectionHeading
           title="Certifications"
           description="The training behind the lifeguarding work."
         />
 
-        <ul className="mt-10 flex flex-col divide-y divide-border/40">
-          {certifications.map((cert) => (
-            <li
-              key={cert.name}
-              className="flex flex-col gap-1 py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-x-6"
-            >
-              <span className="text-base font-medium tracking-tight sm:text-lg">
-                {cert.name}
-              </span>
-              <span className="flex items-center gap-3 text-sm text-muted-foreground">
-                {cert.issuer}
-                <span className="font-mono text-xs">{cert.year}</span>
-              </span>
-            </li>
-          ))}
-        </ul>
+        <div className="mt-10">
+          <DisplayCards cards={cards} />
+        </div>
       </div>
     </section>
   );

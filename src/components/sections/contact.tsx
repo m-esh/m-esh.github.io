@@ -5,6 +5,7 @@ import { LinkedInIcon } from "@/components/icons";
 import { profile } from "@/data/profile";
 import { Button } from "@/components/ui/button";
 import { Magnetic } from "@/components/magnetic";
+import { TextRewind } from "@/components/ui/text-rewind";
 
 const socials = [{ label: "LinkedIn", href: profile.socials.linkedin, icon: LinkedInIcon }];
 
@@ -12,10 +13,8 @@ export function Contact() {
   return (
     <section id="contact" className="relative overflow-hidden py-20 sm:py-28">
       <div className="mx-auto max-w-4xl px-6 text-center lg:px-8">
-        <h2
-          className="animate-fade-up text-balance font-display text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl"
-        >
-          Contact me
+        <h2 className="animate-fade-up text-balance text-4xl sm:text-5xl md:text-6xl">
+          <TextRewind text="Contact me" />
         </h2>
 
         <div
