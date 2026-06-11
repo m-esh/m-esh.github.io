@@ -33,7 +33,7 @@ export function TextRewind({
   const c = { ...DEFAULT_COLORS, ...shadowColors };
 
   const stamped = {
-    textShadow: `6px 6px 0px ${c.first}, 9px 9px 0px ${c.second}, 12px 12px 0px ${c.third}, 15px 15px 0px ${c.fourth}, 28px 28px 18px ${c.glow}55`,
+    textShadow: `2px 2px 0px ${c.first}, 4px 4px 0px ${c.second}, 6px 6px 0px ${c.third}, 8px 8px 0px ${c.fourth}, 14px 14px 10px ${c.glow}33`,
   };
   const flat = { textShadow: "none" };
 
