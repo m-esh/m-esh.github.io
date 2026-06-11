@@ -4,7 +4,6 @@ import { Schibsted_Grotesk, Geist_Mono, Bricolage_Grotesque } from "next/font/go
 import { profile } from "@/data/profile";
 import { IntroScreen } from "@/components/intro-screen";
 import { MotionProvider } from "@/components/motion-provider";
-import { CursorSpotlight } from "@/components/cursor-spotlight";
 import { ShaderBackground } from "@/components/shader-background";
 
 import "./globals.css";
@@ -50,7 +49,6 @@ export default function RootLayout({
         <MotionProvider>
           <IntroScreen />
           <ShaderBackground />
-          <CursorSpotlight />
           {children}
         </MotionProvider>
       </body>

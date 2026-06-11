@@ -6,103 +6,54 @@ import { useReducedMotion } from "framer-motion";
 import * as THREE from "three";
 
 const vertexShader = /* glsl */ `
-  varying vec2 vUv;
   void main() {
-    vUv = uv;
     gl_Position = vec4(position, 1.0);
   }
 `;
 
-// Cheap value noise + 3-octave fbm with a single domain-warp.
+// Radial line shader (provided), tinted to the site's gold palette.
 const fragmentShader = /* glsl */ `
+  #define TWO_PI 6.2831853072
+  #define PI 3.14159265359
+
   precision mediump float;
-  varying vec2 vUv;
-  uniform float uTime;
-  uniform vec2 uResolution;
-  uniform vec2 uPointer;
+  uniform vec2 resolution;
+  uniform float time;
 
-  vec2 hash(vec2 p) {
-    p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
-    return -1.0 + 2.0 * fract(sin(p) * 43758.5453123);
-  }
+  void main(void) {
+    vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
+    float t = time * 0.05;
+    float lineWidth = 0.002;
 
-  float noise(vec2 p) {
-    const float K1 = 0.366025404;
-    const float K2 = 0.211324865;
-    vec2 i = floor(p + (p.x + p.y) * K1);
-    vec2 a = p - i + (i.x + i.y) * K2;
-    float m = step(a.y, a.x);
-    vec2 o = vec2(m, 1.0 - m);
-    vec2 b = a - o + K2;
-    vec2 c = a - 1.0 + 2.0 * K2;
-    vec3 h = max(0.5 - vec3(dot(a, a), dot(b, b), dot(c, c)), 0.0);
-    vec3 n = h * h * h * h * vec3(dot(a, hash(i)), dot(b, hash(i + o)), dot(c, hash(i + 1.0)));
-    return dot(n, vec3(70.0));
-  }
-
-  float fbm(vec2 p) {
+    // Accumulate the layered lines into a single intensity (no RGB fringing).
     float v = 0.0;
-    float amp = 0.5;
-    for (int i = 0; i < 3; i++) {
-      v += amp * noise(p);
-      p *= 2.0;
-      amp *= 0.5;
+    for (int j = 0; j < 3; j++) {
+      for (int i = 0; i < 5; i++) {
+        v += lineWidth * float(i * i) /
+          abs(fract(t - 0.01 * float(j) + float(i) * 0.01) * 5.0 - length(uv) + mod(uv.x + uv.y, 0.2));
+      }
     }
-    return v;
-  }
+    v /= 3.0;
 
-  void main() {
-    vec2 uv = vUv;
-    vec2 aspect = vec2(uResolution.x / uResolution.y, 1.0);
-    vec2 p = (uv - 0.5) * aspect;
-
-    float t = uTime * 0.04;
-    vec2 q = vec2(fbm(p + vec2(0.0, t)), fbm(p + vec2(5.2, 1.3) - t));
-    float f = fbm(p + 0.6 * q);
-
-    vec2 mp = (uPointer - 0.5) * aspect;
-    float glow = 0.10 / (length(p - mp) + 0.18);
-
-    vec3 base = vec3(0.07, 0.065, 0.085);
-    vec3 mid = vec3(0.12, 0.10, 0.16);
-    vec3 gold = vec3(0.85, 0.66, 0.20);
-
-    vec3 col = mix(base, mid, smoothstep(-0.2, 0.8, f));
-    col += gold * pow(clamp(f, 0.0, 1.0), 2.5) * 0.32;
-    col += gold * glow * 0.18;
-
-    float vig = smoothstep(1.25, 0.35, length(p));
-    col *= 0.55 + 0.45 * vig;
-
-    gl_FragColor = vec4(col, 1.0);
+    // Map the line intensity onto the gold accent.
+    vec3 gold = vec3(1.0, 0.78, 0.32);
+    gl_FragColor = vec4(gold * v, 1.0);
   }
 `;
 
 function Plane() {
   const matRef = React.useRef<THREE.ShaderMaterial>(null);
-  const pointer = React.useRef(new THREE.Vector2(0.5, 0.5));
-  const target = React.useRef(new THREE.Vector2(0.5, 0.5));
   const { invalidate } = useThree();
 
   const uniforms = React.useMemo(
     () => ({
-      uTime: { value: 0 },
-      uResolution: { value: new THREE.Vector2(1, 1) },
-      uPointer: { value: new THREE.Vector2(0.5, 0.5) },
+      time: { value: 0 },
+      resolution: { value: new THREE.Vector2(1, 1) },
     }),
     []
   );
 
-  React.useEffect(() => {
-    const onMove = (e: PointerEvent) => {
-      if (e.pointerType !== "mouse") return;
-      target.current.set(e.clientX / window.innerWidth, 1 - e.clientY / window.innerHeight);
-    };
-    window.addEventListener("pointermove", onMove, { passive: true });
-    return () => window.removeEventListener("pointermove", onMove);
-  }, []);
-
-  // Drive renders at ~30fps via demand frameloop instead of every rAF.
+  // Render at ~30fps via the demand frameloop instead of every rAF.
   React.useEffect(() => {
     let raf = 0;
     let last = 0;
@@ -119,10 +70,12 @@ function Plane() {
   useFrame((state) => {
     const mat = matRef.current;
     if (!mat) return;
-    mat.uniforms.uTime.value = state.clock.elapsedTime;
-    mat.uniforms.uResolution.value.set(state.size.width, state.size.height);
-    pointer.current.lerp(target.current, 0.08);
-    mat.uniforms.uPointer.value.copy(pointer.current);
+    // elapsedTime * 3 ≈ the original's 0.05-per-frame speed at 60fps, but frame-rate independent.
+    mat.uniforms.time.value = state.clock.elapsedTime * 3.0;
+    mat.uniforms.resolution.value.set(
+      state.size.width * state.viewport.dpr,
+      state.size.height * state.viewport.dpr
+    );
   });
 
   return (
@@ -152,7 +105,7 @@ export function ShaderBackground() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none fixed inset-0 -z-10 opacity-70 blur-[2px] [mask-image:radial-gradient(120%_120%_at_50%_0%,black,transparent_85%)]"
+      className="pointer-events-none fixed inset-0 -z-10 opacity-50 blur-[1px] [mask-image:radial-gradient(135%_135%_at_50%_0%,black,transparent_78%)]"
     >
       <Canvas
         gl={{ antialias: false, alpha: false, powerPreference: "low-power" }}
