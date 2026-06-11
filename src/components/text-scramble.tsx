@@ -19,8 +19,18 @@ export function TextScramble({
   trigger?: "mount" | "hover";
 }) {
   const [display, setDisplay] = React.useState(text);
+  const [canHover, setCanHover] = React.useState(true);
   const reduceMotion = useReducedMotion();
   const raf = React.useRef<number | null>(null);
+
+  // Touch devices don't truly hover; skip the hover-triggered scramble there
+  // so tapping a project row doesn't fire the glitch effect.
+  React.useEffect(() => {
+    const id = requestAnimationFrame(() =>
+      setCanHover(window.matchMedia?.("(hover: hover)").matches ?? true)
+    );
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   const scramble = React.useCallback(() => {
     if (reduceMotion) return;
@@ -65,7 +75,7 @@ export function TextScramble({
     <Tag
       className={className}
       style={style}
-      onMouseEnter={trigger === "hover" ? scramble : undefined}
+      onMouseEnter={trigger === "hover" && canHover ? scramble : undefined}
     >
       {display}
     </Tag>

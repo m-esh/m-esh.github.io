@@ -88,7 +88,9 @@ export function HeroObject() {
   }, [reduceMotion, autoSpin]);
 
   const handlePointerDown = (e: React.PointerEvent) => {
-    e.currentTarget.setPointerCapture(e.pointerId);
+    // Only capture the pointer for mouse — on touch, capturing would trap the
+    // page scroll. With touch-action: pan-y the browser keeps vertical scroll.
+    if (e.pointerType === "mouse") e.currentTarget.setPointerCapture(e.pointerId);
     dragInfo.current = { x: e.clientX, y: e.clientY, moved: 0 };
     setDragging(true);
     setHasInteracted(true);
@@ -112,7 +114,9 @@ export function HeroObject() {
     const drag = dragInfo.current;
     dragInfo.current = null;
     setDragging(false);
-    e.currentTarget.releasePointerCapture(e.pointerId);
+    if (e.currentTarget.hasPointerCapture?.(e.pointerId)) {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    }
 
     if (drag && drag.moved < CLICK_THRESHOLD) {
       setShapeIndex((i) => (i + 1) % SHAPES.length);
@@ -125,7 +129,7 @@ export function HeroObject() {
 
   return (
     <div
-      className="relative mx-auto h-[260px] w-[260px] touch-none select-none sm:h-[320px] sm:w-[320px]"
+      className="relative mx-auto h-[260px] w-[260px] touch-pan-y select-none sm:h-[320px] sm:w-[320px]"
       style={{ perspective: 900, cursor: dragging ? "grabbing" : "grab" }}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
