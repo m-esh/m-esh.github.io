@@ -5,6 +5,7 @@ import { profile } from "@/data/profile";
 import { IntroScreen } from "@/components/intro-screen";
 import { MotionProvider } from "@/components/motion-provider";
 import { CursorSpotlight } from "@/components/cursor-spotlight";
+import { ShaderBackground } from "@/components/shader-background";
 
 import "./globals.css";
 
@@ -48,6 +49,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col antialiased selection:bg-primary selection:text-primary-foreground">
         <MotionProvider>
           <IntroScreen />
+          <ShaderBackground />
           <CursorSpotlight />
           {children}
         </MotionProvider>
