@@ -2,7 +2,7 @@
 
 import { ArrowUpRight, Mail } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
+import { LiquidButton } from "@/components/ui/liquid-button";
 import { Magnetic } from "@/components/magnetic";
 import { HeroObject } from "@/components/hero-object";
 import { TextScramble } from "@/components/text-scramble";
@@ -42,15 +42,15 @@ export function Hero() {
             className="animate-fade-up mt-10 flex flex-wrap items-center gap-3"
           >
             <Magnetic>
-              <Button size="lg" className="group" onClick={() => scrollTo("#projects")}>
+              <LiquidButton className="group" onClick={() => scrollTo("#projects")}>
                 See my projects
                 <ArrowUpRight className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </Button>
+              </LiquidButton>
             </Magnetic>
             <Magnetic>
-              <Button size="lg" variant="outline" onClick={() => scrollTo("#contact")}>
+              <LiquidButton tone="metal" onClick={() => scrollTo("#contact")}>
                 <Mail /> Contact me
-              </Button>
+              </LiquidButton>
             </Magnetic>
           </div>
         </div>

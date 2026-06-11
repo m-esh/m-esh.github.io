@@ -130,7 +130,10 @@ export function ShaderBackground() {
   const reduceMotion = useReducedMotion();
   const [mounted, setMounted] = React.useState(false);
 
-  React.useEffect(() => setMounted(true), []);
+  React.useEffect(() => {
+    const id = requestAnimationFrame(() => setMounted(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   if (reduceMotion || !mounted) return null;
 
