@@ -29,27 +29,3 @@ export function LocalTime({ className }: { className?: string }) {
     </span>
   );
 }
-
-// Pulsing "presence" pill — the small classy signal that the person is reachable.
-export function AvailabilityBadge({
-  label = "Open to opportunities",
-  className,
-}: {
-  label?: string;
-  className?: string;
-}) {
-  return (
-    <span
-      className={cn(
-        "inline-flex items-center gap-2 rounded-full border border-emerald-400/25 bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-300",
-        className
-      )}
-    >
-      <span className="relative flex size-2">
-        <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400/70" />
-        <span className="relative inline-flex size-2 rounded-full bg-emerald-400" />
-      </span>
-      {label}
-    </span>
-  );
-}

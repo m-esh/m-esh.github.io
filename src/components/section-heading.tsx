@@ -25,8 +25,7 @@ export function SectionHeading({
     >
       {index && (
         <span className="font-mono text-xs uppercase tracking-[0.2em] text-primary/80">
-          {index} <span className="text-muted-foreground/50">— </span>
-          <span className="text-muted-foreground">{title}</span>
+          {index}
         </span>
       )}
       <h2 className="text-balance font-display text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">

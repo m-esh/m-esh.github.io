@@ -6,7 +6,7 @@ import { profile } from "@/data/profile";
 import { Button } from "@/components/ui/button";
 import { Magnetic } from "@/components/magnetic";
 import { TextRewind } from "@/components/ui/text-rewind";
-import { LocalTime, AvailabilityBadge } from "@/components/site-status";
+import { LocalTime } from "@/components/site-status";
 
 const socials = [{ label: "LinkedIn", href: profile.socials.linkedin, icon: LinkedInIcon }];
 
@@ -22,8 +22,6 @@ export function Contact() {
           style={{ animationDelay: "0.1s" }}
           className="animate-fade-up mt-10 flex flex-col items-center gap-6"
         >
-          <AvailabilityBadge />
-
           <Magnetic>
             <Button size="lg" asChild>
               <a href={`mailto:${profile.email}`}>

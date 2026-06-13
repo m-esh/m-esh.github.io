@@ -6,7 +6,6 @@ import { LiquidButton } from "@/components/ui/liquid-button";
 import { Magnetic } from "@/components/magnetic";
 import { HeroObject } from "@/components/hero-object";
 import { TextScramble } from "@/components/text-scramble";
-import { AvailabilityBadge } from "@/components/site-status";
 import { useScrollTo } from "@/components/smooth-scroll";
 import { profile } from "@/data/profile";
 
@@ -20,12 +19,9 @@ export function Hero() {
     >
       <div className="mx-auto grid w-full max-w-6xl flex-1 items-center gap-12 px-6 py-12 lg:grid-cols-[1.15fr_1fr] lg:px-8">
         <div className="flex flex-col justify-center">
-          <div className="animate-fade-up flex flex-wrap items-center gap-x-4 gap-y-2">
-            <AvailabilityBadge />
-            <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
-              {profile.location} · {profile.tagline}
-            </p>
-          </div>
+          <p className="animate-fade-up font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
+            {profile.location} · {profile.tagline}
+          </p>
 
           <TextScramble
             as="h1"
