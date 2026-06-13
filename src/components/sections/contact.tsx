@@ -6,6 +6,7 @@ import { profile } from "@/data/profile";
 import { Button } from "@/components/ui/button";
 import { Magnetic } from "@/components/magnetic";
 import { TextRewind } from "@/components/ui/text-rewind";
+import { LocalTime, AvailabilityBadge } from "@/components/site-status";
 
 const socials = [{ label: "LinkedIn", href: profile.socials.linkedin, icon: LinkedInIcon }];
 
@@ -21,6 +22,8 @@ export function Contact() {
           style={{ animationDelay: "0.1s" }}
           className="animate-fade-up mt-10 flex flex-col items-center gap-6"
         >
+          <AvailabilityBadge />
+
           <Magnetic>
             <Button size="lg" asChild>
               <a href={`mailto:${profile.email}`}>
@@ -45,9 +48,9 @@ export function Contact() {
         </div>
       </div>
 
-      <footer className="mx-auto mt-16 flex max-w-6xl flex-col items-center gap-2 border-t border-border/30 px-6 pt-8 text-center text-xs text-muted-foreground sm:flex-row sm:justify-between sm:text-left">
+      <footer className="mx-auto mt-16 flex max-w-6xl flex-col items-center gap-3 border-t border-border/30 px-6 pt-8 text-center text-xs text-muted-foreground sm:flex-row sm:justify-between sm:text-left">
         <p>© {new Date().getFullYear()} {profile.name}.</p>
-        <p>Toronto, Canada</p>
+        <LocalTime className="text-xs" />
       </footer>
     </section>
   );

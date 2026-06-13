@@ -21,6 +21,7 @@ export function Certifications() {
     <section id="certifications" className="relative overflow-x-hidden py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <SectionHeading
+          index="04"
           title="Certifications"
           description="The training behind the lifeguarding work."
         />

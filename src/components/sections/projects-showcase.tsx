@@ -6,6 +6,7 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { projects, type ProjectItem } from "@/data/profile";
 import { SectionHeading } from "@/components/section-heading";
 import { TextScramble } from "@/components/text-scramble";
+import { Reveal } from "@/components/reveal";
 import { cn } from "@/lib/utils";
 
 const CARD_CHROME =
@@ -126,11 +127,12 @@ export function ProjectsShowcase() {
     <section id="projects" className="relative py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <SectionHeading
+          index="03"
           title="Projects"
           description="A running list, with more to come as each season wraps."
         />
 
-        <div className="mt-10 grid gap-4 sm:gap-5 md:grid-cols-2">
+        <Reveal delay={0.08} className="mt-10 grid gap-4 sm:gap-5 md:grid-cols-2">
           {projects.map((project, i) => (
             <ProjectCard
               key={project.title}
@@ -138,7 +140,7 @@ export function ProjectsShowcase() {
               layout={LAYOUTS[i % LAYOUTS.length]}
             />
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   );

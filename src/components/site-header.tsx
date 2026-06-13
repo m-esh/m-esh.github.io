@@ -6,6 +6,7 @@ import { AnimatePresence, motion, useScroll, useMotionValueEvent } from "framer-
 
 import { Button } from "@/components/ui/button";
 import { RobotMark } from "@/components/icons";
+import { useScrollTo } from "@/components/smooth-scroll";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
@@ -22,6 +23,7 @@ export function SiteHeader() {
   const [active, setActive] = React.useState<string | null>(null);
   const { scrollY } = useScroll();
   const scrolledRef = React.useRef(false);
+  const scrollTo = useScrollTo();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const isScrolled = latest > 24;
@@ -54,8 +56,7 @@ export function SiteHeader() {
 
   const handleNavigate = (href: string) => {
     setOpen(false);
-    const el = document.querySelector(href);
-    el?.scrollIntoView({ behavior: "smooth", block: "start" });
+    scrollTo(href);
   };
 
   return (
@@ -83,7 +84,7 @@ export function SiteHeader() {
       >
         <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 lg:px-8">
           <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            onClick={() => scrollTo("#top")}
             aria-label="Back to top"
             className="group/logo inline-flex items-center gap-2.5 text-primary transition-transform active:scale-95"
           >

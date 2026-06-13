@@ -8,6 +8,7 @@ export function Experience() {
     <section id="experience" className="relative py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <SectionHeading
+          index="02"
           title="Where I've worked"
           description="Robotics, manufacturing, lifeguarding, school life. Tap a node to explore the orbit."
         />
