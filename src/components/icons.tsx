@@ -2,6 +2,23 @@ import * as React from "react";
 
 type IconProps = React.SVGProps<SVGSVGElement>;
 
+// The site's robot mark — same drawing as the favicon (src/app/icon.svg),
+// inheriting currentColor so it follows the theme wherever it's placed.
+export function RobotMark(props: IconProps) {
+  return (
+    <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" aria-hidden="true" {...props}>
+      <circle cx="16" cy="3.4" r="1.6" fill="currentColor" stroke="none" />
+      <line x1="16" y1="5" x2="16" y2="7.5" strokeWidth={1.6} />
+      <circle cx="5.6" cy="15" r="1.4" fill="currentColor" stroke="none" />
+      <circle cx="26.4" cy="15" r="1.4" fill="currentColor" stroke="none" />
+      <rect x="7" y="7.5" width="18" height="15" rx="2.5" strokeWidth={1.6} />
+      <rect x="10.5" y="12.5" width="3.6" height="3.6" rx="0.8" fill="currentColor" stroke="none" />
+      <rect x="17.9" y="12.5" width="3.6" height="3.6" rx="0.8" fill="currentColor" stroke="none" />
+      <line x1="11" y1="19" x2="21" y2="19" strokeWidth={1.4} strokeLinecap="round" />
+    </svg>
+  );
+}
+
 export function LinkedInIcon(props: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>

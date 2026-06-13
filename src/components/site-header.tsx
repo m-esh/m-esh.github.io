@@ -5,7 +5,7 @@ import { Menu, X } from "lucide-react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
-import { Magnetic } from "@/components/magnetic";
+import { RobotMark } from "@/components/icons";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
@@ -69,7 +69,7 @@ export function SiteHeader() {
       )}
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-all duration-500",
+          "fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow] duration-500",
           scrolled
             ? "bg-background/95 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.3)]"
             : "bg-transparent"
@@ -79,9 +79,12 @@ export function SiteHeader() {
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             aria-label="Back to top"
-            className="font-display text-lg font-semibold tracking-tight"
+            className="group/logo inline-flex items-center gap-2.5 text-primary transition-transform active:scale-95"
           >
-            MS
+            <RobotMark className="size-7" />
+            <span className="font-display text-lg font-semibold tracking-tight text-foreground">
+              MS
+            </span>
           </button>
 
           <div className="hidden items-center gap-1 md:flex">
@@ -113,15 +116,6 @@ export function SiteHeader() {
           </div>
 
           <div className="flex items-center gap-2">
-            <Magnetic>
-              <Button
-                size="sm"
-                className="hidden sm:inline-flex"
-                onClick={() => handleNavigate("#contact")}
-              >
-                Get in touch
-              </Button>
-            </Magnetic>
             <Button
               variant="ghost"
               size="icon"

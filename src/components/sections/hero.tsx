@@ -63,21 +63,6 @@ export function Hero() {
         </div>
       </div>
 
-      <div
-        style={{ animationDelay: "0.6s" }}
-        className="animate-fade-up mx-auto flex w-full max-w-6xl px-6 pb-10 lg:px-8"
-        aria-hidden
-      >
-        <button
-          type="button"
-          tabIndex={-1}
-          onClick={() => scrollTo("#about")}
-          className="group inline-flex cursor-pointer items-center gap-3 text-muted-foreground transition-colors hover:text-foreground"
-        >
-          <span className="block h-px w-10 bg-current opacity-50 transition-[width] duration-300 group-hover:w-14" />
-          <span className="font-mono text-xs uppercase tracking-[0.18em]">Scroll</span>
-        </button>
-      </div>
     </section>
   );
 }

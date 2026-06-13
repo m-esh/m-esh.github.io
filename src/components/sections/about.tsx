@@ -25,8 +25,8 @@ export function About() {
                 Right now
               </p>
               <ul className="mt-3 flex flex-col gap-2.5">
-                <li className="text-sm leading-snug">FRC 7902 — Mech Division Vice Lead</li>
-                <li className="text-sm leading-snug">City of Toronto — Lifeguard</li>
+                <li className="text-sm leading-snug">Mech Division Vice Lead, FRC 7902</li>
+                <li className="text-sm leading-snug">Lifeguard, City of Toronto</li>
                 <li className="text-sm leading-snug">Grade 11 · Markham, ON</li>
               </ul>
             </div>

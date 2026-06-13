@@ -56,8 +56,22 @@ const SHAPES: Shape[] = [
 ];
 
 const BASE_TILT = -22;
-const DRAG_SENSITIVITY = 0.4;
-const CLICK_THRESHOLD = 8;
+const MOUSE_SENSITIVITY = 0.4;
+// Thumbs cover less distance than a mouse, so touch gets more degrees per pixel.
+const TOUCH_SENSITIVITY = 0.65;
+const CLICK_THRESHOLD = 10;
+// Soft tilt limit — tanh adds friction near the edge instead of a hard stop,
+// and keeps drags from flipping the shape into unreadable angles.
+const TILT_LIMIT = 60;
+
+type DragInfo = {
+  x: number;
+  y: number;
+  moved: number;
+  isTouch: boolean;
+  velocity: number; // deg/s around Y, for flick momentum
+  lastTime: number;
+};
 
 export function HeroObject() {
   const reduceMotion = useReducedMotion();
@@ -72,8 +86,10 @@ export function HeroObject() {
   const rotateX = useTransform(dragX, (v) => BASE_TILT + v);
   const rotateY = useTransform([autoSpin, dragY], ([a, d]: number[]) => 35 + a + d);
 
-  const dragInfo = React.useRef<{ x: number; y: number; moved: number } | null>(null);
+  const dragInfo = React.useRef<DragInfo | null>(null);
+  const rawTilt = React.useRef(0);
   const spinControls = React.useRef<ReturnType<typeof animate> | null>(null);
+  const momentum = React.useRef<ReturnType<typeof animate> | null>(null);
 
   React.useEffect(() => {
     if (reduceMotion) return;
@@ -84,17 +100,28 @@ export function HeroObject() {
       ease: "linear",
     });
 
-    return () => spinControls.current?.stop();
+    return () => {
+      spinControls.current?.stop();
+      momentum.current?.stop();
+    };
   }, [reduceMotion, autoSpin]);
 
   const handlePointerDown = (e: React.PointerEvent) => {
     // Only capture the pointer for mouse — on touch, capturing would trap the
     // page scroll. With touch-action: pan-y the browser keeps vertical scroll.
     if (e.pointerType === "mouse") e.currentTarget.setPointerCapture(e.pointerId);
-    dragInfo.current = { x: e.clientX, y: e.clientY, moved: 0 };
+    dragInfo.current = {
+      x: e.clientX,
+      y: e.clientY,
+      moved: 0,
+      isTouch: e.pointerType !== "mouse",
+      velocity: 0,
+      lastTime: performance.now(),
+    };
     setDragging(true);
     setHasInteracted(true);
     spinControls.current?.pause();
+    momentum.current?.stop();
   };
 
   const handlePointerMove = (e: React.PointerEvent) => {
@@ -103,26 +130,61 @@ export function HeroObject() {
 
     const dx = e.clientX - drag.x;
     const dy = e.clientY - drag.y;
-    dragY.set(dragY.get() + dx * DRAG_SENSITIVITY);
-    dragX.set(dragX.get() - dy * DRAG_SENSITIVITY);
+    const now = performance.now();
+    const dt = Math.max(now - drag.lastTime, 1) / 1000;
+    const sensitivity = drag.isTouch ? TOUCH_SENSITIVITY : MOUSE_SENSITIVITY;
+
+    const spinDelta = dx * sensitivity;
+    dragY.set(dragY.get() + spinDelta);
+    // Blend velocity samples so one jittery final frame doesn't decide the flick.
+    drag.velocity = drag.velocity * 0.6 + (spinDelta / dt) * 0.4;
+
+    // On touch, vertical motion belongs to page scroll (touch-action: pan-y),
+    // so only mouse drags tilt the shape — through the soft tanh clamp.
+    if (!drag.isTouch) {
+      rawTilt.current -= dy * sensitivity;
+      dragX.set(TILT_LIMIT * Math.tanh(rawTilt.current / TILT_LIMIT));
+    }
+
     drag.moved += Math.abs(dx) + Math.abs(dy);
     drag.x = e.clientX;
     drag.y = e.clientY;
+    drag.lastTime = now;
   };
 
-  const handlePointerUp = (e: React.PointerEvent) => {
-    const drag = dragInfo.current;
+  const endDrag = (e: React.PointerEvent) => {
     dragInfo.current = null;
     setDragging(false);
     if (e.currentTarget.hasPointerCapture?.(e.pointerId)) {
       e.currentTarget.releasePointerCapture(e.pointerId);
     }
+    if (!reduceMotion) spinControls.current?.play();
+  };
 
-    if (drag && drag.moved < CLICK_THRESHOLD) {
+  const handlePointerUp = (e: React.PointerEvent) => {
+    const drag = dragInfo.current;
+    if (!drag) return;
+
+    if (drag.moved < CLICK_THRESHOLD) {
       setShapeIndex((i) => (i + 1) % SHAPES.length);
+    } else if (!reduceMotion && Math.abs(drag.velocity) > 80) {
+      // Flick: let the spin coast and settle instead of stopping dead.
+      momentum.current = animate(dragY, dragY.get() + drag.velocity * 0.3, {
+        type: "spring",
+        stiffness: 60,
+        damping: 18,
+        velocity: drag.velocity,
+      });
     }
 
-    if (!reduceMotion) spinControls.current?.play();
+    endDrag(e);
+  };
+
+  // The browser claimed the gesture (page scroll on touch). Not a tap — never
+  // cycle the shape from here, or scrolling past the cube would morph it.
+  const handlePointerCancel = (e: React.PointerEvent) => {
+    if (!dragInfo.current) return;
+    endDrag(e);
   };
 
   const faces = SHAPES[shapeIndex];
@@ -134,7 +196,7 @@ export function HeroObject() {
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
-      onPointerCancel={handlePointerUp}
+      onPointerCancel={handlePointerCancel}
     >
       <motion.div
         className="absolute inset-0"

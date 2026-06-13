@@ -3,7 +3,7 @@
 import * as React from "react";
 import { useReducedMotion } from "framer-motion";
 
-const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!<>-_\\/[]{}—=+*^?#";
+const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!<>-_\\/[]{}=+*^?#";
 
 export function TextScramble({
   text,

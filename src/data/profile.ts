@@ -30,7 +30,7 @@ export const experience: ExperienceItem[] = [
   {
     role: "Mechanical Division Vice Lead & Drive Team, FRC Team 7902",
     org: "FIRST Robotics Competition",
-    period: "Jun 2025–present",
+    period: "Jun 2025-present",
     location: "Markham, ON",
     summary:
       "Helping lead the mechanical side of a competition robot build each season, while also stepping onto the field as part of the drive team.",
@@ -43,7 +43,7 @@ export const experience: ExperienceItem[] = [
   {
     role: "Mechanical Assembler",
     org: "MicroArt Services Inc.",
-    period: "Jul 2025–Sep 2025",
+    period: "Jul 2025-Sep 2025",
     location: "Markham, ON",
     summary:
       "Built PCB-based electronics for emergency response equipment on the assembly floor, where every finished unit had to clear inspection before it shipped.",
@@ -56,7 +56,7 @@ export const experience: ExperienceItem[] = [
   {
     role: "Lifeguard",
     org: "City of Toronto",
-    period: "2025–present",
+    period: "2025-present",
     location: "Toronto, ON",
     summary:
       "Watching over swimmers at municipal pools, staying alert and ready to step in the moment something needs attention.",
@@ -69,7 +69,7 @@ export const experience: ExperienceItem[] = [
   {
     role: "Mechanical & CAD Division, VEX Team 10801 Trubotics",
     org: "VEX Robotics",
-    period: "Sep 2024–Nov 2025",
+    period: "Sep 2024-Nov 2025",
     location: "Markham, ON",
     summary:
       "Spent a season designing and building competition robot mechanisms in Fusion 360, then reworking them until they held up under real match conditions.",
@@ -82,7 +82,7 @@ export const experience: ExperienceItem[] = [
   {
     role: "Ensemble Representative & Senior Webmaster",
     org: "Trudeau Music Council",
-    period: "Sep 2025–present",
+    period: "Sep 2025-present",
     location: "Markham, ON",
     summary:
       "Started out representing my ensemble on the school's music council, and have since taken on running the council's website day to day.",
@@ -95,7 +95,7 @@ export const experience: ExperienceItem[] = [
   {
     role: "Tutor",
     org: "Trudeau Tutoring & Co.",
-    period: "Sep 2025–present",
+    period: "Sep 2025-present",
     location: "Markham, ON",
     summary:
       "Working one-on-one with fellow students to break down material they're stuck on until it actually clicks.",
@@ -108,7 +108,7 @@ export const experience: ExperienceItem[] = [
   {
     role: "Newspaper Carrier",
     org: "Markham Economist & Sun",
-    period: "Jul 2023–Sep 2023",
+    period: "Jul 2023-Sep 2023",
     location: "Markham, ON",
     summary:
       "A summer route delivering papers door to door across local neighborhoods, rain or shine.",
@@ -124,6 +124,7 @@ export type ProjectItem = {
   title: string;
   description: string;
   year: string;
+  image?: { src: string; alt: string };
   links?: { label: string; href: string }[];
 };
 
@@ -131,8 +132,12 @@ export const projects: ProjectItem[] = [
   {
     title: "Gesture-Controlled Drone",
     description:
-      "A 3D-printed ducted drone flown with a flex-sensor glove — finger curls become stick inputs, streamed from an ESP32 on your hand to a Betaflight flight controller. Built with a friend.",
+      "A 3D-printed ducted drone flown with a flex-sensor glove: finger curls become stick inputs, streamed from an ESP32 on your hand to a Betaflight flight controller. Built with a friend.",
     year: "2026",
+    image: {
+      src: "/projects/drone/glove.jpg",
+      alt: "Flex-sensor glove controller wired to an ESP32",
+    },
     links: [{ label: "View case study", href: "/projects/drone" }],
   },
   {
@@ -140,6 +145,10 @@ export const projects: ProjectItem[] = [
     description:
       "A hand-crank music box, built around a re-tuned kalimba and a custom 3D-printed drum, that plays the opening of the tenor sax solo from Omar Thomas' Come Sunday.",
     year: "2026",
+    image: {
+      src: "/projects/kalimbinator/cad-render.png",
+      alt: "CAD render of the Kalimbinator hand-crank music box",
+    },
     links: [{ label: "View case study", href: "/projects/kalimbinator" }],
   },
   {
@@ -147,13 +156,17 @@ export const projects: ProjectItem[] = [
     description:
       "A finger-worn chopstick that flips between an eating utensil and a flat fold against your fingers, modeled in CAD, 3D printed, and assembled by hand.",
     year: "2025",
+    image: {
+      src: "/projects/chopstick-ring/prototype-eating-mode.jpg",
+      alt: "Chopstick Ring prototype worn in eating mode",
+    },
     links: [{ label: "View case study", href: "/projects/chopstick-ring" }],
   },
   {
     title: "FRC 7902 Competition Robot",
     description:
       "A season-long build that starts as a CAD sketch and ends as a machine that has to drive, score, and survive elimination matches.",
-    year: "2025–present",
+    year: "2025-present",
     links: [{ label: "FRC Team 7902", href: "https://www.thebluealliance.com/team/7902" }],
   },
 ];
@@ -168,12 +181,12 @@ export const certifications: CertificationItem[] = [
   {
     name: "National Lifeguard (NL)",
     issuer: "Lifesaving Society",
-    year: "2025–2027",
+    year: "2025-2027",
   },
   {
     name: "Standard First Aid & CPR/AED",
     issuer: "Lifesaving Society",
-    year: "2024–2027",
+    year: "2024-2027",
   },
   {
     name: "Bronze Cross",

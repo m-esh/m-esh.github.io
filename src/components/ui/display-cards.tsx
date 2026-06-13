@@ -38,12 +38,14 @@ function DisplayCard({
   return (
     <div
       className={cn(
-        "relative flex h-32 w-[15rem] select-none flex-col justify-between rounded-xl border-2 border-border/60 bg-card/70 px-4 py-3 backdrop-blur-sm transition-all duration-500 [grid-area:stack]",
+        // Solid bg + opacity dim instead of backdrop-blur + grayscale: three
+        // stacked filtered layers forced expensive repaints while scrolling.
+        "relative flex h-32 w-[15rem] select-none flex-col justify-between rounded-xl border-2 border-border/60 bg-card px-4 py-3 transition-[transform,opacity,border-color] duration-500 [grid-area:stack]",
         "after:absolute after:-right-1 after:top-[-5%] after:h-[110%] after:w-[15rem] after:bg-gradient-to-l after:from-background after:to-transparent after:content-['']",
         "sm:h-36 sm:w-[24rem] sm:px-5 sm:py-4 sm:after:w-[24rem]",
         pressed
-          ? cn(PRESSED[index], "grayscale-0 border-primary/40")
-          : cn(BASE[index], HOVER[index], "grayscale-[60%] hover:grayscale-0 hover:border-primary/50 hover:bg-card")
+          ? cn(PRESSED[index], "opacity-100 border-primary/40")
+          : cn(BASE[index], HOVER[index], "opacity-80 hover:opacity-100 hover:border-primary/50")
       )}
     >
       <div className="flex items-center gap-2">
