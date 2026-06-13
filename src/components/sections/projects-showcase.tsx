@@ -70,24 +70,30 @@ function ProjectCard({
 
   const content =
     layout === "feature" ? (
-      // Featured: text beside the photo, photo gets the bigger column.
-      <div className="grid flex-1 md:grid-cols-[1fr_1.2fr]">
+      // Featured: text beside the photo.
+      <div className="grid flex-1 md:grid-cols-[1.1fr_1fr]">
         <CardBody project={project} ArrowIcon={ArrowIcon} className="justify-center" />
         <CardImage
           project={project}
-          className="order-first aspect-[16/9] md:order-none md:aspect-auto md:min-h-[280px]"
+          className="order-first aspect-[2/1] md:order-none md:aspect-auto md:min-h-[220px]"
         />
       </div>
     ) : layout === "tile" ? (
       <>
-        <CardImage project={project} className="aspect-[16/10]" />
+        <CardImage project={project} className="aspect-[16/9]" />
         <CardBody project={project} ArrowIcon={ArrowIcon} />
       </>
     ) : (
-      // Wide text card on a blueprint grid: the robot is rebuilt every season,
-      // so the drawing-board texture is the honest visual.
-      <div style={BLUEPRINT_BG} className="flex flex-1">
-        <CardBody project={project} ArrowIcon={ArrowIcon} className="max-w-2xl py-7 sm:py-8" />
+      // Wide card mirroring the feature: photo left, text on the blueprint
+      // grid right — the drawing-board texture for the season-rebuilt robot.
+      <div className="grid flex-1 md:grid-cols-[1fr_1.1fr]">
+        <CardImage
+          project={project}
+          className="aspect-[2/1] md:aspect-auto md:min-h-[200px]"
+        />
+        <div style={BLUEPRINT_BG} className="flex">
+          <CardBody project={project} ArrowIcon={ArrowIcon} className="justify-center" />
+        </div>
       </div>
     );
 
