@@ -20,11 +20,12 @@ const BASE = [
 
 const HOVER = ["hover:-translate-y-10", "hover:-translate-y-1", "hover:translate-y-9"];
 
-// While pressed (touch hold), fan the cards apart vertically so all three read.
+// Tapped open: fan the cards into a vertical stack with enough gap (card
+// height + ~24px) that every line of every card clears the one behind it.
 const PRESSED = [
-  "-translate-y-16 sm:-translate-y-20",
-  "translate-x-6 sm:translate-x-16",
-  "translate-x-12 translate-y-16 sm:translate-x-32 sm:translate-y-20",
+  "-translate-y-[152px] translate-x-0 sm:-translate-y-[168px]",
+  "translate-y-0 translate-x-0",
+  "translate-y-[152px] translate-x-0 sm:translate-y-[168px]",
 ];
 
 function DisplayCard({
@@ -40,12 +41,14 @@ function DisplayCard({
       className={cn(
         // Solid bg + opacity dim instead of backdrop-blur + grayscale: three
         // stacked filtered layers forced expensive repaints while scrolling.
-        "relative flex h-32 w-[15rem] select-none flex-col justify-between rounded-xl border-2 border-border/60 bg-card px-4 py-3 transition-[transform,opacity,border-color] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] [grid-area:stack]",
+        // transform/opacity only (no border-color) keeps the fan-out on the
+        // GPU compositor — animating border-color alongside it caused jank.
+        "relative flex h-32 w-[15rem] select-none flex-col justify-between rounded-xl border-2 bg-card px-4 py-3 transform-gpu transition-[transform,opacity] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] [grid-area:stack]",
         "after:absolute after:-right-1 after:top-[-5%] after:h-[110%] after:w-[15rem] after:bg-gradient-to-l after:from-background after:to-transparent after:content-['']",
         "sm:h-36 sm:w-[24rem] sm:px-5 sm:py-4 sm:after:w-[24rem]",
         pressed
           ? cn(PRESSED[index], "opacity-100 border-primary/40")
-          : cn(BASE[index], HOVER[index], "opacity-80 hover:opacity-100 hover:border-primary/50")
+          : cn(BASE[index], HOVER[index], "opacity-80 border-border/60 hover:opacity-100 hover:border-primary/50")
       )}
     >
       <div className="flex items-center gap-2">
@@ -67,7 +70,10 @@ export function DisplayCards({ cards }: { cards: DisplayCardProps[] }) {
 
   return (
     <div
-      className="grid touch-pan-y place-items-center pb-10 pt-4 [grid-template-areas:'stack'] sm:pb-16"
+      className={cn(
+        "grid touch-pan-y place-items-center [grid-template-areas:'stack'] transition-[padding] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+        pressed ? "pb-[120px] pt-[112px] sm:pb-32 sm:pt-28" : "pb-10 pt-4 sm:pb-16"
+      )}
       onClick={() => {
         // Mouse already gets the fan-out via hover — only tap toggles it.
         if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
