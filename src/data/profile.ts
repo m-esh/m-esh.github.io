@@ -168,8 +168,8 @@ export const projects: ProjectItem[] = [
       "A season-long build that starts as a CAD sketch and ends as a machine that has to drive, score, and survive elimination matches.",
     year: "2025-present",
     image: {
-      src: "/projects/frc/robot-closeup.jpg",
-      alt: "Close-up of FRC Team 7902's 2025 competition robot",
+      src: "/projects/frc/robot-2026-rebuilt.jpg",
+      alt: "FRC Team 7902's robot loaded with game pieces during a 2026 REBUILT match",
     },
     links: [{ label: "FRC Team 7902", href: "https://www.thebluealliance.com/team/7902" }],
   },
