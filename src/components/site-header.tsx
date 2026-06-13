@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Menu, X } from "lucide-react";
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useMotionValueEvent } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
 import { RobotMark } from "@/components/icons";
@@ -60,13 +60,19 @@ export function SiteHeader() {
 
   return (
     <>
-      {open && (
-        <div
-          onClick={() => setOpen(false)}
-          aria-hidden
-          className="fixed inset-0 z-40 bg-background/70 md:hidden"
-        />
-      )}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            onClick={() => setOpen(false)}
+            aria-hidden
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 z-40 bg-background/60 backdrop-blur-sm md:hidden"
+          />
+        )}
+      </AnimatePresence>
       <header
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow] duration-500",
@@ -123,36 +129,50 @@ export function SiteHeader() {
               aria-label="Toggle menu"
               onClick={() => setOpen((o) => !o)}
             >
-              {open ? <X /> : <Menu />}
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={open ? "close" : "open"}
+                  initial={{ opacity: 0, rotate: -90, scale: 0.6 }}
+                  animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                  exit={{ opacity: 0, rotate: 90, scale: 0.6 }}
+                  transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                  className="inline-flex"
+                >
+                  {open ? <X /> : <Menu />}
+                </motion.span>
+              </AnimatePresence>
             </Button>
           </div>
         </nav>
 
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            className="bg-background md:hidden"
-          >
-            <div className="flex flex-col gap-1 px-6 py-4">
-              {NAV_LINKS.map((link) => (
-                <button
-                  key={link.href}
-                  onClick={() => handleNavigate(link.href)}
-                  className={cn(
-                    "rounded-lg px-3 py-2.5 text-left text-sm font-medium transition-colors",
-                    active === link.href
-                      ? "bg-card text-foreground"
-                      : "text-muted-foreground hover:bg-card/60 hover:text-foreground"
-                  )}
-                >
-                  {link.label}
-                </button>
-              ))}
-            </div>
-          </motion.div>
-        )}
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="border-t border-white/10 bg-background/70 backdrop-blur-xl backdrop-saturate-150 md:hidden"
+            >
+              <div className="flex flex-col gap-1 px-6 py-4">
+                {NAV_LINKS.map((link) => (
+                  <button
+                    key={link.href}
+                    onClick={() => handleNavigate(link.href)}
+                    className={cn(
+                      "rounded-lg px-3 py-2.5 text-left text-sm font-medium transition-[color,background-color,transform] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.98]",
+                      active === link.href
+                        ? "bg-card text-foreground"
+                        : "text-muted-foreground active:bg-card/60 active:text-foreground"
+                    )}
+                  >
+                    {link.label}
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
     </>
   );
