@@ -95,10 +95,10 @@ function OrbitNode({
           >
             <span
               className={cn(
-                "flex size-11 items-center justify-center rounded-full border backdrop-blur-sm transition-colors sm:size-14",
+                "flex size-11 items-center justify-center rounded-full transition-colors sm:size-14",
                 active
-                  ? "border-primary bg-primary text-primary-foreground shadow-[0_0_24px_-2px_oklch(0.78_0.2_95/0.7)]"
-                  : "border-border bg-card/70 text-muted-foreground group-hover/node:border-primary/60 group-hover/node:text-foreground"
+                  ? "border border-primary bg-primary text-primary-foreground shadow-[0_0_24px_-2px_oklch(0.78_0.2_95/0.7)]"
+                  : "glass text-muted-foreground group-hover/node:border-primary/60 group-hover/node:text-foreground"
               )}
             >
               <Icon className="size-4 sm:size-5" />
@@ -171,7 +171,7 @@ export function OrbitalTimeline() {
         <div className="pointer-events-none absolute inset-[20%] rounded-full border border-dashed border-border/30" />
 
         {/* center hub */}
-        <div className="pointer-events-none absolute left-1/2 top-1/2 flex size-20 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-primary/40 bg-card/60 text-center backdrop-blur-sm sm:size-24">
+        <div className="glass pointer-events-none absolute left-1/2 top-1/2 flex size-20 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border-primary/40 text-center sm:size-24">
           <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
             Roles
           </span>
@@ -205,7 +205,7 @@ export function OrbitalTimeline() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="rounded-xl border border-border/60 bg-card/70 p-6 backdrop-blur-sm sm:p-8"
+            className="glass rounded-xl p-6 sm:p-8"
           >
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div>

@@ -43,11 +43,11 @@ function DisplayCard({
         // stacked filtered layers forced expensive repaints while scrolling.
         // transform/opacity only (no border-color) keeps the fan-out on the
         // GPU compositor — animating border-color alongside it caused jank.
-        "relative flex h-32 w-[15rem] select-none flex-col justify-between rounded-xl border-2 bg-card px-4 py-3 transform-gpu transition-[transform,opacity] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] [grid-area:stack]",
+        "glass relative flex h-32 w-[15rem] select-none flex-col justify-between rounded-xl px-4 py-3 transform-gpu transition-[transform,opacity] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] [grid-area:stack]",
         "sm:h-36 sm:w-[24rem] sm:px-5 sm:py-4",
         pressed
           ? cn(PRESSED[index], "opacity-100 border-primary/40")
-          : cn(BASE[index], HOVER[index], "opacity-100 border-border/60 hover:border-primary/50")
+          : cn(BASE[index], HOVER[index], "opacity-100 hover:border-primary/50")
       )}
     >
       <div className="flex items-center gap-2">

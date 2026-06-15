@@ -76,10 +76,10 @@ export function SiteHeader() {
       </AnimatePresence>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow] duration-500",
+          "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500",
           scrolled
-            ? "bg-background/95 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.3)]"
-            : "bg-transparent"
+            ? "glass shadow-[0_8px_30px_-12px_rgba(0,0,0,0.3)]"
+            : "border-b border-transparent bg-transparent"
         )}
       >
         <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 lg:px-8">
@@ -153,7 +153,7 @@ export function SiteHeader() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="border-t border-white/10 bg-background/70 backdrop-blur-xl backdrop-saturate-150 md:hidden"
+              className="glass border-t-0 md:hidden"
             >
               <div className="flex flex-col gap-1 px-6 py-4">
                 {NAV_LINKS.map((link) => (
