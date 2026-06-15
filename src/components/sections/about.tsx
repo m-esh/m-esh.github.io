@@ -22,30 +22,30 @@ export function About() {
             ))}
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
-            <div className="glass col-span-2 flex items-center gap-3 rounded-xl p-5">
-              <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
-                <Wrench className="size-5" />
-              </span>
-              <div>
-                <p className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
-                  Right now
-                </p>
-                <p className="mt-1 text-sm leading-snug">Mech Division Vice Lead, FRC 7902</p>
-              </div>
-            </div>
-            <div className="glass flex flex-col gap-3 rounded-xl p-5">
-              <span className="flex size-10 items-center justify-center rounded-lg bg-primary/15 text-primary">
-                <LifeBuoy className="size-5" />
-              </span>
-              <p className="text-sm leading-snug">Lifeguard, City of Toronto</p>
-            </div>
-            <div className="glass flex flex-col gap-3 rounded-xl p-5">
-              <span className="flex size-10 items-center justify-center rounded-lg bg-primary/15 text-primary">
-                <GraduationCap className="size-5" />
-              </span>
-              <p className="text-sm leading-snug">Grade 11 · Markham, ON</p>
-            </div>
+          <div className="glass flex flex-col gap-4 rounded-xl p-5">
+            <p className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+              Right now
+            </p>
+            <ul className="flex flex-col gap-3.5">
+              <li className="flex items-center gap-3 text-sm leading-snug">
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
+                  <Wrench className="size-4" />
+                </span>
+                Mech Division Vice Lead, FRC 7902
+              </li>
+              <li className="flex items-center gap-3 text-sm leading-snug">
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
+                  <LifeBuoy className="size-4" />
+                </span>
+                Lifeguard, City of Toronto
+              </li>
+              <li className="flex items-center gap-3 text-sm leading-snug">
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
+                  <GraduationCap className="size-4" />
+                </span>
+                Grade 11 · Markham, ON
+              </li>
+            </ul>
           </div>
         </Reveal>
       </div>
