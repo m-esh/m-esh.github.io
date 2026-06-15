@@ -64,7 +64,7 @@ export function PartsDiagram({
   }, [openIndex, close, step]);
 
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-border/60 bg-card/50">
+    <div className="relative overflow-hidden rounded-xl border border-border/60 bg-card/50">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={image}

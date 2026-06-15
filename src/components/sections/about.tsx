@@ -21,7 +21,7 @@ export function About() {
           </div>
 
           <div className="flex flex-col gap-3">
-            <div className="rounded-2xl bg-card/70 p-5">
+            <div className="rounded-xl bg-card/70 p-5">
               <p className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
                 Right now
               </p>

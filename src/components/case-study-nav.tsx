@@ -54,7 +54,7 @@ export function CaseStudyNav({ sections }: { sections: CaseStudySection[] }) {
               onClick={() => handleNavigate(section.id)}
               aria-current={active === section.id ? "true" : undefined}
               className={cn(
-                "rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors",
+                "rounded-xl px-3.5 py-1.5 text-sm font-medium transition-colors",
                 active === section.id
                   ? "bg-card text-foreground"
                   : "text-muted-foreground hover:text-foreground"

@@ -205,7 +205,7 @@ export function OrbitalTimeline() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="rounded-2xl border border-border/60 bg-card/70 p-6 backdrop-blur-sm sm:p-8"
+            className="rounded-xl border border-border/60 bg-card/70 p-6 backdrop-blur-sm sm:p-8"
           >
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div>

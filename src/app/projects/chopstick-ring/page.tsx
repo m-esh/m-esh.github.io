@@ -196,7 +196,7 @@ export default function ChopstickRingPage() {
             </p>
 
             <div className="mt-10 grid gap-6 sm:grid-cols-2">
-              <div className="flex flex-col overflow-hidden rounded-2xl bg-card/70">
+              <div className="flex flex-col overflow-hidden rounded-xl bg-card/70">
                 <TiltCard className="aspect-[16/10]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
@@ -217,7 +217,7 @@ export default function ChopstickRingPage() {
                 </div>
               </div>
 
-              <div className="flex flex-col overflow-hidden rounded-2xl bg-card/70">
+              <div className="flex flex-col overflow-hidden rounded-xl bg-card/70">
                 <TiltCard className="aspect-[16/10]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img

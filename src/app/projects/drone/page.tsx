@@ -112,7 +112,7 @@ export default function DronePage() {
             </p>
 
             <div className="mt-10 grid gap-6 sm:grid-cols-2">
-              <div className="flex flex-col overflow-hidden rounded-2xl bg-card/70">
+              <div className="flex flex-col overflow-hidden rounded-xl bg-card/70">
                 <TiltCard className="aspect-[16/10]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
@@ -132,7 +132,7 @@ export default function DronePage() {
                 </div>
               </div>
 
-              <div className="flex flex-col overflow-hidden rounded-2xl bg-card/70">
+              <div className="flex flex-col overflow-hidden rounded-xl bg-card/70">
                 <TiltCard className="aspect-[16/10]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
@@ -170,7 +170,7 @@ export default function DronePage() {
             </p>
 
             <div className="mt-10 grid gap-6 sm:grid-cols-2">
-              <div className="flex flex-col overflow-hidden rounded-2xl bg-card/70">
+              <div className="flex flex-col overflow-hidden rounded-xl bg-card/70">
                 <TiltCard className="aspect-[16/10]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
@@ -191,7 +191,7 @@ export default function DronePage() {
                 </div>
               </div>
 
-              <div className="flex flex-col overflow-hidden rounded-2xl bg-card/70">
+              <div className="flex flex-col overflow-hidden rounded-xl bg-card/70">
                 <TiltCard className="aspect-[16/10]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
@@ -230,7 +230,7 @@ export default function DronePage() {
               transmitter&apos;s would.
             </p>
 
-            <div className="mt-10 flex flex-col overflow-hidden rounded-2xl bg-card/70 sm:mx-auto sm:max-w-2xl">
+            <div className="mt-10 flex flex-col overflow-hidden rounded-xl bg-card/70 sm:mx-auto sm:max-w-2xl">
               <video
                 src="/projects/drone/betaflight-tuning.mp4"
                 className="aspect-[16/10] w-full bg-black object-contain"
@@ -251,7 +251,7 @@ export default function DronePage() {
               </div>
             </div>
 
-            <div className="mx-auto mt-10 flex max-w-sm flex-col overflow-hidden rounded-2xl bg-card/70">
+            <div className="mx-auto mt-10 flex max-w-sm flex-col overflow-hidden rounded-xl bg-card/70">
               <video
                 src="/projects/drone/flight-demo.mp4"
                 className="aspect-[9/16] w-full object-cover"

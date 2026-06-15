@@ -103,7 +103,7 @@ export function SiteHeader() {
                   onClick={() => handleNavigate(link.href)}
                   aria-current={isActive ? "true" : undefined}
                   className={cn(
-                    "relative rounded-full px-4 py-2 text-sm font-medium transition-colors",
+                    "relative rounded-xl px-4 py-2 text-sm font-medium transition-colors",
                     isActive
                       ? "text-foreground"
                       : "text-muted-foreground hover:text-foreground"
@@ -113,7 +113,7 @@ export function SiteHeader() {
                     <motion.span
                       layoutId="nav-active"
                       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                      className="absolute inset-0 rounded-full bg-card"
+                      className="absolute inset-0 rounded-xl bg-card"
                     />
                   )}
                   <span className="relative">{link.label}</span>
