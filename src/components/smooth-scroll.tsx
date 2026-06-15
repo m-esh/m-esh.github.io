@@ -29,9 +29,27 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
         touchMultiplier: 1.6,
       }}
     >
+      <LenisResize />
       {children}
     </ReactLenis>
   );
+}
+
+// Lazy-loaded images and reveal animations change the document height after
+// Lenis takes its initial measurement, which otherwise leaves it capped short
+// of the real bottom (scroll stops just before the contact section). Re-sync
+// whenever the page's content height changes.
+function LenisResize() {
+  const lenis = useLenis();
+
+  React.useEffect(() => {
+    if (!lenis) return;
+    const observer = new ResizeObserver(() => lenis.resize());
+    observer.observe(document.body);
+    return () => observer.disconnect();
+  }, [lenis]);
+
+  return null;
 }
 
 // Anchor navigation that rides the Lenis timeline when it's available and
@@ -45,6 +63,7 @@ export function useScrollTo() {
         hash === "#top" ? 0 : document.querySelector<HTMLElement>(hash);
       if (target === null) return;
       if (lenis) {
+        lenis.resize();
         lenis.scrollTo(target, { offset: -72 });
       } else if (typeof target === "number") {
         window.scrollTo({ top: target, behavior: "smooth" });

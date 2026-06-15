@@ -51,7 +51,6 @@ function CardImage({ project, className }: { project: ProjectItem; className?: s
       <img
         src={project.image.src}
         alt={project.image.alt}
-        loading="lazy"
         className="size-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
       />
     </div>
