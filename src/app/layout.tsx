@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Schibsted_Grotesk, Geist_Mono, Bricolage_Grotesque } from "next/font/google";
+import { Space_Grotesk, Geist_Mono, Bricolage_Grotesque } from "next/font/google";
 
 import { profile } from "@/data/profile";
 import { IntroScreen } from "@/components/intro-screen";
@@ -7,7 +7,7 @@ import { MotionProvider } from "@/components/motion-provider";
 
 import "./globals.css";
 
-const schibsted = Schibsted_Grotesk({
+const spaceGrotesk = Space_Grotesk({
   variable: "--font-geist-sans",
   subsets: ["latin"],
   display: "swap",
@@ -42,7 +42,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${schibsted.variable} ${geistMono.variable} ${bricolage.variable} dark h-full`}
+      className={`${spaceGrotesk.variable} ${geistMono.variable} ${bricolage.variable} dark h-full`}
     >
       <body className="min-h-full flex flex-col antialiased selection:bg-primary selection:text-primary-foreground">
         <MotionProvider>
