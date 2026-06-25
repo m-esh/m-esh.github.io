@@ -121,7 +121,6 @@ function OrbitNode({
 export function OrbitalTimeline() {
   const reduceMotion = useReducedMotion();
   const [active, setActive] = React.useState(0);
-  const [hovered, setHovered] = React.useState(false);
   const [inView, setInView] = React.useState(false);
   const orbitRef = React.useRef<HTMLDivElement>(null);
   const angle = useMotionValue(0);
@@ -137,7 +136,8 @@ export function OrbitalTimeline() {
     return () => controls.current?.stop();
   }, [reduceMotion, angle]);
 
-  // Only spin while the orbit is on screen and not being hovered.
+  // Keep spinning the whole time it's on screen; only pause off-screen to
+  // avoid burning frames on an animation nobody can see.
   React.useEffect(() => {
     const el = orbitRef.current;
     if (!el) return;
@@ -150,9 +150,9 @@ export function OrbitalTimeline() {
 
   React.useEffect(() => {
     if (reduceMotion) return;
-    if (inView && !hovered) controls.current?.play();
+    if (inView) controls.current?.play();
     else controls.current?.pause();
-  }, [inView, hovered, reduceMotion]);
+  }, [inView, reduceMotion]);
 
   const item = experience[active];
   const total = experience.length;
@@ -160,12 +160,7 @@ export function OrbitalTimeline() {
   return (
     <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center">
       {/* Orbit */}
-      <div
-        ref={orbitRef}
-        className="relative mx-auto aspect-square w-full max-w-[460px]"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      >
+      <div ref={orbitRef} className="relative mx-auto aspect-square w-full max-w-[460px]">
         {/* orbit rings */}
         <div className="pointer-events-none absolute inset-[8%] rounded-full border border-border/40" />
         <div className="pointer-events-none absolute inset-[20%] rounded-full border border-dashed border-border/30" />
