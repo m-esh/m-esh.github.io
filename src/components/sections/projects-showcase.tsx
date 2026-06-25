@@ -10,7 +10,7 @@ import { Reveal } from "@/components/reveal";
 import { cn } from "@/lib/utils";
 
 const CARD_CHROME =
-  "group glass relative flex flex-col overflow-hidden rounded-xl transition-colors duration-300 hover:border-primary/40";
+  "group glass focus-ring relative flex flex-col overflow-hidden rounded-xl transition-colors duration-300 hover:border-primary/40";
 
 // Blueprint grid for the no-photo card — same texture family as the hero cube.
 const BLUEPRINT_BG = {

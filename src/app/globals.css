@@ -150,6 +150,21 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Shared keyboard-focus ring so every interactive element (nav links,
+     cards, icon buttons) gets the same visible focus state the Button and
+     LiquidButton components already have. Mirrors Tailwind's
+     `ring-2 ring-ring/60 ring-offset-2`: a background gap, then the ring. */
+  .focus-ring {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  .focus-ring:focus-visible {
+    outline-color: transparent;
+    box-shadow:
+      0 0 0 2px var(--background),
+      0 0 0 4px color-mix(in oklch, var(--ring) 60%, transparent);
+  }
 }
 
 @layer components {

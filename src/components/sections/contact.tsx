@@ -37,7 +37,7 @@ export function Contact() {
                 href={link.href}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                className="focus-ring inline-flex items-center gap-2 rounded-lg px-1.5 py-1 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
               >
                 <link.icon className="size-4" /> {link.label}
               </a>

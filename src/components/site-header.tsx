@@ -86,7 +86,7 @@ export function SiteHeader() {
           <button
             onClick={() => scrollTo("#top")}
             aria-label="Back to top"
-            className="group/logo inline-flex items-center gap-2.5 text-primary transition-transform active:scale-95"
+            className="focus-ring group/logo inline-flex items-center gap-2.5 rounded-lg text-primary transition-transform active:scale-95"
           >
             <RobotMark className="size-7" />
             <span className="font-display text-lg font-semibold tracking-tight text-foreground">
@@ -103,7 +103,7 @@ export function SiteHeader() {
                   onClick={() => handleNavigate(link.href)}
                   aria-current={isActive ? "true" : undefined}
                   className={cn(
-                    "relative rounded-xl px-4 py-2 text-sm font-medium transition-colors",
+                    "focus-ring relative rounded-xl px-4 py-2 text-sm font-medium transition-colors",
                     isActive
                       ? "text-foreground"
                       : "text-muted-foreground hover:text-foreground"
@@ -161,7 +161,7 @@ export function SiteHeader() {
                     key={link.href}
                     onClick={() => handleNavigate(link.href)}
                     className={cn(
-                      "rounded-lg px-3 py-2.5 text-left text-sm font-medium transition-[color,background-color,transform] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.98]",
+                      "focus-ring rounded-lg px-3 py-2.5 text-left text-sm font-medium transition-[color,background-color,transform] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.98]",
                       active === link.href
                         ? "bg-card text-foreground"
                         : "text-muted-foreground active:bg-card/60 active:text-foreground"

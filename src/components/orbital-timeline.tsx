@@ -84,7 +84,7 @@ function OrbitNode({
         type="button"
         onClick={onSelect}
         aria-label={node.short}
-        className="pointer-events-auto absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2"
+        className="focus-ring pointer-events-auto absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full"
       >
         <motion.span className="block" style={{ rotate: upright }}>
           <span
@@ -106,7 +106,7 @@ function OrbitNode({
             <span
               className={cn(
                 "whitespace-nowrap font-mono text-[10px] uppercase tracking-wider transition-colors sm:text-xs",
-                active ? "text-foreground" : "text-muted-foreground/70"
+                active ? "text-foreground" : "text-muted-foreground"
               )}
             >
               {node.short}

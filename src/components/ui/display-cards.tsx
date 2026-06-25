@@ -59,7 +59,7 @@ function DisplayCard({
         <p className="text-base font-semibold tracking-tight sm:text-lg">{title}</p>
       </div>
       <p className="text-sm text-muted-foreground sm:text-base">{description}</p>
-      <p className="font-mono text-xs text-muted-foreground/70">{date}</p>
+      <p className="font-mono text-xs text-muted-foreground">{date}</p>
     </div>
   );
 }

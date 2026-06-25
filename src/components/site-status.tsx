@@ -25,7 +25,7 @@ export function LocalTime({ className }: { className?: string }) {
 
   return (
     <span className={cn("font-mono tabular-nums", className)} suppressHydrationWarning>
-      {time ?? "—:——"} <span className="text-muted-foreground/70">Toronto</span>
+      {time ?? "—:——"} <span className="text-muted-foreground">Toronto</span>
     </span>
   );
 }
