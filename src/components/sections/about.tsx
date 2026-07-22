@@ -43,7 +43,7 @@ export function About() {
                 <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
                   <GraduationCap className="size-4" />
                 </span>
-                Grade 11 · Markham, ON
+                Grade 12 · Markham, ON
               </li>
             </ul>
           </div>

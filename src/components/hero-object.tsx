@@ -51,8 +51,10 @@ const SHAPES: Shape[] = [
   shape({ tz: HALF, sx: 1, sy: 1.3 }, { tz: 125, sx: 0.08, sy: 0.08 }),
   // Disc — wide and flat, like a turbine rotor
   shape({ tz: HALF, sx: 1.3, sy: 0.15 }, { tz: 14, sx: 1.3, sy: 1.3 }),
-  // Pylon — a slender antenna mast
-  shape({ tz: 22, sx: 0.28, sy: 1.6 }, { tz: 95, sx: 0.28, sy: 0.28 }),
+  // Pylon — a slender antenna mast. Faces must agree on the box: side faces
+  // sit at ±(0.28·180)/2 and caps at ±(1.6·180)/2, or the caps float inside
+  // the shaft and the open ends read as a glitch mid-morph.
+  shape({ tz: 25.2, sx: 0.28, sy: 1.6 }, { tz: 144, sx: 0.28, sy: 0.28 }),
 ];
 
 const BASE_TILT = -22;

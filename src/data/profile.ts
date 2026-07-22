@@ -4,9 +4,9 @@ export const profile = {
   tagline: "Aspiring Mechatronics Engineer",
   location: "Toronto, Canada",
   blurb:
-    "Grade 11 student building things that move, sense, and respond, from competition robots each season to lifeguarding through the summer.",
+    "Grade 12 student building things that move, sense, and respond, from competition robots each season to lifeguarding through the summer.",
   longBio: [
-    "I'm Mehrdad, a grade 11 student in Toronto with my sights set on mechatronics engineering, the field where mechanical systems, electronics, and code all come together.",
+    "I'm Mehrdad, a grade 12 student in Toronto with my sights set on mechatronics engineering, the field where mechanical systems, electronics, and code all come together.",
     "Most weeks split between lifeguarding for the City of Toronto and building competition robots with FRC Team 7902. Different worlds, same lesson: stay calm, pay attention, get it right.",
   ],
   email: "mehrdad.shari@gmail.com",

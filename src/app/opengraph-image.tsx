@@ -31,7 +31,7 @@ export default function Image() {
             display: "flex",
             width: 64,
             height: 4,
-            backgroundColor: "#e8c450",
+            backgroundColor: "#10b981",
             marginBottom: 36,
           }}
         />
@@ -62,7 +62,7 @@ export default function Image() {
             display: "flex",
             marginTop: 24,
             fontSize: 40,
-            color: "#e8c450",
+            color: "#10b981",
           }}
         >
           {profile.tagline}

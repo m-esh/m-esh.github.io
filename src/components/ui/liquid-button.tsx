@@ -31,9 +31,9 @@ export function LiquidButton({
         tone === "gold"
           ? cn(
               "bg-primary text-primary-foreground",
-              "shadow-[inset_0_1px_0_0_oklch(1_0_0/0.5),inset_0_-2px_6px_0_oklch(0.4_0.1_60/0.35),0_8px_30px_-8px_oklch(0.78_0.2_95/0.7)]",
-              "hover:shadow-[inset_0_1px_0_0_oklch(1_0_0/0.55),inset_0_-2px_6px_0_oklch(0.4_0.1_60/0.35),0_12px_40px_-8px_oklch(0.78_0.2_95/0.85)]",
-              "active:shadow-[inset_0_1px_2px_0_oklch(0.4_0.1_60/0.4),inset_0_-1px_2px_0_oklch(1_0_0/0.35),0_4px_16px_-8px_oklch(0.78_0.2_95/0.7)]"
+              "shadow-[inset_0_1px_0_0_oklch(1_0_0/0.5),inset_0_-2px_6px_0_oklch(0.32_0.07_162/0.35),0_8px_30px_-8px_oklch(0.72_0.16_162/0.7)]",
+              "hover:shadow-[inset_0_1px_0_0_oklch(1_0_0/0.55),inset_0_-2px_6px_0_oklch(0.32_0.07_162/0.35),0_12px_40px_-8px_oklch(0.72_0.16_162/0.85)]",
+              "active:shadow-[inset_0_1px_2px_0_oklch(0.32_0.07_162/0.4),inset_0_-1px_2px_0_oklch(1_0_0/0.35),0_4px_16px_-8px_oklch(0.72_0.16_162/0.7)]"
             )
           : cn(
               "border border-white/15 bg-white/8 text-foreground backdrop-blur-xl backdrop-saturate-150",
