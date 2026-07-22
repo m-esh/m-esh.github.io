@@ -97,7 +97,7 @@ function OrbitNode({
               className={cn(
                 "flex size-11 items-center justify-center rounded-full transition-colors sm:size-14",
                 active
-                  ? "border border-primary bg-primary text-primary-foreground shadow-[0_0_24px_-2px_oklch(0.72_0.16_162/0.7)]"
+                  ? "border border-primary bg-primary text-primary-foreground shadow-[0_0_24px_-2px_oklch(0.63_0.15_163/0.7)]"
                   : "glass text-muted-foreground group-hover/node:border-primary/60 group-hover/node:text-foreground"
               )}
             >

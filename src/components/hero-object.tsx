@@ -47,10 +47,13 @@ const SHAPES: Shape[] = [
   shape({ tz: HALF, sx: 1, sy: 0.3 }, { tz: THIN, sx: 1, sy: 1 }),
   // Beam — stretched into a tall girder
   shape({ tz: THIN, sx: 0.3, sy: 1 }, { tz: HALF, sx: 0.3, sy: 0.3 }),
-  // Crystal — pinched into a faceted gem
-  shape({ tz: HALF, sx: 1, sy: 1.3 }, { tz: 125, sx: 0.08, sy: 0.08 }),
-  // Disc — wide and flat, like a turbine rotor
-  shape({ tz: HALF, sx: 1.3, sy: 0.15 }, { tz: 14, sx: 1.3, sy: 1.3 }),
+  // Crystal — pinched into a faceted gem. Caps sit exactly at the side
+  // extent (1.3·180/2) so they never poke through mid-morph.
+  shape({ tz: HALF, sx: 1, sy: 1.3 }, { tz: 117, sx: 0.08, sy: 0.08 }),
+  // Disc — wide and flat, like a turbine rotor. Sides at ±(1.3·180)/2 and
+  // caps at ±(0.15·180)/2 keep the box closed; the old tz: HALF sides left
+  // the rim faces overhanging, which tore visibly on the way to the pylon.
+  shape({ tz: 117, sx: 1.3, sy: 0.15 }, { tz: 13.5, sx: 1.3, sy: 1.3 }),
   // Pylon — a slender antenna mast. Faces must agree on the box: side faces
   // sit at ±(0.28·180)/2 and caps at ±(1.6·180)/2, or the caps float inside
   // the shaft and the open ends read as a glitch mid-morph.

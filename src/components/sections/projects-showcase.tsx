@@ -15,7 +15,7 @@ const CARD_CHROME =
 // Blueprint grid for the no-photo card — same texture family as the hero cube.
 const BLUEPRINT_BG = {
   backgroundImage:
-    "repeating-linear-gradient(to right, oklch(0.72 0.16 162 / 0.07) 0 1px, transparent 1px 44px), repeating-linear-gradient(to bottom, oklch(0.72 0.16 162 / 0.07) 0 1px, transparent 1px 44px)",
+    "repeating-linear-gradient(to right, oklch(0.63 0.15 163 / 0.07) 0 1px, transparent 1px 44px), repeating-linear-gradient(to bottom, oklch(0.63 0.15 163 / 0.07) 0 1px, transparent 1px 44px)",
 };
 
 function CardBody({
