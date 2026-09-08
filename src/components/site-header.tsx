@@ -54,9 +54,19 @@ export function SiteHeader() {
     return () => observer.disconnect();
   }, []);
 
-  const handleNavigate = (href: string) => {
+  // Real anchors, progressively enhanced: the href is what makes these
+  // shareable, middle-clickable and keyboard-native, and it still works with
+  // JS off. We only intercept a plain left click to run the smooth scroll and
+  // keep the URL hash in sync.
+  const handleNavigate = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (e.defaultPrevented) return;
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    e.preventDefault();
     setOpen(false);
     scrollTo(href);
+    if (href !== window.location.hash) {
+      window.history.pushState(null, "", href === "#top" ? window.location.pathname : href);
+    }
   };
 
   return (
@@ -87,8 +97,9 @@ export function SiteHeader() {
         )}
       >
         <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 lg:px-8">
-          <button
-            onClick={() => scrollTo("#top")}
+          <a
+            href="#top"
+            onClick={(e) => handleNavigate(e, "#top")}
             aria-label="Back to top"
             className="focus-ring group/logo inline-flex items-center gap-2.5 rounded-lg text-primary transition-transform active:scale-95"
           >
@@ -96,15 +107,16 @@ export function SiteHeader() {
             <span className="font-display text-lg font-semibold tracking-tight text-foreground">
               MS
             </span>
-          </button>
+          </a>
 
           <div className="hidden items-center gap-1 md:flex">
             {NAV_LINKS.map((link) => {
               const isActive = active === link.href;
               return (
-                <button
+                <a
                   key={link.href}
-                  onClick={() => handleNavigate(link.href)}
+                  href={link.href}
+                  onClick={(e) => handleNavigate(e, link.href)}
                   aria-current={isActive ? "true" : undefined}
                   className={cn(
                     "focus-ring relative rounded-xl px-4 py-2 text-sm font-medium transition-colors",
@@ -121,7 +133,7 @@ export function SiteHeader() {
                     />
                   )}
                   <span className="relative">{link.label}</span>
-                </button>
+                </a>
               );
             })}
           </div>
@@ -161,18 +173,20 @@ export function SiteHeader() {
             >
               <div className="flex flex-col gap-1 px-6 py-4">
                 {NAV_LINKS.map((link) => (
-                  <button
+                  <a
                     key={link.href}
-                    onClick={() => handleNavigate(link.href)}
+                    href={link.href}
+                    onClick={(e) => handleNavigate(e, link.href)}
+                    aria-current={active === link.href ? "true" : undefined}
                     className={cn(
-                      "focus-ring rounded-lg px-3 py-2.5 text-left text-sm font-medium transition-[color,background-color,transform] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.98]",
+                      "focus-ring rounded-lg px-3 py-2.5 text-left text-sm font-medium transition-[color,background-color,transform] duration-[var(--motion-fast)] ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.98]",
                       active === link.href
                         ? "bg-card text-foreground"
                         : "text-muted-foreground active:bg-card/60 active:text-foreground"
                     )}
                   >
                     {link.label}
-                  </button>
+                  </a>
                 ))}
               </div>
             </motion.div>

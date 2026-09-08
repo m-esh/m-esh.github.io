@@ -13,7 +13,7 @@ const sections = [
 ];
 
 export const metadata: Metadata = {
-  title: "Gesture-Controlled Drone · Mehrdad Shariatmadari",
+  title: "Gesture-Controlled Drone",
   description:
     "A 3D-printed drone flown with a flex-sensor glove: hand gestures become stick inputs, streamed from an ESP32 on the back of your hand to a Betaflight flight controller.",
 };
@@ -26,20 +26,27 @@ export default function DronePage() {
       <CaseStudyNav sections={sections} />
 
       <main className="flex-1 pt-16">
-        {/* Hero */}
-        <section className="relative overflow-hidden py-20 sm:py-28">
-          <div className="mx-auto flex max-w-3xl flex-col gap-5 px-6 lg:px-8">
+        {/* Hero. Text column beside the real hardware so the build is visible
+            in the first screen instead of a full viewport of prose. */}
+        <section className="relative overflow-hidden py-16 sm:py-20">
+          <div className="mx-auto grid max-w-6xl items-center gap-10 px-6 lg:grid-cols-[1.15fr_minmax(0,26rem)] lg:px-8">
+            <div className="flex flex-col gap-5">
             <span className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
               Built with a friend · 2026
             </span>
-            <h1 className="text-balance font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
-              Gesture-Controlled Drone
+            {/* The hyphen is a break opportunity, so the title kept splitting
+                as "Gesture-" / "Controlled Drone". The compound is held
+                together from `sm` up, where it fits; below that it must be
+                allowed to break or it overflows a phone screen. */}
+            <h1 className="text-pretty font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl">
+              <span className="whitespace-normal sm:whitespace-nowrap">Gesture-Controlled</span>{" "}
+              Drone
             </h1>
-            <p className="max-w-xl text-balance text-lg leading-relaxed text-muted-foreground sm:text-xl">
-              A drone you fly with your hand instead of sticks. Flex sensors on a
-              glove read your fingers, an ESP32 streams the gestures to the
-              aircraft as radio commands, and a 3D-printed ducted frame keeps the
-              props safe while it learns to hover.
+            <p className="max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground">
+              A drone you fly with your hand instead of sticks: curl your
+              fingers and a sensor glove sends the same commands a transmitter
+              would, to a 3D-printed aircraft whose ducts keep the props out of
+              trouble while it learns to hover.
             </p>
             <dl className="mt-2 grid grid-cols-2 gap-4 pt-5 text-sm sm:max-w-2xl sm:grid-cols-4">
               <div className="flex flex-col gap-1">
@@ -69,6 +76,30 @@ export default function DronePage() {
                 <dd className="font-medium">Lift-off &amp; live channel input</dd>
               </div>
             </dl>
+            </div>
+
+            <figure className="flex flex-col gap-3">
+              <div className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border/60 bg-border/60">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/projects/drone/frame-assembled.jpg"
+                  alt="The assembled 3D-printed drone frame with four ducted propellers, motors and the flight controller mounted"
+                  className="aspect-[3/4] size-full object-cover"
+                  decoding="async"
+                />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/projects/drone/glove.jpg"
+                  alt="The control glove with flex sensors taped along the fingers and its electronics on the back of the hand"
+                  className="aspect-[3/4] size-full object-cover"
+                  decoding="async"
+                />
+              </div>
+              <figcaption className="text-sm leading-relaxed text-muted-foreground">
+                The two halves that have to agree: the printed aircraft, and the
+                glove that flies it.
+              </figcaption>
+            </figure>
           </div>
         </section>
 
@@ -80,8 +111,8 @@ export default function DronePage() {
                 The idea
               </h2>
               <p className="leading-relaxed text-muted-foreground">
-                Every drone ships with the same two-stick transmitter, and
-                learning it is half the battle. We wanted to skip the sticks
+                Conventional drone controllers typically use two sticks, and
+                learning them is half the battle. We wanted to skip the sticks
                 entirely: point your hand, curl your fingers, and have the
                 aircraft respond. That turned one project into two builds that
                 had to meet in the middle, a custom aircraft and a wearable
@@ -193,8 +224,8 @@ export default function DronePage() {
                   </span>
                   <p className="text-sm leading-relaxed text-muted-foreground">
                     Flex sensors run down the fingers and the electronics ride
-                    the back of the hand, so the whole transmitter weighs almost
-                    nothing and goes wherever your hand does.
+                    the back of the hand, so the controller is light enough to
+                    wear and goes wherever your hand does.
                   </p>
                 </div>
               </div>
@@ -285,12 +316,16 @@ export default function DronePage() {
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
             <div className="max-w-2xl pt-8">
               <p className="leading-relaxed text-muted-foreground">
-                The drone flies, the glove talks to it, and every piece of the
-                chain, from a bending finger to a spinning motor, is something
-                we built or programmed ourselves. It&apos;s the most
-                end-to-end project either of us has taken on: mechanical design,
-                electronics, firmware, and flight tuning all have to work at
-                once, or nothing leaves the ground.
+                It lifts off, and the glove&apos;s channels move in Betaflight
+                the way a transmitter&apos;s would. Flying it on gestures alone,
+                reliably, is still ahead of us. What we built ourselves is the
+                frame, the glove, the wiring, and the firmware that turns a
+                bending finger into a channel value; the motors, the flight
+                controller, and Betaflight itself are off-the-shelf parts we
+                integrated. It&apos;s still the most end-to-end project either
+                of us has taken on: mechanical design, electronics, firmware,
+                and flight tuning all have to work at once, or nothing leaves
+                the ground.
               </p>
             </div>
             <div className="mt-8">

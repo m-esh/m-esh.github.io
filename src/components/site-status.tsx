@@ -27,9 +27,13 @@ export function LocalTime({ className }: { className?: string }) {
     return () => window.clearInterval(id);
   }, []);
 
+  // No "—:——" placeholder. It sat there permanently whenever JS didn't run,
+  // reading as a broken clock; the label alone is honest until a real time
+  // exists, and the time fades in beside it once the first tick lands.
   return (
     <span className={cn("font-mono tabular-nums", className)} suppressHydrationWarning>
-      {time ?? "—:——"} <span className="text-muted-foreground">Toronto</span>
+      {time && <>{time} </>}
+      <span className="text-muted-foreground">Toronto</span>
     </span>
   );
 }

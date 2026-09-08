@@ -15,7 +15,7 @@ const sections = [
 ];
 
 export const metadata: Metadata = {
-  title: "Chopstick Ring · Mehrdad Shariatmadari",
+  title: "Chopstick Ring",
   description:
     "A finger-worn chopstick that flips between an eating utensil and a flat fold against your fingers, sketched, modeled in CAD, 3D printed, and assembled by hand.",
 };

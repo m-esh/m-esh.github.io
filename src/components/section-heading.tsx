@@ -23,8 +23,10 @@ export function SectionHeading({
         className
       )}
     >
+      {/* Full-strength primary, not /80: at 12px the faded variant measured
+          4.32:1, just under the 4.5 AA floor for small text. */}
       {index && (
-        <span className="font-mono text-xs uppercase tracking-[0.2em] text-primary/80">
+        <span className="font-mono text-xs uppercase tracking-[0.2em] text-primary">
           {index}
         </span>
       )}

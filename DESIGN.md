@@ -58,14 +58,29 @@ Verify both with JS disabled before shipping changes to either.
 
 - **SiteHeader**: fixed; transparent until 24px scroll, then `bg-background/90` + border + blur. The background is opaque enough on its own — nav legibility must not depend on `backdrop-filter`, which can be absent (unsupported, or `prefers-reduced-transparency`).
 - **OrbitalTimeline**: the signature interaction. A `tablist`/`tab`/`tabpanel` with roving tabindex, arrow/Home/End keys, and the panel wired via `aria-labelledby`. Rotates continuously while on screen, and pauses on hover/focus so a node never drifts out from under the pointer. Below `sm`, node labels are dropped (seven of them collide) and prev/next buttons plus the active role name sit under the ring. The panel renders plainly — no enter animation gating opacity — so switching roles is instant.
-- **Project cards**: solid `bg-card/60`, not glass (nothing sits behind them, so a backdrop-filter cost blur work for no visible frost). Every image carries a definite aspect ratio; `aspect-auto` once let a portrait photo stretch the featured card to 692px.
+- **Project cards**: solid `bg-card/60`, not glass (nothing sits behind them, so a backdrop-filter cost blur work for no visible frost). Every image carries a definite aspect ratio; `aspect-auto` once let a portrait photo stretch the featured card to 692px. A project whose subject isn't legible from one photo can supply `image2`, rendered as two tall panes side by side — the source photos are portrait, so vertical panes crop far less than letterbox bands. `fit: "contain"` frames a CAD render as a padded plate instead of letting its white ground bleed to the card edge.
+- **Hero cube**: rotation idles when scrolled offscreen, same as the orbit — it previously animated for the whole page. `--cube-edge` (a registered `@property`, so it interpolates) lifts on hover and again while dragging, so grabbing it responds visibly. `touch-pan-y` keeps vertical page scroll with the browser; only horizontal drags rotate on touch. The hint names the real interactions rather than showing a bare icon.
 - **Certifications**: a plain three-up grid. The previous fanned card deck overlapped its own text at rest and only separated on hover, so two of three were unreadable on touch.
 - **Buttons**: rounded-full; primary = solid emerald; `LiquidButton` for the hero pair.
 - **Focus**: every interactive element carries `.focus-ring` (or the equivalent in `Button`/`LiquidButton`). Nav links, cards, orbit nodes and social links all show a visible ring.
 
+## Copy rules
+
+- `profile.blurb` is the **meta description only** (needs location + field for search, under ~160 chars). `profile.heroLine` is what renders in the hero, and deliberately repeats neither: the eyebrow directly above it already says "Toronto, Canada · Aspiring Mechatronics Engineer".
+- Homepage card descriptions name the object and its distinctive feature. Electronics detail, exact musical passages and part counts live in the case study, not the card.
+- Claims stay inside what the material shows. The drone page separates **Demonstrated** (lift-off, live channel input) from the unproven goal of reliable gesture flight, and says which parts were built versus integrated off the shelf.
+
+## Long titles
+
+`text-balance` split "Gesture-Controlled Drone" after the hyphen, since a hyphen is a break opportunity. The compound is wrapped in `whitespace-normal sm:whitespace-nowrap`: held together from `sm` up where it fits, allowed to break below that — a plain `whitespace-nowrap` overflowed a 390px screen. Check any new hyphenated title the same way.
+
 ## Spacing & Layout
 
 `max-w-6xl` container, `px-6 lg:px-8`. Sections `py-20 sm:py-24` with `scroll-mt-20` so the fixed header never covers a heading. Prose capped at `max-w-2xl`/`max-w-3xl`. Radius scale from `--radius: 0.5rem`; cards use `rounded-xl`.
+
+**`scroll-margin` is the single source of truth for anchor landings.** `useScrollTo` passes no offset to Lenis, because Lenis already honours `scroll-mt-*`; the two together applied the header clearance twice and dropped every section ~150px down the viewport. With one source, a JS-driven nav click and a plain `#hash` load both land at 80px — verified equal.
+
+Nav items are real `<a href="#...">` anchors. A plain left click is intercepted for smooth scroll and a history entry; modified clicks and middle clicks fall through to the browser.
 
 Homepage order: Hero → Projects → About → Experience & Leadership → Certifications → Contact.
 

@@ -4,8 +4,6 @@ import * as React from "react";
 import { animate, motion, useMotionValue, useReducedMotion, type MotionValue } from "framer-motion";
 import {
   Bot,
-  ChevronLeft,
-  ChevronRight,
   CircuitBoard,
   LifeBuoy,
   Cpu,
@@ -96,13 +94,15 @@ function OrbitNode({
         // Roving tabindex: one stop for the whole orbit, then arrow keys.
         tabIndex={active ? 0 : -1}
         onClick={onSelect}
-        className="group/node focus-ring pointer-events-auto absolute left-1/2 top-0 grid -translate-x-1/2 -translate-y-1/2 cursor-pointer place-items-center rounded-full"
+        // The button wraps the icon *and* its label, so the whole chip is one
+        // hit target rather than a 44px circle with dead text beside it.
+        className="group/node focus-ring pointer-events-auto absolute left-1/2 top-0 grid -translate-x-1/2 -translate-y-1/2 cursor-pointer place-items-center rounded-2xl p-1"
       >
         <motion.span className="block" style={{ rotate: upright }}>
           <span className="flex flex-col items-center gap-1.5">
             <span
               className={cn(
-                "relative grid size-11 place-items-center rounded-full transition-[background-color,border-color,color,transform,box-shadow]",
+                "relative grid size-12 place-items-center rounded-full transition-[background-color,border-color,color,transform,box-shadow]",
                 "duration-[var(--motion-base)] ease-[cubic-bezier(0.16,1,0.3,1)] sm:size-14",
                 active
                   ? "scale-110 border border-primary bg-primary text-primary-foreground shadow-[0_0_20px_-4px_oklch(0.63_0.15_163/0.65)]"
@@ -113,13 +113,16 @@ function OrbitNode({
                     )
               )}
             >
-              <Icon className="size-4 sm:size-5" />
+              <Icon className="size-5" />
             </span>
-            {/* Labels are desktop-only: at phone widths seven of them collide. */}
+            {/* Readable at every width: a chip with its own background so the
+                label never has to compete with the orbit rings behind it. */}
             <span
               className={cn(
-                "hidden whitespace-nowrap font-mono text-[11px] uppercase tracking-wider transition-colors sm:block",
-                active ? "text-foreground" : "text-muted-foreground"
+                "whitespace-nowrap rounded-md px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wider transition-colors sm:text-[11px]",
+                active
+                  ? "bg-primary/15 text-foreground"
+                  : "text-muted-foreground group-hover/node:text-foreground"
               )}
             >
               {node.short}
@@ -233,7 +236,10 @@ export function OrbitalTimeline() {
           onBlurCapture={(e) => {
             if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setEngaged(false);
           }}
-          className="relative mx-auto aspect-square w-full max-w-[300px] sm:max-w-[460px]"
+          // Ring width is capped below the 375px content box: node labels sit
+          // outside the ring radius, and a wider ring pushed the longest one
+          // ("VEX 10801") far enough right to make the page scroll sideways.
+          className="relative mx-auto aspect-square w-full max-w-[280px] sm:max-w-[460px]"
         >
           {/* orbit rings */}
           <div className="pointer-events-none absolute inset-[10%] rounded-full border border-border/40" />
@@ -272,32 +278,6 @@ export function OrbitalTimeline() {
           </div>
         </div>
 
-        {/* Phone controls: labels are hidden on the ring at this size, so the
-            active role is named here and stepped with real buttons. */}
-        <div className="mt-6 flex items-center justify-center gap-2 sm:hidden">
-          <button
-            type="button"
-            onClick={() => step(-1)}
-            aria-label="Previous role"
-            className="focus-ring grid size-11 place-items-center rounded-full border border-border/70 bg-card text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <ChevronLeft className="size-5" />
-          </button>
-          <span
-            aria-hidden
-            className="min-w-[9rem] text-center font-mono text-xs uppercase tracking-[0.16em] text-foreground"
-          >
-            {nodes[active].short}
-          </span>
-          <button
-            type="button"
-            onClick={() => step(1)}
-            aria-label="Next role"
-            className="focus-ring grid size-11 place-items-center rounded-full border border-border/70 bg-card text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <ChevronRight className="size-5" />
-          </button>
-        </div>
       </div>
 
       {/* Detail panel. Rendered plainly (no enter animation gating its
@@ -308,8 +288,15 @@ export function OrbitalTimeline() {
         id={panelId}
         aria-labelledby={tabId(active)}
         tabIndex={0}
-        className="focus-ring rounded-xl border border-border/60 bg-card/70 p-6 sm:p-8"
+        // Measured across all seven roles the panel ranged 394-542px, so
+        // switching tabs moved everything under it by up to 148px. Reserving
+        // close to the median absorbs most of that without stranding a large
+        // empty block under the shortest role.
+        className="focus-ring rounded-xl border border-border/60 bg-card/70 p-6 sm:p-8 lg:min-h-[30rem]"
       >
+        {/* Keyed so each switch replays a short fade; there is no exit
+            animation to wait through, so the new role is readable at once. */}
+        <div key={active} className="animate-[panel-in_var(--motion-base)_var(--ease-out)_both]">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
             <h3 className="text-xl font-semibold tracking-tight sm:text-2xl">{item.role}</h3>
@@ -336,6 +323,7 @@ export function OrbitalTimeline() {
             </li>
           ))}
         </ul>
+        </div>
       </div>
     </div>
   );

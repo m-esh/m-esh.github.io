@@ -64,7 +64,12 @@ export function useScrollTo() {
       if (target === null) return;
       if (lenis) {
         lenis.resize();
-        lenis.scrollTo(target, { offset: -72 });
+        // No manual offset here. Lenis already honours each section's
+        // `scroll-mt-*`, so adding -72 on top applied the header clearance
+        // twice and dropped every section ~150px down the viewport. Letting
+        // scroll-margin be the only source of truth also makes a JS-driven
+        // click and a plain `#hash` load land in exactly the same place.
+        lenis.scrollTo(target);
       } else if (typeof target === "number") {
         window.scrollTo({ top: target, behavior: "smooth" });
       } else {

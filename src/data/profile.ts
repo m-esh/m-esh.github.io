@@ -6,13 +6,18 @@ export const profile = {
   initials: "MS",
   tagline: "Aspiring Mechatronics Engineer",
   location: "Toronto, Canada",
-  // Doubles as the meta description, so it stays under ~160 characters to
-  // avoid being truncated in search results.
+  // Meta description only: needs the location and field for search results,
+  // and stays under ~160 characters so it isn't truncated.
   blurb:
     "Grade 12 student in Toronto headed for mechatronics engineering. I build things that move, sense, and respond, from competition robots to a drone you fly with your hand.",
+  // Hero display line. Deliberately does not repeat the location or the field:
+  // the eyebrow directly above it already reads "Toronto, Canada · Aspiring
+  // Mechatronics Engineer", so this says what I actually build instead.
+  heroLine:
+    "I'm a Grade 12 student who builds robots, mechanisms, and the electronics that make them move.",
   longBio: [
     "I'm Mehrdad, a Grade 12 student in Toronto aiming for mechatronics engineering, the place where mechanical design, electronics, and code have to meet.",
-    "Most of my time goes to FRC Team 7902, where I help lead the mechanical division and drive at competition, and to projects I take on myself: a gesture-controlled drone, a 3D-printed music box, a chopstick you wear on your finger.",
+    "Most of my time goes to FRC Team 7902, where I help lead the mechanical division and drive at competition. The rest goes into build projects: a music box and a wearable chopstick I designed on my own, and a gesture-controlled drone I built with a friend.",
     "The rest of the week is lifeguarding for the City of Toronto, tutoring, and playing in my school's music program. Guarding a pool turns out to be good engineering practice: stay calm, read the situation fast, act before it gets worse.",
   ],
   email: "mehrdad.shari@gmail.com",
@@ -131,7 +136,12 @@ export type ProjectItem = {
   year: string;
   /** Tools and disciplines the project actually used. Kept short: 3-4 max. */
   tags: string[];
-  image?: { src: string; alt: string };
+  /** `fit: "contain"` frames a CAD render as a plate instead of letting its
+   *  white background bleed to the card edge. */
+  image?: { src: string; alt: string; fit?: "cover" | "contain" };
+  /** Optional companion shot. The featured card pairs the two side by side
+   *  when a project isn't legible from a single photo. */
+  image2?: { src: string; alt: string; fit?: "cover" | "contain" };
   links?: { label: string; href: string }[];
   /** True when the only destination is someone else's site, not a case study. */
   external?: boolean;
@@ -141,31 +151,40 @@ export const projects: ProjectItem[] = [
   {
     title: "Gesture-Controlled Drone",
     description:
-      "A 3D-printed ducted drone flown with a flex-sensor glove: finger curls become stick inputs, streamed from an ESP32 on your hand to a Betaflight flight controller. Built with a friend.",
+      "A 3D-printed ducted drone flown by curling your fingers inside a sensor glove, instead of a two-stick transmitter. Built with a friend.",
     year: "2026",
     tags: ["CAD", "3D printing", "ESP32", "Betaflight"],
+    // Two shots, because neither half explains the project alone: the glove
+    // close-up alone never showed the aircraft it flies.
     image: {
+      src: "/projects/drone/frame-assembled.jpg",
+      alt: "The assembled 3D-printed drone with four ducted propellers and its flight controller",
+    },
+    image2: {
       src: "/projects/drone/glove.jpg",
-      alt: "Flex-sensor glove controller wired to an ESP32",
+      alt: "The flex-sensor glove that controls the drone, wired to an ESP32",
     },
     links: [{ label: "View case study", href: "/projects/drone" }],
   },
   {
     title: "Kalimbinator",
     description:
-      "A hand-crank music box, built around a re-tuned kalimba and a custom 3D-printed drum, that plays the opening of the tenor sax solo from Omar Thomas' Come Sunday.",
+      "A hand-cranked music box built around a re-tuned kalimba, where a 3D-printed peg drum plucks the tines to play a melody.",
     year: "2026",
     tags: ["CAD", "3D printing", "Mechanism design"],
     image: {
       src: "/projects/kalimbinator/cad-render.png",
       alt: "CAD render of the Kalimbinator hand-crank music box",
+      // The render is on a white ground; contained and padded it reads as a
+      // drawing plate rather than a blown-out photo against the dark UI.
+      fit: "contain",
     },
     links: [{ label: "View case study", href: "/projects/kalimbinator" }],
   },
   {
     title: "Chopstick Ring",
     description:
-      "A finger-worn chopstick that flips between an eating utensil and a flat fold against your fingers, modeled in CAD, 3D printed, and assembled by hand.",
+      "A finger-worn chopstick that swings down to eat and folds flat against your hand when you're done, on a single pivot.",
     year: "2025",
     tags: ["CAD", "3D printing", "Hinge design"],
     image: {
@@ -177,7 +196,7 @@ export const projects: ProjectItem[] = [
   {
     title: "FRC 7902 Competition Robot",
     description:
-      "A team build I work on as mechanical division vice lead: planning the mechanical side, solving problems in CAD within the game rules, and driving the robot at regional events.",
+      "A team build I work on as mechanical division vice lead, from CAD and prototyping to driving the robot at regional events.",
     year: "2025-present",
     tags: ["CAD", "Prototyping", "Drive team"],
     image: {

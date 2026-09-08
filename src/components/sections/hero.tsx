@@ -37,7 +37,7 @@ export function Hero() {
             style={{ animationDelay: "0.12s" }}
             className="animate-fade-up mt-6 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground sm:text-xl"
           >
-            {profile.blurb}
+            {profile.heroLine}
           </p>
 
           <div

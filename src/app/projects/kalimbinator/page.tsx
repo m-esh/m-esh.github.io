@@ -12,7 +12,7 @@ const sections = [
 ];
 
 export const metadata: Metadata = {
-  title: "Kalimbinator · Mehrdad Shariatmadari",
+  title: "Kalimbinator",
   description:
     "A hand-crank music box, built around a re-tuned kalimba and a custom 3D-printed drum, that plays the opening of the tenor saxophone solo from Omar Thomas' Come Sunday.",
 };

@@ -79,16 +79,71 @@ function CardBody({
   );
 }
 
-function CardImage({ project, className }: { project: ProjectItem; className?: string }) {
-  if (!project.image) return null;
+function Shot({
+  src,
+  alt,
+  fit = "cover",
+  eager,
+}: {
+  src: string;
+  alt: string;
+  fit?: "cover" | "contain";
+  eager?: boolean;
+}) {
   return (
-    <div className={cn("relative overflow-hidden bg-secondary/40", className)}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={project.image.src}
-        alt={project.image.alt}
-        className="size-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
-      />
+    /* eslint-disable-next-line @next/next/no-img-element */
+    <img
+      src={src}
+      alt={alt}
+      loading={eager ? "eager" : "lazy"}
+      decoding="async"
+      className={cn(
+        "size-full transition-transform duration-[var(--motion-slow)] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]",
+        fit === "contain"
+          ? "rounded-lg bg-white object-contain"
+          : "object-cover"
+      )}
+    />
+  );
+}
+
+function CardImage({
+  project,
+  className,
+  eager,
+}: {
+  project: ProjectItem;
+  className?: string;
+  eager?: boolean;
+}) {
+  if (!project.image) return null;
+
+  // Paired shots sit side by side rather than stacked: the source photos are
+  // portrait, so two tall panes crop far less of the subject than two wide
+  // letterbox bands would.
+  if (project.image2) {
+    return (
+      <div className={cn("relative grid grid-cols-2 gap-px overflow-hidden bg-border/60", className)}>
+        <div className="relative overflow-hidden bg-secondary/40">
+          <Shot {...project.image} eager={eager} />
+        </div>
+        <div className="relative overflow-hidden bg-secondary/40">
+          <Shot {...project.image2} eager={eager} />
+        </div>
+      </div>
+    );
+  }
+
+  const contained = project.image.fit === "contain";
+  return (
+    <div
+      className={cn(
+        "relative overflow-hidden",
+        contained ? "bg-secondary/25 p-3 sm:p-4" : "bg-secondary/40",
+        className
+      )}
+    >
+      <Shot {...project.image} eager={eager} />
     </div>
   );
 }
@@ -96,9 +151,12 @@ function CardImage({ project, className }: { project: ProjectItem; className?: s
 function ProjectCard({
   project,
   layout,
+  eager,
 }: {
   project: ProjectItem;
   layout: "feature" | "tile" | "wide";
+  /** Only the first card sits near the fold; the rest load lazily. */
+  eager?: boolean;
 }) {
   const href = project.links?.[0]?.href;
   const isInternal = href?.startsWith("/");
@@ -127,6 +185,7 @@ function ProjectCard({
         {body(false, "justify-center")}
         <CardImage
           project={project}
+          eager={eager}
           className="order-first aspect-[2/1] md:order-none md:aspect-[4/3]"
         />
       </div>
@@ -187,6 +246,7 @@ export function ProjectsShowcase() {
               key={project.title}
               project={project}
               layout={LAYOUTS[i % LAYOUTS.length]}
+              eager={i === 0}
             />
           ))}
         </Reveal>

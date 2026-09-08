@@ -82,6 +82,8 @@ export function HeroObject() {
   const reduceMotion = useReducedMotion();
   const [shapeIndex, setShapeIndex] = React.useState(0);
   const [dragging, setDragging] = React.useState(false);
+  const [inView, setInView] = React.useState(true);
+  const stageRef = React.useRef<HTMLDivElement>(null);
   const [hasInteracted, setHasInteracted] = React.useState(false);
 
   const autoSpin = useMotionValue(0);
@@ -111,6 +113,25 @@ export function HeroObject() {
     };
   }, [reduceMotion, autoSpin]);
 
+  // The cube used to keep spinning for the whole page once you scrolled past
+  // it, animating a transform nobody could see. Same treatment as the orbit:
+  // idle while offscreen.
+  React.useEffect(() => {
+    const el = stageRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), {
+      threshold: 0.05,
+    });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  React.useEffect(() => {
+    if (reduceMotion) return;
+    if (inView && !dragging) spinControls.current?.play();
+    else spinControls.current?.pause();
+  }, [inView, dragging, reduceMotion]);
+
   const handlePointerDown = (e: React.PointerEvent) => {
     // Only capture the pointer for mouse — on touch, capturing would trap the
     // page scroll. With touch-action: pan-y the browser keeps vertical scroll.
@@ -125,7 +146,6 @@ export function HeroObject() {
     };
     setDragging(true);
     setHasInteracted(true);
-    spinControls.current?.pause();
     momentum.current?.stop();
   };
 
@@ -163,7 +183,6 @@ export function HeroObject() {
     if (e.currentTarget.hasPointerCapture?.(e.pointerId)) {
       e.currentTarget.releasePointerCapture(e.pointerId);
     }
-    if (!reduceMotion) spinControls.current?.play();
   };
 
   const handlePointerUp = (e: React.PointerEvent) => {
@@ -196,7 +215,11 @@ export function HeroObject() {
 
   return (
     <div
-      className="relative mx-auto h-[260px] w-[260px] touch-pan-y select-none sm:h-[320px] sm:w-[320px]"
+      // touch-pan-y keeps vertical page scrolling with the browser: only
+      // horizontal drags rotate on touch, so the cube never traps a scroll.
+      ref={stageRef}
+      className="cube-stage relative mx-auto h-[280px] w-[280px] touch-pan-y select-none sm:h-[340px] sm:w-[340px]"
+      data-dragging={dragging ? "true" : undefined}
       style={{ perspective: 900, cursor: dragging ? "grabbing" : "grab" }}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
@@ -225,25 +248,32 @@ export function HeroObject() {
         })}
       </motion.div>
 
+      {/* Names the interaction instead of leaving a bare icon to be guessed
+          at. Both verbs are real: a drag rotates, a tap cycles the shape. */}
       <AnimatePresence>
         {!hasInteracted && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.6 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.6 }}
-            transition={{ duration: 0.4 }}
-            className="pointer-events-none absolute bottom-2 right-2 flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card/80 text-muted-foreground backdrop-blur-sm"
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 6 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="pointer-events-none absolute inset-x-0 -bottom-2 flex justify-center"
           >
-            <motion.div
-              animate={
-                reduceMotion
-                  ? undefined
-                  : { x: [0, 8, -8, 0], rotate: [0, -18, 18, 0] }
-              }
-              transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <Hand className="h-4 w-4" />
-            </motion.div>
+            <span className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card/85 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground backdrop-blur-sm">
+              <motion.span
+                aria-hidden
+                className="inline-flex"
+                animate={reduceMotion ? undefined : { x: [0, 5, -5, 0] }}
+                transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <Hand className="size-3.5" />
+              </motion.span>
+              {/* The second clause is dropped on phones, where the full
+                  string wrapped onto two lines inside the pill. */}
+              <span className="whitespace-nowrap">
+                Drag to rotate<span className="hidden sm:inline"> · tap to morph</span>
+              </span>
+            </span>
           </motion.div>
         )}
       </AnimatePresence>
