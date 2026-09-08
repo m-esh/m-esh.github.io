@@ -41,7 +41,7 @@ export function CaseStudyNav({ sections }: { sections: CaseStudySection[] }) {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 lg:px-8">
         <Link
           href="/#projects"
-          className="group inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          className="focus-ring group inline-flex items-center gap-2 rounded-lg px-1.5 py-1 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
         >
           <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-1" />
           Back to portfolio
@@ -54,7 +54,7 @@ export function CaseStudyNav({ sections }: { sections: CaseStudySection[] }) {
               onClick={() => handleNavigate(section.id)}
               aria-current={active === section.id ? "true" : undefined}
               className={cn(
-                "rounded-xl px-3.5 py-1.5 text-sm font-medium transition-colors",
+                "focus-ring rounded-xl px-3.5 py-1.5 text-sm font-medium transition-colors",
                 active === section.id
                   ? "bg-card text-foreground"
                   : "text-muted-foreground hover:text-foreground"

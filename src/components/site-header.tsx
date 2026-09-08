@@ -10,9 +10,9 @@ import { useScrollTo } from "@/components/smooth-scroll";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
+  { label: "Projects", href: "#projects" },
   { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#projects" },
   { label: "Certifications", href: "#certifications" },
   { label: "Contact", href: "#contact" },
 ];
@@ -76,10 +76,14 @@ export function SiteHeader() {
       </AnimatePresence>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500",
+          "fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,box-shadow] duration-500",
+          // Legibility can't depend on backdrop-filter: where blur is missing
+          // or disabled, a translucent bar lets body copy collide with the nav
+          // labels. bg-background/90 stays readable on its own, and the blur
+          // is layered on top purely as polish.
           scrolled
-            ? "glass shadow-[0_8px_30px_-12px_rgba(0,0,0,0.3)]"
-            : "border-b border-transparent bg-transparent"
+            ? "border-border/60 bg-background/90 shadow-lg shadow-black/30 backdrop-blur-xl backdrop-saturate-150"
+            : "border-transparent bg-transparent"
         )}
       >
         <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 lg:px-8">
@@ -153,7 +157,7 @@ export function SiteHeader() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="glass border-t-0 md:hidden"
+              className="border-b border-border/60 bg-background/95 backdrop-blur-xl backdrop-saturate-150 md:hidden"
             >
               <div className="flex flex-col gap-1 px-6 py-4">
                 {NAV_LINKS.map((link) => (

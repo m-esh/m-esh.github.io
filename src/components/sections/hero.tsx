@@ -13,9 +13,12 @@ export function Hero() {
   const scrollTo = useScrollTo();
 
   return (
+    // 92svh rather than a full viewport: the next section peeks above the
+    // fold, so the hero still fills the screen but the work below is visibly
+    // there rather than a scroll into the unknown.
     <section
       id="top"
-      className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden pt-16"
+      className="relative flex min-h-[92svh] flex-col justify-center overflow-hidden pt-16"
     >
       <div className="mx-auto grid w-full max-w-6xl flex-1 items-center gap-12 px-6 py-12 lg:grid-cols-[1.15fr_1fr] lg:px-8">
         <div className="flex flex-col justify-center">
@@ -44,12 +47,15 @@ export function Hero() {
             <Magnetic>
               <LiquidButton className="group" onClick={() => scrollTo("#projects")}>
                 See my projects
-                <ArrowUpRight className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <ArrowUpRight
+                  aria-hidden
+                  className="transition-transform duration-[var(--motion-base)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                />
               </LiquidButton>
             </Magnetic>
             <Magnetic>
               <LiquidButton tone="metal" onClick={() => scrollTo("#contact")}>
-                <Mail /> Contact me
+                <Mail aria-hidden /> Contact me
               </LiquidButton>
             </Magnetic>
           </div>

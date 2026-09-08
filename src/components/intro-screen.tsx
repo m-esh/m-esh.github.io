@@ -6,11 +6,11 @@ import { motion, AnimatePresence, useReducedMotion, type Variants } from "framer
 import { profile } from "@/data/profile";
 
 const NAME = profile.name;
-const STAGGER = 0.045;
-const START_DELAY = 0.25;
-const SETTLE_DURATION = 0.55;
-const HOLD = 0.45;
-const EXIT_DURATION = 0.45;
+const STAGGER = 0.03;
+const START_DELAY = 0.15;
+const SETTLE_DURATION = 0.45;
+const HOLD = 0.25;
+const EXIT_DURATION = 0.4;
 
 const VISIBLE_MS =
   (START_DELAY + (NAME.length - 1) * STAGGER + SETTLE_DURATION + HOLD) * 1000;
@@ -32,35 +32,65 @@ const container: Variants = {
   },
 };
 
+// Layout effects don't run on the server; falling back to useEffect there
+// keeps React from warning while still letting the client open the overlay
+// before the first paint (so the page never flashes behind it).
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
+
 export function IntroScreen() {
   const reduceMotion = useReducedMotion();
-  const [visible, setVisible] = React.useState(true);
+  // Starts closed and is opened by an effect. The overlay therefore never
+  // exists in the SSR markup: if JS fails to boot, or this component throws,
+  // the visitor lands on the real page instead of a permanent blank screen.
+  const [visible, setVisible] = React.useState(false);
 
-  // Skip the intro on repeat visits within the same tab session. sessionStorage
-  // can't be read during SSR, so the overlay must render first and be hidden
-  // here, before paint, to avoid both a hydration mismatch and a visible flash.
-  React.useLayoutEffect(() => {
-    if (sessionStorage.getItem(SEEN_KEY)) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setVisible(false);
+  useIsomorphicLayoutEffect(() => {
+    if (reduceMotion) return;
+    let seen = false;
+    try {
+      seen = sessionStorage.getItem(SEEN_KEY) !== null;
+      sessionStorage.setItem(SEEN_KEY, "1");
+    } catch {
+      // Private mode / storage disabled: play it, just don't remember.
     }
-  }, []);
+    if (!seen) setVisible(true);
+  }, [reduceMotion]);
 
   React.useEffect(() => {
-    if (reduceMotion || !visible) return;
-    sessionStorage.setItem(SEEN_KEY, "1");
+    if (!visible) return;
+
     document.body.style.overflow = "hidden";
     const timer = setTimeout(() => setVisible(false), VISIBLE_MS);
+
+    // Belt and braces: if the timer is throttled (background tab) or the exit
+    // animation never resolves, this hard deadline releases the page anyway.
+    const failsafe = setTimeout(() => setVisible(false), VISIBLE_MS + 2000);
+
     return () => {
       clearTimeout(timer);
+      clearTimeout(failsafe);
       document.body.style.overflow = "";
     };
-  }, [reduceMotion, visible]);
+  }, [visible]);
 
+  // Always release the scroll lock once hidden, whatever path got us here.
   React.useEffect(() => {
-    if (!visible) {
-      document.body.style.overflow = "";
-    }
+    if (!visible) document.body.style.overflow = "";
+  }, [visible]);
+
+  // Let a visitor dismiss it early rather than waiting it out.
+  React.useEffect(() => {
+    if (!visible) return;
+    const skip = () => setVisible(false);
+    window.addEventListener("keydown", skip);
+    window.addEventListener("pointerdown", skip);
+    window.addEventListener("wheel", skip, { passive: true });
+    return () => {
+      window.removeEventListener("keydown", skip);
+      window.removeEventListener("pointerdown", skip);
+      window.removeEventListener("wheel", skip);
+    };
   }, [visible]);
 
   if (reduceMotion) return null;
@@ -79,7 +109,7 @@ export function IntroScreen() {
             initial="hidden"
             animate="visible"
             variants={container}
-            className="inline-flex flex-wrap items-baseline justify-center text-balance text-center font-display text-2xl font-semibold tracking-tight text-glow sm:text-4xl"
+            className="inline-flex flex-wrap items-baseline justify-center text-balance text-center font-display text-2xl font-semibold tracking-tight sm:text-4xl"
           >
             {NAME.split("").map((char, i) => {
               const offset = pieceOffset(i);

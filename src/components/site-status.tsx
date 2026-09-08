@@ -18,6 +18,10 @@ export function LocalTime({ className }: { className?: string }) {
         hour12: true,
       }).format(new Date());
 
+    // The first tick has to happen in an effect, not in render: the clock is a
+    // client-only value, and putting it in the SSR markup would guarantee a
+    // hydration mismatch on every load.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setTime(format());
     const id = window.setInterval(() => setTime(format()), 10_000);
     return () => window.clearInterval(id);

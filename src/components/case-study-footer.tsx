@@ -6,13 +6,13 @@ export function CaseStudyFooter({ next }: { next: { href: string; label: string 
     <div className="flex flex-col items-start gap-5 border-t border-border/30 pt-8 sm:flex-row sm:items-end sm:justify-between">
       <Link
         href="/#projects"
-        className="group inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+        className="focus-ring group inline-flex items-center gap-2 rounded-lg px-1.5 py-1 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
       >
         <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-1" />
         Back to all projects
       </Link>
 
-      <Link href={next.href} className="group flex flex-col items-start gap-1 sm:items-end">
+      <Link href={next.href} className="focus-ring group flex flex-col items-start gap-1 rounded-lg px-1.5 py-1 sm:items-end">
         <span className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
           Next project
         </span>

@@ -149,7 +149,11 @@ export default function ChopstickRingPage() {
               </div>
               <div className="flex flex-col gap-1">
                 <dt className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">Parts</dt>
-                <dd className="font-medium">6-piece assembly</dd>
+                {/* Five distinct parts are modeled and dimensioned (arm,
+                    bracket, ring, pin, bushing) across six drawing sheets, the
+                    first being the assembly overview. The old "6-piece" figure
+                    matched the sheet count, not the part count. */}
+                <dd className="font-medium">5 modeled parts</dd>
               </div>
             </dl>
           </div>
@@ -177,7 +181,7 @@ export default function ChopstickRingPage() {
                 The Chopstick Ring lives on two fingers. A pivoting arm swings down into
                 an eating position when you need it, then folds back flat against your
                 hand when you don&apos;t, staying clean, out of the way, and always within reach. I
-                worked through the geometry in CAD, dimensioned a six-part assembly, then
+                worked through the geometry in CAD, dimensioned every part, then
                 3D printed and hand-assembled the prototype with metal pins and rings.
               </p>
             </div>

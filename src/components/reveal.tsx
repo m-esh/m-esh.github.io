@@ -1,30 +1,59 @@
 "use client";
 
-import { motion, type HTMLMotionProps } from "framer-motion";
+import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-type RevealProps = HTMLMotionProps<"div"> & {
-  /** Stagger this element after the section enters, in seconds. */
+type RevealProps = React.ComponentProps<"div"> & {
+  /** Stagger this element after it enters view, in seconds. */
   delay?: number;
-  /** Starting vertical offset before the element settles. */
-  y?: number;
 };
 
-// Scroll-choreographed entrance: content fades and lifts into place as it
-// crosses into view, once. MotionConfig reducedMotion="user" (set in the
-// provider) automatically drops the transform for reduced-motion visitors.
-export function Reveal({ children, className, delay = 0, y = 24, ...props }: RevealProps) {
+// Scroll-choreographed entrance: content lifts into place as it crosses into
+// view, once.
+//
+// Deliberately CSS-driven rather than framer-motion's `whileInView`. That
+// version SSR'd `opacity: 0` inline, so every wrapped section was invisible to
+// crawlers, print, and anyone whose JS failed — the page rendered blank. Here
+// the markup ships fully visible and JS only *adds* the animation, so a
+// failure degrades to plain, readable content. `prefers-reduced-motion` is
+// handled in CSS alongside the animation itself.
+export function Reveal({ children, className, delay = 0, style, ...props }: RevealProps) {
+  const ref = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    // Arm the animation only once JS is running, so the no-JS state stays visible.
+    el.dataset.reveal = "idle";
+
+    if (!("IntersectionObserver" in window)) {
+      el.dataset.reveal = "in";
+      return;
+    }
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        el.dataset.reveal = "in";
+        io.disconnect();
+      },
+      { rootMargin: "0px 0px -12% 0px" }
+    );
+
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <motion.div
-      className={cn(className)}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "0px 0px -12% 0px" }}
-      transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
+    <div
+      ref={ref}
+      className={cn("reveal", className)}
+      style={{ "--reveal-delay": `${delay}s`, ...style } as React.CSSProperties}
       {...props}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

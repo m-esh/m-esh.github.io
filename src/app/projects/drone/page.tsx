@@ -41,7 +41,7 @@ export default function DronePage() {
               aircraft as radio commands, and a 3D-printed ducted frame keeps the
               props safe while it learns to hover.
             </p>
-            <dl className="mt-2 grid grid-cols-3 gap-4 pt-5 text-sm sm:max-w-md">
+            <dl className="mt-2 grid grid-cols-2 gap-4 pt-5 text-sm sm:max-w-2xl sm:grid-cols-4">
               <div className="flex flex-col gap-1">
                 <dt className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
                   Role
@@ -59,6 +59,14 @@ export default function DronePage() {
                   Control
                 </dt>
                 <dd className="font-medium">Flex-sensor glove</dd>
+              </div>
+              {/* States only what the footage actually shows, so a reader can
+                  tell a demonstrated capability from an intended one. */}
+              <div className="flex flex-col gap-1">
+                <dt className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                  Demonstrated
+                </dt>
+                <dd className="font-medium">Lift-off &amp; live channel input</dd>
               </div>
             </dl>
           </div>

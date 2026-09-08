@@ -6,9 +6,9 @@ import { Reveal } from "@/components/reveal";
 
 export function About() {
   return (
-    <section id="about" className="relative py-20 sm:py-28">
+    <section id="about" className="relative scroll-mt-20 py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
-        <SectionHeading index="01" title="About me" />
+        <SectionHeading index="02" title="About me" />
 
         <Reveal delay={0.08} className="mt-10 grid gap-8 lg:grid-cols-[1fr_320px]">
           <div className="flex flex-col gap-6">

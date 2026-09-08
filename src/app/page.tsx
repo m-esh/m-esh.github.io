@@ -20,9 +20,9 @@ export default function Home() {
       <SiteHeader />
       <main id="content" className="flex-1">
         <Hero />
+        <ProjectsShowcase />
         <About />
         <Experience />
-        <ProjectsShowcase />
         <Certifications />
         <Contact />
       </main>

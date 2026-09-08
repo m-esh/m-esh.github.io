@@ -1,20 +1,25 @@
+/** Production origin. Metadata, canonicals and the sitemap all resolve from this. */
+export const siteUrl = "https://mrdad.ca";
+
 export const profile = {
   name: "Mehrdad Shariatmadari",
   initials: "MS",
   tagline: "Aspiring Mechatronics Engineer",
   location: "Toronto, Canada",
+  // Doubles as the meta description, so it stays under ~160 characters to
+  // avoid being truncated in search results.
   blurb:
-    "Grade 12 student building things that move, sense, and respond, from competition robots each season to lifeguarding through the summer.",
+    "Grade 12 student in Toronto headed for mechatronics engineering. I build things that move, sense, and respond, from competition robots to a drone you fly with your hand.",
   longBio: [
-    "I'm Mehrdad, a grade 12 student in Toronto with my sights set on mechatronics engineering, the field where mechanical systems, electronics, and code all come together.",
-    "Most weeks split between lifeguarding for the City of Toronto and building competition robots with FRC Team 7902. Different worlds, same lesson: stay calm, pay attention, get it right.",
+    "I'm Mehrdad, a Grade 12 student in Toronto aiming for mechatronics engineering, the place where mechanical design, electronics, and code have to meet.",
+    "Most of my time goes to FRC Team 7902, where I help lead the mechanical division and drive at competition, and to projects I take on myself: a gesture-controlled drone, a 3D-printed music box, a chopstick you wear on your finger.",
+    "The rest of the week is lifeguarding for the City of Toronto, tutoring, and playing in my school's music program. Guarding a pool turns out to be good engineering practice: stay calm, read the situation fast, act before it gets worse.",
   ],
   email: "mehrdad.shari@gmail.com",
   socials: {
     linkedin:
       "https://www.linkedin.com/in/mehrdad-shariatmadari",
   },
-  resumeUrl: "#",
 };
 
 export type ExperienceItem = {
@@ -124,8 +129,12 @@ export type ProjectItem = {
   title: string;
   description: string;
   year: string;
+  /** Tools and disciplines the project actually used. Kept short: 3-4 max. */
+  tags: string[];
   image?: { src: string; alt: string };
   links?: { label: string; href: string }[];
+  /** True when the only destination is someone else's site, not a case study. */
+  external?: boolean;
 };
 
 export const projects: ProjectItem[] = [
@@ -134,6 +143,7 @@ export const projects: ProjectItem[] = [
     description:
       "A 3D-printed ducted drone flown with a flex-sensor glove: finger curls become stick inputs, streamed from an ESP32 on your hand to a Betaflight flight controller. Built with a friend.",
     year: "2026",
+    tags: ["CAD", "3D printing", "ESP32", "Betaflight"],
     image: {
       src: "/projects/drone/glove.jpg",
       alt: "Flex-sensor glove controller wired to an ESP32",
@@ -145,6 +155,7 @@ export const projects: ProjectItem[] = [
     description:
       "A hand-crank music box, built around a re-tuned kalimba and a custom 3D-printed drum, that plays the opening of the tenor sax solo from Omar Thomas' Come Sunday.",
     year: "2026",
+    tags: ["CAD", "3D printing", "Mechanism design"],
     image: {
       src: "/projects/kalimbinator/cad-render.png",
       alt: "CAD render of the Kalimbinator hand-crank music box",
@@ -156,6 +167,7 @@ export const projects: ProjectItem[] = [
     description:
       "A finger-worn chopstick that flips between an eating utensil and a flat fold against your fingers, modeled in CAD, 3D printed, and assembled by hand.",
     year: "2025",
+    tags: ["CAD", "3D printing", "Hinge design"],
     image: {
       src: "/projects/chopstick-ring/prototype-eating-mode.jpg",
       alt: "Chopstick Ring prototype worn in eating mode",
@@ -165,13 +177,20 @@ export const projects: ProjectItem[] = [
   {
     title: "FRC 7902 Competition Robot",
     description:
-      "A season-long build that starts as a CAD sketch and ends as a machine that has to drive, score, and survive elimination matches.",
+      "A team build I work on as mechanical division vice lead: planning the mechanical side, solving problems in CAD within the game rules, and driving the robot at regional events.",
     year: "2025-present",
+    tags: ["CAD", "Prototyping", "Drive team"],
     image: {
       src: "/projects/frc/robot-2026-rebuilt.jpg",
       alt: "FRC Team 7902's robot loaded with game pieces during a 2026 REBUILT match",
     },
-    links: [{ label: "FRC Team 7902", href: "https://www.thebluealliance.com/team/7902" }],
+    links: [
+      {
+        label: "Team profile on The Blue Alliance",
+        href: "https://www.thebluealliance.com/team/7902",
+      },
+    ],
+    external: true,
   },
 ];
 

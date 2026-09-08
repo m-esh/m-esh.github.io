@@ -9,8 +9,11 @@ import { TextScramble } from "@/components/text-scramble";
 import { Reveal } from "@/components/reveal";
 import { cn } from "@/lib/utils";
 
+// Solid surface rather than .glass: nothing sits behind these cards, so a
+// backdrop-filter across four large elements cost blur work on every scroll
+// frame and bought no visible frost.
 const CARD_CHROME =
-  "group glass focus-ring relative flex flex-col overflow-hidden rounded-xl transition-colors duration-300 hover:border-primary/40";
+  "group focus-ring relative flex flex-col overflow-hidden rounded-xl border border-border/60 bg-card/60 transition-colors duration-[var(--motion-base)] hover:border-primary/40";
 
 // Blueprint grid for the no-photo card — same texture family as the hero cube.
 const BLUEPRINT_BG = {
@@ -21,23 +24,56 @@ const BLUEPRINT_BG = {
 function CardBody({
   project,
   ArrowIcon,
+  cta,
+  pinCta,
   className,
 }: {
   project: ProjectItem;
   ArrowIcon: typeof ArrowRight;
+  cta: string;
+  /** Tiles pin the CTA to the bottom so it lines up across the grid row.
+   *  Side-by-side layouts centre the block instead, which would otherwise
+   *  leave a large hole between the tags and a bottom-pinned CTA. */
+  pinCta: boolean;
   className?: string;
 }) {
   return (
     <div className={cn("flex flex-1 flex-col gap-2.5 p-5 sm:p-6", className)}>
-      <span className="inline-flex items-center gap-2 text-lg font-semibold tracking-tight sm:text-xl">
+      <span className="text-lg font-semibold tracking-tight sm:text-xl">
         <TextScramble text={project.title} trigger="hover" />
-        <ArrowIcon className="size-4 shrink-0 text-muted-foreground transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-foreground" />
       </span>
       <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
         {project.description}
       </p>
-      <span className="mt-auto pt-2 font-mono text-xs text-muted-foreground">
-        {project.year}
+
+      <ul className="mt-1 flex flex-wrap gap-1.5">
+        {project.tags.map((tag) => (
+          <li
+            key={tag}
+            className="rounded-md border border-border/60 px-2 py-0.5 font-mono text-[11px] text-muted-foreground"
+          >
+            {tag}
+          </li>
+        ))}
+      </ul>
+
+      {/* Understated but explicit affordance: the whole card is the target,
+          and this names where it goes (internal case study vs. someone
+          else's site) instead of relying on a bare arrow. */}
+      <span
+        className={cn(
+          "flex items-center justify-between gap-4 pt-3",
+          pinCta && "mt-auto"
+        )}
+      >
+        <span className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground/90 transition-colors group-hover:text-primary">
+          {cta}
+          <ArrowIcon
+            aria-hidden
+            className="size-4 shrink-0 transition-transform duration-[var(--motion-base)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+          />
+        </span>
+        <span className="font-mono text-xs text-muted-foreground">{project.year}</span>
       </span>
     </div>
   );
@@ -67,32 +103,45 @@ function ProjectCard({
   const href = project.links?.[0]?.href;
   const isInternal = href?.startsWith("/");
   const ArrowIcon = isInternal ? ArrowRight : ArrowUpRight;
+  // An external card says so plainly, so nobody clicks expecting a case study
+  // and lands on a third-party team profile instead.
+  const cta = isInternal ? "View project" : (project.links?.[0]?.label ?? "Visit site");
 
+  const body = (pinCta: boolean, extra?: string) => (
+    <CardBody
+      project={project}
+      ArrowIcon={ArrowIcon}
+      cta={cta}
+      pinCta={pinCta}
+      className={extra}
+    />
+  );
+
+  // Every image gets a definite ratio. Leaving the side-by-side images on
+  // `aspect-auto` let a portrait photo set its own height and stretched the
+  // featured card to 692px, most of it empty space beside the text.
   const content =
     layout === "feature" ? (
       // Featured: text beside the photo.
       <div className="grid flex-1 md:grid-cols-[1.1fr_1fr]">
-        <CardBody project={project} ArrowIcon={ArrowIcon} className="justify-center" />
+        {body(false, "justify-center")}
         <CardImage
           project={project}
-          className="order-first aspect-[2/1] md:order-none md:aspect-auto md:min-h-[220px]"
+          className="order-first aspect-[2/1] md:order-none md:aspect-[4/3]"
         />
       </div>
     ) : layout === "tile" ? (
       <>
         <CardImage project={project} className="aspect-[16/9]" />
-        <CardBody project={project} ArrowIcon={ArrowIcon} />
+        {body(true)}
       </>
     ) : (
       // Wide card mirroring the feature: photo left, text on the blueprint
       // grid right — the drawing-board texture for the season-rebuilt robot.
       <div className="grid flex-1 md:grid-cols-[1fr_1.1fr]">
-        <CardImage
-          project={project}
-          className="aspect-[2/1] md:aspect-auto md:min-h-[200px]"
-        />
+        <CardImage project={project} className="aspect-[2/1] md:aspect-[3/2]" />
         <div style={BLUEPRINT_BG} className="flex">
-          <CardBody project={project} ArrowIcon={ArrowIcon} className="justify-center" />
+          {body(false, "justify-center")}
         </div>
       </div>
     );
@@ -115,6 +164,7 @@ function ProjectCard({
       className={cn(CARD_CHROME, cellSpan)}
     >
       {content}
+      <span className="sr-only"> (opens The Blue Alliance in a new tab)</span>
     </a>
   );
 }
@@ -123,12 +173,12 @@ const LAYOUTS: Array<"feature" | "tile" | "wide"> = ["feature", "tile", "tile", 
 
 export function ProjectsShowcase() {
   return (
-    <section id="projects" className="relative py-20 sm:py-28">
+    <section id="projects" className="relative scroll-mt-20 py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <SectionHeading
-          index="03"
-          title="Projects"
-          description="A running list, with more to come as each season wraps."
+          index="01"
+          title="Selected Projects"
+          description="Things I designed, built, and had to debug when they didn't work the first time."
         />
 
         <Reveal delay={0.08} className="mt-10 grid gap-4 sm:gap-5 md:grid-cols-2">
