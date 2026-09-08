@@ -4,6 +4,8 @@ import * as React from "react";
 import { animate, motion, useMotionValue, useReducedMotion, type MotionValue } from "framer-motion";
 import {
   Bot,
+  ChevronLeft,
+  ChevronRight,
   CircuitBoard,
   LifeBuoy,
   Cpu,
@@ -278,6 +280,38 @@ export function OrbitalTimeline() {
           </div>
         </div>
 
+        {/* Stepper. Shown at every width: a rotating dial is fiddly to click
+            precisely, and these give a steady target plus a readout of which
+            of the seven roles is selected. They drive the same selection as
+            the nodes, so the tablist stays the source of truth. */}
+        <div className="mt-6 flex items-center justify-center gap-2">
+          <button
+            type="button"
+            onClick={() => step(-1)}
+            aria-label="Previous role"
+            className="focus-ring grid size-11 shrink-0 place-items-center rounded-full border border-border/70 bg-card text-muted-foreground transition-colors duration-[var(--motion-fast)] hover:border-primary/50 hover:text-foreground"
+          >
+            <ChevronLeft className="size-5" aria-hidden />
+          </button>
+
+          <p className="flex min-w-[10rem] flex-col items-center gap-0.5 text-center">
+            <span className="font-mono text-xs uppercase tracking-[0.16em] text-foreground">
+              {nodes[active].short}
+            </span>
+            <span className="font-mono text-[10px] tabular-nums text-muted-foreground">
+              {active + 1} / {total}
+            </span>
+          </p>
+
+          <button
+            type="button"
+            onClick={() => step(1)}
+            aria-label="Next role"
+            className="focus-ring grid size-11 shrink-0 place-items-center rounded-full border border-border/70 bg-card text-muted-foreground transition-colors duration-[var(--motion-fast)] hover:border-primary/50 hover:text-foreground"
+          >
+            <ChevronRight className="size-5" aria-hidden />
+          </button>
+        </div>
       </div>
 
       {/* Detail panel. Rendered plainly (no enter animation gating its
