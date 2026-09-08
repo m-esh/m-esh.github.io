@@ -67,7 +67,7 @@ Verify both with JS disabled before shipping changes to either.
 
 `max-w-6xl` container, `px-6 lg:px-8`. Sections `py-20 sm:py-24` with `scroll-mt-20` so the fixed header never covers a heading. Prose capped at `max-w-2xl`/`max-w-3xl`. Radius scale from `--radius: 0.5rem`; cards use `rounded-xl`.
 
-Homepage order: Hero → Selected Projects → About → Experience & Leadership → Certifications → Contact.
+Homepage order: Hero → Projects → About → Experience & Leadership → Certifications → Contact.
 
 ## CSS gotchas
 

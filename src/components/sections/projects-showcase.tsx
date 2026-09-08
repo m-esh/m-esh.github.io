@@ -177,7 +177,7 @@ export function ProjectsShowcase() {
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <SectionHeading
           index="01"
-          title="Selected Projects"
+          title="Projects"
           description="Things I designed, built, and had to debug when they didn't work the first time."
         />
 
