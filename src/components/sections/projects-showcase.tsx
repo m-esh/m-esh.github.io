@@ -73,7 +73,9 @@ function CardBody({
             className="size-4 shrink-0 transition-transform duration-[var(--motion-base)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
           />
         </span>
-        <span className="font-mono text-xs text-muted-foreground">{project.year}</span>
+        <span className="shrink-0 whitespace-nowrap font-mono text-xs text-muted-foreground">
+          {project.year}
+        </span>
       </span>
     </div>
   );

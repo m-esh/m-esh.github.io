@@ -196,7 +196,7 @@ export const projects: ProjectItem[] = [
   {
     title: "FRC 7902 Competition Robot",
     description:
-      "A team build I work on as manufacturing subdivision vice lead, from CAD and prototyping to driving the robot at regional events.",
+      "The robot our team builds each season. I'm vice lead of the manufacturing subdivision, I design parts in CAD, and I drive at regionals.",
     year: "2025-present",
     tags: ["CAD", "Prototyping", "Drive team"],
     image: {
@@ -204,10 +204,8 @@ export const projects: ProjectItem[] = [
       alt: "FRC Team 7902's robot loaded with game pieces during a 2026 REBUILT match",
     },
     links: [
-      {
-        label: "Team profile on The Blue Alliance",
-        href: "https://www.thebluealliance.com/team/7902",
-      },
+      // Kept short: the long form wrapped onto two lines in the card footer.
+      { label: "The Blue Alliance profile", href: "https://www.thebluealliance.com/team/7902" },
     ],
     external: true,
   },
