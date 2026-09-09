@@ -48,8 +48,8 @@ export function Hero() {
                 very next thing on the page, so a button to reach it just
                 repeated the scroll the visitor was about to make anyway. */}
             <Magnetic>
-              <LiquidButton className="group" onClick={() => scrollTo("#experience")}>
-                See my experience
+              <LiquidButton className="group" onClick={() => scrollTo("#about")}>
+                Read about me
                 <ArrowUpRight
                   aria-hidden
                   className="transition-transform duration-[var(--motion-base)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
