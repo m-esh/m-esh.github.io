@@ -31,7 +31,7 @@ export function About() {
                 <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
                   <Wrench className="size-4" />
                 </span>
-                Mech Division Vice Lead, FRC 7902
+                Manufacturing Vice Lead, FRC 7902
               </li>
               <li className="flex items-center gap-3 text-sm leading-snug">
                 <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">

@@ -17,7 +17,7 @@ export const profile = {
     "I'm a Grade 12 student who builds robots, mechanisms, and the electronics that make them move.",
   longBio: [
     "I'm Mehrdad, a Grade 12 student in Toronto aiming for mechatronics engineering, the place where mechanical design, electronics, and code have to meet.",
-    "Most of my time goes to FRC Team 7902, where I help lead the mechanical division and drive at competition. The rest goes into build projects: a music box and a wearable chopstick I designed on my own, and a gesture-controlled drone I built with a friend.",
+    "Most of my time goes to FRC Team 7902, where I help lead the manufacturing subdivision and drive at competition. The rest goes into build projects: a music box and a wearable chopstick I designed on my own, and a gesture-controlled drone I built with a friend.",
     "The rest of the week is lifeguarding for the City of Toronto, tutoring, and playing in my school's music program. Guarding a pool turns out to be good engineering practice: stay calm, read the situation fast, act before it gets worse.",
   ],
   email: "mehrdad.shari@gmail.com",
@@ -38,14 +38,14 @@ export type ExperienceItem = {
 
 export const experience: ExperienceItem[] = [
   {
-    role: "Mechanical Division Vice Lead & Drive Team, FRC Team 7902",
+    role: "Manufacturing Subdivision Vice Lead & Drive Team, FRC Team 7902",
     org: "FIRST Robotics Competition",
     period: "Jun 2025-present",
     location: "Markham, ON",
     summary:
-      "Helping lead the mechanical side of a competition robot build each season, while also stepping onto the field as part of the drive team.",
+      "Helping lead the manufacturing subdivision through a competition robot build each season, while also stepping onto the field as part of the drive team.",
     highlights: [
-      "Help run the mechanical division: planning builds, assigning tasks, and keeping CAD designs on track",
+      "Help run the manufacturing subdivision: planning builds, assigning tasks, and keeping CAD designs on track",
       "Use CAD and quick prototyping to solve mechanical problems within the competition's rules",
       "Operate the robot on the field as part of the drive team and adjust strategy between matches at regional events",
     ],
@@ -196,7 +196,7 @@ export const projects: ProjectItem[] = [
   {
     title: "FRC 7902 Competition Robot",
     description:
-      "A team build I work on as mechanical division vice lead, from CAD and prototyping to driving the robot at regional events.",
+      "A team build I work on as manufacturing subdivision vice lead, from CAD and prototyping to driving the robot at regional events.",
     year: "2025-present",
     tags: ["CAD", "Prototyping", "Drive team"],
     image: {
