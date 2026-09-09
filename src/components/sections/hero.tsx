@@ -44,9 +44,12 @@ export function Hero() {
             style={{ animationDelay: "0.2s" }}
             className="animate-fade-up mt-10 flex flex-wrap items-center gap-3"
           >
+            {/* Points past the projects, not at them: the projects grid is the
+                very next thing on the page, so a button to reach it just
+                repeated the scroll the visitor was about to make anyway. */}
             <Magnetic>
-              <LiquidButton className="group" onClick={() => scrollTo("#projects")}>
-                See my projects
+              <LiquidButton className="group" onClick={() => scrollTo("#experience")}>
+                See my experience
                 <ArrowUpRight
                   aria-hidden
                   className="transition-transform duration-[var(--motion-base)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
