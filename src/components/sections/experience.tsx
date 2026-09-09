@@ -10,7 +10,7 @@ export function Experience() {
         <SectionHeading
           index="03"
           title="Experience & Leadership"
-          description="Robotics, manufacturing, lifeguarding, music, tutoring. Select a node to read the role."
+          description="Everything I've done so far. Select a node to read the role."
         />
 
         <div className="mt-10">
