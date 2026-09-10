@@ -159,15 +159,19 @@
     text-wrap: balance;
   }
 
-  /* Scroll reveal. Content is visible by default; JS sets data-reveal="idle"
-     to arm the animation and "in" to play it, so a JS failure degrades to
-     plain visible content instead of a blank page. */
-  .reveal[data-reveal="idle"] {
+  /* Scroll reveal.
+
+     The hidden state is gated on html[data-js], which an inline script sets
+     before the first paint. That matters: arming this from a React effect
+     meant the page painted fully and then snapped blank at hydration — a
+     visible flash of the whole site. Because the flag is only ever set by
+     script, a browser without JS never hides anything. */
+  html[data-js] .reveal {
     opacity: 0;
     transform: translateY(var(--reveal-y, 20px));
   }
-  .reveal[data-reveal="in"] {
-    animation: reveal-in var(--motion-slow) var(--ease-out) var(--reveal-delay, 0s) both;
+  html[data-js] .reveal[data-reveal="in"] {
+    animation: reveal-in var(--motion-slow) var(--ease-out) var(--reveal-delay, 0s) forwards;
   }
   /* Short crossfade when the orbit swaps roles. Enter-only: nothing waits on
      an exit, so a new role is readable the moment it is selected. */
@@ -193,11 +197,11 @@
     }
   }
   @media (prefers-reduced-motion: reduce) {
-    .reveal[data-reveal="idle"] {
+    html[data-js] .reveal {
       opacity: 1;
       transform: none;
     }
-    .reveal[data-reveal="in"] {
+    html[data-js] .reveal[data-reveal="in"] {
       animation: none;
     }
   }

@@ -71,12 +71,19 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${geistMono.variable} ${bricolage.variable} dark h-full`}
     >
       <body className="min-h-full flex flex-col antialiased selection:bg-primary selection:text-primary-foreground">
-        {/* Runs before the overlay is parsed, so a repeat visit never sees a
-            frame of it. Everything here is an enhancement: with JS off the
-            intro simply plays and its CSS animation clears it. */}
+        {/* Runs before any of the page below is parsed. It arms the scroll
+            reveals (data-js) so they are hidden from the very first paint
+            rather than snapping blank at hydration, and skips the intro on a
+            repeat visit. Both are enhancements: with JS off, nothing is
+            hidden and the intro clears itself in CSS. The 2.5s timer undoes
+            data-js if React never mounted to claim it, so a failed hydration
+            can't leave the page permanently blank. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var d=document.documentElement;
+            __html: `(function(){var d=document.documentElement;
+d.dataset.js='1';
+setTimeout(function(){if(!d.dataset.revealReady)delete d.dataset.js},2500);
+try{
 if(matchMedia('(prefers-reduced-motion: reduce)').matches||sessionStorage.getItem('intro-seen')){d.dataset.introSeen='1';return}
 sessionStorage.setItem('intro-seen','1');d.dataset.introPlaying='1';
 setTimeout(function(){delete d.dataset.introPlaying},${INTRO_TOTAL_MS})}catch(e){}})()`,

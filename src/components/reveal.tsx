@@ -12,12 +12,12 @@ type RevealProps = React.ComponentProps<"div"> & {
 // Scroll-choreographed entrance: content lifts into place as it crosses into
 // view, once.
 //
-// Deliberately CSS-driven rather than framer-motion's `whileInView`. That
-// version SSR'd `opacity: 0` inline, so every wrapped section was invisible to
-// crawlers, print, and anyone whose JS failed — the page rendered blank. Here
-// the markup ships fully visible and JS only *adds* the animation, so a
-// failure degrades to plain, readable content. `prefers-reduced-motion` is
-// handled in CSS alongside the animation itself.
+// The hidden state lives in CSS behind `html[data-js]`, which an inline script
+// sets before the first paint. Two earlier versions each got this wrong:
+// framer-motion's `whileInView` server-rendered `opacity: 0`, so the page was
+// blank without JS; arming it from this effect instead meant the whole page
+// painted and then snapped blank at hydration. Setting the flag pre-paint
+// keeps both properties — no flash, and nothing hidden when JS never runs.
 export function Reveal({ children, className, delay = 0, style, ...props }: RevealProps) {
   const ref = React.useRef<HTMLDivElement>(null);
 
@@ -25,8 +25,9 @@ export function Reveal({ children, className, delay = 0, style, ...props }: Reve
     const el = ref.current;
     if (!el) return;
 
-    // Arm the animation only once JS is running, so the no-JS state stays visible.
-    el.dataset.reveal = "idle";
+    // Tells the inline script's failsafe that React did mount, so it leaves
+    // `data-js` alone.
+    document.documentElement.dataset.revealReady = "1";
 
     if (!("IntersectionObserver" in window)) {
       el.dataset.reveal = "in";
