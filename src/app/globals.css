@@ -239,6 +239,55 @@
   }
 }
 
+/* Intro overlay. Ships in the server HTML so the page never flashes behind
+   it, and clears itself with an animation so it can't strand anyone when JS
+   is unavailable. `visibility` is animated (not just opacity) so the finished
+   overlay stops catching clicks. */
+.intro {
+  animation: intro-out var(--motion-base) var(--ease-out) var(--intro-exit-delay) forwards;
+}
+
+@keyframes intro-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.intro-letter {
+  display: inline-block;
+  animation: intro-letter-in 0.45s var(--ease-out) both;
+}
+
+@keyframes intro-letter-in {
+  from {
+    opacity: 0;
+    transform: translate(var(--lx), var(--ly)) rotate(var(--lr)) scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Repeat visit in the same tab, or reduced motion: skip it outright. The
+   inline script in the layout sets this before the first paint. */
+html[data-intro-seen] .intro {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro {
+    display: none;
+  }
+}
+
+/* Scroll is locked only while the intro is actually playing; the same inline
+   script clears the attribute when it ends. */
+html[data-intro-playing] {
+  overflow: hidden;
+}
+
 .cube-face {
   position: absolute;
   inset: 0;

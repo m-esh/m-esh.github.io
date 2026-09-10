@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Geist_Mono, Bricolage_Grotesque } from "next/font/google";
 
 import { profile, siteUrl } from "@/data/profile";
-import { IntroScreen } from "@/components/intro-screen";
+import { IntroScreen, INTRO_TOTAL_MS } from "@/components/intro-screen";
 import { MotionProvider } from "@/components/motion-provider";
 
 import "./globals.css";
@@ -71,6 +71,17 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${geistMono.variable} ${bricolage.variable} dark h-full`}
     >
       <body className="min-h-full flex flex-col antialiased selection:bg-primary selection:text-primary-foreground">
+        {/* Runs before the overlay is parsed, so a repeat visit never sees a
+            frame of it. Everything here is an enhancement: with JS off the
+            intro simply plays and its CSS animation clears it. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var d=document.documentElement;
+if(matchMedia('(prefers-reduced-motion: reduce)').matches||sessionStorage.getItem('intro-seen')){d.dataset.introSeen='1';return}
+sessionStorage.setItem('intro-seen','1');d.dataset.introPlaying='1';
+setTimeout(function(){delete d.dataset.introPlaying},${INTRO_TOTAL_MS})}catch(e){}})()`,
+          }}
+        />
         <MotionProvider>
           <IntroScreen />
           {children}

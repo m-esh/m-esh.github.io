@@ -1,22 +1,20 @@
-"use client";
-
 import * as React from "react";
-import { motion, AnimatePresence, useReducedMotion, type Variants } from "framer-motion";
 
 import { profile } from "@/data/profile";
 
 const NAME = profile.name;
 const STAGGER = 0.03;
 const START_DELAY = 0.15;
-const SETTLE_DURATION = 0.45;
+const SETTLE = 0.45;
 const HOLD = 0.25;
-const EXIT_DURATION = 0.4;
+const EXIT = 0.4;
 
-const VISIBLE_MS =
-  (START_DELAY + (NAME.length - 1) * STAGGER + SETTLE_DURATION + HOLD) * 1000;
+/** When the overlay starts fading, in seconds. */
+const EXIT_DELAY = START_DELAY + (NAME.length - 1) * STAGGER + SETTLE + HOLD;
+/** Total life of the intro, in ms — the scroll lock uses the same number. */
+export const INTRO_TOTAL_MS = Math.round((EXIT_DELAY + EXIT) * 1000);
 
-const SEEN_KEY = "intro-seen";
-
+/** Deterministic scatter so each letter tumbles in from its own direction. */
 function pieceOffset(index: number) {
   return {
     x: ((index * 47) % 84) - 42,
@@ -25,123 +23,47 @@ function pieceOffset(index: number) {
   };
 }
 
-const container: Variants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: STAGGER, delayChildren: START_DELAY },
-  },
-};
-
-// Layout effects don't run on the server; falling back to useEffect there
-// keeps React from warning while still letting the client open the overlay
-// before the first paint (so the page never flashes behind it).
-const useIsomorphicLayoutEffect =
-  typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
-
+// Server-rendered and animated entirely in CSS. Two earlier versions each
+// broke one half of this:
+//
+//   - The original mounted the overlay client-side only, so the whole page
+//     painted from the server HTML and the intro appeared a frame later — a
+//     visible flash of the entire site before the animation started. A layout
+//     effect can't help; it runs after that first paint.
+//   - Before that, the overlay was server-rendered but dismissed by JS, so if
+//     JS never ran the visitor sat behind a permanent blank screen.
+//
+// Shipping it in the HTML fixes the flash, and dismissing it with a CSS
+// animation means it always clears itself, JS or no JS. An inline script in
+// the layout hides it outright on repeat visits and for reduced motion.
 export function IntroScreen() {
-  const reduceMotion = useReducedMotion();
-  // Starts closed and is opened by an effect. The overlay therefore never
-  // exists in the SSR markup: if JS fails to boot, or this component throws,
-  // the visitor lands on the real page instead of a permanent blank screen.
-  const [visible, setVisible] = React.useState(false);
-
-  useIsomorphicLayoutEffect(() => {
-    if (reduceMotion) return;
-    let seen = false;
-    try {
-      seen = sessionStorage.getItem(SEEN_KEY) !== null;
-      sessionStorage.setItem(SEEN_KEY, "1");
-    } catch {
-      // Private mode / storage disabled: play it, just don't remember.
-    }
-    if (!seen) setVisible(true);
-  }, [reduceMotion]);
-
-  React.useEffect(() => {
-    if (!visible) return;
-
-    document.body.style.overflow = "hidden";
-    const timer = setTimeout(() => setVisible(false), VISIBLE_MS);
-
-    // Belt and braces: if the timer is throttled (background tab) or the exit
-    // animation never resolves, this hard deadline releases the page anyway.
-    const failsafe = setTimeout(() => setVisible(false), VISIBLE_MS + 2000);
-
-    return () => {
-      clearTimeout(timer);
-      clearTimeout(failsafe);
-      document.body.style.overflow = "";
-    };
-  }, [visible]);
-
-  // Always release the scroll lock once hidden, whatever path got us here.
-  React.useEffect(() => {
-    if (!visible) document.body.style.overflow = "";
-  }, [visible]);
-
-  // Let a visitor dismiss it early rather than waiting it out.
-  React.useEffect(() => {
-    if (!visible) return;
-    const skip = () => setVisible(false);
-    window.addEventListener("keydown", skip);
-    window.addEventListener("pointerdown", skip);
-    window.addEventListener("wheel", skip, { passive: true });
-    return () => {
-      window.removeEventListener("keydown", skip);
-      window.removeEventListener("pointerdown", skip);
-      window.removeEventListener("wheel", skip);
-    };
-  }, [visible]);
-
-  if (reduceMotion) return null;
-
   return (
-    <AnimatePresence>
-      {visible && (
-        <motion.div
-          aria-hidden
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: EXIT_DURATION, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-background px-6"
-        >
-          <motion.span
-            initial="hidden"
-            animate="visible"
-            variants={container}
-            className="inline-flex flex-wrap items-baseline justify-center text-balance text-center font-display text-2xl font-semibold tracking-tight sm:text-4xl"
-          >
-            {NAME.split("").map((char, i) => {
-              const offset = pieceOffset(i);
-              return (
-                <motion.span
-                  key={i}
-                  variants={{
-                    hidden: {
-                      opacity: 0,
-                      x: offset.x,
-                      y: offset.y,
-                      rotate: offset.rotate,
-                      scale: 0.4,
-                    },
-                    visible: {
-                      opacity: 1,
-                      x: 0,
-                      y: 0,
-                      rotate: 0,
-                      scale: 1,
-                      transition: { duration: SETTLE_DURATION, ease: [0.16, 1, 0.3, 1] },
-                    },
-                  }}
-                  className="inline-block"
-                >
-                  {char === " " ? " " : char}
-                </motion.span>
-              );
-            })}
-          </motion.span>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <div
+      aria-hidden
+      className="intro fixed inset-0 z-[100] flex items-center justify-center bg-background px-6"
+      style={{ "--intro-exit-delay": `${EXIT_DELAY}s` } as React.CSSProperties}
+    >
+      <span className="inline-flex flex-wrap items-baseline justify-center text-balance text-center font-display text-2xl font-semibold tracking-tight sm:text-4xl">
+        {NAME.split("").map((char, i) => {
+          const offset = pieceOffset(i);
+          return (
+            <span
+              key={i}
+              className="intro-letter"
+              style={
+                {
+                  "--lx": `${offset.x}px`,
+                  "--ly": `${offset.y}px`,
+                  "--lr": `${offset.rotate}deg`,
+                  animationDelay: `${(START_DELAY + i * STAGGER).toFixed(3)}s`,
+                } as React.CSSProperties
+              }
+            >
+              {char === " " ? " " : char}
+            </span>
+          );
+        })}
+      </span>
+    </div>
   );
 }
