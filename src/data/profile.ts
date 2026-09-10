@@ -229,8 +229,8 @@ export const certifications: CertificationItem[] = [
     year: "2024-2027",
   },
   {
-    name: "Bronze Cross",
-    issuer: "Lifesaving Society",
-    year: "2024",
+    name: "Karate Black Belt",
+    issuer: "Northern Karate Schools",
+    year: "2026",
   },
 ];
