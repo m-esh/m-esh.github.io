@@ -141,9 +141,6 @@ export function OrbitalTimeline() {
   const reduceMotion = useReducedMotion();
   const [active, setActive] = React.useState(0);
   const [inView, setInView] = React.useState(false);
-  // Rotation holds still while someone is actually aiming at a node, so the
-  // target never drifts out from under the pointer mid-click.
-  const [engaged, setEngaged] = React.useState(false);
   const orbitRef = React.useRef<HTMLDivElement>(null);
   const tabRefs = React.useRef<(HTMLButtonElement | null)[]>([]);
   const angle = useMotionValue(0);
@@ -175,12 +172,16 @@ export function OrbitalTimeline() {
     return () => io.disconnect();
   }, []);
 
-  // Spin only when it's on screen and nobody is interacting with it.
+  // Never stops for interaction: hovering, focusing or selecting a node all
+  // leave the rotation running. The only pause is while the whole orbit is
+  // off screen, which nobody can see anyway, and reduced motion, which stops
+  // it outright. At one turn every two minutes a node drifts about 6px per
+  // second, slow enough that it stays easy to click while moving.
   React.useEffect(() => {
     if (reduceMotion) return;
-    if (inView && !engaged) controls.current?.play();
+    if (inView) controls.current?.play();
     else controls.current?.pause();
-  }, [inView, engaged, reduceMotion]);
+  }, [inView, reduceMotion]);
 
   const select = React.useCallback((next: number, focus = false) => {
     setActive(next);
@@ -232,12 +233,6 @@ export function OrbitalTimeline() {
           aria-label="Roles and activities"
           aria-orientation="horizontal"
           onKeyDown={onKeyDown}
-          onPointerEnter={() => setEngaged(true)}
-          onPointerLeave={() => setEngaged(false)}
-          onFocusCapture={() => setEngaged(true)}
-          onBlurCapture={(e) => {
-            if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setEngaged(false);
-          }}
           // Ring width is capped below the 375px content box: node labels sit
           // outside the ring radius, and a wider ring pushed the longest one
           // ("VEX 10801") far enough right to make the page scroll sideways.
