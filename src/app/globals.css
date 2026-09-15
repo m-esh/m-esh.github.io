@@ -309,6 +309,7 @@ html[data-intro-playing] {
      lost half their faces at many view angles and looked broken mid-morph. */
   transition:
     transform 0.6s var(--ease-out),
+    opacity var(--motion-slow) var(--ease-out),
     border-color var(--motion-base) var(--ease-out),
     background-image var(--motion-base) var(--ease-out);
 }
@@ -319,6 +320,19 @@ html[data-intro-playing] {
   syntax: "<number>";
   inherits: true;
   initial-value: 0.55;
+}
+
+/* Parts of the drone-frame wireframe. Same material as the cube faces, but
+   sized and shaped per part rather than as six planes. */
+.cube-part {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  border: 1px solid oklch(0.63 0.15 163 / var(--cube-edge, 0.55));
+  background-color: oklch(0.63 0.15 163 / 0.05);
+  transition:
+    opacity var(--motion-slow) var(--ease-out),
+    border-color var(--motion-base) var(--ease-out);
 }
 
 .cube-stage {

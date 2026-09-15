@@ -68,6 +68,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      // The inline script below sets data-js / data-intro-playing here before
+      // React hydrates, which React would otherwise report as a mismatch.
+      // Scoped to this element's attributes only.
+      suppressHydrationWarning
       className={`${spaceGrotesk.variable} ${geistMono.variable} ${bricolage.variable} dark h-full`}
     >
       <body className="min-h-full flex flex-col antialiased selection:bg-primary selection:text-primary-foreground">

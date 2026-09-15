@@ -98,7 +98,10 @@ function OrbitNode({
         onClick={onSelect}
         // The button wraps the icon *and* its label, so the whole chip is one
         // hit target rather than a 44px circle with dead text beside it.
-        className="group/node focus-ring pointer-events-auto absolute left-1/2 top-0 grid -translate-x-1/2 -translate-y-1/2 cursor-pointer place-items-center rounded-2xl p-1"
+        // Padding is tighter on phones: the button covers the icon *and* its
+        // label, and on the small ring those boxes grew wide enough to overlap
+        // their neighbours, so one node's centre was covered and unclickable.
+        className="group/node focus-ring pointer-events-auto absolute left-1/2 top-0 grid -translate-x-1/2 -translate-y-1/2 cursor-pointer place-items-center rounded-2xl p-0.5 sm:p-1"
       >
         <motion.span className="block" style={{ rotate: upright }}>
           <span className="flex flex-col items-center gap-1.5">
@@ -121,7 +124,7 @@ function OrbitNode({
                 label never has to compete with the orbit rings behind it. */}
             <span
               className={cn(
-                "whitespace-nowrap rounded-md px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wider transition-colors sm:text-[11px]",
+                "whitespace-nowrap rounded-md px-0.5 py-0.5 font-mono text-[10px] uppercase tracking-normal transition-colors sm:px-1.5 sm:text-[11px] sm:tracking-wider",
                 active
                   ? "bg-primary/15 text-foreground"
                   : "text-muted-foreground group-hover/node:text-foreground"
@@ -233,10 +236,11 @@ export function OrbitalTimeline() {
           aria-label="Roles and activities"
           aria-orientation="horizontal"
           onKeyDown={onKeyDown}
-          // Ring width is capped below the 375px content box: node labels sit
-          // outside the ring radius, and a wider ring pushed the longest one
-          // ("VEX 10801") far enough right to make the page scroll sideways.
-          className="relative mx-auto aspect-square w-full max-w-[280px] sm:max-w-[460px]"
+          // Sized against two constraints: wide enough that seven node chips
+          // don't crowd each other around the ring, narrow enough that the
+          // outermost label still clears the 375px content box. The tighter
+          // mobile labels above are what let this grow back to 320.
+          className="relative mx-auto aspect-square w-full max-w-[320px] sm:max-w-[460px]"
         >
           {/* orbit rings */}
           <div className="pointer-events-none absolute inset-[10%] rounded-full border border-border/40" />
@@ -307,6 +311,28 @@ export function OrbitalTimeline() {
             <ChevronRight className="size-5" aria-hidden />
           </button>
         </div>
+
+        {/* A photograph of the selected role, where one actually exists — only
+            FRC does. It lives in this column rather than in the panel so a
+            role with an image can't make the panel taller than one without,
+            and no placeholder is shown for the roles that have none. */}
+        {item.image && (
+          <figure key={item.org} className="mt-8 animate-[panel-in_var(--motion-base)_var(--ease-out)_both]">
+            <div className="overflow-hidden rounded-lg bg-secondary/40">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={item.image.src}
+                alt={item.image.alt}
+                loading="lazy"
+                decoding="async"
+                className="aspect-[16/9] size-full object-cover"
+              />
+            </div>
+            <figcaption className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
+              Our robot mid-match at a 2026 REBUILT event.
+            </figcaption>
+          </figure>
+        )}
       </div>
 
       {/* Detail panel. Rendered plainly (no enter animation gating its
@@ -328,8 +354,12 @@ export function OrbitalTimeline() {
         <div key={active} className="animate-[panel-in_var(--motion-base)_var(--ease-out)_both]">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <h3 className="text-xl font-semibold tracking-tight sm:text-2xl">{item.role}</h3>
-            <p className="mt-1 text-sm font-medium text-muted-foreground">{item.org}</p>
+            {/* Organisation first and largest — it's what a reader recognises
+                — with the role beneath, instead of one oversized run-on line. */}
+            <h3 className="font-display text-xl font-semibold tracking-tight sm:text-2xl">
+              {item.org}
+            </h3>
+            <p className="mt-1 max-w-sm text-sm font-medium text-foreground/80">{item.role}</p>
           </div>
           <div className="flex flex-col items-start gap-1 text-sm text-muted-foreground sm:items-end">
             <span className="font-mono text-xs tracking-wide">{item.period}</span>

@@ -54,11 +54,34 @@ Every animation must be purposeful (orientation, feedback, continuity, emphasis)
 
 Verify both with JS disabled before shipping changes to either.
 
+## Project presentation
+
+Projects are **not** a grid of identical cards. They are open rows on the shared
+container grid, separated by hairlines, and each one's composition is chosen by
+what its images have to show (`composition` in `src/data/profile.ts`):
+
+| Value | Used for | Why |
+|---|---|---|
+| `pair` | Drone, Chopstick Ring | Two views the object needs: aircraft + controller; open + folded |
+| `single` | FRC | One competition photograph |
+| `plate` | Kalimbinator | A CAD render on a white ground, contained rather than cropped |
+
+Rules that hold across all of them: titles and captions sit **outside** the
+image, never over it; every shot carries a caption saying what to notice; tools
+are one understated text line, not a row of outlined badges; there is no
+enclosing card. A shot may override its framing with `ratio` — the FRC photo is
+`3/2` because a 16/9 crop framed the field rail and pushed the robot out of
+shot.
+
+Only real assets are used. Where a project has no photograph of the finished
+build, the gap is reported rather than filled.
+
 ## Components
 
 - **SiteHeader**: fixed; transparent until 24px scroll, then `bg-background/90` + border + blur. The background is opaque enough on its own — nav legibility must not depend on `backdrop-filter`, which can be absent (unsupported, or `prefers-reduced-transparency`).
 - **OrbitalTimeline**: the signature interaction. A `tablist`/`tab`/`tabpanel` with roving tabindex, arrow/Home/End keys, and the panel wired via `aria-labelledby`. Rotates continuously while on screen, and pauses on hover/focus so a node never drifts out from under the pointer. Below `sm`, node labels are dropped (seven of them collide) and prev/next buttons plus the active role name sit under the ring. The panel renders plainly — no enter animation gating opacity — so switching roles is instant.
 - **Project cards**: solid `bg-card/60`, not glass (nothing sits behind them, so a backdrop-filter cost blur work for no visible frost). Every image carries a definite aspect ratio; `aspect-auto` once let a portrait photo stretch the featured card to 692px. A project whose subject isn't legible from one photo can supply `image2`, rendered as two tall panes side by side — the source photos are portrait, so vertical panes crop far less than letterbox bands. `fit: "contain"` frames a CAD render as a padded plate instead of letting its white ground bleed to the card edge.
+- **Hero cube**: the last stop in the shape cycle is a simplified wireframe of the drone's printed frame — four ducts on a square, the body, and the cross members, as laid out in `projects/drone/frame-assembled.jpg`. It's a reduction of a real part, labelled "Drone frame" so it reads as an object rather than another abstract solid, and it implies no dimensions. It renders from `FRAME_PARTS` rather than the six-plane box, and the two groups cross-fade **per element**: opacity on a wrapper would flatten its `preserve-3d` children.
 - **Hero cube**: rotation idles when scrolled offscreen, same as the orbit — it previously animated for the whole page. `--cube-edge` (a registered `@property`, so it interpolates) lifts on hover and again while dragging, so grabbing it responds visibly. `touch-pan-y` keeps vertical page scroll with the browser; only horizontal drags rotate on touch. The hint names the real interactions rather than showing a bare icon.
 - **Certifications**: a plain three-up grid. The previous fanned card deck overlapped its own text at rest and only separated on hover, so two of three were unreadable on touch.
 - **Buttons**: rounded-full; primary = solid emerald; `LiquidButton` for the hero pair.

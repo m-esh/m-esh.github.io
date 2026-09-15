@@ -2,7 +2,6 @@
 
 import { ArrowUpRight, Mail } from "lucide-react";
 
-import { LiquidButton } from "@/components/ui/liquid-button";
 import { Magnetic } from "@/components/magnetic";
 import { HeroObject } from "@/components/hero-object";
 import { TextScramble } from "@/components/text-scramble";
@@ -44,23 +43,31 @@ export function Hero() {
             style={{ animationDelay: "0.2s" }}
             className="animate-fade-up mt-10 flex flex-wrap items-center gap-3"
           >
-            {/* Points past the projects, not at them: the projects grid is the
-                very next thing on the page, so a button to reach it just
-                repeated the scroll the visitor was about to make anyway. */}
+            {/* One solid action and one quiet link. The pair of glossy pills
+                with outer glow read as generic; a single filled button gives
+                the hierarchy without the decoration. It points past the
+                projects, since those are already the next thing on the page. */}
             <Magnetic>
-              <LiquidButton className="group" onClick={() => scrollTo("#about")}>
+              <button
+                type="button"
+                onClick={() => scrollTo("#about")}
+                className="focus-ring group inline-flex h-12 items-center gap-2 rounded-full bg-primary px-7 text-base font-medium text-primary-foreground shadow-[inset_0_1px_0_0_oklch(1_0_0/0.28)] transition-[background-color,transform] duration-[var(--motion-base)] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-px hover:bg-primary/90 active:translate-y-0 active:scale-[0.98] active:duration-[var(--motion-fast)]"
+              >
                 Read about me
                 <ArrowUpRight
                   aria-hidden
-                  className="transition-transform duration-[var(--motion-base)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  className="size-4 transition-transform duration-[var(--motion-base)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 />
-              </LiquidButton>
+              </button>
             </Magnetic>
-            <Magnetic>
-              <LiquidButton tone="metal" onClick={() => scrollTo("#contact")}>
-                <Mail aria-hidden /> Contact me
-              </LiquidButton>
-            </Magnetic>
+
+            <button
+              type="button"
+              onClick={() => scrollTo("#contact")}
+              className="focus-ring inline-flex h-12 items-center gap-2 rounded-full px-3 text-base font-medium text-muted-foreground transition-colors duration-[var(--motion-base)] hover:text-foreground"
+            >
+              <Mail aria-hidden className="size-4" /> Contact me
+            </button>
           </div>
         </div>
 

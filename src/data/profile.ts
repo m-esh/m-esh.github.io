@@ -18,7 +18,7 @@ export const profile = {
   longBio: [
     "I'm Mehrdad, a Grade 12 student in Toronto aiming for mechatronics engineering, the place where mechanical design, electronics, and code have to meet.",
     "Most of my time goes to FRC Team 7902, where I help lead the manufacturing subdivision and drive at competition. The rest goes into build projects: a music box and a wearable chopstick I designed on my own, and a gesture-controlled drone I built with a friend.",
-    "The rest of the week is lifeguarding for the City of Toronto, tutoring, and playing in my school's music program. Guarding a pool turns out to be good engineering practice: stay calm, read the situation fast, act before it gets worse.",
+    "The rest of the week is lifeguarding for the City of Toronto, tutoring, and playing in my school's music program. The Kalimbinator came out of that last one: I wanted a machine that could play a phrase I liked, so I spent six rounds of CAD working out how to make a drum pluck it.",
   ],
   email: "mehrdad.shari@gmail.com",
   socials: {
@@ -28,18 +28,27 @@ export const profile = {
 };
 
 export type ExperienceItem = {
-  role: string;
+  /** The organisation leads: it's the thing a reader recognises first. */
   org: string;
+  /** What I did there, shown beneath the organisation. */
+  role: string;
   period: string;
   location: string;
   summary: string;
   highlights: string[];
+  /** Only where a real photograph of that role exists. Most don't have one,
+   *  and none is invented to fill the slot. */
+  image?: { src: string; alt: string };
 };
 
 export const experience: ExperienceItem[] = [
   {
-    role: "Manufacturing Subdivision Vice Lead & Drive Team, FRC Team 7902",
-    org: "FIRST Robotics Competition",
+    org: "FRC Team 7902",
+    role: "Manufacturing Subdivision Vice Lead · Drive Team",
+    image: {
+      src: "/projects/frc/robot-2026-rebuilt.jpg",
+      alt: "FRC Team 7902's robot loaded with game pieces during a 2026 REBUILT match",
+    },
     period: "Jun 2025-present",
     location: "Markham, ON",
     summary:
@@ -77,8 +86,8 @@ export const experience: ExperienceItem[] = [
     ],
   },
   {
-    role: "Mechanical & CAD Division, VEX Team 10801 Trubotics",
-    org: "VEX Robotics",
+    org: "VEX Team 10801 Trubotics",
+    role: "Mechanical & CAD Division",
     period: "Sep 2024-Nov 2025",
     location: "Markham, ON",
     summary:
@@ -130,18 +139,34 @@ export const experience: ExperienceItem[] = [
   },
 ];
 
+export type Shot = {
+  src: string;
+  alt: string;
+  /** What the reader should notice. Shown beneath the image. */
+  caption: string;
+  /** `contain` plates a CAD render instead of cropping it. */
+  fit?: "cover" | "contain";
+  /** Overrides the composition's default framing when a tighter crop would
+   *  cut the subject out — the FRC match photo loses the robot at 16/9. */
+  ratio?: "16/9" | "4/3" | "3/2";
+};
+
 export type ProjectItem = {
   title: string;
+  /** One line: what the object is and the thing that makes it distinctive.
+   *  Detail belongs on the case study, not here. */
   description: string;
   year: string;
-  /** Tools and disciplines the project actually used. Kept short: 3-4 max. */
+  /** Tools and disciplines, rendered as a single understated line. */
   tags: string[];
-  /** `fit: "contain"` frames a CAD render as a plate instead of letting its
-   *  white background bleed to the card edge. */
-  image?: { src: string; alt: string; fit?: "cover" | "contain" };
-  /** Optional companion shot. The featured card pairs the two side by side
-   *  when a project isn't legible from a single photo. */
-  image2?: { src: string; alt: string; fit?: "cover" | "contain" };
+  /** Layout is chosen per project by what its images have to show:
+   *  `pair` for objects that need two views, `single` for one photograph,
+   *  `plate` for a CAD render that shouldn't be cropped. */
+  composition: "pair" | "single" | "plate";
+  shots: Shot[];
+  /** Named when the work wasn't solo, so team and independent projects
+   *  can't be mistaken for each other. */
+  credit?: string;
   links?: { label: string; href: string }[];
   /** True when the only destination is someone else's site, not a case study. */
   external?: boolean;
@@ -151,19 +176,26 @@ export const projects: ProjectItem[] = [
   {
     title: "Gesture-Controlled Drone",
     description:
-      "A 3D-printed ducted drone flown by curling your fingers inside a sensor glove, instead of a two-stick transmitter. Built with a friend.",
+      "A 3D-printed ducted drone flown by curling your fingers inside a sensor glove, instead of a two-stick transmitter.",
     year: "2026",
     tags: ["CAD", "3D printing", "ESP32", "Betaflight"],
-    // Two shots, because neither half explains the project alone: the glove
-    // close-up alone never showed the aircraft it flies.
-    image: {
-      src: "/projects/drone/frame-assembled.jpg",
-      alt: "The assembled 3D-printed drone with four ducted propellers and its flight controller",
-    },
-    image2: {
-      src: "/projects/drone/glove.jpg",
-      alt: "The flex-sensor glove that controls the drone, wired to an ESP32",
-    },
+    credit: "Built with a friend",
+    // Two views, because neither half explains the project alone: the glove
+    // never showed the aircraft it flies, and the aircraft never showed why
+    // it's unusual.
+    composition: "pair",
+    shots: [
+      {
+        src: "/projects/drone/frame-assembled.jpg",
+        alt: "The assembled 3D-printed drone with four ducted propellers and its flight controller",
+        caption: "Four motors inside full prop ducts, flight controller in the middle.",
+      },
+      {
+        src: "/projects/drone/glove.jpg",
+        alt: "The flex-sensor glove that controls the drone, wired to an ESP32",
+        caption: "Flex sensors down the fingers, electronics on the back of the hand.",
+      },
+    ],
     links: [{ label: "View case study", href: "/projects/drone" }],
   },
   {
@@ -172,13 +204,16 @@ export const projects: ProjectItem[] = [
       "A hand-cranked music box built around a re-tuned kalimba, where a 3D-printed peg drum plucks the tines to play a melody.",
     year: "2026",
     tags: ["CAD", "3D printing", "Mechanism design"],
-    image: {
-      src: "/projects/kalimbinator/cad-render.png",
-      alt: "CAD render of the Kalimbinator hand-crank music box",
-      // The render is on a white ground; contained and padded it reads as a
-      // drawing plate rather than a blown-out photo against the dark UI.
-      fit: "contain",
-    },
+    composition: "plate",
+    shots: [
+      {
+        src: "/projects/kalimbinator/cad-render.png",
+        alt: "CAD render of the Kalimbinator hand-crank music box",
+        caption: "Hand crank, peg drum, and the housing that holds the kalimba at an angle.",
+        // Plated rather than cropped: the render sits on a white ground.
+        fit: "contain",
+      },
+    ],
     links: [{ label: "View case study", href: "/projects/kalimbinator" }],
   },
   {
@@ -186,11 +221,21 @@ export const projects: ProjectItem[] = [
     description:
       "A finger-worn chopstick that swings down to eat and folds flat against your hand when you're done, on a single pivot.",
     year: "2025",
+    // The whole point is that it has two states, so both are shown.
+    composition: "pair",
     tags: ["CAD", "3D printing", "Hinge design"],
-    image: {
-      src: "/projects/chopstick-ring/prototype-eating-mode.jpg",
-      alt: "Chopstick Ring prototype worn in eating mode",
-    },
+    shots: [
+      {
+        src: "/projects/chopstick-ring/prototype-eating-mode.jpg",
+        alt: "Chopstick Ring prototype open in eating position, the arm swung down from the finger rings",
+        caption: "Open: the arm swings down from the finger rings.",
+      },
+      {
+        src: "/projects/chopstick-ring/prototype-typing-mode.jpg",
+        alt: "Chopstick Ring folded flat beside a keyboard, clear of the hands",
+        caption: "Folded: flat against the hand and clear of the keyboard.",
+      },
+    ],
     links: [{ label: "View case study", href: "/projects/chopstick-ring" }],
   },
   {
@@ -199,10 +244,18 @@ export const projects: ProjectItem[] = [
       "The robot our team builds each season. I'm vice lead of the manufacturing subdivision, I design parts in CAD, and I drive at regionals.",
     year: "2025-present",
     tags: ["CAD", "Prototyping", "Drive team"],
-    image: {
-      src: "/projects/frc/robot-2026-rebuilt.jpg",
-      alt: "FRC Team 7902's robot loaded with game pieces during a 2026 REBUILT match",
-    },
+    credit: "Team build",
+    composition: "single",
+    shots: [
+      {
+        src: "/projects/frc/robot-2026-rebuilt.jpg",
+        alt: "FRC Team 7902's robot loaded with game pieces during a 2026 REBUILT match",
+        caption: "Our robot mid-match at a 2026 REBUILT event.",
+        // The photograph's own proportions: cropping it to 16/9 framed the
+        // field rail and pushed the robot out of shot.
+        ratio: "3/2",
+      },
+    ],
     links: [
       // Kept short: the long form wrapped onto two lines in the card footer.
       { label: "The Blue Alliance profile", href: "https://www.thebluealliance.com/team/7902" },

@@ -60,6 +60,35 @@ const SHAPES: Shape[] = [
   shape({ tz: 25.2, sx: 0.28, sy: 1.6 }, { tz: 144, sx: 0.28, sy: 0.28 }),
 ];
 
+// A simplified wireframe of the drone's printed frame: four prop ducts on a
+// square, the body between them, and the cross members that tie them
+// together — the layout visible in projects/drone/frame-assembled.jpg. It is a
+// reduction of the real part, not a new design, and no dimensions are implied.
+const DUCT = 96; // duct outer diameter
+const DUCT_OFFSET = 62; // duct centre distance from the frame centre, per axis
+const SPAN = Math.round(Math.hypot(DUCT_OFFSET * 2, DUCT_OFFSET * 2)); // corner to corner
+
+const FRAME_PARTS: { key: string; w: number; h: number; round: string; t: string }[] = [
+  // Four ducts, laid flat in the horizontal plane.
+  ...[
+    [-1, -1],
+    [1, -1],
+    [-1, 1],
+    [1, 1],
+  ].map(([sx, sy]) => ({
+    key: `duct-${sx}-${sy}`,
+    w: DUCT,
+    h: DUCT,
+    round: "9999px",
+    t: `rotateX(90deg) translateX(${sx * DUCT_OFFSET}px) translateY(${sy * DUCT_OFFSET}px)`,
+  })),
+  // Cross members running corner to corner beneath the ducts.
+  { key: "arm-a", w: SPAN, h: 4, round: "2px", t: "rotateX(90deg) rotateZ(45deg)" },
+  { key: "arm-b", w: SPAN, h: 4, round: "2px", t: "rotateX(90deg) rotateZ(-45deg)" },
+  // Centre body carrying the flight controller.
+  { key: "body", w: 58, h: 58, round: "8px", t: "rotateX(90deg)" },
+];
+
 const BASE_TILT = -22;
 const MOUSE_SENSITIVITY = 0.4;
 // Thumbs cover less distance than a mouse, so touch gets more degrees per pixel.
@@ -190,7 +219,8 @@ export function HeroObject() {
     if (!drag) return;
 
     if (drag.moved < CLICK_THRESHOLD) {
-      setShapeIndex((i) => (i + 1) % SHAPES.length);
+      // +1 for the drone frame, which sits at the end of the cycle.
+      setShapeIndex((i) => (i + 1) % (SHAPES.length + 1));
     } else if (!reduceMotion && Math.abs(drag.velocity) > 80) {
       // Flick: let the spin coast and settle instead of stopping dead.
       momentum.current = animate(dragY, dragY.get() + drag.velocity * 0.3, {
@@ -211,7 +241,11 @@ export function HeroObject() {
     endDrag(e);
   };
 
-  const faces = SHAPES[shapeIndex];
+  // The frame is the last stop in the cycle. Both groups stay mounted and
+  // cross-fade per element: putting the opacity on a wrapper would flatten
+  // its preserve-3d children.
+  const showFrame = shapeIndex === SHAPES.length;
+  const faces = SHAPES[Math.min(shapeIndex, SHAPES.length - 1)];
 
   return (
     <div
@@ -242,11 +276,43 @@ export function HeroObject() {
               className="cube-face"
               style={{
                 transform: `rotateX(${f.rx}deg) rotateY(${f.ry}deg) translateZ(${f.tz}px) scale(${f.sx}, ${f.sy})`,
+                opacity: showFrame ? 0 : 1,
               }}
             />
           );
         })}
+
+        {FRAME_PARTS.map((part) => (
+          <div
+            key={part.key}
+            className="cube-part"
+            style={{
+              width: part.w,
+              height: part.h,
+              borderRadius: part.round,
+              transform: part.t,
+              opacity: showFrame ? 1 : 0,
+            }}
+          />
+        ))}
       </motion.div>
+
+      {/* Names the part when the frame is showing. Without this the shape is
+          just another abstract solid; with it, the object is identifiable as
+          something actually built. */}
+      <AnimatePresence>
+        {showFrame && hasInteracted && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="pointer-events-none absolute inset-x-0 -bottom-2 text-center font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground"
+          >
+            Drone frame
+          </motion.p>
+        )}
+      </AnimatePresence>
 
       {/* Names the interaction instead of leaving a bare icon to be guessed
           at. Both verbs are real: a drag rotates, a tap cycles the shape. */}

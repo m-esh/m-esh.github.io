@@ -3,253 +3,140 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 
-import { projects, type ProjectItem } from "@/data/profile";
+import { projects, type ProjectItem, type Shot } from "@/data/profile";
 import { SectionHeading } from "@/components/section-heading";
-import { TextScramble } from "@/components/text-scramble";
 import { Reveal } from "@/components/reveal";
 import { cn } from "@/lib/utils";
 
-// Solid surface rather than .glass: nothing sits behind these cards, so a
-// backdrop-filter across four large elements cost blur work on every scroll
-// frame and bought no visible frost.
-const CARD_CHROME =
-  "group focus-ring relative flex flex-col overflow-hidden rounded-xl border border-border/60 bg-card/60 transition-colors duration-[var(--motion-base)] hover:border-primary/40";
-
-// Blueprint grid for the no-photo card — same texture family as the hero cube.
-const BLUEPRINT_BG = {
-  backgroundImage:
-    "repeating-linear-gradient(to right, oklch(0.63 0.15 163 / 0.07) 0 1px, transparent 1px 44px), repeating-linear-gradient(to bottom, oklch(0.63 0.15 163 / 0.07) 0 1px, transparent 1px 44px)",
-};
-
-function CardBody({
-  project,
-  ArrowIcon,
-  cta,
-  pinCta,
-  className,
-}: {
-  project: ProjectItem;
-  ArrowIcon: typeof ArrowRight;
-  cta: string;
-  /** Tiles pin the CTA to the bottom so it lines up across the grid row.
-   *  Side-by-side layouts centre the block instead, which would otherwise
-   *  leave a large hole between the tags and a bottom-pinned CTA. */
-  pinCta: boolean;
-  className?: string;
-}) {
+function Figure({ shot, eager, tall }: { shot: Shot; eager?: boolean; tall?: boolean }) {
+  const contained = shot.fit === "contain";
+  const ratio =
+    shot.ratio === "3/2"
+      ? "aspect-[3/2]"
+      : shot.ratio === "4/3" || (!shot.ratio && tall)
+        ? "aspect-[4/3]"
+        : "aspect-[16/9]";
   return (
-    <div className={cn("flex flex-1 flex-col gap-2.5 p-5 sm:p-6", className)}>
-      <span className="text-lg font-semibold tracking-tight sm:text-xl">
-        <TextScramble text={project.title} trigger="hover" />
-      </span>
-      <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
-        {project.description}
-      </p>
-
-      <ul className="mt-1 flex flex-wrap gap-1.5">
-        {project.tags.map((tag) => (
-          <li
-            key={tag}
-            className="rounded-md border border-border/60 px-2 py-0.5 font-mono text-[11px] text-muted-foreground"
-          >
-            {tag}
-          </li>
-        ))}
-      </ul>
-
-      {/* Understated but explicit affordance: the whole card is the target,
-          and this names where it goes (internal case study vs. someone
-          else's site) instead of relying on a bare arrow. */}
-      <span
+    <figure className="flex flex-col gap-2.5">
+      <div
         className={cn(
-          "flex items-center justify-between gap-4 pt-3",
-          pinCta && "mt-auto"
+          "relative overflow-hidden rounded-lg",
+          ratio,
+          // A CAD render already carries its own white ground, so it needs no
+          // container behind it — wrapping it in a tinted box just framed a
+          // plate inside another plate.
+          contained ? "bg-transparent" : "bg-secondary/40"
         )}
       >
-        <span className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground/90 transition-colors group-hover:text-primary">
-          {cta}
-          <ArrowIcon
-            aria-hidden
-            className="size-4 shrink-0 transition-transform duration-[var(--motion-base)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-          />
-        </span>
-        <span className="shrink-0 whitespace-nowrap font-mono text-xs text-muted-foreground">
-          {project.year}
-        </span>
-      </span>
-    </div>
-  );
-}
-
-function Shot({
-  src,
-  alt,
-  fit = "cover",
-  eager,
-}: {
-  src: string;
-  alt: string;
-  fit?: "cover" | "contain";
-  eager?: boolean;
-}) {
-  return (
-    /* eslint-disable-next-line @next/next/no-img-element */
-    <img
-      src={src}
-      alt={alt}
-      loading={eager ? "eager" : "lazy"}
-      decoding="async"
-      className={cn(
-        "size-full transition-transform duration-[var(--motion-slow)] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]",
-        fit === "contain"
-          ? "rounded-lg bg-white object-contain"
-          : "object-cover"
-      )}
-    />
-  );
-}
-
-function CardImage({
-  project,
-  className,
-  eager,
-}: {
-  project: ProjectItem;
-  className?: string;
-  eager?: boolean;
-}) {
-  if (!project.image) return null;
-
-  // Paired shots sit side by side rather than stacked: the source photos are
-  // portrait, so two tall panes crop far less of the subject than two wide
-  // letterbox bands would.
-  if (project.image2) {
-    return (
-      <div className={cn("relative grid grid-cols-2 gap-px overflow-hidden bg-border/60", className)}>
-        <div className="relative overflow-hidden bg-secondary/40">
-          <Shot {...project.image} eager={eager} />
-        </div>
-        <div className="relative overflow-hidden bg-secondary/40">
-          <Shot {...project.image2} eager={eager} />
-        </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={shot.src}
+          alt={shot.alt}
+          loading={eager ? "eager" : "lazy"}
+          decoding="async"
+          className={cn(
+            "size-full",
+            contained ? "rounded-lg object-contain" : "object-cover"
+          )}
+        />
       </div>
-    );
-  }
-
-  const contained = project.image.fit === "contain";
-  return (
-    <div
-      className={cn(
-        "relative overflow-hidden",
-        contained ? "bg-secondary/25 p-3 sm:p-4" : "bg-secondary/40",
-        className
-      )}
-    >
-      <Shot {...project.image} eager={eager} />
-    </div>
+      <figcaption className="text-sm leading-relaxed text-muted-foreground">
+        {shot.caption}
+      </figcaption>
+    </figure>
   );
 }
 
-function ProjectCard({
-  project,
-  layout,
-  eager,
-}: {
-  project: ProjectItem;
-  layout: "feature" | "tile" | "wide";
-  /** Only the first card sits near the fold; the rest load lazily. */
-  eager?: boolean;
-}) {
+function Project({ project, eager }: { project: ProjectItem; eager?: boolean }) {
   const href = project.links?.[0]?.href;
   const isInternal = href?.startsWith("/");
   const ArrowIcon = isInternal ? ArrowRight : ArrowUpRight;
-  // An external card says so plainly, so nobody clicks expecting a case study
-  // and lands on a third-party team profile instead.
   const cta = isInternal ? "View project" : (project.links?.[0]?.label ?? "Visit site");
 
-  const body = (pinCta: boolean, extra?: string) => (
-    <CardBody
-      project={project}
-      ArrowIcon={ArrowIcon}
-      cta={cta}
-      pinCta={pinCta}
-      className={extra}
-    />
-  );
-
-  // Every image gets a definite ratio. Leaving the side-by-side images on
-  // `aspect-auto` let a portrait photo set its own height and stretched the
-  // featured card to 692px, most of it empty space beside the text.
-  const content =
-    layout === "feature" ? (
-      // Featured: text beside the photo.
-      <div className="grid flex-1 md:grid-cols-[1.1fr_1fr]">
-        {body(false, "justify-center")}
-        <CardImage
-          project={project}
-          eager={eager}
-          className="order-first aspect-[2/1] md:order-none md:aspect-[4/3]"
-        />
+  // Composition follows the object: two views where the object has two sides
+  // to show, one photograph where it doesn't, a plate for a CAD render.
+  const media =
+    project.composition === "pair" ? (
+      <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
+        {project.shots.map((shot, i) => (
+          <Figure key={shot.src} shot={shot} eager={eager && i === 0} tall />
+        ))}
       </div>
-    ) : layout === "tile" ? (
-      <>
-        <CardImage project={project} className="aspect-[16/9]" />
-        {body(true)}
-      </>
     ) : (
-      // Wide card mirroring the feature: photo left, text on the blueprint
-      // grid right — the drawing-board texture for the season-rebuilt robot.
-      <div className="grid flex-1 md:grid-cols-[1fr_1.1fr]">
-        <CardImage project={project} className="aspect-[2/1] md:aspect-[3/2]" />
-        <div style={BLUEPRINT_BG} className="flex">
-          {body(false, "justify-center")}
-        </div>
+      <div className={project.composition === "plate" ? "sm:max-w-3xl" : undefined}>
+        <Figure shot={project.shots[0]} eager={eager} />
       </div>
     );
 
-  const cellSpan = layout !== "tile" ? "md:col-span-2" : undefined;
+  const linkClass =
+    "focus-ring group/cta inline-flex items-center gap-1.5 rounded text-sm font-medium text-foreground transition-colors hover:text-primary";
+  const arrow = (
+    <ArrowIcon
+      aria-hidden
+      className="size-4 shrink-0 transition-transform duration-[var(--motion-base)] group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5"
+    />
+  );
 
-  if (!href) {
-    return <div className={cn(CARD_CHROME, cellSpan)}>{content}</div>;
-  }
+  return (
+    <article className="flex flex-col gap-6">
+      {media}
 
-  return isInternal ? (
-    <Link href={href} className={cn(CARD_CHROME, cellSpan)}>
-      {content}
-    </Link>
-  ) : (
-    <a
-      href={href}
-      target="_blank"
-      rel="noreferrer noopener"
-      className={cn(CARD_CHROME, cellSpan)}
-    >
-      {content}
-      <span className="sr-only"> (opens The Blue Alliance in a new tab)</span>
-    </a>
+      {/* Text sits outside the image: title and line on the left, the
+          practical details on the right, on the same grid as everything else. */}
+      <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,20rem)] md:items-start md:gap-10">
+        <div className="flex flex-col gap-2">
+          <h3 className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">
+            {project.title}
+          </h3>
+          <p className="max-w-xl text-pretty leading-relaxed text-muted-foreground">
+            {project.description}
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-2 md:items-end md:text-right">
+          <p className="font-mono text-xs text-muted-foreground">
+            {project.year}
+            {project.credit ? ` · ${project.credit}` : ""}
+          </p>
+          {/* One readable line instead of a row of outlined badges. */}
+          <p className="text-sm text-muted-foreground">{project.tags.join(" · ")}</p>
+          {href &&
+            (isInternal ? (
+              <Link href={href} className={cn(linkClass, "mt-1")}>
+                {cta} {arrow}
+              </Link>
+            ) : (
+              <a
+                href={href}
+                target="_blank"
+                rel="noreferrer noopener"
+                className={cn(linkClass, "mt-1")}
+              >
+                {cta} {arrow}
+                <span className="sr-only"> (opens The Blue Alliance in a new tab)</span>
+              </a>
+            ))}
+        </div>
+      </div>
+    </article>
   );
 }
-
-const LAYOUTS: Array<"feature" | "tile" | "wide"> = ["feature", "tile", "tile", "wide"];
 
 export function ProjectsShowcase() {
   return (
     <section id="projects" className="relative scroll-mt-20 py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
-        <SectionHeading
-          index="01"
-          title="Projects"
-          description="Things I designed, built, and had to debug when they didn't work the first time."
-        />
+        <SectionHeading index="01" title="Projects" />
 
-        <Reveal delay={0.08} className="mt-10 grid gap-4 sm:gap-5 md:grid-cols-2">
+        {/* Open rows separated by hairlines rather than four identical cards. */}
+        <Reveal delay={0.08} className="mt-12 flex flex-col gap-14 sm:gap-16">
           {projects.map((project, i) => (
-            <ProjectCard
+            <div
               key={project.title}
-              project={project}
-              layout={LAYOUTS[i % LAYOUTS.length]}
-              eager={i === 0}
-            />
+              className={cn(i > 0 && "border-t border-border/40 pt-14 sm:pt-16")}
+            >
+              <Project project={project} eager={i === 0} />
+            </div>
           ))}
         </Reveal>
       </div>

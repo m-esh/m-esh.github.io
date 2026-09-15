@@ -13,7 +13,6 @@ export function Certifications() {
         <SectionHeading
           index="04"
           title="Certifications"
-          description="Qualifications I've earned along the way."
         />
 
         {/* A plain three-up row. The previous fanned card deck overlapped its
