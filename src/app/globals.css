@@ -305,8 +305,8 @@ html[data-intro-playing] {
   background-image:
     repeating-linear-gradient(to right, oklch(0.63 0.15 163 / calc(var(--cube-edge, 0.55) * 0.32)) 0 1px, transparent 1px 45px),
     repeating-linear-gradient(to bottom, oklch(0.63 0.15 163 / calc(var(--cube-edge, 0.55) * 0.32)) 0 1px, transparent 1px 45px);
-  /* Double-sided faces: with backface culling, flattened shapes (disc, panel)
-     lost half their faces at many view angles and looked broken mid-morph. */
+  /* Double-sided faces: with backface culling, a face rotated past 90° by a
+     drag would vanish instead of showing its back. */
   transition:
     transform 0.6s var(--ease-out),
     opacity var(--motion-slow) var(--ease-out),
@@ -322,12 +322,14 @@ html[data-intro-playing] {
   initial-value: 0.55;
 }
 
-/* Parts of the drone-frame wireframe. Same material as the cube faces, but
-   sized and shaped per part rather than as six planes. */
-.cube-part {
+/* A single ring in the sphere or torus wireframe. Same material as the cube
+   faces, but always circular — the sphere and torus are both built entirely
+   out of these, positioned and sized differently per shape. */
+.cube-ring {
   position: absolute;
   inset: 0;
   margin: auto;
+  border-radius: 9999px;
   border: 1px solid oklch(0.63 0.15 163 / var(--cube-edge, 0.55));
   background-color: oklch(0.63 0.15 163 / 0.05);
   transition:

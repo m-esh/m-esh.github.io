@@ -16,7 +16,7 @@ export const profile = {
   heroLine:
     "I'm a Grade 12 student who builds robots, mechanisms, and the electronics that make them move.",
   longBio: [
-    "I'm Mehrdad, a Grade 12 student in Toronto aiming for mechatronics engineering, the place where mechanical design, electronics, and code have to meet.",
+    "I'm Mehrdad Shariatmadari, a Grade 12 student in Toronto aiming for mechatronics engineering, the place where mechanical design, electronics, and code have to meet.",
     "Most of my time goes to FRC Team 7902, where I help lead the manufacturing subdivision and drive at competition. The rest goes into build projects: a music box and a wearable chopstick I designed on my own, and a gesture-controlled drone I built with a friend.",
     "The rest of the week is lifeguarding for the City of Toronto, tutoring, and playing in my school's music program. The Kalimbinator came out of that last one: I wanted a machine that could play a phrase I liked, so I spent six rounds of CAD working out how to make a drum pluck it.",
   ],
@@ -36,19 +36,12 @@ export type ExperienceItem = {
   location: string;
   summary: string;
   highlights: string[];
-  /** Only where a real photograph of that role exists. Most don't have one,
-   *  and none is invented to fill the slot. */
-  image?: { src: string; alt: string };
 };
 
 export const experience: ExperienceItem[] = [
   {
     org: "FRC Team 7902",
     role: "Manufacturing Subdivision Vice Lead · Drive Team",
-    image: {
-      src: "/projects/frc/robot-2026-rebuilt.jpg",
-      alt: "FRC Team 7902's robot loaded with game pieces during a 2026 REBUILT match",
-    },
     period: "Jun 2025-present",
     location: "Markham, ON",
     summary:
@@ -212,6 +205,9 @@ export const projects: ProjectItem[] = [
         caption: "Hand crank, peg drum, and the housing that holds the kalimba at an angle.",
         // Plated rather than cropped: the render sits on a white ground.
         fit: "contain",
+        // The render's own proportions (903×711 ≈ 4/3); the default 16/9 left
+        // wide empty margins on either side of it.
+        ratio: "4/3",
       },
     ],
     links: [{ label: "View case study", href: "/projects/kalimbinator" }],

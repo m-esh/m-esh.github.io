@@ -6,7 +6,7 @@ export function About() {
   return (
     <section id="about" className="relative scroll-mt-20 py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
-        <SectionHeading index="02" title="About me" />
+        <SectionHeading index="02" title="I like the part where an idea becomes real" />
 
         {/* Single column, capped at a readable measure. The bio used to sit in
             a two-column grid beside a "Right now" card; without it, running

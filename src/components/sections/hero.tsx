@@ -4,7 +4,6 @@ import { ArrowUpRight, Mail } from "lucide-react";
 
 import { Magnetic } from "@/components/magnetic";
 import { HeroObject } from "@/components/hero-object";
-import { TextScramble } from "@/components/text-scramble";
 import { useScrollTo } from "@/components/smooth-scroll";
 import { profile } from "@/data/profile";
 
@@ -25,12 +24,17 @@ export function Hero() {
             {profile.location} · {profile.tagline}
           </p>
 
-          <TextScramble
-            as="h1"
-            text={profile.name}
-            style={{ animationDelay: "0.05s" } as React.CSSProperties}
-            className="animate-fade-up mt-5 max-w-4xl text-balance font-display text-[clamp(2.25rem,9vw,4.5rem)] font-semibold leading-[1.05] tracking-tight"
-          />
+          {/* The statement carries the hero instead of the name — it's the
+              first thing a visitor reads, in place of "Mehrdad
+              Shariatmadari". The full name still appears, once, at the top
+              of About. "hold" keeps the one accent from the line's original
+              spot further down the page, which this replaces. */}
+          <h1
+            style={{ animationDelay: "0.05s" }}
+            className="animate-fade-up mt-5 max-w-2xl text-balance font-display text-[clamp(2.25rem,6vw,3.75rem)] font-semibold leading-[1.08] tracking-tight"
+          >
+            Ideas are better when you can <span className="text-primary">hold</span> them
+          </h1>
 
           <p
             style={{ animationDelay: "0.12s" }}

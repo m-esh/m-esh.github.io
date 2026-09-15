@@ -311,28 +311,6 @@ export function OrbitalTimeline() {
             <ChevronRight className="size-5" aria-hidden />
           </button>
         </div>
-
-        {/* A photograph of the selected role, where one actually exists — only
-            FRC does. It lives in this column rather than in the panel so a
-            role with an image can't make the panel taller than one without,
-            and no placeholder is shown for the roles that have none. */}
-        {item.image && (
-          <figure key={item.org} className="mt-8 animate-[panel-in_var(--motion-base)_var(--ease-out)_both]">
-            <div className="overflow-hidden rounded-lg bg-secondary/40">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={item.image.src}
-                alt={item.image.alt}
-                loading="lazy"
-                decoding="async"
-                className="aspect-[16/9] size-full object-cover"
-              />
-            </div>
-            <figcaption className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
-              Our robot mid-match at a 2026 REBUILT event.
-            </figcaption>
-          </figure>
-        )}
       </div>
 
       {/* Detail panel. Rendered plainly (no enter animation gating its

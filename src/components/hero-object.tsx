@@ -13,81 +13,65 @@ import {
 
 const CUBE = 180;
 const HALF = CUBE / 2;
-const THIN = HALF * 0.3;
-
-type FaceTransform = { rx: number; ry: number; tz: number; sx: number; sy: number };
-type Shape = Record<(typeof FACE_NAMES)[number], FaceTransform>;
 
 const FACE_NAMES = ["front", "back", "right", "left", "top", "bottom"] as const;
 
-const ORIENT: Record<(typeof FACE_NAMES)[number], { rx: number; ry: number }> = {
-  front: { rx: 0, ry: 0 },
-  back: { rx: 0, ry: 180 },
-  right: { rx: 0, ry: 90 },
-  left: { rx: 0, ry: -90 },
-  top: { rx: 90, ry: 0 },
-  bottom: { rx: -90, ry: 0 },
+// Every face sits at the same distance from the centre, at full scale — a
+// plain cube. There's nothing left to parameterise once the box no longer
+// morphs into other box shapes, so this replaces the old shape()/SHAPES
+// machinery that built six differently-scaled variants.
+const CUBE_FACES: Record<(typeof FACE_NAMES)[number], { rx: number; ry: number; tz: number }> = {
+  front: { rx: 0, ry: 0, tz: HALF },
+  back: { rx: 0, ry: 180, tz: HALF },
+  right: { rx: 0, ry: 90, tz: HALF },
+  left: { rx: 0, ry: -90, tz: HALF },
+  top: { rx: 90, ry: 0, tz: HALF },
+  bottom: { rx: -90, ry: 0, tz: HALF },
 };
 
-function shape(sides: { tz: number; sx: number; sy: number }, caps: { tz: number; sx: number; sy: number }): Shape {
+type RingPart = { key: string; w: number; h: number; t: string };
+
+// A wireframe sphere: great circles that all share one rotation axis, so they
+// all pass through the same two points (the poles) — the standard way to fake
+// a globe out of flat rings. Diameter matches the cube's edge so the two
+// shapes read as the same size.
+const SPHERE_D = 190;
+const SPHERE_RINGS: RingPart[] = [0, 60, 120].map((angle) => ({
+  key: `sphere-x-${angle}`,
+  w: SPHERE_D,
+  h: SPHERE_D,
+  t: `rotateX(${angle}deg)`,
+}));
+SPHERE_RINGS.push(
+  ...[30, 90, 150].map((angle) => ({
+    key: `sphere-y-${angle}`,
+    w: SPHERE_D,
+    h: SPHERE_D,
+    t: `rotateY(${angle}deg)`,
+  }))
+);
+
+// A wireframe torus: identical tube rings spaced evenly around a circular
+// path. rotateY places each ring at its angle around the loop, translateZ
+// sets the path radius, and the final rotateX(90deg) stands each ring up so
+// its face points along the direction of travel rather than radially outward
+// — that's the difference between a real donut with a hole through the
+// middle and a barrel of hoops with no hole (verified by rendering both).
+const TORUS_RING_COUNT = 16;
+const TORUS_MAJOR_R = 70;
+const TORUS_TUBE_D = 56;
+const TORUS_RINGS: RingPart[] = Array.from({ length: TORUS_RING_COUNT }, (_, i) => {
+  const angle = Math.round((i * 360) / TORUS_RING_COUNT);
   return {
-    front: { ...ORIENT.front, ...sides },
-    back: { ...ORIENT.back, ...sides },
-    right: { ...ORIENT.right, ...sides },
-    left: { ...ORIENT.left, ...sides },
-    top: { ...ORIENT.top, ...caps },
-    bottom: { ...ORIENT.bottom, ...caps },
+    key: `torus-${i}`,
+    w: TORUS_TUBE_D,
+    h: TORUS_TUBE_D,
+    t: `rotateY(${angle}deg) translateZ(${TORUS_MAJOR_R}px) rotateX(90deg)`,
   };
-}
+});
 
-const SHAPES: Shape[] = [
-  // Cube
-  shape({ tz: HALF, sx: 1, sy: 1 }, { tz: HALF, sx: 1, sy: 1 }),
-  // Panel — flattened into a circuit-board-like slab
-  shape({ tz: HALF, sx: 1, sy: 0.3 }, { tz: THIN, sx: 1, sy: 1 }),
-  // Beam — stretched into a tall girder
-  shape({ tz: THIN, sx: 0.3, sy: 1 }, { tz: HALF, sx: 0.3, sy: 0.3 }),
-  // Crystal — pinched into a faceted gem. Caps sit exactly at the side
-  // extent (1.3·180/2) so they never poke through mid-morph.
-  shape({ tz: HALF, sx: 1, sy: 1.3 }, { tz: 117, sx: 0.08, sy: 0.08 }),
-  // Disc — wide and flat, like a turbine rotor. Sides at ±(1.3·180)/2 and
-  // caps at ±(0.15·180)/2 keep the box closed; the old tz: HALF sides left
-  // the rim faces overhanging, which tore visibly on the way to the pylon.
-  shape({ tz: 117, sx: 1.3, sy: 0.15 }, { tz: 13.5, sx: 1.3, sy: 1.3 }),
-  // Pylon — a slender antenna mast. Faces must agree on the box: side faces
-  // sit at ±(0.28·180)/2 and caps at ±(1.6·180)/2, or the caps float inside
-  // the shaft and the open ends read as a glitch mid-morph.
-  shape({ tz: 25.2, sx: 0.28, sy: 1.6 }, { tz: 144, sx: 0.28, sy: 0.28 }),
-];
-
-// A simplified wireframe of the drone's printed frame: four prop ducts on a
-// square, the body between them, and the cross members that tie them
-// together — the layout visible in projects/drone/frame-assembled.jpg. It is a
-// reduction of the real part, not a new design, and no dimensions are implied.
-const DUCT = 96; // duct outer diameter
-const DUCT_OFFSET = 62; // duct centre distance from the frame centre, per axis
-const SPAN = Math.round(Math.hypot(DUCT_OFFSET * 2, DUCT_OFFSET * 2)); // corner to corner
-
-const FRAME_PARTS: { key: string; w: number; h: number; round: string; t: string }[] = [
-  // Four ducts, laid flat in the horizontal plane.
-  ...[
-    [-1, -1],
-    [1, -1],
-    [-1, 1],
-    [1, 1],
-  ].map(([sx, sy]) => ({
-    key: `duct-${sx}-${sy}`,
-    w: DUCT,
-    h: DUCT,
-    round: "9999px",
-    t: `rotateX(90deg) translateX(${sx * DUCT_OFFSET}px) translateY(${sy * DUCT_OFFSET}px)`,
-  })),
-  // Cross members running corner to corner beneath the ducts.
-  { key: "arm-a", w: SPAN, h: 4, round: "2px", t: "rotateX(90deg) rotateZ(45deg)" },
-  { key: "arm-b", w: SPAN, h: 4, round: "2px", t: "rotateX(90deg) rotateZ(-45deg)" },
-  // Centre body carrying the flight controller.
-  { key: "body", w: 58, h: 58, round: "8px", t: "rotateX(90deg)" },
-];
+const SHAPE_KINDS = ["cube", "sphere", "torus"] as const;
+type ShapeKind = (typeof SHAPE_KINDS)[number];
 
 const BASE_TILT = -22;
 const MOUSE_SENSITIVITY = 0.4;
@@ -219,8 +203,7 @@ export function HeroObject() {
     if (!drag) return;
 
     if (drag.moved < CLICK_THRESHOLD) {
-      // +1 for the drone frame, which sits at the end of the cycle.
-      setShapeIndex((i) => (i + 1) % (SHAPES.length + 1));
+      setShapeIndex((i) => (i + 1) % SHAPE_KINDS.length);
     } else if (!reduceMotion && Math.abs(drag.velocity) > 80) {
       // Flick: let the spin coast and settle instead of stopping dead.
       momentum.current = animate(dragY, dragY.get() + drag.velocity * 0.3, {
@@ -241,11 +224,9 @@ export function HeroObject() {
     endDrag(e);
   };
 
-  // The frame is the last stop in the cycle. Both groups stay mounted and
-  // cross-fade per element: putting the opacity on a wrapper would flatten
-  // its preserve-3d children.
-  const showFrame = shapeIndex === SHAPES.length;
-  const faces = SHAPES[Math.min(shapeIndex, SHAPES.length - 1)];
+  // All three shapes stay mounted and cross-fade per element: putting the
+  // opacity on a wrapper would flatten its preserve-3d children.
+  const kind: ShapeKind = SHAPE_KINDS[shapeIndex];
 
   return (
     <div
@@ -269,50 +250,45 @@ export function HeroObject() {
         }}
       >
         {FACE_NAMES.map((name) => {
-          const f = faces[name];
+          const f = CUBE_FACES[name];
           return (
             <div
               key={name}
               className="cube-face"
               style={{
-                transform: `rotateX(${f.rx}deg) rotateY(${f.ry}deg) translateZ(${f.tz}px) scale(${f.sx}, ${f.sy})`,
-                opacity: showFrame ? 0 : 1,
+                transform: `rotateX(${f.rx}deg) rotateY(${f.ry}deg) translateZ(${f.tz}px)`,
+                opacity: kind === "cube" ? 1 : 0,
               }}
             />
           );
         })}
 
-        {FRAME_PARTS.map((part) => (
+        {SPHERE_RINGS.map((part) => (
           <div
             key={part.key}
-            className="cube-part"
+            className="cube-ring"
             style={{
               width: part.w,
               height: part.h,
-              borderRadius: part.round,
               transform: part.t,
-              opacity: showFrame ? 1 : 0,
+              opacity: kind === "sphere" ? 1 : 0,
+            }}
+          />
+        ))}
+
+        {TORUS_RINGS.map((part) => (
+          <div
+            key={part.key}
+            className="cube-ring"
+            style={{
+              width: part.w,
+              height: part.h,
+              transform: part.t,
+              opacity: kind === "torus" ? 1 : 0,
             }}
           />
         ))}
       </motion.div>
-
-      {/* Names the part when the frame is showing. Without this the shape is
-          just another abstract solid; with it, the object is identifiable as
-          something actually built. */}
-      <AnimatePresence>
-        {showFrame && hasInteracted && (
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="pointer-events-none absolute inset-x-0 -bottom-2 text-center font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground"
-          >
-            Drone frame
-          </motion.p>
-        )}
-      </AnimatePresence>
 
       {/* Names the interaction instead of leaving a bare icon to be guessed
           at. Both verbs are real: a drag rotates, a tap cycles the shape. */}

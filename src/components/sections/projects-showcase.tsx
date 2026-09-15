@@ -63,7 +63,9 @@ function Project({ project, eager }: { project: ProjectItem; eager?: boolean }) 
         ))}
       </div>
     ) : (
-      <div className={project.composition === "plate" ? "sm:max-w-3xl" : undefined}>
+      // mx-auto: a max-width block defaults to the left edge of the row, so
+      // the plate sat off-centre rather than centred within it.
+      <div className={project.composition === "plate" ? "mx-auto sm:max-w-3xl" : undefined}>
         <Figure shot={project.shots[0]} eager={eager} />
       </div>
     );
