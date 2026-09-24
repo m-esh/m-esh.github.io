@@ -110,7 +110,7 @@ function OrbitNode({
                 "relative grid size-12 place-items-center rounded-full transition-[background-color,border-color,color,transform,box-shadow]",
                 "duration-[var(--motion-base)] ease-[cubic-bezier(0.16,1,0.3,1)] sm:size-14",
                 active
-                  ? "scale-110 border border-primary bg-primary text-primary-foreground shadow-[0_0_20px_-4px_oklch(0.63_0.15_163/0.65)]"
+                  ? "scale-110 border border-primary bg-primary text-primary-foreground shadow-[0_0_20px_-4px_oklch(0.72_0.25_345/0.65)]"
                   : cn(
                       "border border-border/70 bg-card text-muted-foreground",
                       "group-hover/node:scale-105 group-hover/node:border-primary/60 group-hover/node:text-foreground",
