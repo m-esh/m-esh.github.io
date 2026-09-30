@@ -13,7 +13,7 @@ const sections = [
 export const metadata: Metadata = {
   title: "iPhone Commercial",
   description:
-    "A self-directed concept ad for the iPhone 16 Pro Max, modeled and animated in Blender, cut and graded in DaVinci Resolve.",
+    "A concept ad for the iPhone 16 Pro Max, modeled in Blender and cut in DaVinci Resolve — not an Apple production.",
 };
 
 export default function FirstLightPage() {
@@ -41,10 +41,9 @@ export default function FirstLightPage() {
                 the Apple logo, so the page has to be unambiguous that this is
                 a personal exercise, not official or commissioned work. */}
             <p className="max-w-xl text-balance text-lg leading-relaxed text-muted-foreground sm:text-xl">
-              A concept product ad for the iPhone 16 Pro Max — not an Apple
-              production, a spec piece I made on my own to learn the pipeline
-              end to end: modeled and animated in Blender, then cut and
-              graded in DaVinci Resolve.
+              A concept ad for the iPhone 16 Pro Max — not an Apple
+              production. Modeled and animated in Blender, then cut and
+              graded in DaVinci Resolve, both self-taught.
             </p>
             <dl className="mt-2 grid grid-cols-3 gap-4 pt-5 text-sm sm:max-w-md">
               <div className="flex flex-col gap-1">
@@ -93,14 +92,11 @@ export default function FirstLightPage() {
                 The idea
               </h2>
               <p className="leading-relaxed text-muted-foreground">
-                Everything I&apos;d built up to this point lived in the real
-                world — CAD, 3D printing, a robot you could drive. This was a
-                chance to see if I could do the same kind of product thinking
-                entirely on screen: model a device from scratch, light it,
-                move a camera around it, and cut the result together like a
-                real launch video. The iPhone 16 Pro Max was the reference; the
-                telephoto claim on screen is fiction I wrote for the ad, not a
-                real spec.
+                Everything else I&apos;d built lived in the real world — CAD,
+                3D printing, a robot you could drive. This was the same kind
+                of thinking, but entirely on a screen: model something from
+                scratch, light it, move a camera around it, and cut it like a
+                real launch video.
               </p>
             </div>
             <div className="flex flex-col gap-4">
@@ -108,11 +104,9 @@ export default function FirstLightPage() {
                 The shape of it
               </h2>
               <p className="leading-relaxed text-muted-foreground">
-                Forty seconds, built the way Apple&apos;s own product films are:
-                a slow macro reveal of the body and camera bump, an exploded
-                view of the lens stack, then a title card making a claim about
-                what changed. No dialogue, no cast — just the object, the
-                light, and the cut.
+                Forty seconds: a macro reveal of the body, an exploded view
+                of the lens stack, then a title card. No dialogue, no cast —
+                just the object, the light, and the cut.
               </p>
             </div>
           </div>
@@ -125,13 +119,10 @@ export default function FirstLightPage() {
               Blender, then DaVinci
             </h2>
             <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">
-              Neither tool was one I&apos;d used seriously before this — I
-              learned both by building this one piece. The phone body, the
-              lens stack, the studio lighting, and the camera moves are all
-              modeled and animated in Blender. From there the render went
-              into DaVinci Resolve for the cut, the color grade, and the
-              on-screen title cards, the same software split a lot of
-              real product films run on.
+              Neither tool was one I&apos;d used before — I learned both
+              building this. The phone, the lens stack, the lighting, and
+              the camera moves are all Blender. The render went to DaVinci
+              Resolve for the cut, the grade, and the title cards.
             </p>
           </div>
         </section>
@@ -141,9 +132,9 @@ export default function FirstLightPage() {
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
             <div className="max-w-2xl pt-8">
               <p className="leading-relaxed text-muted-foreground">
-                It&apos;s the first thing I&apos;ve finished that never touched
-                a 3D printer — same instinct as the rest of what&apos;s on this
-                site, aimed at a screen instead of a bench.
+                First thing I&apos;ve finished that never touched a 3D
+                printer — same instinct, aimed at a screen instead of a
+                bench.
               </p>
             </div>
             <div className="mt-8">

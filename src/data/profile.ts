@@ -237,7 +237,7 @@ export const projects: ProjectItem[] = [
   {
     title: "iPhone Commercial",
     description:
-      "A self-directed concept ad for the iPhone 16 Pro Max, modeled and animated in Blender, cut and graded in DaVinci Resolve.",
+      "A concept ad for the iPhone 16 Pro Max, modeled and animated in Blender, cut and graded in DaVinci Resolve.",
     year: "2025",
     tags: ["Blender", "3D animation", "DaVinci Resolve"],
     composition: "single",
