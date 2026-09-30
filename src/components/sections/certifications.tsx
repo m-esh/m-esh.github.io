@@ -4,7 +4,7 @@ import { certifications } from "@/data/profile";
 import { SectionHeading } from "@/components/section-heading";
 import { Reveal } from "@/components/reveal";
 
-const ICONS = [ShieldCheck, HeartPulse, Award];
+const ICONS = [Award, ShieldCheck, HeartPulse];
 
 export function Certifications() {
   return (

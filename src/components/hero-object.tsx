@@ -31,10 +31,13 @@ const CUBE_FACES: Record<(typeof FACE_NAMES)[number], { rx: number; ry: number; 
 
 type RingPart = { key: string; w: number; h: number; t: string };
 
-// A wireframe sphere: great circles that all share one rotation axis, so they
-// all pass through the same two points (the poles) — the standard way to fake
-// a globe out of flat rings. Diameter matches the cube's edge so the two
-// shapes read as the same size.
+// A wireframe sphere built from three families of meridian great circles, one
+// per axis (X, Y, Z), each evenly spaced 60° apart. Two families alone leave
+// a whole band of the globe with no ring crossing it — like a globe with
+// longitude lines but no latitude lines on one side. All three, spaced around
+// their own pole, is the standard armillary-sphere trick and reads as a full
+// globe from any angle. Diameter matches the cube's edge so the two shapes
+// read as the same size.
 const SPHERE_D = 190;
 const SPHERE_RINGS: RingPart[] = [0, 60, 120].map((angle) => ({
   key: `sphere-x-${angle}`,
@@ -50,23 +53,47 @@ SPHERE_RINGS.push(
     t: `rotateY(${angle}deg)`,
   }))
 );
+SPHERE_RINGS.push(
+  // rotateY(90deg) first tips the ring so its plane contains the Z axis
+  // (the poles now point at/away from the camera); rotateZ then sweeps that
+  // ring around those poles, in the same way rotateX/rotateY sweep the
+  // other two families around theirs.
+  ...[0, 60, 120].map((angle) => ({
+    key: `sphere-z-${angle}`,
+    w: SPHERE_D,
+    h: SPHERE_D,
+    t: `rotateZ(${angle}deg) rotateY(90deg)`,
+  }))
+);
 
 // A wireframe torus: identical tube rings spaced evenly around a circular
-// path. rotateY places each ring at its angle around the loop, translateZ
-// sets the path radius, and the final rotateX(90deg) stands each ring up so
-// its face points along the direction of travel rather than radially outward
-// — that's the difference between a real donut with a hole through the
-// middle and a barrel of hoops with no hole (verified by rendering both).
+// path. rotateY places each ring at its angle around the loop and translateZ
+// sets the path radius; both run in the ring's own tilted frame at that
+// point, so its face is still pointing straight out radially, like a barrel
+// of hoops with no hole through the middle. The final rotateY(90deg) turns
+// that face to point along the direction of travel instead, which is what
+// actually stands each ring up into the donut's tube — a trailing
+// rotateX(90deg) here rotates the ring's face to vertical/horizontal instead
+// and collapses the whole loop flat (verified by rendering both).
 const TORUS_RING_COUNT = 16;
 const TORUS_MAJOR_R = 70;
 const TORUS_TUBE_D = 56;
+// The loop above sits flat, like a bagel lying on a table — its hole points
+// straight up, along the same axis the shape's shared, gentle resting tilt
+// barely tips, so at rest the camera looks almost straight into the rim
+// instead of down at the hole. Baked into the loop itself (so it doesn't
+// touch the cube or sphere, and holds even before the visitor drags
+// anything), this stands the whole loop up on its edge and turns it to face
+// the camera, the way you'd tilt a donut up off a table to actually look at
+// it (tuned by rendering candidates side by side, not guessed).
+const TORUS_TILT = 58;
 const TORUS_RINGS: RingPart[] = Array.from({ length: TORUS_RING_COUNT }, (_, i) => {
   const angle = Math.round((i * 360) / TORUS_RING_COUNT);
   return {
     key: `torus-${i}`,
     w: TORUS_TUBE_D,
     h: TORUS_TUBE_D,
-    t: `rotateY(${angle}deg) translateZ(${TORUS_MAJOR_R}px) rotateX(90deg)`,
+    t: `rotateZ(90deg) rotateX(${TORUS_TILT}deg) rotateY(${angle}deg) translateZ(${TORUS_MAJOR_R}px) rotateY(90deg)`,
   };
 });
 

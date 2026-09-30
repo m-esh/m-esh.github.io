@@ -284,6 +284,11 @@ export type CertificationItem = {
 
 export const certifications: CertificationItem[] = [
   {
+    name: "Karate Black Belt",
+    issuer: "Northern Karate Schools",
+    year: "2026",
+  },
+  {
     name: "National Lifeguard (NL)",
     issuer: "Lifesaving Society",
     year: "2025-2027",
@@ -292,10 +297,5 @@ export const certifications: CertificationItem[] = [
     name: "Standard First Aid & CPR/AED",
     issuer: "Lifesaving Society",
     year: "2024-2027",
-  },
-  {
-    name: "Karate Black Belt",
-    issuer: "Northern Karate Schools",
-    year: "2026",
   },
 ];
