@@ -42,8 +42,9 @@ export default function FirstLightPage() {
                 a personal exercise, not official or commissioned work. */}
             <p className="max-w-xl text-balance text-lg leading-relaxed text-muted-foreground sm:text-xl">
               A concept ad for the iPhone 16 Pro Max, not an Apple
-              production. Modeled and animated in Blender, then cut and
-              graded in DaVinci Resolve, both self-taught.
+              production. Modeled and animated in Blender, a tool I taught
+              myself for this, then cut and graded in DaVinci Resolve, which
+              I already knew.
             </p>
             <dl className="mt-2 grid grid-cols-3 gap-4 pt-5 text-sm sm:max-w-md">
               <div className="flex flex-col gap-1">
@@ -86,8 +87,8 @@ export default function FirstLightPage() {
 
         {/* Overview */}
         <section id="overview" className="relative scroll-mt-16 py-16 sm:py-20">
-          <div className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-2 lg:px-8">
-            <div className="flex flex-col gap-4">
+          <div className="mx-auto max-w-6xl px-6 lg:px-8">
+            <div className="flex max-w-2xl flex-col gap-4">
               <h2 className="text-balance font-display text-2xl font-semibold tracking-tight sm:text-3xl">
                 The idea
               </h2>
@@ -97,16 +98,6 @@ export default function FirstLightPage() {
                 of thinking, but entirely on a screen: model something from
                 scratch, light it, move a camera around it, and cut it like a
                 real launch video.
-              </p>
-            </div>
-            <div className="flex flex-col gap-4">
-              <h2 className="text-balance font-display text-2xl font-semibold tracking-tight sm:text-3xl">
-                The shape of it
-              </h2>
-              <p className="leading-relaxed text-muted-foreground">
-                Forty seconds: a macro reveal of the body, an exploded view
-                of the lens stack, then a title card. No dialogue, no cast,
-                just the object, the light, and the cut.
               </p>
             </div>
           </div>
@@ -119,10 +110,12 @@ export default function FirstLightPage() {
               Blender, then DaVinci
             </h2>
             <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">
-              Neither tool was one I&apos;d used before. I learned both
-              building this. The phone, the lens stack, the lighting, and
-              the camera moves are all Blender. The render went to DaVinci
-              Resolve for the cut, the grade, and the title cards.
+              I&apos;d used DaVinci Resolve before, but never Blender. I
+              taught myself from online videos and modeled, lit, and
+              animated the phone, the lens stack, and the camera moves
+              there. The render went to DaVinci Resolve for the cut, the
+              grade, and the title cards. Start to finish, the whole thing
+              came together in about 12 hours.
             </p>
           </div>
         </section>
