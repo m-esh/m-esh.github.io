@@ -35,7 +35,7 @@ function Figure({ shot, eager, tall }: { shot: Shot; eager?: boolean; tall?: boo
           loading={eager ? "eager" : "lazy"}
           decoding="async"
           className={cn(
-            "size-full",
+            "size-full transition-transform duration-[var(--motion-base)] group-hover:scale-[1.025]",
             contained ? "rounded-lg object-contain" : "object-cover"
           )}
         />
@@ -70,24 +70,22 @@ function Project({ project, eager }: { project: ProjectItem; eager?: boolean }) 
       </div>
     );
 
-  const linkClass =
-    "focus-ring group/cta inline-flex items-center gap-1.5 rounded text-sm font-medium text-foreground transition-colors hover:text-primary";
   const arrow = (
     <ArrowIcon
       aria-hidden
-      className="size-4 shrink-0 transition-transform duration-[var(--motion-base)] group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5"
+      className="size-4 shrink-0 transition-transform duration-[var(--motion-base)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
     />
   );
 
-  return (
-    <article className="flex flex-col gap-6">
+  const body = (
+    <>
       {media}
 
       {/* Text sits outside the image: title and line on the left, the
           practical details on the right, on the same grid as everything else. */}
       <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,20rem)] md:items-start md:gap-10">
         <div className="flex flex-col gap-2">
-          <h3 className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">
+          <h3 className="font-display text-2xl font-semibold tracking-tight transition-colors group-hover:text-primary sm:text-3xl">
             {project.title}
           </h3>
           <p className="max-w-xl text-pretty leading-relaxed text-muted-foreground">
@@ -102,24 +100,39 @@ function Project({ project, eager }: { project: ProjectItem; eager?: boolean }) 
           </p>
           {/* One readable line instead of a row of outlined badges. */}
           <p className="text-sm text-muted-foreground">{project.tags.join(" · ")}</p>
-          {href &&
-            (isInternal ? (
-              <Link href={href} className={cn(linkClass, "mt-1")}>
-                {cta} {arrow}
-              </Link>
-            ) : (
-              <a
-                href={href}
-                target="_blank"
-                rel="noreferrer noopener"
-                className={cn(linkClass, "mt-1")}
-              >
-                {cta} {arrow}
+          {href && (
+            <span className="mt-1 inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors group-hover:text-primary">
+              {cta} {arrow}
+              {!isInternal && (
                 <span className="sr-only"> (opens The Blue Alliance in a new tab)</span>
-              </a>
-            ))}
+              )}
+            </span>
+          )}
         </div>
       </div>
+    </>
+  );
+
+  // The whole card is the hit target, not just the trailing "View project"
+  // line — that line is now a visual cue inside the link, not a link itself,
+  // so there's nothing nested for a click anywhere on the row to conflict with.
+  if (!href) {
+    return <article className="flex flex-col gap-6">{body}</article>;
+  }
+
+  const cardClass = "focus-ring group flex flex-col gap-6 rounded-xl";
+
+  return (
+    <article>
+      {isInternal ? (
+        <Link href={href} className={cardClass}>
+          {body}
+        </Link>
+      ) : (
+        <a href={href} target="_blank" rel="noreferrer noopener" className={cardClass}>
+          {body}
+        </a>
+      )}
     </article>
   );
 }
