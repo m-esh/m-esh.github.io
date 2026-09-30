@@ -235,7 +235,7 @@ export const projects: ProjectItem[] = [
     links: [{ label: "View case study", href: "/projects/chopstick-ring" }],
   },
   {
-    title: "First Light",
+    title: "Focal Length",
     description:
       "A self-directed concept ad for the iPhone 16 Pro Max, modeled and animated in Blender, cut and graded in DaVinci Resolve.",
     year: "2025",

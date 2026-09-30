@@ -271,7 +271,7 @@ export default function ChopstickRingPage() {
         {/* Closing */}
         <section className="relative py-16 sm:py-28">
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
-            <CaseStudyFooter next={{ href: "/projects/first-light", label: "First Light" }} />
+            <CaseStudyFooter next={{ href: "/projects/first-light", label: "Focal Length" }} />
           </div>
         </section>
       </main>
