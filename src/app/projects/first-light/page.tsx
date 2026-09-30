@@ -13,7 +13,7 @@ const sections = [
 export const metadata: Metadata = {
   title: "iPhone Commercial",
   description:
-    "A concept ad for the iPhone 16 Pro Max, modeled in Blender and cut in DaVinci Resolve — not an Apple production.",
+    "A concept ad for the iPhone 16 Pro Max, modeled in Blender and cut in DaVinci Resolve. Not an Apple production.",
 };
 
 export default function FirstLightPage() {
@@ -41,7 +41,7 @@ export default function FirstLightPage() {
                 the Apple logo, so the page has to be unambiguous that this is
                 a personal exercise, not official or commissioned work. */}
             <p className="max-w-xl text-balance text-lg leading-relaxed text-muted-foreground sm:text-xl">
-              A concept ad for the iPhone 16 Pro Max — not an Apple
+              A concept ad for the iPhone 16 Pro Max, not an Apple
               production. Modeled and animated in Blender, then cut and
               graded in DaVinci Resolve, both self-taught.
             </p>
@@ -92,7 +92,7 @@ export default function FirstLightPage() {
                 The idea
               </h2>
               <p className="leading-relaxed text-muted-foreground">
-                Everything else I&apos;d built lived in the real world — CAD,
+                Everything else I&apos;d built lived in the real world: CAD,
                 3D printing, a robot you could drive. This was the same kind
                 of thinking, but entirely on a screen: model something from
                 scratch, light it, move a camera around it, and cut it like a
@@ -105,7 +105,7 @@ export default function FirstLightPage() {
               </h2>
               <p className="leading-relaxed text-muted-foreground">
                 Forty seconds: a macro reveal of the body, an exploded view
-                of the lens stack, then a title card. No dialogue, no cast —
+                of the lens stack, then a title card. No dialogue, no cast,
                 just the object, the light, and the cut.
               </p>
             </div>
@@ -119,7 +119,7 @@ export default function FirstLightPage() {
               Blender, then DaVinci
             </h2>
             <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">
-              Neither tool was one I&apos;d used before — I learned both
+              Neither tool was one I&apos;d used before. I learned both
               building this. The phone, the lens stack, the lighting, and
               the camera moves are all Blender. The render went to DaVinci
               Resolve for the cut, the grade, and the title cards.
@@ -133,7 +133,7 @@ export default function FirstLightPage() {
             <div className="max-w-2xl pt-8">
               <p className="leading-relaxed text-muted-foreground">
                 First thing I&apos;ve finished that never touched a 3D
-                printer — same instinct, aimed at a screen instead of a
+                printer. Same instinct, aimed at a screen instead of a
                 bench.
               </p>
             </div>
