@@ -11,7 +11,7 @@ const sections = [
 ];
 
 export const metadata: Metadata = {
-  title: "Focal Length",
+  title: "iPhone Commercial",
   description:
     "A self-directed concept ad for the iPhone 16 Pro Max, modeled and animated in Blender, cut and graded in DaVinci Resolve.",
 };
@@ -34,7 +34,7 @@ export default function FirstLightPage() {
               Independent Project · May 2025
             </span>
             <h1 className="text-balance font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
-              Focal Length
+              iPhone Commercial
             </h1>
             {/* "Not an Apple production" is load-bearing, not throat-clearing:
                 the video itself is styled as an Apple launch ad and features
