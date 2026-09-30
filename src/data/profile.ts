@@ -235,6 +235,22 @@ export const projects: ProjectItem[] = [
     links: [{ label: "View case study", href: "/projects/chopstick-ring" }],
   },
   {
+    title: "First Light",
+    description:
+      "A self-directed concept ad for the iPhone 16 Pro Max, modeled and animated in Blender, cut and graded in DaVinci Resolve.",
+    year: "2025",
+    tags: ["Blender", "3D animation", "DaVinci Resolve"],
+    composition: "single",
+    shots: [
+      {
+        src: "/projects/first-light/poster.jpg",
+        alt: "A CG-rendered iPhone with its telephoto camera lenses exploded apart, from a self-made concept product ad",
+        caption: "A 40-second concept ad, rendered in Blender and cut in DaVinci Resolve.",
+      },
+    ],
+    links: [{ label: "View case study", href: "/projects/first-light" }],
+  },
+  {
     title: "FRC 7902 Competition Robot",
     description:
       "The robot our team builds each season. I'm vice lead of the manufacturing subdivision, I design parts in CAD, and I drive at regionals.",
