@@ -31,7 +31,7 @@ export default function FirstLightPage() {
         <section className="relative overflow-hidden py-16 sm:py-20">
           <div className="mx-auto flex max-w-3xl flex-col gap-5 px-6 lg:px-8">
             <span className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
-              Independent Project · May 2025
+              Case Study · May 2025
             </span>
             <h1 className="text-balance font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
               iPhone Commercial
@@ -93,9 +93,11 @@ export default function FirstLightPage() {
                 The idea
               </h2>
               <p className="leading-relaxed text-muted-foreground">
-                Everything else I&apos;d built lived in the real world: CAD,
-                3D printing, a robot you could drive. This was the same kind
-                of thinking, but entirely on a screen: model something from
+                An English class assignment gave me the brief: make a
+                product ad. That&apos;s all school contributed. Everything
+                I&apos;d built before this lived in the real world: CAD, 3D
+                printing, a robot you could drive. This was the same kind of
+                thinking, but entirely on a screen: model something from
                 scratch, light it, move a camera around it, and cut it like a
                 real launch video.
               </p>
