@@ -253,7 +253,7 @@ export const projects: ProjectItem[] = [
   {
     title: "Sightline",
     description:
-      "A top-down stealth shooter built solo in Java with Greenfoot: a flashlight cone, raycasting enemy vision, and eleven enemies sharing a dark house with you.",
+      "A top-down stealth shooter built solo in Java with Greenfoot, built around a flashlight that decides what you can see and what's about to see you.",
     year: "2026",
     tags: ["Java", "Greenfoot", "Object-oriented programming"],
     composition: "single",

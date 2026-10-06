@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Crosshair, Flashlight } from "lucide-react";
 
 import { ScrollProgress } from "@/components/scroll-progress";
 import { TiltCard } from "@/components/tilt-card";
@@ -16,7 +15,7 @@ const sections = [
 export const metadata: Metadata = {
   title: "Sightline",
   description:
-    "A top-down stealth shooter built solo in Java with Greenfoot for a grade 11 Intro to Computer Science class, built around a flashlight and enemies that have to actually see you first.",
+    "A top-down stealth shooter inspired by Ready or Not, built solo in Java with Greenfoot for a grade 11 Intro to Computer Science class. My first full game.",
 };
 
 export default function SightlinePage() {
@@ -40,10 +39,11 @@ export default function SightlinePage() {
               Sightline
             </h1>
             <p className="max-w-xl text-balance text-lg leading-relaxed text-muted-foreground sm:text-xl">
-              A top-down stealth shooter, built solo in Java with Greenfoot
-              for my grade 11 Intro to Computer Science class. Eleven enemies
-              share a dark house with you, and a flashlight is the only
-              thing deciding who sees who first.
+              I wanted to take a game like Ready or Not and shrink it down
+              into something I could actually build for my grade 11 Intro to
+              Computer Science class: a top-down version built around one
+              idea, a flashlight that decides what you can and can&apos;t
+              see. It&apos;s the first full game I&apos;ve made.
             </p>
             <dl className="mt-2 grid grid-cols-3 gap-4 pt-5 text-sm sm:max-w-md">
               <div className="flex flex-col gap-1">
@@ -125,11 +125,12 @@ export default function SightlinePage() {
                 The idea
               </h2>
               <p className="leading-relaxed text-muted-foreground">
-                The assignment was to build a game in Greenfoot using
-                object-oriented programming. I wanted to build something
-                around a single mechanic rather than a pile of features, so
-                I picked vision itself: what you can see, what sees you, and
-                how little of a dark room either side actually gets.
+                I&apos;d been playing a lot of Ready or Not, a slow, tense
+                SWAT game where you clear a room one doorway at a time and
+                the dark is doing half the work. I wanted that same feeling
+                in something I&apos;d actually built myself, so I took it
+                top-down and scaled it down to something I could realistically
+                finish in Greenfoot for the assignment.
               </p>
             </div>
             <div className="flex flex-col gap-4">
@@ -137,10 +138,11 @@ export default function SightlinePage() {
                 The build
               </h2>
               <p className="leading-relaxed text-muted-foreground">
-                One world, one house, eleven enemies, built solo. The map
-                itself was placed by hand in the Greenfoot editor, actor by
-                actor, then exported into a plain list of spawn
-                coordinates the world constructor runs through on startup.
+                This is the first real game I&apos;ve made, start to finish,
+                and I built it solo. One world, one house, eleven enemies,
+                all placed by hand in the Greenfoot editor before I pulled
+                their positions into code. Everything else, the walls, the
+                player, the flashlight, had to be built from nothing.
               </p>
             </div>
           </div>
@@ -153,55 +155,36 @@ export default function SightlinePage() {
               Two sightlines, not one
             </h2>
             <p className="mt-3 max-w-2xl text-balance leading-relaxed text-muted-foreground">
-              The name is literal: there are two vision systems running at
-              once, yours and theirs, and the whole game is what happens
-              when they cross.
+              The name is literal. There are two vision systems running at
+              the same time, yours and theirs, and the whole game is just
+              what happens when they cross.
             </p>
 
-            <div className="mt-10 grid gap-6 sm:grid-cols-2">
-              <div className="flex flex-col overflow-hidden rounded-xl bg-card/70">
-                <TiltCard className="aspect-[16/10]">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="/projects/sightline/gameplay.jpg"
-                    alt="The player's flashlight cone, the only visible light source in Sightline"
-                    className="size-full object-cover"
-                  />
-                </TiltCard>
-                <div className="flex flex-col gap-2 p-6">
-                  <span className="flex items-center gap-1.5 font-mono text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
-                    <Flashlight className="size-3.5" /> Your sight
-                  </span>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    A black overlay follows the player and turns toward the
-                    mouse, with a flashlight-shaped cutout. Enemies outside
-                    that cone are just as invisible to you as you are to
-                    them.
-                  </p>
-                </div>
+            <div className="mt-10 grid gap-10 sm:grid-cols-2">
+              <div className="flex flex-col gap-2">
+                <h3 className="font-display text-lg font-semibold tracking-tight">
+                  Your flashlight
+                </h3>
+                <p className="leading-relaxed text-muted-foreground">
+                  A black overlay follows you around and turns toward the
+                  mouse, with a flashlight-shaped hole cut into it. Anything
+                  outside that cone doesn&apos;t exist as far as you can
+                  tell, walls, furniture, an enemy standing right next to
+                  you.
+                </p>
               </div>
 
-              <div className="flex flex-col overflow-hidden rounded-xl bg-card/70">
-                <TiltCard className="aspect-[16/10]">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="/projects/sightline/poster.jpg"
-                    alt="Sightline title art, two armed figures moving through a dark doorway"
-                    className="size-full object-cover"
-                  />
-                </TiltCard>
-                <div className="flex flex-col gap-2 p-6">
-                  <span className="flex items-center gap-1.5 font-mono text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
-                    <Crosshair className="size-3.5" /> Their sight
-                  </span>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    Each enemy fires an invisible ray at the player every
-                    frame; it dies the instant it hits a wall. If it
-                    reaches you clean, that enemy opens fire. Get close
-                    enough instead and a click is a free melee stab, no
-                    ammo spent.
-                  </p>
-                </div>
+              <div className="flex flex-col gap-2">
+                <h3 className="font-display text-lg font-semibold tracking-tight">
+                  Their sightline
+                </h3>
+                <p className="leading-relaxed text-muted-foreground">
+                  Every enemy fires an invisible ray at you, every single
+                  frame, and it dies the instant it hits a wall. If it
+                  reaches you clean, they spot you and open fire. Get close
+                  enough before that happens and clicking stabs them
+                  instead, no ammo spent.
+                </p>
               </div>
             </div>
           </div>
@@ -214,17 +197,17 @@ export default function SightlinePage() {
               Built in Greenfoot
             </h2>
             <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">
-              Every enemy is a Grunt, a subclass of a shared Enemy class
-              that tracks how many are left and decides when the level is
-              won. A couple of utility classes for smooth movement and
-              on-screen text boxes came from my teacher rather than being
-              written from scratch, and the enemies&apos; vision rays were a
-              system I troubleshot with Claude&apos;s help rather than
-              working out alone. The art is AI-generated (ChatGPT); the
-              gunshot and stab sounds are pulled from CS:GO, and the music
-              is from Trauma Team (Atlus, 2010). One known bug survived to
-              the final build: the player can occasionally get stuck in a
-              wall, only fixable by aiming at it and moving erratically
+              Every enemy is a Grunt, built off one shared Enemy class that
+              keeps track of how many are left and decides when I&apos;ve
+              actually won. A couple of pieces I didn&apos;t write myself:
+              two utility classes for movement and on-screen text came from
+              my teacher, and I leaned on Claude to work through the
+              raycasting system for enemy vision, since that was new to me.
+              The art is all AI-generated through ChatGPT, and the gunshot
+              and stab sounds are pulled straight from CS:GO, with music
+              from Trauma Team (Atlus, 2010). There&apos;s still one bug I
+              never fully fixed, you can get stuck in a wall sometimes, and
+              the only way out is to aim at it and move around erratically
               until it lets go.
             </p>
           </div>
@@ -235,9 +218,9 @@ export default function SightlinePage() {
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
             <div className="max-w-2xl pt-8">
               <p className="leading-relaxed text-muted-foreground">
-                Between this and the iPhone ad, screen-only projects are
-                starting to take up as much of this site as anything I&apos;ve
-                built with my hands.
+                It&apos;s not perfect, that wall bug is still in there, but
+                it&apos;s the first full game I&apos;ve built from nothing,
+                and I&apos;m already thinking about what to make next.
               </p>
             </div>
             <div className="mt-8">
