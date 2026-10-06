@@ -155,9 +155,16 @@ export default function SightlinePage() {
               Two sightlines, not one
             </h2>
             <p className="mt-3 max-w-2xl text-balance leading-relaxed text-muted-foreground">
-              The name is literal. There are two vision systems running at
-              the same time, yours and theirs, and the whole game is just
-              what happens when they cross.
+              In a game like Ready or Not, walls block your view just by
+              being in the way, since you&apos;re roughly at eye level.
+              Top-down, which is what the assignment called for, you can
+              see the whole map at once, there&apos;s nothing to physically
+              hide behind. Darkness and a flashlight were the only way I
+              could find to bring back that tension of not knowing
+              what&apos;s around the corner, in a view where everything is
+              technically visible. The name is literal: there are two
+              vision systems running at the same time, yours and theirs,
+              and the whole game is what happens when they cross.
             </p>
 
             <div className="mt-10 grid gap-10 sm:grid-cols-2">
