@@ -251,6 +251,25 @@ export const projects: ProjectItem[] = [
     links: [{ label: "View case study", href: "/projects/first-light" }],
   },
   {
+    title: "Sightline",
+    description:
+      "A top-down stealth shooter built solo in Java with Greenfoot: a flashlight cone, raycasting enemy vision, and eleven enemies sharing a dark house with you.",
+    year: "2026",
+    tags: ["Java", "Greenfoot", "Object-oriented programming"],
+    composition: "single",
+    shots: [
+      {
+        src: "/projects/sightline/poster.jpg",
+        alt: "Sightline title screen: two SWAT operators breaching a dark doorway with a flashlight beam, tagline 'Fear what you cannot see'",
+        caption: "A top-down stealth shooter built around a single flashlight.",
+        // The title art's own proportions (1448×1086 = 4/3); the default
+        // 16/9 cropped the tagline off the bottom.
+        ratio: "4/3",
+      },
+    ],
+    links: [{ label: "View case study", href: "/projects/sightline" }],
+  },
+  {
     title: "FRC 7902 Competition Robot",
     description:
       "The robot our team builds each season. I'm vice lead of the manufacturing subdivision, I design parts in CAD, and I drive at regionals.",

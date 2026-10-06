@@ -133,7 +133,7 @@ export default function FirstLightPage() {
               </p>
             </div>
             <div className="mt-8">
-              <CaseStudyFooter next={{ href: "/projects/drone", label: "Gesture-Controlled Drone" }} />
+              <CaseStudyFooter next={{ href: "/projects/sightline", label: "Sightline" }} />
             </div>
           </div>
         </section>
