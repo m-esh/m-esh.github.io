@@ -39,11 +39,10 @@ export default function SightlinePage() {
               Sightline
             </h1>
             <p className="max-w-xl text-balance text-lg leading-relaxed text-muted-foreground sm:text-xl">
-              I wanted to take a game like Ready or Not and shrink it down
-              into something I could actually build for my grade 11 Intro to
-              Computer Science class: a top-down version built around one
-              idea, a flashlight that decides what you can and can&apos;t
-              see. It&apos;s the first full game I&apos;ve made.
+              A stealth shooter built solo in Java with Greenfoot for my
+              grade 11 Intro to Computer Science class, my first full game.
+              Eleven enemies share a dark house with you, and a flashlight
+              decides who sees who first.
             </p>
             <dl className="mt-2 grid grid-cols-3 gap-4 pt-5 text-sm sm:max-w-md">
               <div className="flex flex-col gap-1">
@@ -127,10 +126,10 @@ export default function SightlinePage() {
               <p className="leading-relaxed text-muted-foreground">
                 I&apos;d been playing a lot of Ready or Not, a slow, tense
                 SWAT game where you clear a room one doorway at a time and
-                the dark is doing half the work. I wanted that same feeling
-                in something I&apos;d actually built myself, so I took it
-                top-down and scaled it down to something I could realistically
-                finish in Greenfoot for the assignment.
+                the dark does half the work. The assignment called for
+                something top-down, so I couldn&apos;t copy its camera, just
+                the feeling: not knowing what&apos;s on the other side of a
+                wall until it&apos;s too late.
               </p>
             </div>
             <div className="flex flex-col gap-4">
@@ -138,11 +137,11 @@ export default function SightlinePage() {
                 The build
               </h2>
               <p className="leading-relaxed text-muted-foreground">
-                This is the first real game I&apos;ve made, start to finish,
-                and I built it solo. One world, one house, eleven enemies,
-                all placed by hand in the Greenfoot editor before I pulled
-                their positions into code. Everything else, the walls, the
-                player, the flashlight, had to be built from nothing.
+                Just me, start to finish. One world, one house, eleven
+                enemies, placed by hand in the Greenfoot editor before I
+                pulled their positions into code. Past that there was
+                nothing to work from, the walls, the player, the flashlight
+                all had to be written from scratch.
               </p>
             </div>
           </div>
@@ -155,16 +154,12 @@ export default function SightlinePage() {
               Two sightlines, not one
             </h2>
             <p className="mt-3 max-w-2xl text-balance leading-relaxed text-muted-foreground">
-              In a game like Ready or Not, walls block your view just by
-              being in the way, since you&apos;re roughly at eye level.
-              Top-down, which is what the assignment called for, you can
-              see the whole map at once, there&apos;s nothing to physically
-              hide behind. Darkness and a flashlight were the only way I
-              could find to bring back that tension of not knowing
-              what&apos;s around the corner, in a view where everything is
-              technically visible. The name is literal: there are two
-              vision systems running at the same time, yours and theirs,
-              and the whole game is what happens when they cross.
+              From above, a wall can&apos;t block your view the way it does
+              at eye level, you can just see over it. Darkness and a
+              flashlight were the closest thing I could build to a wall
+              that actually blocks sight. The name is literal: two vision
+              systems run at once, yours and theirs, and the game is just
+              what happens when they cross.
             </p>
 
             <div className="mt-10 grid gap-10 sm:grid-cols-2">
@@ -225,9 +220,10 @@ export default function SightlinePage() {
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
             <div className="max-w-2xl pt-8">
               <p className="leading-relaxed text-muted-foreground">
-                It&apos;s not perfect, that wall bug is still in there, but
-                it&apos;s the first full game I&apos;ve built from nothing,
-                and I&apos;m already thinking about what to make next.
+                Picking one mechanic and building everything else around it
+                turned out to be the easy part. Getting the raycasting, the
+                collision, and eleven enemies to all behave at once was the
+                actual class.
               </p>
             </div>
             <div className="mt-8">
