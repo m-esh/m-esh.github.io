@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { usePathname } from "next/navigation";
 import { ReactLenis, useLenis } from "lenis/react";
 
 // Momentum smooth-scroll wrapper (Lenis). Disabled outright when the user
@@ -16,7 +17,13 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     return () => mq.removeEventListener("change", sync);
   }, []);
 
-  if (!enabled) return <>{children}</>;
+  if (!enabled)
+    return (
+      <>
+        <RouteScrollReset />
+        {children}
+      </>
+    );
 
   return (
     <ReactLenis
@@ -30,9 +37,56 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       }}
     >
       <LenisResize />
+      <RouteScrollReset />
       {children}
     </ReactLenis>
   );
+}
+
+// Lenis keeps its own record of the scroll position, so after a client-side
+// route change it put the old homepage offset back on top of Next's
+// scroll-to-top, and project pages (shorter than the homepage) opened at or
+// near their bottom. Every forward navigation now lands at the top, or at the
+// `#section` the link points to. Back/forward is left alone so the browser
+// can return you to where you were.
+function RouteScrollReset() {
+  const pathname = usePathname();
+  const lenis = useLenis();
+  const isHistoryNav = React.useRef(false);
+  const isFirstRender = React.useRef(true);
+
+  React.useEffect(() => {
+    const onPop = () => {
+      isHistoryNav.current = true;
+    };
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
+
+  React.useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    if (isHistoryNav.current) {
+      isHistoryNav.current = false;
+      return;
+    }
+    const hash = window.location.hash;
+    const target = hash ? document.querySelector<HTMLElement>(hash) : null;
+    if (lenis) {
+      lenis.resize();
+      lenis.scrollTo(target ?? 0, { immediate: true, force: true });
+    } else if (target) {
+      target.scrollIntoView({ block: "start" });
+    } else {
+      window.scrollTo(0, 0);
+    }
+    // Only a route change should trigger this, not Lenis re-initialising.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
+
+  return null;
 }
 
 // Lazy-loaded images and reveal animations change the document height after
