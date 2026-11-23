@@ -135,13 +135,13 @@ export const experience: ExperienceItem[] = [
 export type Shot = {
   src: string;
   alt: string;
-  /** What the reader should notice. Shown beneath the image. */
-  caption: string;
   /** `contain` plates a CAD render instead of cropping it. */
   fit?: "cover" | "contain";
-  /** Overrides the composition's default framing when a tighter crop would
+  /** Overrides a featured row's default framing when a tighter crop would
    *  cut the subject out — the FRC match photo loses the robot at 16/9. */
   ratio?: "16/9" | "4/3" | "3/2";
+  /** Anchor for a cover crop when the subject isn't centred (CSS object-position). */
+  position?: string;
 };
 
 export type ProjectItem = {
@@ -152,10 +152,13 @@ export type ProjectItem = {
   year: string;
   /** Tools and disciplines, rendered as a single understated line. */
   tags: string[];
-  /** Layout is chosen per project by what its images have to show:
-   *  `pair` for objects that need two views, `single` for one photograph,
-   *  `plate` for a CAD render that shouldn't be cropped. */
-  composition: "pair" | "single" | "plate";
+  /** `featured` gets a full-width row; `build` and `other` share a compact
+   *  two-column grid, with the screen-only work grouped last so the page
+   *  leads with the physical engineering it's about. */
+  tier: "featured" | "build" | "other";
+  /** Featured rows only: `pair` for objects that need two views, `single`
+   *  for one photograph. Compact cards always show the first shot. */
+  composition?: "pair" | "single";
   shots: Shot[];
   /** Named when the work wasn't solo, so team and independent projects
    *  can't be mistaken for each other. */
@@ -173,6 +176,7 @@ export const projects: ProjectItem[] = [
     year: "2026",
     tags: ["CAD", "3D printing", "ESP32", "Betaflight"],
     credit: "Built with a friend",
+    tier: "featured",
     // Two views, because neither half explains the project alone: the glove
     // never showed the aircraft it flies, and the aircraft never showed why
     // it's unusual.
@@ -181,93 +185,13 @@ export const projects: ProjectItem[] = [
       {
         src: "/projects/drone/frame-assembled.jpg",
         alt: "The assembled 3D-printed drone with four ducted propellers and its flight controller",
-        caption: "Four motors inside full prop ducts, flight controller in the middle.",
       },
       {
         src: "/projects/drone/glove.jpg",
         alt: "The flex-sensor glove that controls the drone, wired to an ESP32",
-        caption: "Flex sensors down the fingers, electronics on the back of the hand.",
       },
     ],
     links: [{ label: "View case study", href: "/projects/drone" }],
-  },
-  {
-    title: "Kalimbinator",
-    description:
-      "A hand-cranked music box built around a re-tuned kalimba, where a 3D-printed peg drum plucks the tines to play a melody.",
-    year: "2026",
-    tags: ["CAD", "3D printing", "Mechanism design"],
-    composition: "plate",
-    shots: [
-      {
-        src: "/projects/kalimbinator/cad-render.png",
-        alt: "CAD render of the Kalimbinator hand-crank music box",
-        caption: "Hand crank, peg drum, and the housing that holds the kalimba at an angle.",
-        // Plated rather than cropped: the render sits on a white ground.
-        fit: "contain",
-        // The render's own proportions (903×711 ≈ 4/3); the default 16/9 left
-        // wide empty margins on either side of it.
-        ratio: "4/3",
-      },
-    ],
-    links: [{ label: "View case study", href: "/projects/kalimbinator" }],
-  },
-  {
-    title: "Chopstick Ring",
-    description:
-      "A finger-worn chopstick that swings down to eat and folds flat against your hand when you're done, on a single pivot.",
-    year: "2025",
-    // The whole point is that it has two states, so both are shown.
-    composition: "pair",
-    tags: ["CAD", "3D printing", "Hinge design"],
-    shots: [
-      {
-        src: "/projects/chopstick-ring/prototype-eating-mode.jpg",
-        alt: "Chopstick Ring prototype open in eating position, the arm swung down from the finger rings",
-        caption: "Open: the arm swings down from the finger rings.",
-      },
-      {
-        src: "/projects/chopstick-ring/prototype-typing-mode.jpg",
-        alt: "Chopstick Ring folded flat beside a keyboard, clear of the hands",
-        caption: "Folded: flat against the hand and clear of the keyboard.",
-      },
-    ],
-    links: [{ label: "View case study", href: "/projects/chopstick-ring" }],
-  },
-  {
-    title: "iPhone Commercial",
-    description:
-      "A concept ad for the iPhone 16 Pro Max, modeled and animated in Blender, cut and graded in DaVinci Resolve.",
-    year: "2025",
-    tags: ["Blender", "3D animation", "DaVinci Resolve"],
-    composition: "single",
-    shots: [
-      {
-        src: "/projects/first-light/poster.jpg",
-        alt: "A CG-rendered iPhone with its telephoto camera lenses exploded apart, from a self-made concept product ad",
-        caption: "A 40-second concept ad, rendered in Blender and cut in DaVinci Resolve.",
-      },
-    ],
-    links: [{ label: "View case study", href: "/projects/first-light" }],
-  },
-  {
-    title: "Sightline",
-    description:
-      "A top-down stealth shooter built solo in Java with Greenfoot, built around a flashlight that decides what you can see and what's about to see you.",
-    year: "2026",
-    tags: ["Java", "Greenfoot", "Object-oriented programming"],
-    composition: "single",
-    shots: [
-      {
-        src: "/projects/sightline/poster.jpg",
-        alt: "Sightline title screen: two SWAT operators breaching a dark doorway with a flashlight beam, tagline 'Fear what you cannot see'",
-        caption: "A top-down stealth shooter built around a single flashlight.",
-        // The title art's own proportions (1448×1086 = 4/3); the default
-        // 16/9 cropped the tagline off the bottom.
-        ratio: "4/3",
-      },
-    ],
-    links: [{ label: "View case study", href: "/projects/sightline" }],
   },
   {
     title: "FRC 7902 Competition Robot",
@@ -276,12 +200,12 @@ export const projects: ProjectItem[] = [
     year: "2025-present",
     tags: ["CAD", "Prototyping", "Drive team"],
     credit: "Team build",
+    tier: "featured",
     composition: "single",
     shots: [
       {
         src: "/projects/frc/robot-2026-rebuilt.jpg",
         alt: "FRC Team 7902's robot loaded with game pieces during a 2026 REBUILT match",
-        caption: "Our robot mid-match at a 2026 REBUILT event.",
         // The photograph's own proportions: cropping it to 16/9 framed the
         // field rail and pushed the robot out of shot.
         ratio: "3/2",
@@ -292,6 +216,70 @@ export const projects: ProjectItem[] = [
       { label: "The Blue Alliance profile", href: "https://www.thebluealliance.com/team/7902" },
     ],
     external: true,
+  },
+  {
+    title: "Kalimbinator",
+    description:
+      "A hand-cranked music box built around a re-tuned kalimba, where a 3D-printed peg drum plucks the tines to play a melody.",
+    year: "2026",
+    tags: ["CAD", "3D printing", "Mechanism design"],
+    tier: "build",
+    shots: [
+      {
+        src: "/projects/kalimbinator/cad-render.png",
+        alt: "CAD render of the Kalimbinator hand-crank music box",
+        fit: "contain",
+      },
+    ],
+    links: [{ label: "View case study", href: "/projects/kalimbinator" }],
+  },
+  {
+    title: "Chopstick Ring",
+    description:
+      "A finger-worn chopstick that swings down to eat and folds flat against your hand when you're done, on a single pivot.",
+    year: "2025",
+    tags: ["CAD", "3D printing", "Hinge design"],
+    tier: "build",
+    shots: [
+      {
+        src: "/projects/chopstick-ring/prototype-eating-mode.jpg",
+        alt: "Chopstick Ring prototype open in eating position, the arm swung down from the finger rings",
+      },
+    ],
+    links: [{ label: "View case study", href: "/projects/chopstick-ring" }],
+  },
+  {
+    title: "iPhone Commercial",
+    description:
+      "A concept ad for the iPhone 16 Pro Max, modeled and animated in Blender, cut and graded in DaVinci Resolve.",
+    year: "2025",
+    tags: ["Blender", "3D animation", "DaVinci Resolve"],
+    tier: "other",
+    shots: [
+      {
+        src: "/projects/first-light/poster.jpg",
+        alt: "A CG-rendered iPhone with its telephoto camera lenses exploded apart, from a self-made concept product ad",
+        // The on-screen title sits on the right third; a centred 4/3 crop
+        // cut it off mid-word.
+        position: "80% 50%",
+      },
+    ],
+    links: [{ label: "View case study", href: "/projects/first-light" }],
+  },
+  {
+    title: "Sightline",
+    description:
+      "A top-down stealth shooter built solo in Java with Greenfoot, built around a flashlight that decides what you can see and what's about to see you.",
+    year: "2026",
+    tags: ["Java", "Greenfoot", "Object-oriented programming"],
+    tier: "other",
+    shots: [
+      {
+        src: "/projects/sightline/poster.jpg",
+        alt: "Sightline title screen: two SWAT operators breaching a dark doorway with a flashlight beam, tagline 'Fear what you cannot see'",
+      },
+    ],
+    links: [{ label: "View case study", href: "/projects/sightline" }],
   },
 ];
 

@@ -118,7 +118,7 @@ export default function KalimbinatorPage() {
                   <img
                     src="/projects/kalimbinator/cad-render.png"
                     alt="3D rendered CAD model of the Kalimbinator showing the hand crank, peg drum, and kalimba housing"
-                    className="size-full bg-white object-contain"
+                    className="size-full bg-secondary/40 object-contain p-4"
                   />
                 </TiltCard>
                 <div className="flex flex-col gap-1 p-6">

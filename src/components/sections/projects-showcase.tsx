@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 
@@ -8,151 +9,190 @@ import { SectionHeading } from "@/components/section-heading";
 import { Reveal } from "@/components/reveal";
 import { cn } from "@/lib/utils";
 
-function Figure({ shot, eager, tall }: { shot: Shot; eager?: boolean; tall?: boolean }) {
+function Media({ shot, aspect, eager }: { shot: Shot; aspect: string; eager?: boolean }) {
   const contained = shot.fit === "contain";
-  const ratio =
-    shot.ratio === "3/2"
-      ? "aspect-[3/2]"
-      : shot.ratio === "4/3" || (!shot.ratio && tall)
-        ? "aspect-[4/3]"
-        : "aspect-[16/9]";
   return (
-    <figure className="flex flex-col gap-2.5">
-      <div
+    <div className={cn("relative overflow-hidden rounded-lg bg-secondary/40", aspect)}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={shot.src}
+        alt={shot.alt}
+        loading={eager ? "eager" : "lazy"}
+        decoding="async"
+        style={shot.position ? { objectPosition: shot.position } : undefined}
         className={cn(
-          "relative overflow-hidden rounded-lg",
-          ratio,
-          // A CAD render already carries its own white ground, so it needs no
-          // container behind it — wrapping it in a tinted box just framed a
-          // plate inside another plate.
-          contained ? "bg-transparent" : "bg-secondary/40"
+          "size-full transition-transform duration-[var(--motion-base)] group-hover:scale-[1.025]",
+          contained ? "object-contain p-4" : "object-cover"
         )}
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={shot.src}
-          alt={shot.alt}
-          loading={eager ? "eager" : "lazy"}
-          decoding="async"
-          className={cn(
-            "size-full transition-transform duration-[var(--motion-base)] group-hover:scale-[1.025]",
-            contained ? "rounded-lg object-contain" : "object-cover"
-          )}
-        />
-      </div>
-      <figcaption className="text-sm leading-relaxed text-muted-foreground">
-        {shot.caption}
-      </figcaption>
-    </figure>
+      />
+    </div>
   );
 }
 
-function Project({ project, eager }: { project: ProjectItem; eager?: boolean }) {
+function linkInfo(project: ProjectItem) {
   const href = project.links?.[0]?.href;
-  const isInternal = href?.startsWith("/");
-  const ArrowIcon = isInternal ? ArrowRight : ArrowUpRight;
-  const cta = isInternal ? "View project" : (project.links?.[0]?.label ?? "Visit site");
+  const isInternal = href?.startsWith("/") ?? false;
+  return {
+    href,
+    isInternal,
+    cta: isInternal ? "View project" : (project.links?.[0]?.label ?? "Visit site"),
+    Arrow: isInternal ? ArrowRight : ArrowUpRight,
+  };
+}
 
-  // Composition follows the object: two views where the object has two sides
-  // to show, one photograph where it doesn't, a plate for a CAD render.
+function Cta({ project }: { project: ProjectItem }) {
+  const { href, isInternal, cta, Arrow } = linkInfo(project);
+  if (!href) return null;
+  return (
+    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors group-hover:text-primary">
+      {cta}
+      <Arrow
+        aria-hidden
+        className="size-4 shrink-0 transition-transform duration-[var(--motion-base)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+      />
+      {!isInternal && <span className="sr-only"> (opens The Blue Alliance in a new tab)</span>}
+    </span>
+  );
+}
+
+// The whole card is the hit target; the "View project" line inside it is a
+// visual cue, not a nested link, so a click anywhere on the card lands.
+function CardLink({
+  project,
+  className,
+  children,
+}: {
+  project: ProjectItem;
+  className: string;
+  children: ReactNode;
+}) {
+  const { href, isInternal } = linkInfo(project);
+  const cls = cn("focus-ring group rounded-xl", className);
+  if (!href) return <div className={className}>{children}</div>;
+  return isInternal ? (
+    <Link href={href} className={cls}>
+      {children}
+    </Link>
+  ) : (
+    <a href={href} target="_blank" rel="noreferrer noopener" className={cls}>
+      {children}
+    </a>
+  );
+}
+
+function Meta({ project }: { project: ProjectItem }) {
+  return (
+    <p className="font-mono text-xs text-muted-foreground">
+      {project.year}
+      {project.credit ? ` · ${project.credit}` : ""}
+    </p>
+  );
+}
+
+function FeaturedProject({ project, eager }: { project: ProjectItem; eager?: boolean }) {
+  // Two views where the object has two sides to show, one photograph where
+  // it doesn't.
   const media =
     project.composition === "pair" ? (
       <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
         {project.shots.map((shot, i) => (
-          <Figure key={shot.src} shot={shot} eager={eager && i === 0} tall />
+          <Media key={shot.src} shot={shot} aspect="aspect-[4/3]" eager={eager && i === 0} />
         ))}
       </div>
     ) : (
-      // mx-auto: a max-width block defaults to the left edge of the row, so
-      // the plate sat off-centre rather than centred within it.
-      <div className={project.composition === "plate" ? "mx-auto sm:max-w-3xl" : undefined}>
-        <Figure shot={project.shots[0]} eager={eager} />
-      </div>
+      <Media
+        shot={project.shots[0]}
+        aspect={project.shots[0].ratio === "3/2" ? "aspect-[3/2]" : "aspect-[16/9]"}
+        eager={eager}
+      />
     );
-
-  const arrow = (
-    <ArrowIcon
-      aria-hidden
-      className="size-4 shrink-0 transition-transform duration-[var(--motion-base)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-    />
-  );
-
-  const body = (
-    <>
-      {media}
-
-      {/* Text sits outside the image: title and line on the left, the
-          practical details on the right, on the same grid as everything else. */}
-      <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,20rem)] md:items-start md:gap-10">
-        <div className="flex flex-col gap-2">
-          <h3 className="font-display text-2xl font-semibold tracking-tight transition-colors group-hover:text-primary sm:text-3xl">
-            {project.title}
-          </h3>
-          <p className="max-w-xl text-pretty leading-relaxed text-muted-foreground">
-            {project.description}
-          </p>
-        </div>
-
-        <div className="flex flex-col gap-2 md:items-end md:text-right">
-          <p className="font-mono text-xs text-muted-foreground">
-            {project.year}
-            {project.credit ? ` · ${project.credit}` : ""}
-          </p>
-          {/* One readable line instead of a row of outlined badges. */}
-          <p className="text-sm text-muted-foreground">{project.tags.join(" · ")}</p>
-          {href && (
-            <span className="mt-1 inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors group-hover:text-primary">
-              {cta} {arrow}
-              {!isInternal && (
-                <span className="sr-only"> (opens The Blue Alliance in a new tab)</span>
-              )}
-            </span>
-          )}
-        </div>
-      </div>
-    </>
-  );
-
-  // The whole card is the hit target, not just the trailing "View project"
-  // line — that line is now a visual cue inside the link, not a link itself,
-  // so there's nothing nested for a click anywhere on the row to conflict with.
-  if (!href) {
-    return <article className="flex flex-col gap-6">{body}</article>;
-  }
-
-  const cardClass = "focus-ring group flex flex-col gap-6 rounded-xl";
 
   return (
     <article>
-      {isInternal ? (
-        <Link href={href} className={cardClass}>
-          {body}
-        </Link>
-      ) : (
-        <a href={href} target="_blank" rel="noreferrer noopener" className={cardClass}>
-          {body}
-        </a>
-      )}
+      <CardLink project={project} className="flex flex-col gap-6">
+        {media}
+        <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,20rem)] md:items-start md:gap-10">
+          <div className="flex flex-col gap-2">
+            <h3 className="font-display text-2xl font-semibold tracking-tight transition-colors group-hover:text-primary sm:text-3xl">
+              {project.title}
+            </h3>
+            <p className="max-w-xl text-pretty leading-relaxed text-muted-foreground">
+              {project.description}
+            </p>
+          </div>
+          <div className="flex flex-col gap-2 md:items-end md:text-right">
+            <Meta project={project} />
+            {/* One readable line instead of a row of outlined badges. */}
+            <p className="text-sm text-muted-foreground">{project.tags.join(" · ")}</p>
+            <div className="mt-1">
+              <Cta project={project} />
+            </div>
+          </div>
+        </div>
+      </CardLink>
     </article>
   );
 }
 
+function CompactProject({ project }: { project: ProjectItem }) {
+  return (
+    <article>
+      <CardLink project={project} className="flex h-full flex-col gap-4">
+        <Media shot={project.shots[0]} aspect="aspect-[4/3]" />
+        <div className="flex flex-1 flex-col gap-2">
+          <Meta project={project} />
+          <h3 className="font-display text-xl font-semibold tracking-tight transition-colors group-hover:text-primary sm:text-2xl">
+            {project.title}
+          </h3>
+          <p className="text-pretty text-sm leading-relaxed text-muted-foreground">
+            {project.description}
+          </p>
+          <p className="text-sm text-muted-foreground">{project.tags.join(" · ")}</p>
+          <div className="mt-auto pt-2">
+            <Cta project={project} />
+          </div>
+        </div>
+      </CardLink>
+    </article>
+  );
+}
+
+function CompactGroup({ label, items }: { label: string; items: ProjectItem[] }) {
+  return (
+    <div className="border-t border-border/40 pt-14 sm:pt-16">
+      <h3 className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
+        {label}
+      </h3>
+      <div className="mt-8 grid gap-12 sm:grid-cols-2 sm:gap-8">
+        {items.map((project) => (
+          <CompactProject key={project.title} project={project} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function ProjectsShowcase() {
+  const featured = projects.filter((p) => p.tier === "featured");
+  const builds = projects.filter((p) => p.tier === "build");
+  const other = projects.filter((p) => p.tier === "other");
+
   return (
     <section id="projects" className="relative scroll-mt-20 py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <SectionHeading index="01" title="Projects" />
 
-        {/* Open rows separated by hairlines rather than four identical cards. */}
         <Reveal delay={0.08} className="mt-12 flex flex-col gap-14 sm:gap-16">
-          {projects.map((project, i) => (
+          {featured.map((project, i) => (
             <div
               key={project.title}
               className={cn(i > 0 && "border-t border-border/40 pt-14 sm:pt-16")}
             >
-              <Project project={project} eager={i === 0} />
+              <FeaturedProject project={project} eager={i === 0} />
             </div>
           ))}
+          <CompactGroup label="More builds" items={builds} />
+          <CompactGroup label="Other work" items={other} />
         </Reveal>
       </div>
     </section>
